@@ -5,42 +5,42 @@ import java.lang.Exception;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-class NewPage extends JFrame implements ActionListener {
-   JButton user;
+class optionPage extends JFrame implements ActionListener {
+   JButton owner;
    JButton client;
    JPanel clientUser;
-  NewPage() {
+  optionPage() {
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Welcome");
     setSize(400,200);   
     
     
 
-    user = new JButton("User");
-    client = new JButton("Client");
+    owner = new JButton("Car");
+    client = new JButton("Job");
     
     clientUser = new JPanel(new GridLayout(3, 1));
-    JLabel welcomeLabel = new JLabel("Welcome, are you a client or user?");
+    JLabel welcomeLabel = new JLabel("Welcome, would you like to submit a car or a job?");
    
     clientUser.add(welcomeLabel);
-    clientUser.add(user);
+    clientUser.add(owner);
     clientUser.add(client);
 
 
     add(clientUser, BorderLayout.CENTER);
-    user.addActionListener(this);
+    owner.addActionListener(this);
       client.addActionListener(this);
   }
 
    public void actionPerformed(ActionEvent e) {
       Object obj = e.getSource();
-      if (obj == user) {
-      NewPage userPage = new NewPage();
-      userPage.setVisible(true);
+      if (obj == owner) {
+      ownerWindow ownerPage = new ownerWindow();
+      ownerPage.setVisible(true);
       }
       else if (obj == client) {
-         NewPage clientPage = new NewPage();
-         clientPage.setVisible(true);
+         clientWindow clientWindow = new clientWindow();
+         clientWindow.setVisible(true);
       }
       else {
          System.out.println("error");
