@@ -25,7 +25,6 @@ JButton submit;
         licensePlateText = new JTextField(15);
         submit = new JButton("Submit");
 
-       
         ownerPage = new JPanel(new GridLayout(15, 1));
         JLabel welcome = new JLabel("Welcome to the owner page. Please enter the following information, leaving no fields blank.");
         ownerPage.add(welcome);
@@ -39,13 +38,11 @@ JButton submit;
         ownerPage.add(licensePlateText);
         ownerPage.add(submit);
         add(ownerPage, BorderLayout.CENTER);
-
         submit.addActionListener(this);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Car Submission");
-        setSize(1000,5000);  
-
+        setSize(1000,3000);  
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -60,10 +57,9 @@ JButton submit;
         else {
             System.out.println("There has been an error submitting your car. Please try again.");
         }
-
-        
     }
 }
+
 class ownerPage {
     public static void main(String[] args) {
         try {
@@ -76,7 +72,6 @@ class ownerPage {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-
 }
 
 

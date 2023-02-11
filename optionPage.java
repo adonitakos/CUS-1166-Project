@@ -6,34 +6,33 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 class optionPage extends JFrame implements ActionListener {
+
    JButton owner;
    JButton client;
    JPanel clientUser;
-  optionPage() {
-    setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-    setTitle("Welcome");
-    setSize(400,200);   
-    
-    
 
+  optionPage() {
     owner = new JButton("Car");
     client = new JButton("Job");
     
-    clientUser = new JPanel(new GridLayout(3, 1));
-    JLabel welcomeLabel = new JLabel("Welcome, would you like to submit a car or a job?");
+    clientUser = new JPanel(new GridLayout(5, 1));
+    JLabel welcomeLabel = new JLabel("Welcome to Vehicle Vortex. Would you like to submit a car or a job?");
    
     clientUser.add(welcomeLabel);
     clientUser.add(owner);
     clientUser.add(client);
-
-
     add(clientUser, BorderLayout.CENTER);
     owner.addActionListener(this);
-      client.addActionListener(this);
-  }
+    client.addActionListener(this);
+
+    setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    setTitle("Welcome");
+    setSize(1000,800);  
+   }
 
    public void actionPerformed(ActionEvent e) {
       Object obj = e.getSource();
+
       if (obj == owner) {
       ownerWindow ownerPage = new ownerWindow();
       ownerPage.setVisible(true);
@@ -47,7 +46,3 @@ class optionPage extends JFrame implements ActionListener {
       }
    }
 }
-
-
-
-

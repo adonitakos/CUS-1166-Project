@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
             newPanel.add(userLabel);
             newPanel.add(textField1);
             newPanel.add(passwordLabel);
+            
             newPanel.add(textField2);
             newPanel.add(submit);
 
