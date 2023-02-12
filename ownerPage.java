@@ -1,17 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.ActionListener;
+
 class ownerWindow extends JFrame implements ActionListener {
-// intializing variables
-JPanel ownerPage;
-JLabel ownerID, make, model, licensePlate;
-final JTextField ownerIDText, makeText, modelText, licensePlateText;
-JButton submit;
+    
+// Intializing variables
+    JPanel ownerPage;
+    JLabel ownerID, make, model, licensePlate;
+    final JTextField ownerIDText, makeText, modelText, licensePlateText;
+    JButton submit;
 
     ownerWindow() {
-        // assigning variables values
+    // Assigning variables values
         ownerID = new JLabel();
         ownerID.setText("Owner ID");
         ownerIDText = new JTextField(15);
@@ -26,10 +27,10 @@ JButton submit;
         licensePlateText = new JTextField(15);
         submit = new JButton("Submit");
 
-        // creating new panel
+    // Creating new panel
         ownerPage = new JPanel(new GridLayout(15, 1));
         JLabel welcome = new JLabel("Welcome to the owner page. Please enter the following information, leaving no fields blank.");
-        // adding variables to panel
+    // Adding variables to panel
         ownerPage.add(welcome);
         ownerPage.add(ownerID);
         ownerPage.add(ownerIDText);
@@ -47,9 +48,9 @@ JButton submit;
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Car Submission");
         setSize(1000,3000);  
-    }
+    } // <--- ownerPage() constructor ends here
 
-    // creating action listener method
+// Creating action listener method
     public void actionPerformed(ActionEvent e) {
         // assigning the information that will be inputted by the user as string variables
         String ownerIDInfo = ownerIDText.getText();
@@ -65,8 +66,9 @@ JButton submit;
         else {
             System.out.println("There has been an error submitting your car. Please try again.");
         }
-    }
-}
+    } // <--- actionPerformed() method ends here
+
+} // <--- ownerWindows{} class ends here
 
 class ownerPage {
     public static void main(String[] args) {
@@ -79,5 +81,6 @@ class ownerPage {
         catch(Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-    }
-}
+
+    } // <--- main() method ends here
+} // <--- ownerPage{} class ends here
