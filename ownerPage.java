@@ -4,13 +4,14 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.ActionListener;
 class ownerWindow extends JFrame implements ActionListener {
-
+// intializing variables
 JPanel ownerPage;
 JLabel ownerID, make, model, licensePlate;
 final JTextField ownerIDText, makeText, modelText, licensePlateText;
 JButton submit;
 
     ownerWindow() {
+        // assigning variables values
         ownerID = new JLabel();
         ownerID.setText("Owner ID");
         ownerIDText = new JTextField(15);
@@ -25,8 +26,10 @@ JButton submit;
         licensePlateText = new JTextField(15);
         submit = new JButton("Submit");
 
+        // creating new panel
         ownerPage = new JPanel(new GridLayout(15, 1));
         JLabel welcome = new JLabel("Welcome to the owner page. Please enter the following information, leaving no fields blank.");
+        // adding variables to panel
         ownerPage.add(welcome);
         ownerPage.add(ownerID);
         ownerPage.add(ownerIDText);
@@ -38,6 +41,7 @@ JButton submit;
         ownerPage.add(licensePlateText);
         ownerPage.add(submit);
         add(ownerPage, BorderLayout.CENTER);
+        // creating action listener for the submit button
         submit.addActionListener(this);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -45,15 +49,19 @@ JButton submit;
         setSize(1000,3000);  
     }
 
+    // creating action listener method
     public void actionPerformed(ActionEvent e) {
+        // assigning the information that will be inputted by the user as string variables
         String ownerIDInfo = ownerIDText.getText();
         String ownerMake = makeText.getText();
         String ownerModel = modelText.getText();
         String ownerLicensePlate = licensePlateText.getText();
 
+        // if all the info inputted equals 1, it will tell the user their car has been submitted
         if (ownerIDInfo.equals(1) && ownerMake.equals(1) && ownerModel.equals(1) && ownerLicensePlate.equals(1)) {
             System.out.println("Thank you. Your car has been submitted.");
         }
+        // else, it will give an error message and let the user try again
         else {
             System.out.println("There has been an error submitting your car. Please try again.");
         }
@@ -73,8 +81,3 @@ class ownerPage {
         }
     }
 }
-
-
-
-
-
