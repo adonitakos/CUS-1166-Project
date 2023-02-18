@@ -3,7 +3,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 class ownerWindow extends JFrame implements ActionListener {
 
@@ -54,18 +58,33 @@ class ownerWindow extends JFrame implements ActionListener {
     } // <--- ownerPage() constructor ends here
 
 // Creating action listener method
-    public void actionPerformed(ActionEvent e) {
-    // Assigning the information that will be inputted by the user as string variables
-        String ownerIDInfo = ownerIDText.getText();
-        String ownerMake = makeText.getText();
-        String ownerModel = modelText.getText();
-        String ownerLicensePlate = licensePlateText.getText();
+public void actionPerformed(ActionEvent e) {
+    // store user input as string variables
+    String ownerIDInfo = ownerIDText.getText();
+    String ownerMake = makeText.getText();
+    String ownerModel = modelText.getText();
+    String ownerLicensePlate = licensePlateText.getText();
 
-  // Confirm to the user that their information has been submitted
-      System.out.println("Thank you. Your car has been submitted.");
+    // get the current timestamp when the user submits this form
+    String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
+    // write the user-provided credentials and timestamp to a file called userInfo.txt, making it so that this information is not overwritten when the program terminates and it is stored in a new line with each submission
+    try {
+        FileWriter writer = new FileWriter("userInfo.txt", true); // true parameter to append to file
+        
+        writer.write(ownerIDInfo + ":" + ownerMake + ":" + ownerModel + ":" + ownerLicensePlate + ":" + timestamp + "\n");
+        writer.close();
+        System.out.println("User info successfully saved to file!");
 
-    } // <--- actionPerformed() method ends here
+        // success message
+        System.out.println("Thank you. Your car has been submitted.");
+    } 
+    // error message
+    catch (IOException ex) {
+        System.out.println("Error writing user info to file.");
+    }
+}
+ // <--- actionPerformed() method ends here
 
 } // <--- ownerWindows{} class ends here
 
