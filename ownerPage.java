@@ -2,17 +2,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 class ownerWindow extends JFrame implements ActionListener {
-    
+
 // Intializing variables
     JPanel ownerPage;
     JLabel ownerID, make, model, licensePlate;
     final JTextField ownerIDText, makeText, modelText, licensePlateText;
     JButton submit;
 
+    ObjectMapper objectMapper = new ObjectMapper();
+
     ownerWindow() {
-    // Assigning variables values
+// Assigning variables values
         ownerID = new JLabel();
         ownerID.setText("Owner ID");
         ownerIDText = new JTextField(15);
@@ -30,6 +36,7 @@ class ownerWindow extends JFrame implements ActionListener {
     // Creating new panel
         ownerPage = new JPanel(new GridLayout(15, 1));
         JLabel welcome = new JLabel("Welcome to the owner page. Please enter the following information, leaving no fields blank.");
+        
     // Adding variables to panel
         ownerPage.add(welcome);
         ownerPage.add(ownerID);
@@ -52,20 +59,41 @@ class ownerWindow extends JFrame implements ActionListener {
 
 // Creating action listener method
     public void actionPerformed(ActionEvent e) {
-        // assigning the information that will be inputted by the user as string variables
+    // Assigning the information that will be inputted by the user as string variables
         String ownerIDInfo = ownerIDText.getText();
         String ownerMake = makeText.getText();
         String ownerModel = modelText.getText();
         String ownerLicensePlate = licensePlateText.getText();
 
-        // if all the info inputted equals 1, it will tell the user their car has been submitted
-        if (ownerIDInfo.equals(1) && ownerMake.equals(1) && ownerModel.equals(1) && ownerLicensePlate.equals(1)) {
-            System.out.println("Thank you. Your car has been submitted.");
-        }
-        // else, it will give an error message and let the user try again
-        else {
-            System.out.println("There has been an error submitting your car. Please try again.");
-        }
+      // Creating a JSON object to store the information
+      JSONObject carInformation = new JSONObject();
+      carInformation.put("ownerID", ownerIDInfo);
+      carInformation.put("make", ownerMake);
+      carInformation.put("model", ownerModel);
+      carInformation.put("licensePlate", ownerLicensePlate);
+
+  // Read the existing db.json file
+      JSONParser parser = new JSONParser();
+      try {
+          Object obj = parser.parse(new FileReader("db.json"));
+          JSONObject jsonObject = (JSONObject) obj;
+          JSONArray ownerArray = (JSONArray) jsonObject.get("owner");
+          ownerArray.add(carInformation);
+
+          // Write the updated db.json file
+          try (FileWriter file = new FileWriter("db.json")) {
+              file.write(jsonObject.toJSONString());
+              System.out.println("Successfully Copied JSON Object to File...");
+              System.out.println("\nJSON Object: " + jsonObject);
+          }
+      } catch (IOException | ParseException ex) {
+          ex.printStackTrace();
+      }
+
+  // Confirm to the user that their information has been submitted
+      System.out.println("Thank you. Your car has been submitted.");
+
+
     } // <--- actionPerformed() method ends here
 
 } // <--- ownerWindows{} class ends here

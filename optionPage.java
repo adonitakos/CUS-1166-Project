@@ -37,7 +37,7 @@ class optionPage extends JFrame implements ActionListener {
 
 // Action Listener method
    public void actionPerformed(ActionEvent e) {
-   // finding the source of the action and assigning it to an object variable
+   // Finding the source of the action and assigning it to an object variable
       Object obj = e.getSource();
 
    // IF the "car" button was pressed, it will take them to the ownerPage
