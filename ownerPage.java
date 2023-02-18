@@ -70,7 +70,7 @@ public void actionPerformed(ActionEvent e) {
 
     // write the user-provided credentials and timestamp to a file called userInfo.txt, making it so that this information is not overwritten when the program terminates and it is stored in a new line with each submission
     try {
-        FileWriter writer = new FileWriter("userInfo.txt", true); // true parameter to append to file
+        FileWriter writer = new FileWriter("ownerInfo.txt", true); // true parameter to append to file
         
         writer.write(ownerIDInfo + ":" + ownerMake + ":" + ownerModel + ":" + ownerLicensePlate + ":" + timestamp + "\n");
         writer.close();
