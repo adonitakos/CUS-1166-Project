@@ -4,8 +4,6 @@ import java.awt.event.*;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
 class ownerWindow extends JFrame implements ActionListener {
 
@@ -14,8 +12,6 @@ class ownerWindow extends JFrame implements ActionListener {
     JLabel ownerID, make, model, licensePlate;
     final JTextField ownerIDText, makeText, modelText, licensePlateText;
     JButton submit;
-
-    ObjectMapper objectMapper = new ObjectMapper();
 
     ownerWindow() {
 // Assigning variables values
@@ -64,31 +60,6 @@ class ownerWindow extends JFrame implements ActionListener {
         String ownerMake = makeText.getText();
         String ownerModel = modelText.getText();
         String ownerLicensePlate = licensePlateText.getText();
-
-      // Creating a JSON object to store the information
-      JSONObject carInformation = new JSONObject();
-      carInformation.put("ownerID", ownerIDInfo);
-      carInformation.put("make", ownerMake);
-      carInformation.put("model", ownerModel);
-      carInformation.put("licensePlate", ownerLicensePlate);
-
-  // Read the existing db.json file
-      JSONParser parser = new JSONParser();
-      try {
-          Object obj = parser.parse(new FileReader("db.json"));
-          JSONObject jsonObject = (JSONObject) obj;
-          JSONArray ownerArray = (JSONArray) jsonObject.get("owner");
-          ownerArray.add(carInformation);
-
-          // Write the updated db.json file
-          try (FileWriter file = new FileWriter("db.json")) {
-              file.write(jsonObject.toJSONString());
-              System.out.println("Successfully Copied JSON Object to File...");
-              System.out.println("\nJSON Object: " + jsonObject);
-          }
-      } catch (IOException | ParseException ex) {
-          ex.printStackTrace();
-      }
 
   // Confirm to the user that their information has been submitted
       System.out.println("Thank you. Your car has been submitted.");

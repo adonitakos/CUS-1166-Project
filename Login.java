@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.Exception;
+import java.security.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -64,14 +66,12 @@ public void actionPerformed(ActionEvent ae) {
 
     // write the user-provided credentials to a file
     try {
-        FileWriter writer = new FileWriter("/Users/teutaelazaj/Desktop/1166/project/Vehicle-Vortex/Credentials.txt", true);
-
-        
-        // may need to adjust file path, can be replaced with this instead
+        FileWriter writer = new FileWriter("Credentials.txt", true);
+        LocalDateTime timestamp = LocalDateTime.now();
         // File credentialsFile = new File("Credentials.txt");
         // FileWriter writer = new FileWriter(credentialsFile);
         
-        writer.write(userValue + ":" + passValue + System.lineSeparator()); // add newline character
+        writer.write(userValue + ":" + passValue + ":" + timestamp.toString() + System.lineSeparator()); // add newline character
         writer.close();
         System.out.println("Credentials successfully saved to file!");
 
@@ -108,7 +108,7 @@ public void actionPerformed(ActionEvent ae) {
 class Login {
 
     public static void main(String[] args) {
-
+        System.out.println("\n========= Login =========\n");
         try {
             CreateLoginForm form = new CreateLoginForm();
             form.setSize(300,100);
