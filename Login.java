@@ -12,7 +12,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 class CreateLoginForm extends JFrame implements ActionListener {
-// Initializing Variables
+// Initializing Java Swing Variables
+    JLabel banner;
     JButton submit;
     JPanel LoginPanel;
     JLabel userLabel, passwordLabel;
@@ -21,19 +22,60 @@ class CreateLoginForm extends JFrame implements ActionListener {
 // Creating the GUI for the Login form
     CreateLoginForm() {
 
-    // Assigning variables values
+    // Assigning JSwing variables values & styling
+    
+        // Banner
+        banner = new JLabel();
+        banner.setText("Login");
+        banner.setBounds(115, 30, 100, 40);
+        banner.setForeground(Color.WHITE);
+        banner.setFont(new Font("Inter", Font.BOLD, 30));
+
+        // User Label
         userLabel = new JLabel();
         userLabel.setText("Username");
+        userLabel.setBounds(44, 100, 100, 16);
+        userLabel.setForeground(Color.WHITE);
+        userLabel.setFont(new Font("Inter", Font.BOLD, 16));
+
+        // User Field
         userField = new JTextField(15);
+        userField.setBounds(37, 128, 249, 38);
+        userField.setBackground(new Color(217, 217, 217));
+        userField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(86, 53, 158)),
+            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
+        // Password Label
         passwordLabel = new JLabel();
         passwordLabel.setText("Password");
+        passwordLabel.setBounds(44, 170, 100, 16);
+        passwordLabel.setForeground(Color.WHITE);
+        passwordLabel.setFont(new Font("Inter", Font.BOLD, 16));
+
+        // Password Field
         passwordField = new JPasswordField(15);
+        passwordField.setBounds(37, 198, 249, 38);
+        passwordField.setBackground(new Color(217, 217, 217));
+        passwordField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(86, 53, 158)),
+            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
+        // Submit
         submit = new JButton("Submit");
+        submit.setBounds(110, 270, 100, 34);
+        submit.setBackground(new Color(217, 217, 217));
+        submit.setForeground(new Color(86, 53, 158));
+        submit.setFont(new Font("Inter", Font.BOLD, 16));
+        
 
     // Creating a new Panel
-        LoginPanel = new JPanel(new GridLayout(3, 1));
+        LoginPanel = new JPanel();
+        LoginPanel.setBackground(new Color(86, 53, 158));
+        LoginPanel.setLayout(null);
 
-    // Adding variables to Panel
+    // Adding variables to 
+        LoginPanel.add(banner);
         LoginPanel.add(userLabel);
         LoginPanel.add(userField);
         LoginPanel.add(passwordLabel);
@@ -83,9 +125,6 @@ public void actionPerformed(ActionEvent ae) {
     }
 } // <--- actionPerformed() method ends here
 
-
-
-
     // public void actionPerformed(ActionEvent ae) {
     // // Assigning the information that will be inputted by the user as string variables
     //     String userValue = userField.getText();
@@ -111,7 +150,8 @@ class Login {
         System.out.println("\n========= Login =========\n");
         try {
             CreateLoginForm form = new CreateLoginForm();
-            form.setSize(300,100);
+            // form.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            form.setSize(323, 393);
             form.setVisible(true);
         }
         catch(Exception e) {

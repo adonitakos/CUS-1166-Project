@@ -6,19 +6,39 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 class optionPage extends JFrame implements ActionListener {
-// Initializing Variables
+// Initializing Java Swing Variables
+   JPanel clientUser;
    JButton owner;
    JButton client;
-   JPanel clientUser;
-
+   
    optionPage() {
-   // Assigning variables values
+   // Assigning JSwing variables values & styling
+
+      // Welcome Label
+      JLabel welcomeLabel = new JLabel("Welcome to Vehicle Vortex. Would you like to submit a Car or a Job?");
+      welcomeLabel.setForeground(Color.WHITE);
+      welcomeLabel.setFont(new Font("Inter", Font.PLAIN, 20));
+      
+      // Owner button
       owner = new JButton("Car");
+      owner.setBackground(new Color(217, 217, 217));
+      owner.setForeground(new Color(86, 53, 158));
+      owner.setFont(new Font("Inter", Font.BOLD, 20));
+
+      // Client button
       client = new JButton("Job");
+      client.setBackground(new Color(217, 217, 217));
+      client.setForeground(new Color(86, 53, 158));
+      client.setFont(new Font("Inter", Font.BOLD, 20));.
+
+
+      // Adoni's NOTE: Make these buttons on different rows, make them bigger (at least wider), and make any adjustments you feel are right
 
    // Creating new panel
-      clientUser = new JPanel(new GridLayout(5, 1));
-      JLabel welcomeLabel = new JLabel("Welcome to Vehicle Vortex. Would you like to submit a car or a job?");
+      // clientUser = new JPanel(new GridLayout(5, 1));
+      clientUser = new JPanel();
+      clientUser.setBackground(new Color(86, 53, 158));
+      client.setLayout(null);
 
    // Adding variables to the panel
       clientUser.add(welcomeLabel);
