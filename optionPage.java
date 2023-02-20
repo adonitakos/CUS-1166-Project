@@ -42,7 +42,6 @@ class optionPage extends JFrame implements ActionListener {
       client.setForeground(new Color(86, 53, 158));
       client.setFont(new Font("Inter", Font.BOLD, 20));
 
-
       // Adoni's NOTE: Make these buttons on different rows, make them bigger (at least wider), and make any adjustments you feel are right
 
    // Creating new panel
