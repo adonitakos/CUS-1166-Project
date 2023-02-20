@@ -1,6 +1,6 @@
 
-/* Project: Vehicular Cloud System
-* Class: clientPage.java
+/* Project: Vehicle Vortex
+* Class: ClientPage.java
 * Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
 * Date: February 19th, 2023 
 * This program creates a client page, where users who have selected "Job" will
@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
-class clientWindow extends JFrame implements ActionListener {
+class ClientWindow extends JFrame implements ActionListener {
     // Initializing variables
     JLabel clientID, duration, deadline, description;
     final JTextField clientIDText, durationText, deadlineText, descriptionText;
@@ -24,8 +24,8 @@ class clientWindow extends JFrame implements ActionListener {
     JPanel clientPage;
 
 // ---------------------------------------------------------------------------------
-// This method creates the GUI for the clientWindow
-    clientWindow() {
+// This method creates the GUI for the ClientWindow
+    ClientWindow() {
         // Assigning variables values
         clientID = new JLabel();
         clientID.setText("Client ID:");
@@ -70,7 +70,7 @@ class clientWindow extends JFrame implements ActionListener {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Job Submission");
         setSize(400, 250);   
-    } // <--- clientWindow() constructor ends here
+    } // <--- ClientWindow() constructor ends here
 
 // ---------------------------------------------------------------------------------
     // Action Listener method
@@ -102,10 +102,10 @@ class clientWindow extends JFrame implements ActionListener {
     } // <--- actionPerformed() method ends here
 } // <--- clientWindow{} class ends here
 
-class clientPage {
+class ClientPage {
     public static void main(String[] args) {
         try {
-            clientWindow form = new clientWindow();
+            ClientWindow form = new ClientWindow();
             form.setVisible(true);
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());

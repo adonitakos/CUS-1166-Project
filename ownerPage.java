@@ -1,6 +1,6 @@
 
-/* Project: Vehicular Cloud System
-* Class: ownerPage.java 
+/* Project: Vehicle Vortex
+* Class: OwnerPage.java 
 * Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
 * Date: February 19th, 2023 
 * This program creates the owner page, where users who have selected "Owner"
@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-class ownerWindow extends JFrame implements ActionListener {
+class OwnerWindow extends JFrame implements ActionListener {
 
 // Intializing variables
     JPanel ownerPage;
@@ -27,8 +27,8 @@ class ownerWindow extends JFrame implements ActionListener {
     JButton submit;
 
 // ---------------------------------------------------------------------------------
-// This method creates the GUI for the ownerWindow
-    ownerWindow() {
+// This method creates the GUI for the OwnerWindow
+    OwnerWindow() {
 // Assigning variables values
         ownerID = new JLabel();
         ownerID.setText("Owner ID");
@@ -66,42 +66,42 @@ class ownerWindow extends JFrame implements ActionListener {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Car Submission");
         setSize(1000,3000);  
-    } // <--- ownerPage() constructor ends here
+    } // <--- OwnerWindow() constructor ends here
 
 // ---------------------------------------------------------------------------------
 // Creating action listener method
-public void actionPerformed(ActionEvent e) {
-    // store user input as string variables
-    String ownerIDInfo = ownerIDText.getText();
-    String ownerMake = makeText.getText();
-    String ownerModel = modelText.getText();
-    String ownerLicensePlate = licensePlateText.getText();
+    public void actionPerformed(ActionEvent e) {
+    // Store user input as string variables
+        String ownerIDInfo = ownerIDText.getText();
+        String ownerMake = makeText.getText();
+        String ownerModel = modelText.getText();
+        String ownerLicensePlate = licensePlateText.getText();
 
-    // get the current timestamp when the user submits this form
-    String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+    // Get the current timestamp when the user submits this form
+        String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
-    // write the user-provided credentials and timestamp to a file called userInfo.txt, making it so that this information is not overwritten when the program terminates and it is stored in a new line with each submission
-    try {
-        FileWriter writer = new FileWriter("ownerInfo.txt", true); // true parameter to append to file
-        
-        writer.write(ownerIDInfo + ":" + ownerMake + ":" + ownerModel + ":" + ownerLicensePlate + ":" + timestamp + "\n");
-        writer.close();
-        System.out.println("User info successfully saved to file!");
+    // Write the user-provided credentials and timestamp to a file called userInfo.txt, making it so that this information is not overwritten when the program terminates and it is stored in a new line with each submission
+        try {
+            FileWriter writer = new FileWriter("ownerInfo.txt", true); // true parameter to append to file
+            
+            writer.write(ownerIDInfo + ":" + ownerMake + ":" + ownerModel + ":" + ownerLicensePlate + ":" + timestamp + "\n");
+            writer.close();
+            System.out.println("User info successfully saved to file!");
 
-        // success message
-        System.out.println("Thank you. Your car has been submitted.");
-    } 
-    // error message
-    catch (IOException ex) {
-        System.out.println("Error writing user info to file.");
-    }
-} // <--- actionPerformed() method ends here
-} // <--- ownerWindow{} class ends here
+            // success message
+            System.out.println("Thank you. Your car has been submitted.");
+        } 
+    // Error message
+        catch (IOException ex) {
+            System.out.println("Error writing user info to file.");
+        }
+    } // <--- actionPerformed() method ends here
+} // <--- OwnerWindow{} class ends here
 
-class ownerPage {
+class OwnerPage {
     public static void main(String[] args) {
         try {
-            ownerWindow form = new ownerWindow();
+            OwnerWindow form = new OwnerWindow();
             form.setSize(300,100);
             form.setVisible(true);
         }

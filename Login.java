@@ -1,9 +1,9 @@
 
-/* Project: Vehicular Cloud System
+/* Project: Vehicle Vortex
 * Class: Login.java 
 * Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
 * Date: February 19th, 2023 
-* This program creates a log in page, where users are able to enter their credentials,
+* This program creates a login page, where users are able to enter their credentials,
 * where they will gain access to Vehicle Vortex.
 */ 
 
@@ -101,39 +101,37 @@ class CreateLoginForm extends JFrame implements ActionListener {
 
 // ---------------------------------------------------------------------------------
 // Action listener method for the submit button
-public void actionPerformed(ActionEvent ae) {
-    // Assigning the information that will be inputted by the user as string variables
-    String userValue = userField.getText();
-    String passValue = passwordField.getText();
+    public void actionPerformed(ActionEvent ae) {
+        // Assigning the information that will be inputted by the user as string variables
+        String userValue = userField.getText();
+        String passValue = passwordField.getText();
 
-    // validating username and password based on rules - username must be greater than 5, and password must be at least 5 characters and contain one special character.
-    if (userValue.length() <= 5) {
-        System.out.println("ERROR: Username must be greater than 5 characters long.");
-        return;
-    }
-    if (!passValue.matches("^(?=.*[!@#$%^&*(),.?\":{}|<>]).{5,}$")) {
-        System.out.println("ERROR: Password must be at least 5 characters long and contain at least one special character.");
-        return;
-    }
+        // validating username and password based on rules - username must be greater than 5, and password must be at least 5 characters and contain one special character.
+        if (userValue.length() <= 5) {
+            System.out.println("ERROR: Username must be greater than 5 characters long.");
+            return;
+        }
+        if (!passValue.matches("^(?=.*[!@#$%^&*(),.?\":{}|<>]).{5,}$")) {
+            System.out.println("ERROR: Password must be at least 5 characters long and contain at least one special character.");
+            return;
+        }
 
-    // write the user-provided credentials to a file
-    try {
-        FileWriter writer = new FileWriter("Credentials.txt", true);
-        LocalDateTime timestamp = LocalDateTime.now();
-        // File credentialsFile = new File("Credentials.txt");
-        // FileWriter writer = new FileWriter(credentialsFile);
-        
-        writer.write(userValue + ":" + passValue + ":" + timestamp.toString() + System.lineSeparator()); // add newline character
-        writer.close();
-        System.out.println("Credentials successfully saved to file!");
+        // Write the user-provided credentials to a file
+        try {
+            FileWriter writer = new FileWriter("Credentials.txt", true);
+            LocalDateTime timestamp = LocalDateTime.now();
+            
+            writer.write(userValue + ":" + passValue + ":" + timestamp.toString() + System.lineSeparator()); // add newline character
+            writer.close();
+            System.out.println("Credentials successfully saved to file!");
 
-        // Show the option page if credentials are in line with rules
-        optionPage page = new optionPage();
-        page.setVisible(true);
-    } catch (IOException e) {
-        System.out.println("Error writing credentials to file.");
-    }
-} // <--- actionPerformed() method ends here
+            // Show the option page if credentials are in line with rules
+            OptionPage page = new OptionPage();
+            page.setVisible(true);
+        } catch (IOException e) {
+            System.out.println("Error writing credentials to file.");
+        }
+    } // <--- actionPerformed() method ends here
 } // <--- CreateLoginForm{} class ends here
 
 class Login {
