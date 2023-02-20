@@ -1,3 +1,12 @@
+
+/* Project: Vehicular Cloud System
+* Class: ownerPage.java 
+* Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+* Date: February 19th, 2023 
+* This program creates the owner page, where users who have selected "Owner"
+* will be able to enter details and submit their car for use.
+*/ 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -17,6 +26,8 @@ class ownerWindow extends JFrame implements ActionListener {
     final JTextField ownerIDText, makeText, modelText, licensePlateText;
     JButton submit;
 
+// ---------------------------------------------------------------------------------
+// This method creates the GUI for the ownerWindow
     ownerWindow() {
 // Assigning variables values
         ownerID = new JLabel();
@@ -57,6 +68,7 @@ class ownerWindow extends JFrame implements ActionListener {
         setSize(1000,3000);  
     } // <--- ownerPage() constructor ends here
 
+// ---------------------------------------------------------------------------------
 // Creating action listener method
 public void actionPerformed(ActionEvent e) {
     // store user input as string variables
@@ -83,10 +95,8 @@ public void actionPerformed(ActionEvent e) {
     catch (IOException ex) {
         System.out.println("Error writing user info to file.");
     }
-}
- // <--- actionPerformed() method ends here
-
-} // <--- ownerWindows{} class ends here
+} // <--- actionPerformed() method ends here
+} // <--- ownerWindow{} class ends here
 
 class ownerPage {
     public static void main(String[] args) {
@@ -95,10 +105,8 @@ class ownerPage {
             form.setSize(300,100);
             form.setVisible(true);
         }
-
         catch(Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-
     } // <--- main() method ends here
 } // <--- ownerPage{} class ends here

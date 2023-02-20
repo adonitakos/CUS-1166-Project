@@ -1,3 +1,12 @@
+
+/* Project: Vehicular Cloud System
+* Class: optionPage.java
+* Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+* Date: February 19th, 2023 
+* This program creates an option page, where users will be able to decide
+* if they would like to submit a car or a job.
+*/ 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -11,6 +20,8 @@ class optionPage extends JFrame implements ActionListener {
    JButton owner;
    JButton client;
    
+// ---------------------------------------------------------------------------------
+// This method creates the GUI for the optionPage
    optionPage() {
    // Assigning JSwing variables values & styling
 
@@ -29,7 +40,7 @@ class optionPage extends JFrame implements ActionListener {
       client = new JButton("Job");
       client.setBackground(new Color(217, 217, 217));
       client.setForeground(new Color(86, 53, 158));
-      client.setFont(new Font("Inter", Font.BOLD, 20));.
+      client.setFont(new Font("Inter", Font.BOLD, 20));
 
 
       // Adoni's NOTE: Make these buttons on different rows, make them bigger (at least wider), and make any adjustments you feel are right
@@ -55,6 +66,7 @@ class optionPage extends JFrame implements ActionListener {
       setSize(1000,800);  
    } // <--- optionPage() constructor ends here
 
+// ---------------------------------------------------------------------------------
 // Action Listener method
    public void actionPerformed(ActionEvent e) {
    // Finding the source of the action and assigning it to an object variable

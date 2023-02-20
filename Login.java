@@ -1,3 +1,12 @@
+
+/* Project: Vehicular Cloud System
+* Class: Login.java 
+* Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+* Date: February 19th, 2023 
+* This program creates a log in page, where users are able to enter their credentials,
+* where they will gain access to Vehicle Vortex.
+*/ 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -15,15 +24,16 @@ class CreateLoginForm extends JFrame implements ActionListener {
 // Initializing Java Swing Variables
     JLabel banner;
     JButton submit;
-    JPanel LoginPanel;
+    JPanel loginPanel;
     JLabel userLabel, passwordLabel;
     final JTextField userField, passwordField;
 
-// Creating the GUI for the Login form
+// ---------------------------------------------------------------------------------
+// This method creates the GUI for the Login form
     CreateLoginForm() {
 
     // Assigning JSwing variables values & styling
-    
+
         // Banner
         banner = new JLabel();
         banner.setText("Login");
@@ -70,18 +80,18 @@ class CreateLoginForm extends JFrame implements ActionListener {
         
 
     // Creating a new Panel
-        LoginPanel = new JPanel();
-        LoginPanel.setBackground(new Color(86, 53, 158));
-        LoginPanel.setLayout(null);
+        loginPanel = new JPanel();
+        loginPanel.setBackground(new Color(86, 53, 158));
+        loginPanel.setLayout(null);
 
     // Adding variables to 
-        LoginPanel.add(banner);
-        LoginPanel.add(userLabel);
-        LoginPanel.add(userField);
-        LoginPanel.add(passwordLabel);
-        LoginPanel.add(passwordField);
-        LoginPanel.add(submit);
-        add(LoginPanel, BorderLayout.CENTER);
+        loginPanel.add(banner);
+        loginPanel.add(userLabel);
+        loginPanel.add(userField);
+        loginPanel.add(passwordLabel);
+        loginPanel.add(passwordField);
+        loginPanel.add(submit);
+        add(loginPanel, BorderLayout.CENTER);
 
     // Creating action listener for the submit button
         submit.addActionListener(this);
@@ -89,8 +99,8 @@ class CreateLoginForm extends JFrame implements ActionListener {
 
     } // <--- CreateLoginForm() constructor ends here
 
+// ---------------------------------------------------------------------------------
 // Action listener method for the submit button
-
 public void actionPerformed(ActionEvent ae) {
     // Assigning the information that will be inputted by the user as string variables
     String userValue = userField.getText();
@@ -124,28 +134,9 @@ public void actionPerformed(ActionEvent ae) {
         System.out.println("Error writing credentials to file.");
     }
 } // <--- actionPerformed() method ends here
-
-    // public void actionPerformed(ActionEvent ae) {
-    // // Assigning the information that will be inputted by the user as string variables
-    //     String userValue = userField.getText();
-    //     String passValue = passwordField.getText();
-
-    // // ! --- [Temporary solution to what will later be Firebase Authentication] --- !
-    // // IF the user inputs the username and password as 1, it will bring the user to the optionPage 
-    //     if (userValue.equals("1") && passValue.equals("1")) {
-    //         optionPage page = new optionPage();
-    //         page.setVisible(true);
-    //     }
-    // // ELSE, it will tell them it is the wrong user and pass and it will have them try again
-    //     else {
-    //         System.out.println("Wrong username and Password!");
-    //     }
-    // } // <--- actionPerformed() method ends here
-
 } // <--- CreateLoginForm{} class ends here
 
 class Login {
-
     public static void main(String[] args) {
         System.out.println("\n========= Login =========\n");
         try {
@@ -157,7 +148,5 @@ class Login {
         catch(Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-
     } // <--- main() method ends here
-
 } // <--- Login{} class ends here

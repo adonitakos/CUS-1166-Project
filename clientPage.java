@@ -1,3 +1,12 @@
+
+/* Project: Vehicular Cloud System
+* Class: clientPage.java
+* Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+* Date: February 19th, 2023 
+* This program creates a client page, where users who have selected "Job" will
+* be able to enter details and submit the job they would like completed.
+*/ 
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -14,6 +23,8 @@ class clientWindow extends JFrame implements ActionListener {
     JButton submit;
     JPanel clientPage;
 
+// ---------------------------------------------------------------------------------
+// This method creates the GUI for the clientWindow
     clientWindow() {
         // Assigning variables values
         clientID = new JLabel();
@@ -59,8 +70,9 @@ class clientWindow extends JFrame implements ActionListener {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Job Submission");
         setSize(400, 250);   
-    }
+    } // <--- clientWindow() constructor ends here
 
+// ---------------------------------------------------------------------------------
     // Action Listener method
     public void actionPerformed(ActionEvent e) {
         // Assigning the information that will be inputted by the user as string variables
@@ -87,8 +99,8 @@ class clientWindow extends JFrame implements ActionListener {
         catch (IOException ex) {
             System.out.println("Error writing client info to file.");
         }
-    }
-}
+    } // <--- actionPerformed() method ends here
+} // <--- clientWindow{} class ends here
 
 class clientPage {
     public static void main(String[] args) {
@@ -98,5 +110,5 @@ class clientPage {
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-    }
-}
+    } // <--- main() method ends here
+} // <--- clientPage{} class ends here
