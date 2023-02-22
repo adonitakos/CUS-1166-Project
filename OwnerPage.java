@@ -22,8 +22,8 @@ class OwnerWindow extends JFrame implements ActionListener {
 
 // Intializing variables
     JPanel ownerPage;
-    JLabel ownerID, make, model, licensePlate;
-    final JTextField ownerIDText, makeText, modelText, licensePlateText;
+    JLabel ownerID, make, model, licensePlate, residencyTime;
+    final JTextField ownerIDText, makeText, modelText, licensePlateText,residencyTimeText;
     JButton submit;
 
 // ---------------------------------------------------------------------------------
@@ -32,22 +32,67 @@ class OwnerWindow extends JFrame implements ActionListener {
 // Assigning variables values
         ownerID = new JLabel();
         ownerID.setText("Owner ID");
-        ownerIDText = new JTextField(15);
+        ownerIDText = new JTextField(10);
+        ownerID.setForeground(Color.WHITE);
+        ownerIDText.add(ownerID);
+        ownerIDText.setBackground(new Color(217, 217, 217));
+        ownerIDText.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(86, 53, 158)),
+            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
+            residencyTime = new JLabel();
+            residencyTime.setText("Residency Time");
+            residencyTimeText = new JTextField(10);
+            residencyTime.setForeground(Color.WHITE);
+            residencyTimeText.add(residencyTime);
+            residencyTime.setBackground(new Color(217, 217, 217));
+            residencyTime.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
         make = new JLabel();
         make.setText("Make");
         makeText = new JTextField(15);
+        makeText.add(make);
+        make.setForeground(Color.WHITE);
+        makeText.setBackground(new Color(217, 217, 217));
+        makeText.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(86, 53, 158)),
+            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
         model = new JLabel();
         model.setText("Model");
         modelText = new JTextField(15);
+        modelText.add(model);
+        model.setForeground(Color.WHITE);
+        modelText.setBackground(new Color(217, 217, 217));
+        modelText.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(86, 53, 158)),
+            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
         licensePlate = new JLabel();
         licensePlate.setText("License Plate");
         licensePlateText = new JTextField(15);
-        submit = new JButton("Submit");
+        licensePlate.add(ownerID);
+        licensePlate.setForeground(Color.WHITE);
+        licensePlate.setBackground(new Color(217, 217, 217));
+        licensePlate.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(86, 53, 158)),
+            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-    // Creating new panel
+            submit = new JButton("Submit");
+            submit.setBounds(110, 270, 100, 34);
+            submit.setBackground(new Color(217, 217, 217));
+            submit.setForeground(new Color(86, 53, 158));
+            submit.setFont(new Font("Inter", Font.BOLD, 16));
+
+
+    // Creating new panel 
         ownerPage = new JPanel(new GridLayout(15, 1));
+        ownerPage.setBackground(new Color(86, 53, 158));
         JLabel welcome = new JLabel("Welcome to the owner page. Please enter the following information, leaving no fields blank.");
-        
+    // Sets the Welcome string to White text
+        welcome.setForeground(Color.WHITE);
     // Adding variables to panel
         ownerPage.add(welcome);
         ownerPage.add(ownerID);
@@ -58,6 +103,8 @@ class OwnerWindow extends JFrame implements ActionListener {
         ownerPage.add(modelText);
         ownerPage.add(licensePlate);
         ownerPage.add(licensePlateText);
+        ownerPage.add(residencyTime);
+        ownerPage.add(residencyTimeText);
         ownerPage.add(submit);
         add(ownerPage, BorderLayout.CENTER);
         // creating action listener for the submit button
@@ -76,6 +123,7 @@ class OwnerWindow extends JFrame implements ActionListener {
         String ownerMake = makeText.getText();
         String ownerModel = modelText.getText();
         String ownerLicensePlate = licensePlateText.getText();
+        String ownerResidencyTime = residencyTimeText.getText();
 
     // Get the current timestamp when the user submits this form
         String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
@@ -102,9 +150,9 @@ class OwnerPage {
     public static void main(String[] args) {
         try {
             OwnerWindow form = new OwnerWindow();
-            form.setSize(300,100);
+            form.setSize(400,300);
             form.setVisible(true);
-        }
+        }   
         catch(Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
