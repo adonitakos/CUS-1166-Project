@@ -1,0 +1,8 @@
+123:2 hours:2/10/21:2023-02-18 15:57:41
+::::2023-02-18 16:12:47
+1234:3 hours:2/28/2023:dummy text:2023-02-18 16:15:00
+7492:1 hour:2/20/2023:dummytextdummytext:2023-02-18 16:18:49
+18462:5 hours:March 5:N/A:2023-03-02 13:52:22
+12345:5 hours:May 5:N/A:2023-03-02 14:40:53
+Job ID: 12345 | Job Duration: 5 hours | Job Deadline: May 10 | Job Description: N/A | Time: 2023-03-02 14:45:52
+Job ID: 15357 | Job Duration: 10 hours | Job Deadline: March 5 | Job Description: N/A | Timestamp: 2023-03-02 14:47:39

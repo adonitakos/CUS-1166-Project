@@ -18,9 +18,9 @@ class OptionPage extends JFrame implements ActionListener {
    // Initializing Java Swing Variables
    JPanel clientUser;
    JButton owner;
-   JButton client;
+   JButton job;
 
-   final JTextField welcomeLabelText, ownerText, clientTextField,clientUserTextField;
+   final JTextField welcomeLabelText, ownerText, jobTextField, jobUserTextField;
 
    // ---------------------------------------------------------------------------------
    // This method creates the GUI for the optionPage
@@ -52,15 +52,15 @@ class OptionPage extends JFrame implements ActionListener {
             BorderFactory.createLineBorder(new Color(86, 53, 158)),
             BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-      // Client button
-      client = new JButton("Job");
-      client.setBackground(new Color(217, 217, 217));
-      client.setForeground(new Color(86, 53, 158));
-      client.setFont(new Font("Inter", Font.BOLD, 20));
-      clientTextField = new JTextField(15);
-      clientTextField.add(client);
-      clientTextField.setBackground(new Color(217, 217, 217));
-      clientTextField.setBorder(BorderFactory.createCompoundBorder(
+      // Job button
+      job = new JButton("Job");
+      job.setBackground(new Color(217, 217, 217));
+      job.setForeground(new Color(86, 53, 158));
+      job.setFont(new Font("Inter", Font.BOLD, 20));
+      jobTextField = new JTextField(15);
+      jobTextField.add(job);
+      jobTextField.setBackground(new Color(217, 217, 217));
+      jobTextField.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(new Color(86, 53, 158)),
             BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
@@ -70,23 +70,23 @@ class OptionPage extends JFrame implements ActionListener {
       // Creating new panel
       clientUser = new JPanel();
       clientUser.setBackground(new Color(86, 53, 158));
-      client.setLayout(null);
-      clientUserTextField = new JTextField(15);
-      clientUserTextField.add(clientUser);
-      clientUserTextField.setBackground(new Color(217, 217, 217));
-      clientUserTextField.setBorder(BorderFactory.createCompoundBorder(
+      job.setLayout(null);
+      jobUserTextField = new JTextField(15);
+      jobUserTextField.add(clientUser);
+      jobUserTextField.setBackground(new Color(217, 217, 217));
+      jobUserTextField.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(new Color(86, 53, 158)),
             BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
       // Adding variables to the panel
       clientUser.add(welcomeLabel);
       clientUser.add(owner);
-      clientUser.add(client);
+      clientUser.add(job);
       add(clientUser, BorderLayout.CENTER);
 
       // Creating action listeners for the two buttons
       owner.addActionListener(this);
-      client.addActionListener(this);
+      job.addActionListener(this);
 
       setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
       setTitle("Welcome");
@@ -101,15 +101,15 @@ class OptionPage extends JFrame implements ActionListener {
 
       // IF the "car" button was pressed, it will take them to the ownerPage
       if (obj == owner) {
-         OwnerWindow ownerPage = new OwnerWindow();
+         Cars ownerPage = new Cars();
          ownerPage.setVisible(true);
          ownerPage.setSize(700,500);
       }
-      // IF the "job" button was pressed, it will take them to the clientPage
-      else if (obj == client) {
-         ClientWindow clientWindow = new ClientWindow();
-         clientWindow.setVisible(true);
-         clientWindow.setSize(700,500);
+      // IF the "job" button was pressed, it will take them to the jobPage
+      else if (obj == job) {
+         Jobs jobWindow = new Jobs();
+         jobWindow.setVisible(true);
+         jobWindow.setSize(700,500);
       } else {
          System.out.println("error");
       }

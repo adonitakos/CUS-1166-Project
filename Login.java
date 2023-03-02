@@ -121,7 +121,7 @@ class CreateLoginForm extends JFrame implements ActionListener {
             FileWriter writer = new FileWriter("Credentials.txt", true);
             LocalDateTime timestamp = LocalDateTime.now();
             
-            writer.write(userValue + ":" + passValue + ":" + timestamp.toString() + System.lineSeparator()); // add newline character
+            writer.write("Username: " + userValue + " | Password: " + passValue + " | Timestamp: " + timestamp.toString() + System.lineSeparator()); // add newline character
             writer.close();
             System.out.println("Credentials successfully saved to file!");
 

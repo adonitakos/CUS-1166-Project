@@ -1,2 +1,5 @@
 123:Honda:123:geu-3147:2023-02-18 15:39:52
 9472:Mercedes:GLE350:EDSFT31:2023-02-18 15:42:09
+12345 : Ford : Focus : AJ547 : 5 hours : 2023-03-02 14:40:36
+Owner ID: 123 | Car Make: Toyota | Car Model: Camry | License Plate: SJ4829 | Residency Time: 5 hours | Time: 2023-03-02 14:45:40
+Owner ID: 12345 | Car Make: Chevy | Car Model: Cruze | License Plate: JK3821 | Residency Time: 5 hours | Timestamp: 2023-03-02 14:47:28

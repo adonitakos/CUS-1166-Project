@@ -18,17 +18,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-class OwnerWindow extends JFrame implements ActionListener {
+class Cars extends JFrame implements ActionListener {
 
 // Intializing variables
     JPanel ownerPage;
-    JLabel ownerID, make, model, licensePlate, residencyTime;
-    final JTextField ownerIDText, makeText, modelText, licensePlateText,residencyTimeText;
+    JLabel ownerID, carMake, carModel, carLicensePlate, carResidencyTime;
+    final JTextField ownerIDText, carMakeText, carModelText, carLicensePlateText, carResidencyTimeText;
     JButton submit;
 
 // ---------------------------------------------------------------------------------
 // This method creates the GUI for the OwnerWindow
-    OwnerWindow() {
+    Cars() {
 // Assigning variables values
         ownerID = new JLabel();
         ownerID.setText("Owner ID");
@@ -40,43 +40,43 @@ class OwnerWindow extends JFrame implements ActionListener {
             BorderFactory.createLineBorder(new Color(86, 53, 158)),
             BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-            residencyTime = new JLabel();
-            residencyTime.setText("Residency Time");
-            residencyTimeText = new JTextField(10);
-            residencyTime.setForeground(Color.WHITE);
-            residencyTimeText.add(residencyTime);
-            residencyTime.setBackground(new Color(217, 217, 217));
-            residencyTime.setBorder(BorderFactory.createCompoundBorder(
+            carResidencyTime = new JLabel();
+            carResidencyTime.setText("Residency Time");
+            carResidencyTimeText = new JTextField(10);
+            carResidencyTime.setForeground(Color.WHITE);
+            carResidencyTimeText.add(carResidencyTime);
+            carResidencyTime.setBackground(new Color(217, 217, 217));
+            carResidencyTime.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        make = new JLabel();
-        make.setText("Make");
-        makeText = new JTextField(15);
-        makeText.add(make);
-        make.setForeground(Color.WHITE);
-        makeText.setBackground(new Color(217, 217, 217));
-        makeText.setBorder(BorderFactory.createCompoundBorder(
+        carMake = new JLabel();
+        carMake.setText("Make");
+        carMakeText = new JTextField(15);
+        carMakeText.add(carMake);
+        carMake.setForeground(Color.WHITE);
+        carMakeText.setBackground(new Color(217, 217, 217));
+        carMakeText.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(new Color(86, 53, 158)),
             BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        model = new JLabel();
-        model.setText("Model");
-        modelText = new JTextField(15);
-        modelText.add(model);
-        model.setForeground(Color.WHITE);
-        modelText.setBackground(new Color(217, 217, 217));
-        modelText.setBorder(BorderFactory.createCompoundBorder(
+        carModel = new JLabel();
+        carModel.setText("Model");
+        carModelText = new JTextField(15);
+        carModelText.add(carModel);
+        carModel.setForeground(Color.WHITE);
+        carModelText.setBackground(new Color(217, 217, 217));
+        carModelText.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(new Color(86, 53, 158)),
             BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        licensePlate = new JLabel();
-        licensePlate.setText("License Plate");
-        licensePlateText = new JTextField(15);
-        licensePlate.add(ownerID);
-        licensePlate.setForeground(Color.WHITE);
-        licensePlate.setBackground(new Color(217, 217, 217));
-        licensePlate.setBorder(BorderFactory.createCompoundBorder(
+        carLicensePlate = new JLabel();
+        carLicensePlate.setText("License Plate");
+        carLicensePlateText = new JTextField(15);
+        carLicensePlate.add(ownerID);
+        carLicensePlate.setForeground(Color.WHITE);
+        carLicensePlate.setBackground(new Color(217, 217, 217));
+        carLicensePlate.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(new Color(86, 53, 158)),
             BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
@@ -97,14 +97,14 @@ class OwnerWindow extends JFrame implements ActionListener {
         ownerPage.add(welcome);
         ownerPage.add(ownerID);
         ownerPage.add(ownerIDText);
-        ownerPage.add(make);
-        ownerPage.add(makeText);
-        ownerPage.add(model);
-        ownerPage.add(modelText);
-        ownerPage.add(licensePlate);
-        ownerPage.add(licensePlateText);
-        ownerPage.add(residencyTime);
-        ownerPage.add(residencyTimeText);
+        ownerPage.add(carMake);
+        ownerPage.add(carMakeText);
+        ownerPage.add(carModel);
+        ownerPage.add(carModelText);
+        ownerPage.add(carLicensePlate);
+        ownerPage.add(carLicensePlateText);
+        ownerPage.add(carResidencyTime);
+        ownerPage.add(carResidencyTimeText);
         ownerPage.add(submit);
         add(ownerPage, BorderLayout.CENTER);
         // creating action listener for the submit button
@@ -113,17 +113,17 @@ class OwnerWindow extends JFrame implements ActionListener {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Car Submission");
         setSize(1000,3000);  
-    } // <--- OwnerWindow() constructor ends here
+    } // <--- Cars() constructor ends here
 
 // ---------------------------------------------------------------------------------
 // Creating action listener method
     public void actionPerformed(ActionEvent e) {
     // Store user input as string variables
-        String ownerIDInfo = ownerIDText.getText();
-        String ownerMake = makeText.getText();
-        String ownerModel = modelText.getText();
-        String ownerLicensePlate = licensePlateText.getText();
-        String ownerResidencyTime = residencyTimeText.getText();
+        int ownerID = Integer.parseInt(ownerIDText.getText());
+        String carMake = carMakeText.getText();
+        String carModel = carModelText.getText();
+        String carLicensePlate = carLicensePlateText.getText();
+        String carResidencyTime = carResidencyTimeText.getText();
 
     // Get the current timestamp when the user submits this form
         String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
@@ -132,7 +132,7 @@ class OwnerWindow extends JFrame implements ActionListener {
         try {
             FileWriter writer = new FileWriter("ownerInfo.txt", true); // true parameter to append to file
             
-            writer.write(ownerIDInfo + ":" + ownerMake + ":" + ownerModel + ":" + ownerLicensePlate + ":" + timestamp + "\n");
+            writer.write("Owner ID: " + ownerID + " | Car Make: " + carMake + " | Car Model: " + carModel + " | License Plate: " + carLicensePlate + " | Residency Time: " + carResidencyTime + " | Timestamp: " + timestamp + "\n");
             writer.close();
             System.out.println("User info successfully saved to file!");
 
@@ -144,12 +144,12 @@ class OwnerWindow extends JFrame implements ActionListener {
             System.out.println("Error writing user info to file.");
         }
     } // <--- actionPerformed() method ends here
-} // <--- OwnerWindow{} class ends here
+} // <--- Cars{} class ends here
 
 class OwnerPage {
     public static void main(String[] args) {
         try {
-            OwnerWindow form = new OwnerWindow();
+            Cars form = new Cars();
             form.setSize(400,300);
             form.setVisible(true);
         }   
@@ -157,4 +157,4 @@ class OwnerPage {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     } // <--- main() method ends here
-} // <--- ownerPage{} class ends here
+} // <--- OwnerPage{} class ends here
