@@ -1,10 +1,10 @@
 
 /* Project: Vehicle Vortex
-* Class: OptionPage.java
-* Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
-* Date: February 19th, 2023 
-* This program creates an option page, where users will be able to decide
-* if they would like to submit a car or a job.
+*  Class: OptionPage.java
+*  Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+*  Date: February 19th, 2023 
+*  This program creates an option page, where users will be able to decide
+*  if they would like to submit a car or a job.
 */
 
 import javax.swing.*;

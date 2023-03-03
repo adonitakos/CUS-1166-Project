@@ -1,10 +1,10 @@
 
-/* Project: Vehicle Vortex
-* Class: Login.java 
-* Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
-* Date: February 19th, 2023 
-* This program creates a login page, where users are able to enter their credentials,
-* where they will gain access to Vehicle Vortex.
+/*  Project: Vehicle Vortex
+*   Class: Login.java 
+*   Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+*   Date: February 19th, 2023 
+*   This program creates a login page, where users are able to enter their credentials,
+*   where they will gain access to Vehicle Vortex.
 */ 
 
 import javax.swing.*;

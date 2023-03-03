@@ -19,8 +19,8 @@ import java.text.SimpleDateFormat;
 
 class Jobs extends JFrame implements ActionListener {
     // Initializing variables
-    JLabel jobID, jobDuration, jobDeadline, jobDescription;
-    final JTextField jobIDText, jobDurationText, jobDeadlineText, jobDescriptionText;
+    JLabel jobIDLabel, jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel;
+    final JTextField jobIDField, jobDurationField, jobDeadlineField, jobDescriptionField;
     JButton submit;
     JPanel jobPage;
 
@@ -29,47 +29,47 @@ class Jobs extends JFrame implements ActionListener {
     Jobs() {
         // Assigning variables values
 
-        jobID = new JLabel();
-        jobID.setText("Job ID:");
-        jobIDText = new JTextField(15);
-        jobIDText.add(jobID);
-        jobID.setForeground(Color.WHITE);
-        jobID.setFont(new Font("Inter", Font.BOLD, 16));
-        jobID.setBackground(new Color(217, 217, 217));
-        jobID.setBorder(BorderFactory.createCompoundBorder(
+        jobIDLabel = new JLabel();
+        jobIDLabel.setText("Job ID:");
+        jobIDField = new JTextField(15);
+        jobIDField.add(jobIDLabel);
+        jobIDLabel.setForeground(Color.WHITE);
+        jobIDLabel.setFont(new Font("Inter", Font.BOLD, 16));
+        jobIDLabel.setBackground(new Color(217, 217, 217));
+        jobIDLabel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        jobDuration = new JLabel();
-        jobDuration.setText("Job Duration:");
-        jobDurationText = new JTextField(15);
-        jobDurationText.add(jobDuration);
-        jobDuration.setForeground(Color.WHITE);
-        jobDuration.setFont(new Font("Inter", Font.BOLD, 16));
-        jobDuration.setBackground(new Color(217, 217, 217));
-        jobDuration.setBorder(BorderFactory.createCompoundBorder(
+        jobDurationLabel = new JLabel();
+        jobDurationLabel.setText("Job Duration:");
+        jobDurationField = new JTextField(15);
+        jobDurationField.add(jobDurationLabel);
+        jobDurationLabel.setForeground(Color.WHITE);
+        jobDurationLabel.setFont(new Font("Inter", Font.BOLD, 16));
+        jobDurationLabel.setBackground(new Color(217, 217, 217));
+        jobDurationLabel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        jobDeadline = new JLabel();
-        jobDeadline.setText("Job Deadline:");
-        jobDeadlineText = new JTextField(15);
-        jobDeadlineText.add(jobDeadline);
-        jobDeadline.setForeground(Color.WHITE);
-        jobDeadline.setFont(new Font("Inter", Font.BOLD, 16));
-        jobDeadline.setBackground(new Color(217, 217, 217));
-        jobDeadline.setBorder(BorderFactory.createCompoundBorder(
+        jobDeadlineLabel = new JLabel();
+        jobDeadlineLabel.setText("Job Deadline:");
+        jobDeadlineField = new JTextField(15);
+        jobDeadlineField.add(jobDeadlineLabel);
+        jobDeadlineLabel.setForeground(Color.WHITE);
+        jobDeadlineLabel.setFont(new Font("Inter", Font.BOLD, 16));
+        jobDeadlineLabel.setBackground(new Color(217, 217, 217));
+        jobDeadlineLabel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        jobDescription = new JLabel();
-        jobDescription.setText("Please describe the job:");
-        jobDescriptionText = new JTextField(15);
-        jobDescription.setBounds(44, 100, 100, 16);
-        jobDescription.setForeground(Color.WHITE);
-        jobDescription.setFont(new Font("Inter", Font.BOLD, 16));
-        jobDescription.setBackground(new Color(217, 217, 217));
-        jobDescription.setBorder(BorderFactory.createCompoundBorder(
+        jobDescriptionLabel = new JLabel();
+        jobDescriptionLabel.setText("Please describe the job:");
+        jobDescriptionField = new JTextField(15);
+        jobDescriptionLabel.setBounds(44, 100, 100, 16);
+        jobDescriptionLabel.setForeground(Color.WHITE);
+        jobDescriptionLabel.setFont(new Font("Inter", Font.BOLD, 16));
+        jobDescriptionLabel.setBackground(new Color(217, 217, 217));
+        jobDescriptionLabel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
@@ -89,14 +89,14 @@ class Jobs extends JFrame implements ActionListener {
         // Adding variables to the panel
         jobPage.add(welcome);
         jobPage.add(new JLabel(""));
-        jobPage.add(jobID);
-        jobPage.add(jobIDText);
-        jobPage.add(jobDuration);
-        jobPage.add(jobDurationText);
-        jobPage.add(jobDeadline);
-        jobPage.add(jobDeadlineText);
-        jobPage.add(jobDescription);
-        jobPage.add(jobDescriptionText);
+        jobPage.add(jobIDLabel);
+        jobPage.add(jobIDField);
+        jobPage.add(jobDurationLabel);
+        jobPage.add(jobDurationField);
+        jobPage.add(jobDeadlineLabel);
+        jobPage.add(jobDeadlineField);
+        jobPage.add(jobDescriptionLabel);
+        jobPage.add(jobDescriptionField);
 
         add(jobPage, BorderLayout.CENTER);
 
@@ -118,10 +118,10 @@ class Jobs extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // Assigning the information that will be inputted by the user as string
         // variables
-        int jobID = Integer.parseInt(jobIDText.getText());
-        String jobDuration = jobDurationText.getText();
-        String jobDeadline = jobDeadlineText.getText();
-        String jobDescription = jobDescriptionText.getText();
+        int jobID = Integer.parseInt(jobIDField.getText());
+        String jobDuration = jobDurationField.getText();
+        String jobDeadline = jobDeadlineField.getText();
+        String jobDescription = jobDescriptionField.getText();
 
         // getting current timestamp of when user submits form
         String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
