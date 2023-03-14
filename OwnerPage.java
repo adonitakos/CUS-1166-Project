@@ -20,9 +20,9 @@ import java.util.Date;
 class Cars extends JFrame implements ActionListener {
 
     // Intializing variables
-    JPanel ownerPage;
-    JLabel ownerIDLabel, carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
-    final JTextField ownerIDField, carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
+    private JPanel ownerPage;
+    private JLabel ownerIDLabel, carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
+    private final JTextField ownerIDField, carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
     JButton submit;
 
     // ---------------------------------------------------------------------------------

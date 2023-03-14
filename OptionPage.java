@@ -16,9 +16,9 @@ import java.awt.event.ActionEvent;
 
 class OptionPage extends JFrame implements ActionListener {
    // Initializing Java Swing Variables
-   JPanel clientUser;
-   JButton owner;
-   JButton job;
+   private JPanel clientUser;
+   private JButton owner;
+   private JButton job;
 
    final JTextField welcomeLabelText, ownerText, jobTextField, jobUserTextField;
 

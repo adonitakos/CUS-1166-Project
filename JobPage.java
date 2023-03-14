@@ -19,10 +19,10 @@ import java.text.SimpleDateFormat;
 
 class Jobs extends JFrame implements ActionListener {
     // Initializing variables
-    JLabel jobIDLabel, jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel;
-    final JTextField jobIDField, jobDurationField, jobDeadlineField, jobDescriptionField;
-    JButton submit;
-    JPanel jobPage;
+    private JLabel jobIDLabel, jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel;
+    private final JTextField jobIDField, jobDurationField, jobDeadlineField, jobDescriptionField;
+    private JButton submit;
+    private JPanel jobPage;
 
     // ---------------------------------------------------------------------------------
     // This method creates the GUI for the JobWindow
