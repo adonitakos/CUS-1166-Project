@@ -19,8 +19,8 @@ import java.text.SimpleDateFormat;
 
 class Jobs extends JFrame implements ActionListener {
     // Initializing variables
-    private JLabel jobIDLabel, jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel;
-    private final JTextField jobIDField, jobDurationField, jobDeadlineField, jobDescriptionField;
+    private JLabel jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel;
+    private final JTextField jobDurationField, jobDeadlineField, jobDescriptionField;
     private JButton submit;
     private JPanel jobPage;
 
@@ -28,18 +28,7 @@ class Jobs extends JFrame implements ActionListener {
     // This method creates the GUI for the JobWindow
     Jobs() {
         // Assigning variables values
-
-        jobIDLabel = new JLabel();
-        jobIDLabel.setText("Job ID:");
-        jobIDField = new JTextField(15);
-        jobIDField.add(jobIDLabel);
-        jobIDLabel.setForeground(Color.WHITE);
-        jobIDLabel.setFont(new Font("Inter", Font.BOLD, 16));
-        jobIDLabel.setBackground(new Color(217, 217, 217));
-        jobIDLabel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-
+        // Duration
         jobDurationLabel = new JLabel();
         jobDurationLabel.setText("Job Duration:");
         jobDurationField = new JTextField(15);
@@ -51,6 +40,7 @@ class Jobs extends JFrame implements ActionListener {
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
+        // Deadline
         jobDeadlineLabel = new JLabel();
         jobDeadlineLabel.setText("Job Deadline:");
         jobDeadlineField = new JTextField(15);
@@ -62,6 +52,7 @@ class Jobs extends JFrame implements ActionListener {
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
+        // Description
         jobDescriptionLabel = new JLabel();
         jobDescriptionLabel.setText("Please describe the job:");
         jobDescriptionField = new JTextField(15);
@@ -73,6 +64,7 @@ class Jobs extends JFrame implements ActionListener {
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
+        // Submit
         submit = new JButton("Submit");
         submit.setBounds(110, 270, 100, 34);
         submit.setBackground(new Color(217, 217, 217));
@@ -89,8 +81,6 @@ class Jobs extends JFrame implements ActionListener {
         // Adding variables to the panel
         jobPage.add(welcome);
         jobPage.add(new JLabel(""));
-        jobPage.add(jobIDLabel);
-        jobPage.add(jobIDField);
         jobPage.add(jobDurationLabel);
         jobPage.add(jobDurationField);
         jobPage.add(jobDeadlineLabel);
@@ -118,7 +108,7 @@ class Jobs extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // Assigning the information that will be inputted by the user as string
         // variables
-        int jobID = Integer.parseInt(jobIDField.getText());
+        int jobID = User.generateUniqueUserID();
         String jobDuration = jobDurationField.getText();
         String jobDeadline = jobDeadlineField.getText();
         String jobDescription = jobDescriptionField.getText();

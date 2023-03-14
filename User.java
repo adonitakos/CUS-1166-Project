@@ -1,3 +1,12 @@
+
+/*  Project: Vehicle Vortex
+*   Class: User.java 
+*   Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+*   Date: February 19th, 2023 
+*   This file contains the classes that will be used for the User.
+*/ 
+
+import java.util.*;
 public class User {
     private int userID;
     private String userName;

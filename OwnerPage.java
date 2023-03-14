@@ -21,27 +21,14 @@ class Cars extends JFrame implements ActionListener {
 
     // Intializing variables
     private JPanel ownerPage;
-    private JLabel ownerIDLabel, carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
-    private final JTextField ownerIDField, carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
+    private JLabel carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
+    private final JTextField carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
     JButton submit;
 
     // ---------------------------------------------------------------------------------
-    // This method creates the GUI for the OwnerWindow
+    // This method creates the GUI for the Cars Window
     Cars() {
         // Assigning variables values
-
-        // Owner ID
-        // To likely be replaced in favor of userID foreign key
-        ownerIDLabel = new JLabel();
-        ownerIDLabel.setText("Owner ID");
-        ownerIDField = new JTextField(10);
-        ownerIDLabel.setForeground(Color.WHITE);
-        ownerIDField.add(ownerIDLabel);
-        ownerIDField.setBackground(new Color(217, 217, 217));
-        ownerIDField.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-
         // License Plate
         carLicensePlateLabel = new JLabel();
         carLicensePlateLabel.setText("License Plate");
@@ -109,8 +96,6 @@ class Cars extends JFrame implements ActionListener {
 
         // Adding variables to panel
         ownerPage.add(welcome);
-        ownerPage.add(ownerIDLabel); // added to ownerPage panel
-        ownerPage.add(ownerIDField); // added to ownerPage panel
         ownerPage.add(carLicensePlateLabel);
         ownerPage.add(carLicensePlateField);
         ownerPage.add(carMakeLabel);
@@ -120,8 +105,6 @@ class Cars extends JFrame implements ActionListener {
         ownerPage.add(carResidencyTimeLabel);
         ownerPage.add(carResidencyTimeField);
         ownerPage.add(submit);
-
-
 
         add(ownerPage, BorderLayout.CENTER);
         // creating action listener for the submit button
@@ -136,7 +119,7 @@ class Cars extends JFrame implements ActionListener {
     // Creating action listener method
     public void actionPerformed(ActionEvent e) {
         // Store user input as string variables
-        int ownerID = Integer.parseInt(ownerIDField.getText());
+        int ownerID = User.generateUniqueUserID();
         String carMake = carMakeField.getText();
         String carModel = carModelField.getText();
         String carLicensePlate = carLicensePlateField.getText();
