@@ -32,5 +32,19 @@ public class User {
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
+    private static Set<Integer> generatedIDs = new HashSet<>();
+
+    public static int generateUniqueUserID() {
+        Random random = new Random();
+        int userID = random.nextInt(900000000) + 100000000;
+
+        while (generatedIDs.contains(userID)) {
+            userID = random.nextInt(900000000) + 100000000;
+        }
+
+        generatedIDs.add(userID);
+        return userID;
+    }
+
 }
 
