@@ -99,11 +99,11 @@ class OptionPage extends JFrame implements ActionListener {
       // Finding the source of the action and assigning it to an object variable
       Object obj = e.getSource();
 
-      // IF the "car" button was pressed, it will take them to the ownerPage
+      // IF the "car" button was pressed, it will take them to the carPage
       if (obj == owner) {
-         Cars ownerPage = new Cars();
-         ownerPage.setVisible(true);
-         ownerPage.setSize(700,500);
+         Cars carPage = new Cars();
+         carPage.setVisible(true);
+         carPage.setSize(700,500);
       }
       // IF the "job" button was pressed, it will take them to the jobPage
       else if (obj == job) {

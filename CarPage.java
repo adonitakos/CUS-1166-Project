@@ -3,7 +3,7 @@
 *   Class: CarPage.java 
 *   Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
 *   Date: February 19th, 2023 
-*   This program creates the owner page, where users who have selected "Owner"
+*   This program creates the car page, where users who have selected "Owner"
 *   will be able to enter details and submit their car for use.
 */
 
@@ -20,7 +20,7 @@ import java.util.Date;
 class Cars extends JFrame implements ActionListener {
 
     // Intializing variables
-    private JPanel ownerPage;
+    private JPanel carPage;
     private JLabel carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
     private final JTextField carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
     JButton submit;
@@ -87,26 +87,26 @@ class Cars extends JFrame implements ActionListener {
         submit.setFont(new Font("Inter", Font.BOLD, 16));
 
         // Creating new panel
-        ownerPage = new JPanel(new GridLayout(15, 1));
-        ownerPage.setBackground(new Color(86, 53, 158));
+        carPage = new JPanel(new GridLayout(15, 1));
+        carPage.setBackground(new Color(86, 53, 158));
         JLabel welcome = new JLabel(
-                "Welcome to the owner page. Please enter the following information, leaving no fields blank.");
+                "Welcome to the car page. Please enter the following information, leaving no fields blank.");
         // Sets the Welcome string to White text
         welcome.setForeground(Color.WHITE);
 
         // Adding variables to panel
-        ownerPage.add(welcome);
-        ownerPage.add(carLicensePlateLabel);
-        ownerPage.add(carLicensePlateField);
-        ownerPage.add(carMakeLabel);
-        ownerPage.add(carMakeField);
-        ownerPage.add(carModelLabel);
-        ownerPage.add(carModelField);
-        ownerPage.add(carResidencyTimeLabel);
-        ownerPage.add(carResidencyTimeField);
-        ownerPage.add(submit);
+        carPage.add(welcome);
+        carPage.add(carLicensePlateLabel);
+        carPage.add(carLicensePlateField);
+        carPage.add(carMakeLabel);
+        carPage.add(carMakeField);
+        carPage.add(carModelLabel);
+        carPage.add(carModelField);
+        carPage.add(carResidencyTimeLabel);
+        carPage.add(carResidencyTimeField);
+        carPage.add(submit);
 
-        add(ownerPage, BorderLayout.CENTER);
+        add(carPage, BorderLayout.CENTER);
         // creating action listener for the submit button
         submit.addActionListener(this);
 
@@ -132,7 +132,7 @@ class Cars extends JFrame implements ActionListener {
         // userInfo.txt, making it so that this information is not overwritten when the
         // program terminates and it is stored in a new line with each submission
         try {
-            FileWriter writer = new FileWriter("ownerInfo.txt", true); // true parameter to append to file
+            FileWriter writer = new FileWriter("carInfo.txt", true); // true parameter to append to file
 
             writer.write("Owner ID: " + ownerID + " | Car Make: " + carMake + " | Car Model: " + carModel
                     + " | License Plate: " + carLicensePlate + " | Residency Time: " + carResidencyTime
@@ -150,7 +150,7 @@ class Cars extends JFrame implements ActionListener {
     } // <--- actionPerformed() method ends here
 } // <--- Cars{} class ends here
 
-class OwnerPage {
+class CarPage {
     public static void main(String[] args) {
         try {
             Cars form = new Cars();
@@ -160,4 +160,4 @@ class OwnerPage {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     } // <--- main() method ends here
-} // <--- OwnerPage{} class ends here
+} // <--- CarPage{} class ends here
