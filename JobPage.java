@@ -21,7 +21,7 @@ class Jobs extends JFrame implements ActionListener {
     // Initializing variables
     private JLabel jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel;
     private final JTextField jobDurationField, jobDeadlineField, jobDescriptionField;
-    private JButton submit;
+    private JButton submit, jobCompletion;
     private JPanel jobPage;
 
     // ---------------------------------------------------------------------------------
@@ -64,6 +64,13 @@ class Jobs extends JFrame implements ActionListener {
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
+        // jobCompletion
+        jobCompletion = new JButton("Completion Time");
+        jobCompletion.setBounds(110, 270, 100, 34);
+        jobCompletion.setBackground(new Color(217, 217, 217));
+        jobCompletion.setForeground(new Color(86, 53, 158));
+        jobCompletion.setFont(new Font("Inter", Font.BOLD, 16));
+
         // Submit
         submit = new JButton("Submit");
         submit.setBounds(110, 270, 100, 34);
@@ -93,10 +100,12 @@ class Jobs extends JFrame implements ActionListener {
         // Adding submit button to the panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(submit);
+        buttonPanel.add(jobCompletion);
         add(buttonPanel, BorderLayout.SOUTH);
 
         // Creating action listener for the submit button
         submit.addActionListener(this);
+        jobCompletion.addActionListener(this);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Job Submission");
@@ -106,34 +115,44 @@ class Jobs extends JFrame implements ActionListener {
     // ---------------------------------------------------------------------------------
     // Action Listener method
     public void actionPerformed(ActionEvent e) {
-        // Assigning the information that will be inputted by the user as string
-        // variables
-        int jobID = User.generateUniqueUserID();
-        String jobDuration = jobDurationField.getText();
-        String jobDeadline = jobDeadlineField.getText();
-        String jobDescription = jobDescriptionField.getText();
+        Object obj = e.getSource();
+    
+        if (obj == submit) {
+            // Assigning the information that will be inputted by the user as string
+            // variables
+            int jobID = User.generateUniqueUserID();
+            String jobDuration = jobDurationField.getText();
+            String jobDeadline = jobDeadlineField.getText();
+            String jobDescription = jobDescriptionField.getText();
 
-        // getting current timestamp of when user submits form
-        String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+            // getting current timestamp of when user submits form
+            String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
-        // write user inputted credentials and timestamp to a text file called
-        // jobInfo.txt
-        try {
-            FileWriter writer = new FileWriter("jobInfo.txt", true); // true parameter to append to file
+            // write user inputted credentials and timestamp to a text file called
+            // jobInfo.txt
+            try {
+                FileWriter writer = new FileWriter("jobInfo.txt", true); // true parameter to append to file
 
-            writer.write("Job ID: " + jobID + " | Job Duration: " + jobDuration + " | Job Deadline: " + jobDeadline + " | Job Description: " + jobDescription + " | Timestamp: "
-                    + timestamp + "\n");
-            writer.close();
-            System.out.println("Job info successfully saved to file!");
+                 writer.write("Job ID: " + jobID + " | Job Duration: " + jobDuration + " | Job Deadline: " + jobDeadline + " | Job Description: " + jobDescription + " | Timestamp: "
+                        + timestamp + "\n");
+                writer.close();
+                System.out.println("Job info successfully saved to file!");
 
-            // confirmation message if successful
-            System.out.println("Thank you. Your job has been submitted.");
+                // confirmation message if successful
+                System.out.println("Thank you. Your job has been submitted.");
+            }
+            // or error message if unsuccessful
+            catch (IOException ex) {
+                System.out.println("Error writing job info to file.");
+            }
+        }    
+        else if (obj == jobCompletion) {
+            System.out.print("The completion time is: " + "hours.");
         }
-        // or error message if unsuccessful
-        catch (IOException ex) {
-            System.out.println("Error writing job info to file.");
-        }
-    } // <--- actionPerformed() method ends here
+        else {
+            System.out.println("Error.");
+            
+        } // <--- actionPerformed() method ends here
 } // <--- Jobs{} class ends here
 
 class JobPage {
@@ -147,4 +166,5 @@ class JobPage {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     } // <--- main() method ends here
+} 
 } // <--- JobPage{} class ends here
