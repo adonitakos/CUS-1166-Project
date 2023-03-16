@@ -1,6 +1,6 @@
 
 /*  Project: Vehicle Vortex
-*   Class: OwnerPage.java 
+*   Class: CarPage.java 
 *   Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
 *   Date: February 19th, 2023 
 *   This program creates the owner page, where users who have selected "Owner"
