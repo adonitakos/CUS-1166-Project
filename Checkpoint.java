@@ -1,39 +1,40 @@
-Import java.util.Date;
+import java.util.Date;
 
-public class createCheckpoint (){
+public class Checkpoint {
 
-private int checkpointID;
-private Vehicle vehicle;
-private Date CheckInTime;
-private Date CheckOutTime
-private Date time;
+    private int checkpointID;
+    private Car car;
+    private Date checkInTime;
+    private Date checkOutTime;
+    //private Date time;        Not sure what this is used for
 
-public Checkpoint(int checkpointID,Vehicle vehicle)
-{
-    this.checkpointID= checkpointID
-    this.vehicle = vehicle;
-}
+    public Checkpoint(int checkpointID, Car car) {
+        this.checkpointID = checkpointID;
+        this.car = car;
+    }
 
-public int getCheckpointID()
-{
-    return checkpointID;
-}
-public Vehicle getvehicle(){
-    return vehicle;
-}
-public Date getCheckInTime{
-    return checkInTime;
+    public int getCheckpointID() {
+        return checkpointID;
+    }
 
-}
-public Date setcheckInTime(Date time)
-{
-    checkInTime = time;
+    public Car getCar() {
+        return car;
+    }
 
-}
-public void setCheckOutTime(Date time)
-{
-    checkoutTime = time;
-}
+    public Date getCheckInTime() {
+        return checkInTime;
+    }
 
+    public void setCheckInTime(Date time) {
+        checkInTime = time;
+    }
+
+    public void setCheckOutTime(Date time) {
+        checkOutTime = time;
+    }
+
+    public Date getCheckOutTime() {
+        return checkOutTime;
+    }
 
 }
