@@ -5,8 +5,9 @@ public abstract class Job {
     private String jobDuration;
     private String jobDeadline;
     private String jobDescription;
-    private Boolean completionStatus;
+    private Boolean completionStatus = false;
     private int jobRedundancy;
+    private int completionTime;
     private LinkedList<Car> Cars = new LinkedList<Car>();
 
     public Job(int jobID, String jobDuration, String jobDeadline, String jobDescription, int jobRedundancy) {
@@ -19,6 +20,14 @@ public abstract class Job {
 
     public LinkedList<Car> getCars() {
         return Cars;
+    }
+
+    public int getCompletionTime() {
+        return completionTime;
+    }
+
+    public void setCompletionTime(int time) {
+        this.completionTime = time;
     }
 
     public Boolean addCar(Car car) {
@@ -92,5 +101,19 @@ public abstract class Job {
 
     public void performJob() {
         System.out.println("This job is being performed.");
+    }
+
+    public String toString() {
+        String newString = "" + jobID + ",," + jobDuration + ",," + jobDeadline + ",," + jobDescription + ",,"
+                + completionStatus + ",," + jobRedundancy + ",," + completionTime + ",,(";
+        for (int i = 0; i < Cars.size(); i++) {
+            if (i == 0) {
+                newString = newString + Cars.get(i).getOwnerID();
+            } else if (i > 0) {
+                newString = "," + newString + Cars.get(i).getOwnerID();
+            }
+        }
+        newString = newString + ".";
+        return newString;
     }
 }

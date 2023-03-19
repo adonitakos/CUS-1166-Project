@@ -1,5 +1,3 @@
-import java.util.LinkedList;
-
 public class Car {
     private String carLicensePlate;
     private String carMake;
@@ -7,7 +5,7 @@ public class Car {
     private String carResidencyTime;
     private int ownerID;
     private int jobID;
-    private LinkedList<Job> Jobs = new LinkedList<Job>();
+    private Job Job;
 
     public Car(String carLicensePlate, String carMake, String carModel, String carResidencyTime, int ownerID) {
         this.carLicensePlate = carLicensePlate;
@@ -18,17 +16,12 @@ public class Car {
         this.jobID = 0; // Set job ID to 0 to indicate that the car is currently available for hire
     }
 
-    public LinkedList<Job> getJobs() {
-        return Jobs;
+    public Job getJob() {
+        return Job;
     }
 
-    public Boolean addJob(Job job) {
-        Jobs.add(job);
-        return true;
-    }
-
-    public void removeJob(Job job) {
-        Jobs.remove(job);
+    public void setJob(Job job) {
+        this.Job = job;
     }
 
     public String getCarLicensePlate() {
