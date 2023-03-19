@@ -3,6 +3,15 @@ import java.io.*;
 
 public class VCC {
 
+	//  Not sure if these need to be placed in the VCC class as well
+	private int checkpointID;
+	//private Vehicle vehicle;
+	private Date checkInTime;
+	private Date checkOutTime;
+	private Date time;
+     
+
+
 	private LinkedList<Car> Cars = new LinkedList<Car>();
 	private Queue<Job> JobsQueue = new LinkedList<Job>();
 	private LinkedList<Job> AllJobs = new LinkedList<Job>();
@@ -109,12 +118,23 @@ public class VCC {
 
 	}
 
-	public Boolean createCheckPoint() {
+	public Boolean createCheckPoint(int checkpointID, Date CheckInTime, Date CheckOutTime) // (Vehicle vehicle)
+	 {
+		Checkpoint checkpoint = new Checkpoint(checkpointID);//vehicle); edited once vehicle is properly assignable
+		checkpoint.setCheckInTime(checkInTime);
+		checkpoint.setCheckOutTime(checkOutTime);
+		checkpoint.add(checkpoint);
+		return true;
+
+
+
 
 	}
 
 	public Boolean transferCheckpoint() {
+		//Boolean checkpointData = VCC.createCheckPoint(checkpointID,vehicle, checkinTime, checkoutTime);
 
 	}
 
+	
 }
