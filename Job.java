@@ -7,7 +7,7 @@ public abstract class Job {
     private String jobDescription;
     private Boolean completionStatus = false;
     private int jobRedundancy;
-    private int completionTime;
+    private static int completionTime;
     private LinkedList<Car> Cars = new LinkedList<Car>();
 
     public Job(int jobID, int jobDuration, String jobDeadline, String jobDescription, int jobRedundancy) {
@@ -22,12 +22,12 @@ public abstract class Job {
         return Cars;
     }
 
-    public int getCompletionTime() {
+    public static int getCompletionTime() {
         return completionTime;
     }
 
-    public void setCompletionTime(int time) {
-        this.completionTime = time;
+    public static void setCompletionTime(int time) {
+        completionTime = time;
     }
 
     public Boolean addCar(Car car) {
