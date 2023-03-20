@@ -3,7 +3,7 @@ import java.util.LinkedList;
 
 public class Job {
     private int jobID;
-    private int jobDuration;//in hours
+    private static int jobDuration;//in hours
     private String jobDeadline;
     private String jobDescription;
     private Boolean completionStatus = false;
@@ -11,6 +11,7 @@ public class Job {
     private int completionTime;
     private Date timestamp;
     private LinkedList<Car> Cars = new LinkedList<Car>();
+    public static LinkedList<Integer> completionTimes = new LinkedList<Integer>();
 
     public Job(int jobID, int jobDuration, String jobDeadline, String jobDescription) {
         this.jobID = jobID;
@@ -25,6 +26,14 @@ public class Job {
 
     public void setTimestamp(Date date) {
         timestamp = date;
+    }
+
+    public static int sumCompletionTime(LinkedList<Integer> completionTimes) {
+        int completionTime = 0;
+        for (int num : completionTimes) {
+            completionTime += num;
+        }
+        return completionTime;
     }
 
     public LinkedList<Car> getCars() {

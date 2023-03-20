@@ -121,14 +121,9 @@ class Jobs extends JFrame implements ActionListener {
             int jobDuration = Integer.parseInt(jobDurationField.getText());
             String jobDeadline = jobDeadlineField.getText();
             String jobDescription = jobDescriptionField.getText();
-            Job job = new Job(jobID, jobDuration, jobDeadline, jobDescription);
+            Job.completionTimes.add(jobDuration);
             // getting current timestamp of when user submits form
-            Date timestamp = new Date();
-            job.setTimestamp(timestamp);
-            vcc.addJob(job);
-            if (obj == jobCompletion) {
-                System.out.print("The completion time is: " + job.getCompletionTime() + " hours.");
-            }
+            String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
             // write user inputted credentials and timestamp to a text file called
             // jobInfo.txt
             try {
@@ -147,7 +142,11 @@ class Jobs extends JFrame implements ActionListener {
             catch (IOException ex) {
                 System.out.println("Error writing job info to file.");
             }
-        } else {
+        }    
+        else if (obj == jobCompletion) {
+            System.out.print("The completion time is: " + Job.sumCompletionTime(Job.completionTimes) + " hours.");
+        }
+        else {
             System.out.println("Error.");
 
         } // <--- actionPerformed() method ends here
