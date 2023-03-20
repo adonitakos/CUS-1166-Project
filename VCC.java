@@ -36,7 +36,8 @@ public class VCC {
 			ex.printStackTrace();
 			return null;
 		}
-	}
+	} // <--- importJobsFromFile() method ends here
+	
 
 	public Boolean importCarsFromFile(String path) {// needs to be completed
 		try {
