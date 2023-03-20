@@ -21,7 +21,7 @@ class Jobs extends JFrame implements ActionListener {
     // Initializing variables
     private JLabel jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel;
     private final JTextField jobDurationField, jobDeadlineField, jobDescriptionField;
-    private JButton submit, jobCompletion;
+    private JButton submit, jobCompletion, back;
     private JPanel jobPage;
 
     // ---------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ class Jobs extends JFrame implements ActionListener {
         // Assigning variables values
         // Duration
         jobDurationLabel = new JLabel();
-        jobDurationLabel.setText("Job Duration:");
+        jobDurationLabel.setText("Job Duration (in hours):");
         jobDurationField = new JTextField(15);
         jobDurationField.add(jobDurationLabel);
         jobDurationLabel.setForeground(Color.WHITE);
@@ -42,7 +42,7 @@ class Jobs extends JFrame implements ActionListener {
 
         // Deadline
         jobDeadlineLabel = new JLabel();
-        jobDeadlineLabel.setText("Job Deadline:");
+        jobDeadlineLabel.setText("Job Deadline (mm/dd/yyyy):");
         jobDeadlineField = new JTextField(15);
         jobDeadlineField.add(jobDeadlineLabel);
         jobDeadlineLabel.setForeground(Color.WHITE);
@@ -78,6 +78,13 @@ class Jobs extends JFrame implements ActionListener {
         submit.setForeground(new Color(86, 53, 158));
         submit.setFont(new Font("Inter", Font.BOLD, 16));
 
+        // Back Button
+        back = new JButton("Back");
+        back.setBounds(110, 270, 100, 34);
+        back.setBackground(new Color(217, 217, 217));
+        back.setForeground(new Color(86, 53, 158));
+        back.setFont(new Font("Inter", Font.BOLD, 16));
+
         // Creating a new panel
         jobPage = new JPanel(new GridLayout(5, 2));
         jobPage.setBackground(new Color(86, 53, 158));
@@ -97,15 +104,17 @@ class Jobs extends JFrame implements ActionListener {
 
         add(jobPage, BorderLayout.CENTER);
 
-        // Adding submit button to the panel
+        // Adding buttons to the panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(submit);
         buttonPanel.add(jobCompletion);
+        buttonPanel.add(back);
         add(buttonPanel, BorderLayout.SOUTH);
 
         // Creating action listener for the submit button
         submit.addActionListener(this);
         jobCompletion.addActionListener(this);
+        back.addActionListener(this);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Job Submission");
@@ -147,6 +156,16 @@ class Jobs extends JFrame implements ActionListener {
         }    
         else if (obj == jobCompletion) {
             System.out.print("The completion time is: " + Job.sumCompletionTime(Job.completionTimes) + " hours.");
+        }
+
+        else if (obj == back) {
+
+            // if back button was clicked, reopen OptionPage
+            OptionPage page = new OptionPage();
+            page.setVisible(true);
+
+            // if back button was clicked, close current panel
+            dispose();
         }
         else {
             System.out.println("Error.");

@@ -22,7 +22,7 @@ class Cars extends JFrame implements ActionListener {
     private JPanel carPage;
     private JLabel carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
     private final JTextField carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
-    JButton submit;
+    JButton submit, back;
 
     // ---------------------------------------------------------------------------------
     // This method creates the GUI for the Cars Window
@@ -66,7 +66,7 @@ class Cars extends JFrame implements ActionListener {
 
         // Residency Time
         carResidencyTimeLabel = new JLabel();
-        carResidencyTimeLabel.setText("Residency Time");
+        carResidencyTimeLabel.setText("Residency Time (in hours):");
         carResidencyTimeField = new JTextField(10);
         carResidencyTimeLabel.setForeground(Color.WHITE);
         carResidencyTimeLabel.setBackground(new Color(217, 217, 217));
@@ -84,6 +84,13 @@ class Cars extends JFrame implements ActionListener {
         submit.setBackground(new Color(217, 217, 217));
         submit.setForeground(new Color(86, 53, 158));
         submit.setFont(new Font("Inter", Font.BOLD, 16));
+
+        // Back
+        back = new JButton("Back");
+        back.setBounds(110, 310, 100, 34);
+        back.setBackground(new Color(217, 217, 217));
+        back.setForeground(new Color(86, 53, 158));
+        back.setFont(new Font("Inter", Font.BOLD, 16));
 
         // Creating new panel
         carPage = new JPanel(new GridLayout(15, 1));
@@ -104,10 +111,19 @@ class Cars extends JFrame implements ActionListener {
         carPage.add(carResidencyTimeLabel);
         carPage.add(carResidencyTimeField);
         carPage.add(submit);
+        carPage.add(back);
 
         add(carPage, BorderLayout.CENTER);
-        // creating action listener for the submit button
+
+        // Adding buttons to the panel
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(submit);
+        buttonPanel.add(back);
+        add(buttonPanel, BorderLayout.SOUTH);
+
+        // creating action listener for the buttons
         submit.addActionListener(this);
+        back.addActionListener(this);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Car Submission");
@@ -117,34 +133,49 @@ class Cars extends JFrame implements ActionListener {
     // ---------------------------------------------------------------------------------
     // Creating action listener method
     public void actionPerformed(ActionEvent e) {
+        Object obj = e.getSource();
+
+        if (obj == submit) {
         // Store user input as string variables
-        int ownerID = User.generateUniqueUserID();
-        String carMake = carMakeField.getText();
-        String carModel = carModelField.getText();
-        String carLicensePlate = carLicensePlateField.getText();
-        String carResidencyTime = carResidencyTimeField.getText();
+            int ownerID = User.generateUniqueUserID();
+            String carMake = carMakeField.getText();
+            String carModel = carModelField.getText();
+            String carLicensePlate = carLicensePlateField.getText();
+            String carResidencyTime = carResidencyTimeField.getText();
 
-        // Get the current timestamp when the user submits this form
-        String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+            // Get the current timestamp when the user submits this form
+            String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
-        // Write the user-provided credentials and timestamp to a file called
-        // userInfo.txt, making it so that this information is not overwritten when the
-        // program terminates and it is stored in a new line with each submission
-        try {
-            FileWriter writer = new FileWriter("carInfo.txt", true); // true parameter to append to file
+            // Write the user-provided credentials and timestamp to a file called
+            // userInfo.txt, making it so that this information is not overwritten when the
+            // program terminates and it is stored in a new line with each submission
+            try {
+                FileWriter writer = new FileWriter("carInfo.txt", true); // true parameter to append to file
 
-            writer.write("Owner ID: " + ownerID + " | Car Make: " + carMake + " | Car Model: " + carModel
+                writer.write("Owner ID: " + ownerID + " | Car Make: " + carMake + " | Car Model: " + carModel
                     + " | License Plate: " + carLicensePlate + " | Residency Time: " + carResidencyTime
                     + " | Timestamp: " + timestamp + "\n");
-            writer.close();
-            System.out.println("User info successfully saved to file!");
+                writer.close();
+                System.out.println("User info successfully saved to file!");
 
-            // success message
-            System.out.println("Thank you. Your car has been submitted.");
+                // success message
+                System.out.println("Thank you. Your car has been submitted.");
+            }
+            // Error message
+            catch (IOException ex) {
+                System.out.println("Error writing user info to file.");
+            }
         }
-        // Error message
-        catch (IOException ex) {
-            System.out.println("Error writing user info to file.");
+        else if (obj == back) {
+
+            // if back button was clicked, reopen OptionPage
+            OptionPage page = new OptionPage();
+            page.setVisible(true);
+            // if back button was clicked, close CarPage
+            dispose();
+        }
+        else {
+            System.out.println("Error.");
         }
     } // <--- actionPerformed() method ends here
 } // <--- Cars{} class ends here

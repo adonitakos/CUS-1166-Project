@@ -123,6 +123,9 @@ class CreateLoginForm extends JFrame implements ActionListener {
             // Show the option page if credentials are in line with rules
             OptionPage page = new OptionPage();
             page.setVisible(true);
+
+            // dispose of Login page once credentials are valid
+            dispose();
         } catch (IOException e) {
             System.out.println("Error writing credentials to file.");
         }

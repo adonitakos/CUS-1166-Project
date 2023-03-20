@@ -17,8 +17,9 @@ class OptionPage extends JFrame implements ActionListener {
    private JPanel clientUser;
    private JButton owner;
    private JButton job;
+   private JButton back;
 
-   final JTextField welcomeLabelText, ownerText, jobTextField, jobUserTextField;
+   final JTextField welcomeLabelText, ownerText, jobTextField, jobUserTextField, backText;
 
    // ---------------------------------------------------------------------------------
    // This method creates the GUI for the optionPage
@@ -62,6 +63,17 @@ class OptionPage extends JFrame implements ActionListener {
             BorderFactory.createLineBorder(new Color(86, 53, 158)),
             BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
+      back = new JButton("Back");
+      back.setBackground(new Color(217, 217, 217));
+      back.setForeground(new Color(86, 53, 158));
+      back.setFont(new Font("Inter", Font.BOLD, 20));
+      backText = new JTextField(15);
+      backText.add(back);
+      backText.setBackground(new Color(217, 217, 217));
+      backText.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(86, 53, 158)),
+            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
       // Adoni's NOTE: Make these buttons on different rows, make them bigger (at
       // least wider), and make any adjustments you feel are right
 
@@ -80,11 +92,13 @@ class OptionPage extends JFrame implements ActionListener {
       clientUser.add(welcomeLabel);
       clientUser.add(owner);
       clientUser.add(job);
+      clientUser.add(back);
       add(clientUser, BorderLayout.CENTER);
 
       // Creating action listeners for the two buttons
       owner.addActionListener(this);
       job.addActionListener(this);
+      back.addActionListener(this);
 
       setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
       setTitle("Welcome");
@@ -99,16 +113,25 @@ class OptionPage extends JFrame implements ActionListener {
 
       // IF the "car" button was pressed, it will take them to the carPage
       if (obj == owner) {
+         dispose();
          Cars carPage = new Cars();
          carPage.setVisible(true);
          carPage.setSize(700,500);
       }
       // IF the "job" button was pressed, it will take them to the jobPage
       else if (obj == job) {
+         dispose();
          Jobs jobWindow = new Jobs();
          jobWindow.setVisible(true);
          jobWindow.setSize(700,500);
-      } else {
+      } 
+      else if (obj == back) {
+         dispose();
+         CreateLoginForm form = new CreateLoginForm();
+         form.setSize(323, 393);
+         form.setVisible(true);
+      }
+      else {
          System.out.println("error");
       }
    } // <--- actionPerformed() method ends here
