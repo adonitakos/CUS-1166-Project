@@ -20,17 +20,31 @@ public class VCC {
 		return single_instance;
 	}
 
-	public void importJobsFromFile(String path) {// not complete
+	// public void importJobsFromFile(String path) {// not complete
+	// 	try {
+	// 		FileWriter myWriter = new FileWriter(path);
+	// 		myWriter.write(job);
+	// 		myWriter.close();
+	// 		return true;
+	// 	} catch (IOException e) {
+	// 		System.out.println("An error occurred.");
+	// 		e.printStackTrace();
+	// 	}
+	// } // <--- importJobsFromFile() method ends here
+
+	public boolean importJobsFromFile(String path, Job job) {
 		try {
 			FileWriter myWriter = new FileWriter(path);
-			myWriter.write(job);
+			myWriter.write(job.toString());
 			myWriter.close();
 			return true;
 		} catch (IOException e) {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
+			return false;
 		}
-	}
+	} // <--- importJobsFromFile() method ends here
+	
 
 	public Boolean importCarsFromFile(String path) {// needs to be completed
 		try {
