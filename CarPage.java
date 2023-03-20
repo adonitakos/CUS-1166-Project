@@ -20,31 +20,48 @@ class Cars extends JFrame implements ActionListener {
 
     // Intializing variables
     private JPanel carPage;
-    private JLabel carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
-    private final JTextField carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
+    private JLabel ownerIDLabel, carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
+    private final JTextField ownerIDField, carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
     JButton submit, back;
 
     // ---------------------------------------------------------------------------------
     // This method creates the GUI for the Cars Window
     Cars() {
         // Assigning variables values
-        // License Plate
-        carLicensePlateLabel = new JLabel();
-        carLicensePlateLabel.setText("License Plate");
-        carLicensePlateField = new JTextField(15);
-        carLicensePlateLabel.setForeground(Color.WHITE);
-        carLicensePlateLabel.setBackground(new Color(217, 217, 217));
-        carLicensePlateLabel.setBorder(BorderFactory.createCompoundBorder(
+
+        // OwnerID
+        ownerIDLabel = new JLabel();
+        ownerIDLabel.setText("Owner ID:");
+        ownerIDField = new JTextField(15);
+        ownerIDField.add(ownerIDLabel);
+        ownerIDLabel.setForeground(Color.WHITE);
+        ownerIDField.setBackground(new Color(217, 217, 217));
+        ownerIDField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+        ownerIDField.setBackground(new Color(217, 217, 217));
+        ownerIDField.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
+        // License Plate
+        carLicensePlateLabel = new JLabel();
+        carLicensePlateLabel.setText("License Plate:");
+        carLicensePlateField = new JTextField(15);
+        carLicensePlateField.add(carLicensePlateLabel);
+        carLicensePlateLabel.setForeground(Color.WHITE);
         carLicensePlateField.setBackground(new Color(217, 217, 217));
         carLicensePlateField.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+            carLicensePlateField.setBackground(new Color(217, 217, 217));
+            carLicensePlateField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Make
         carMakeLabel = new JLabel();
-        carMakeLabel.setText("Make");
+        carMakeLabel.setText("Make:");
         carMakeField = new JTextField(15);
         carMakeField.add(carMakeLabel);
         carMakeLabel.setForeground(Color.WHITE);
@@ -52,10 +69,14 @@ class Cars extends JFrame implements ActionListener {
         carMakeField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+        carMakeField.setBackground(new Color(217, 217, 217));
+        carMakeField.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Model
         carModelLabel = new JLabel();
-        carModelLabel.setText("Model");
+        carModelLabel.setText("Model:");
         carModelField = new JTextField(15);
         carModelField.add(carModelLabel);
         carModelLabel.setForeground(Color.WHITE);
@@ -63,14 +84,19 @@ class Cars extends JFrame implements ActionListener {
         carModelField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+        carModelField.setBackground(new Color(217, 217, 217));
+        carModelField.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Residency Time
         carResidencyTimeLabel = new JLabel();
-        carResidencyTimeLabel.setText("Residency Time (in hours):");
-        carResidencyTimeField = new JTextField(10);
+        carResidencyTimeLabel.setText("Residency Time:");
+        carResidencyTimeField = new JTextField(15);
+        carResidencyTimeField.add(carResidencyTimeLabel);
         carResidencyTimeLabel.setForeground(Color.WHITE);
-        carResidencyTimeLabel.setBackground(new Color(217, 217, 217));
-        carResidencyTimeLabel.setBorder(BorderFactory.createCompoundBorder(
+        carResidencyTimeField.setBackground(new Color(217, 217, 217));
+        carResidencyTimeField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
         carResidencyTimeField.setBackground(new Color(217, 217, 217));
@@ -102,6 +128,8 @@ class Cars extends JFrame implements ActionListener {
 
         // Adding variables to panel
         carPage.add(welcome);
+        carPage.add(ownerIDLabel);
+        carPage.add(ownerIDField);
         carPage.add(carLicensePlateLabel);
         carPage.add(carLicensePlateField);
         carPage.add(carMakeLabel);
@@ -137,7 +165,7 @@ class Cars extends JFrame implements ActionListener {
 
         if (obj == submit) {
         // Store user input as string variables
-            int ownerID = User.generateUniqueUserID();
+            int ownerID = Integer.parseInt(ownerIDField.getText());
             String carMake = carMakeField.getText();
             String carModel = carModelField.getText();
             String carLicensePlate = carLicensePlateField.getText();
@@ -145,6 +173,12 @@ class Cars extends JFrame implements ActionListener {
 
             // Get the current timestamp when the user submits this form
             String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+
+            // Clearing text fields once user submits to prepare for next input
+            carMakeField.setText("");
+            carModelField.setText("");
+            carLicensePlateField.setText("");
+            carResidencyTimeField.setText("");
 
             // Write the user-provided credentials and timestamp to a file called
             // userInfo.txt, making it so that this information is not overwritten when the

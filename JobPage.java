@@ -19,8 +19,8 @@ import java.text.SimpleDateFormat;
 
 class Jobs extends JFrame implements ActionListener {
     // Initializing variables
-    private JLabel jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel;
-    private final JTextField jobDurationField, jobDeadlineField, jobDescriptionField;
+    private JLabel jobIDLabel, jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel;
+    private final JTextField jobIDField, jobDurationField, jobDeadlineField, jobDescriptionField;
     private JButton submit, jobCompletion, back;
     private JPanel jobPage;
 
@@ -28,6 +28,18 @@ class Jobs extends JFrame implements ActionListener {
     // This method creates the GUI for the JobWindow
     Jobs() {
         // Assigning variables values
+        // JobID
+        jobIDLabel = new JLabel();
+        jobIDLabel.setText("Job ID:");
+        jobIDField = new JTextField(15);
+        jobIDField.add(jobIDLabel);
+        jobIDLabel.setForeground(Color.WHITE);
+        jobIDLabel.setFont(new Font("Inter", Font.BOLD, 16));
+        jobIDLabel.setBackground(new Color(217, 217, 217));
+        jobIDLabel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
         // Duration
         jobDurationLabel = new JLabel();
         jobDurationLabel.setText("Job Duration (in hours):");
@@ -95,6 +107,8 @@ class Jobs extends JFrame implements ActionListener {
         // Adding variables to the panel
         jobPage.add(welcome);
         jobPage.add(new JLabel(""));
+        jobPage.add(jobIDLabel);
+        jobPage.add(jobIDField);
         jobPage.add(jobDurationLabel);
         jobPage.add(jobDurationField);
         jobPage.add(jobDeadlineLabel);
@@ -129,15 +143,20 @@ class Jobs extends JFrame implements ActionListener {
         if (obj == submit) {
             // Assigning the information that will be inputted by the user as string
             // variables
-            int jobID = User.generateUniqueUserID();
+            int jobID = Integer.parseInt(jobIDField.getText());
             int jobDuration = Integer.parseInt(jobDurationField.getText());
             String jobDeadline = jobDeadlineField.getText();
             String jobDescription = jobDescriptionField.getText();
             Job.completionTimes.add(jobDuration);
             // getting current timestamp of when user submits form
             String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-            // write user inputted credentials and timestamp to a text file called
-            // jobInfo.txt
+
+            // Clearing text fields once user submits to prepare for next input
+            jobDurationField.setText("");
+            jobDeadlineField.setText("");
+            jobDescriptionField.setText("");
+
+            // write user inputted credentials and timestamp to a text file called jobInfo.txt
             try {
                 FileWriter writer = new FileWriter("jobInfo.txt", true); // true parameter to append to file
 
