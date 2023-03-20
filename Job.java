@@ -1,31 +1,22 @@
-import java.util.Date;
 import java.util.LinkedList;
 
-public class Job {
+public abstract class Job {
     private int jobID;
     private static int jobDuration;//in hours
     private String jobDeadline;
     private String jobDescription;
     private Boolean completionStatus = false;
     private int jobRedundancy;
-    private int completionTime;
-    private Date timestamp;
+    private static int completionTime;
     private LinkedList<Car> Cars = new LinkedList<Car>();
     public static LinkedList<Integer> completionTimes = new LinkedList<Integer>();
 
-    public Job(int jobID, int jobDuration, String jobDeadline, String jobDescription) {
+    public Job(int jobID, int jobDuration, String jobDeadline, String jobDescription, int jobRedundancy) {
         this.jobID = jobID;
         this.jobDuration = jobDuration;
         this.jobDeadline = jobDeadline;
         this.jobDescription = jobDescription;
-    }
-
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Date date) {
-        timestamp = date;
+        this.jobRedundancy = jobRedundancy;
     }
 
     public static int sumCompletionTime(LinkedList<Integer> completionTimes) {
@@ -40,11 +31,11 @@ public class Job {
         return Cars;
     }
 
-    public int getCompletionTime() {
+    public static int getCompletionTime() {
         return completionTime;
     }
 
-    public void setCompletionTime(int time) {
+    public static void setCompletionTime(int time) {
         completionTime = time;
     }
 
