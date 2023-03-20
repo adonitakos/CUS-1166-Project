@@ -2,7 +2,7 @@ import java.util.LinkedList;
 
 public abstract class Job {
     private int jobID;
-    private String jobDuration;
+    private int jobDuration;//in hours
     private String jobDeadline;
     private String jobDescription;
     private Boolean completionStatus = false;
@@ -10,7 +10,7 @@ public abstract class Job {
     private int completionTime;
     private LinkedList<Car> Cars = new LinkedList<Car>();
 
-    public Job(int jobID, String jobDuration, String jobDeadline, String jobDescription, int jobRedundancy) {
+    public Job(int jobID, int jobDuration, String jobDeadline, String jobDescription, int jobRedundancy) {
         this.jobID = jobID;
         this.jobDuration = jobDuration;
         this.jobDeadline = jobDeadline;
@@ -63,7 +63,7 @@ public abstract class Job {
         return jobID;
     }
 
-    public String getJobDuration() {
+    public int getJobDuration() {
         return jobDuration;
     }
 
@@ -83,7 +83,7 @@ public abstract class Job {
         this.jobID = jobID;
     }
 
-    public void setJobDuration(String jobDuration) {
+    public void setJobDuration(int jobDuration) {
         this.jobDuration = jobDuration;
     }
 
@@ -103,17 +103,4 @@ public abstract class Job {
         System.out.println("This job is being performed.");
     }
 
-    public String toString() {
-        String newString = "" + jobID + ",," + jobDuration + ",," + jobDeadline + ",," + jobDescription + ",,"
-                + completionStatus + ",," + jobRedundancy + ",," + completionTime + ",,(";
-        for (int i = 0; i < Cars.size(); i++) {
-            if (i == 0) {
-                newString = newString + Cars.get(i).getOwnerID();
-            } else if (i > 0) {
-                newString = "," + newString + Cars.get(i).getOwnerID();
-            }
-        }
-        newString = newString + ".";
-        return newString;
-    }
 }

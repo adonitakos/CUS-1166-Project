@@ -8,6 +8,7 @@ public class VCC {
 	private Queue<Job> jobsQueue = new LinkedList<Job>();
 	private LinkedList<Job> allJobs = new LinkedList<Job>();
 	private static VCC single_instance = null;
+	private int queueTime = 0;
 
 	private VCC() {
 	}
@@ -21,18 +22,29 @@ public class VCC {
 
 	public void importJobsFromFile(String path) {// not complete
 		try {
-			File myObj = new File(path);
-			Scanner myReader = new Scanner(myObj);
-			while (myReader.hasNextLine()) {
-				String data = myReader.nextLine();
-				System.out.println(data);
-			}
-			myReader.close();
-		} catch (FileNotFoundException e) {
-			System.out.println("The file was not found.");
+			FileWriter myWriter = new FileWriter(path);
+			myWriter.write(job);
+			myWriter.close();
+			return true;
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
 			e.printStackTrace();
 		}
 	}
+
+	public Boolean importCarsFromFile(String path) {// needs to be completed
+		try {
+			FileWriter myWriter = new FileWriter(path);
+			myWriter.write("Files in Java might be tricky, but it is fun enough!");
+			myWriter.close();
+			return true;
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 
 	public LinkedList<Car> getAllCars() {
 		return Cars;
@@ -80,16 +92,34 @@ public class VCC {
 		return null;
 	}
 
-	public Boolean assignJob(int jobId, int carId) {
+	public Boolean assignCarToJob(int jobId, int carId) {
+		if() {
 
+		}
 	}
 
-	public void deleteCar(int carId) {
-
+	public Boolean deleteCar(int carId) {
+		for (int i = 0; i < Cars.size(); i++) {
+			if (Cars.get(i).getOwnerID() == carId) {
+				Cars.remove(i);
+				return true;
+			}
+		}
+		return null;
 	}
 
-	public void addCar(Car car) {
+	public Boolean addCar(Car car) {
 		Cars.add(car);
+		try {
+			FileOutputStream fileOut = new FileOutputStream("carInfo.txt");
+			ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+			objectOut.writeObject(car);
+			objectOut.close();
+			System.out.println("The Object  was succesfully written to a file");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return true;
 	}
 
 	public Boolean deleteJob(int jobId) {// needs to be completed
@@ -100,35 +130,27 @@ public class VCC {
 		job.setRedundancy(generalRedundancy);
 		allJobs.add(job);
 		jobsQueue.add(job);
+		queueTime += job.getJobDuration();
+		job.setCompletionTime(queueTime);
+		try {
+			FileOutputStream fileOut = new FileOutputStream("jobInfo.txt");
+			ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+			objectOut.writeObject(job);
+			objectOut.close();
+			System.out.println("The Object  was succesfully written to the file");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 		return true;
 	}
 
-	public Boolean importJobs() {// needs to be completed
-		try {
-			FileWriter myWriter = new FileWriter("jobInfo.txt");
-			myWriter.write(job);
-			myWriter.close();
-			return true;
-		} catch (IOException e) {
-			System.out.println("An error occurred.");
-			e.printStackTrace();
-		}
-	}
-
-	public Boolean importCars() {// needs to be completed
-		try {
-			FileWriter myWriter = new FileWriter("carInfo.txt");
-			myWriter.write("Files in Java might be tricky, but it is fun enough!");
-			myWriter.close();
-			return true;
-		} catch (IOException e) {
-			System.out.println("An error occurred.");
-			e.printStackTrace();
-		}
-	}
-
-	public Boolean transferJobsBetweenCars(int jobID, int originalCarID, int newCarID) {
-
+	public Boolean transferJobsBetweenCars(Job job, Car original, Car newCar) {
+		job.getCars().remove(original);
+		job.getCars().add(newCar);
+		original.setJob(null);
+		newCar.setJob(job);
+		// need to add checkpoint usage
+		return true;
 	}
 
 	public Boolean completeJob() {
@@ -138,18 +160,20 @@ public class VCC {
 		return true;
 	}
 
-	public Boolean createCheckPoint(Car Car,int checkpointID, Date checkInTime, Date checkOutTime) // (Vehicle vehicle)
+	public Boolean createCheckPoint(Car Car, int checkpointID, Date checkInTime, Date checkOutTime) // (Vehicle vehicle)
 	{
-		Checkpoint checkpoint = new Checkpoint(checkpointID, Car);// vehicle); edited once vehicle is properly assignable
+		Checkpoint checkpoint = new Checkpoint(checkpointID, Car);// vehicle); edited once vehicle is properly
+																	// assignable
 		checkpoint.setCheckInTime(checkInTime);
 		checkpoint.setCheckOutTime(checkOutTime);
-		checkpoint.add(checkpoint);
+		// checkpoint.add(checkpoint); Not sure of purpose
 		return true;
 	}
 
 	public Boolean transferCheckpoint() {
 		// Boolean checkpointData = VCC.createCheckPoint(checkpointID,vehicle,
 		// checkinTime, checkoutTime);
+		return true;
 
 	}
 
