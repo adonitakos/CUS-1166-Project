@@ -143,7 +143,7 @@ public class VCC {
 			count++;
 		}
 		if (jobsQueue.isEmpty()) {
-			System.out.print("element not found!!" +"\n");
+			System.out.print("Job not found." +"\n");
 			while (!temp.isEmpty()) {
 				jobsQueue.add(temp.peek());
 				temp.remove();
