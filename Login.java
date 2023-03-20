@@ -11,14 +11,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.Exception;
-import java.security.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Scanner;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 class CreateLoginForm extends JFrame implements ActionListener {
 // Initializing Java Swing Variables

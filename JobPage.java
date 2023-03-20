@@ -8,14 +8,10 @@
 */
 
 import javax.swing.*;
-import javax.xml.namespace.QName;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Date;
-import java.text.SimpleDateFormat;
 
 class Jobs extends JFrame implements ActionListener {
     // Initializing variables
@@ -23,6 +19,7 @@ class Jobs extends JFrame implements ActionListener {
     private final JTextField jobDurationField, jobDeadlineField, jobDescriptionField;
     private JButton submit, jobCompletion;
     private JPanel jobPage;
+    VCC vcc = VCC.getInstance();
 
     // ---------------------------------------------------------------------------------
     // This method creates the GUI for the JobWindow
@@ -84,7 +81,7 @@ class Jobs extends JFrame implements ActionListener {
         JLabel welcome = new JLabel(
                 "Welcome to the job page. Please enter the following information, leaving no fields blank.");
 
-                welcome.setForeground(Color.WHITE);
+        welcome.setForeground(Color.WHITE);
         // Adding variables to the panel
         jobPage.add(welcome);
         jobPage.add(new JLabel(""));
@@ -116,24 +113,29 @@ class Jobs extends JFrame implements ActionListener {
     // Action Listener method
     public void actionPerformed(ActionEvent e) {
         Object obj = e.getSource();
-    
+
         if (obj == submit) {
             // Assigning the information that will be inputted by the user as string
             // variables
             int jobID = User.generateUniqueUserID();
-            String jobDuration = jobDurationField.getText();
+            int jobDuration = Integer.parseInt(jobDurationField.getText());
             String jobDeadline = jobDeadlineField.getText();
             String jobDescription = jobDescriptionField.getText();
-
+            Job job = new Job(jobID, jobDuration, jobDeadline, jobDescription);
             // getting current timestamp of when user submits form
-            String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-
+            Date timestamp = new Date();
+            job.setTimestamp(timestamp);
+            vcc.addJob(job);
+            if (obj == jobCompletion) {
+                System.out.print("The completion time is: " + job.getCompletionTime() + " hours.");
+            }
             // write user inputted credentials and timestamp to a text file called
             // jobInfo.txt
             try {
                 FileWriter writer = new FileWriter("jobInfo.txt", true); // true parameter to append to file
 
-                 writer.write("Job ID: " + jobID + " | Job Duration: " + jobDuration + " | Job Deadline: " + jobDeadline + " | Job Description: " + jobDescription + " | Timestamp: "
+                writer.write("Job ID: " + jobID + " | Job Duration: " + jobDuration + " | Job Deadline: " + jobDeadline
+                        + " | Job Description: " + jobDescription + " | Timestamp: "
                         + timestamp + "\n");
                 writer.close();
                 System.out.println("Job info successfully saved to file!");
@@ -145,26 +147,22 @@ class Jobs extends JFrame implements ActionListener {
             catch (IOException ex) {
                 System.out.println("Error writing job info to file.");
             }
-        }    
-        else if (obj == jobCompletion) {
-            System.out.print("The completion time is: " + Job.getCompletionTime() + " hours.");
-        }
-        else {
+        } else {
             System.out.println("Error.");
-            
+
         } // <--- actionPerformed() method ends here
-} // <--- Jobs{} class ends here
+    } // <--- Jobs{} class ends here
 
-class JobPage {
-    public static void main(String[] args) {
-        try {
-            Jobs form = new Jobs();
-            form.setVisible(true);
-            form.setSize(400, 300);
+    class JobPage {
+        public static void main(String[] args) {
+            try {
+                Jobs form = new Jobs();
+                form.setVisible(true);
+                form.setSize(400, 300);
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-    } // <--- main() method ends here
-} 
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+        } // <--- main() method ends here
+    }
 } // <--- JobPage{} class ends here
