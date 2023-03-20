@@ -3,12 +3,12 @@ import java.io.*;
 
 public class VCC {
 
-	private int generalRedundancy = 5;
-	private LinkedList<Car> Cars = new LinkedList<Car>();
-	private Queue<Job> jobsQueue = new LinkedList<Job>();
-	private LinkedList<Job> allJobs = new LinkedList<Job>();
+	private static int generalRedundancy = 5;
+	private static LinkedList<Car> Cars = new LinkedList<Car>();
+	private static Queue<Job> jobsQueue = new LinkedList<Job>();
+	private static LinkedList<Job> allJobs = new LinkedList<Job>();
 	private static VCC single_instance = null;
-	private int queueTime = 0;
+	private static int queueTime = 0;
 
 	private VCC() {
 	}
@@ -20,31 +20,41 @@ public class VCC {
 		return single_instance;
 	}
 
-	public void importJobsFromFile(String path) {// not complete
+	public Boolean importJobFromFile(String path) {// not complete
 		try {
-			FileWriter myWriter = new FileWriter(path);
-			myWriter.write(job);
-			myWriter.close();
+			FileInputStream fileIn = new FileInputStream(path);
+			ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+			while (objectIn.readObject() != null) {
+				Object obj = objectIn.readObject();
+				System.out.println("The Object has been read from the file");
+				objectIn.close();
+				Job job = (Job) obj;
+				addJob(job);
+			}
 			return true;
-		} catch (IOException e) {
-			System.out.println("An error occurred.");
-			e.printStackTrace();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
 		}
 	}
 
 	public Boolean importCarsFromFile(String path) {// needs to be completed
 		try {
-			FileWriter myWriter = new FileWriter(path);
-			myWriter.write("Files in Java might be tricky, but it is fun enough!");
-			myWriter.close();
+			FileInputStream fileIn = new FileInputStream(path);
+			ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+			while (objectIn.readObject() != null) {
+				Object obj = objectIn.readObject();
+				System.out.println("The Object has been read from the file");
+				objectIn.close();
+				Car car = (Car) obj;
+				addCar(car);
+			}
 			return true;
-		} catch (IOException e) {
-			System.out.println("An error occurred.");
-			e.printStackTrace();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
 		}
-		return null;
 	}
-
 
 	public LinkedList<Car> getAllCars() {
 		return Cars;
@@ -93,19 +103,18 @@ public class VCC {
 	}
 
 	public Boolean assignCarToJob(int jobId, int carId) {
-		if() {
-
+		Job job = getJobById(jobId);
+		Car car = getCarById(carId);
+		if (car.getJob() == null && job.getCars().size() < job.getRedundancy()) {
+			job.addCar(car);
+			car.setJob(job);
 		}
+		return true;
 	}
 
 	public Boolean deleteCar(int carId) {
-		for (int i = 0; i < Cars.size(); i++) {
-			if (Cars.get(i).getOwnerID() == carId) {
-				Cars.remove(i);
-				return true;
-			}
-		}
-		return null;
+		Cars.remove(getCarById(carId));
+		return true;
 	}
 
 	public Boolean addCar(Car car) {
@@ -122,8 +131,39 @@ public class VCC {
 		return true;
 	}
 
-	public Boolean deleteJob(int jobId) {// needs to be completed
-
+	public Boolean deleteJob(int jobId)
+	{
+		Queue<Job> temp = new LinkedList<>();
+		Job job = getJobById(jobId);
+		int size = jobsQueue.size();
+		int count = 0;
+		while (!jobsQueue.isEmpty() && jobsQueue.peek() != job) {
+			temp.add(jobsQueue.peek());
+			jobsQueue.remove();
+			count++;
+		}
+		if (jobsQueue.isEmpty()) {
+			System.out.print("element not found!!" +"\n");
+			while (!temp.isEmpty()) {
+				jobsQueue.add(temp.peek());
+				temp.remove();
+			}
+		}
+		else {
+			jobsQueue.remove();
+			while (!temp.isEmpty()) {
+				jobsQueue.add(temp.peek());
+				temp.remove();
+			}
+			int k = size - count - 1;
+			while (k-- >0) {
+				Job tempJob = jobsQueue.peek();
+				jobsQueue.remove();
+				jobsQueue.add(tempJob);
+			}
+		}
+		allJobs.remove(job);
+		return true;
 	}
 
 	public Boolean addJob(Job job) {
