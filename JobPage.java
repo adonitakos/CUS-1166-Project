@@ -147,7 +147,7 @@ class Jobs extends JFrame implements ActionListener {
             }
         }    
         else if (obj == jobCompletion) {
-            System.out.print("The completion time is: " + "hours.");
+            System.out.print("The completion time is: " + Job.getCompletionTime() + " hours.");
         }
         else {
             System.out.println("Error.");
