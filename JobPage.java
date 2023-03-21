@@ -125,7 +125,7 @@ class Jobs extends JFrame implements ActionListener {
         buttonPanel.add(back);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // Creating action listener for the submit button
+        // Creating action listener for the buttons
         submit.addActionListener(this);
         jobCompletion.addActionListener(this);
         back.addActionListener(this);
@@ -152,6 +152,7 @@ class Jobs extends JFrame implements ActionListener {
             String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
             // Clearing text fields once user submits to prepare for next input
+            jobIDField.setText("");
             jobDurationField.setText("");
             jobDeadlineField.setText("");
             jobDescriptionField.setText("");
@@ -172,6 +173,11 @@ class Jobs extends JFrame implements ActionListener {
             catch (IOException ex) {
                 System.out.println("Error writing job info to file.");
             }
+
+            Confirmation form = new Confirmation();
+                form.setVisible(true);
+                form.setSize(400, 300);
+
         }    
         else if (obj == jobCompletion) {
             System.out.print("The completion time is: " + Job.sumCompletionTime(Job.completionTimes) + " hours.");
