@@ -148,6 +148,7 @@ class Jobs extends JFrame implements ActionListener {
             String jobDeadline = jobDeadlineField.getText();
             String jobDescription = jobDescriptionField.getText();
             Job.completionTimes.add(jobDuration);
+            // Job job = new Job(jobID, jobDuration, jobDeadline, jobDescription);
             // getting current timestamp of when user submits form
             String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 

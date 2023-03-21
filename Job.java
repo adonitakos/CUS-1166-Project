@@ -1,6 +1,6 @@
 import java.util.LinkedList;
 
-public abstract class Job {
+public class Job {
     private int jobID;
     private static int jobDuration;//in hours
     private String jobDeadline;

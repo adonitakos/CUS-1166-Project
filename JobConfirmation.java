@@ -8,6 +8,7 @@ class Confirmation extends JFrame implements ActionListener {
     private JLabel thankYouLabel, jobCompletionLabel, jobIDLabel, jobDeadlineLabel, jobDurationLabel, jobDescriptionLabel;
     private JButton close;
 
+    /** need to fix so that user info gets printed **/
     // ------------------------------------------
     // This method creates the GUI for the JobConfirmation
     Confirmation() {
@@ -22,8 +23,8 @@ class Confirmation extends JFrame implements ActionListener {
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-                // JobID label
-        jobIDLabel = new JLabel("Job ID: " , SwingConstants.CENTER);
+        // JobID label
+        jobIDLabel = new JLabel("Job ID: " + job(jobID), SwingConstants.CENTER);
         jobIDLabel.setForeground(Color.WHITE);
         jobIDLabel.setFont(new Font("Inter", Font.BOLD, 16));
         jobIDLabel.setBackground(new Color(217, 217, 217));
