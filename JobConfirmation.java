@@ -15,6 +15,7 @@ class Confirmation extends JFrame implements ActionListener {
 
         // Assigning variables values
         // Thank you label
+        Job job = Job.getInstance();
         thankYouLabel = new JLabel("Thank you. Your job has been submitted.", SwingConstants.CENTER);
         thankYouLabel.setForeground(Color.WHITE);
         thankYouLabel.setFont(new Font("Inter", Font.BOLD, 16));
@@ -24,7 +25,7 @@ class Confirmation extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // JobID label
-        jobIDLabel = new JLabel("Job ID: " + job(jobID), SwingConstants.CENTER);
+        jobIDLabel = new JLabel("Job ID: " + job.getJobID(), SwingConstants.CENTER);
         jobIDLabel.setForeground(Color.WHITE);
         jobIDLabel.setFont(new Font("Inter", Font.BOLD, 16));
         jobIDLabel.setBackground(new Color(217, 217, 217));
@@ -33,7 +34,7 @@ class Confirmation extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Duration Label
-        jobDurationLabel = new JLabel("Job Duration: ", SwingConstants.CENTER);
+        jobDurationLabel = new JLabel("Job Duration: " + job.getJobDuration(), SwingConstants.CENTER);
         jobDurationLabel.setForeground(Color.WHITE);
         jobDurationLabel.setFont(new Font("Inter", Font.BOLD, 16));
         jobDurationLabel.setBackground(new Color(217, 217, 217));
@@ -42,7 +43,7 @@ class Confirmation extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Deadline Label
-        jobDeadlineLabel = new JLabel("Job Deadline: "+ Jobs.jobDescriptionField.getText(), SwingConstants.CENTER);
+        jobDeadlineLabel = new JLabel("Job Deadline: " + job.getJobDeadline(), SwingConstants.CENTER);
         jobDeadlineLabel.setForeground(Color.WHITE);
         jobDeadlineLabel.setFont(new Font("Inter", Font.BOLD, 16));
         jobDeadlineLabel.setBackground(new Color(217, 217, 217));
@@ -51,7 +52,7 @@ class Confirmation extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Description Label
-        jobDescriptionLabel = new JLabel("Job Description: " , SwingConstants.CENTER);
+        jobDescriptionLabel = new JLabel("Job Description: " + job.getJobDescription(), SwingConstants.CENTER);
         jobDescriptionLabel.setForeground(Color.WHITE);
         jobDescriptionLabel.setFont(new Font("Inter", Font.BOLD, 16));
         jobDescriptionLabel.setBackground(new Color(217, 217, 217));
@@ -60,7 +61,7 @@ class Confirmation extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Completion Label
-        jobCompletionLabel = new JLabel("Your job completion time is " + Job.sumCompletionTime(Job.completionTimes) + " hours.", SwingConstants.CENTER);
+        jobCompletionLabel = new JLabel("Your job completion time is " + Job.getCompletionTime() + " hours.", SwingConstants.CENTER);
         jobCompletionLabel.setForeground(Color.WHITE);
         jobCompletionLabel.setFont(new Font("Inter", Font.BOLD, 16));
         jobCompletionLabel.setBackground(new Color(217, 217, 217));
@@ -90,7 +91,7 @@ class Confirmation extends JFrame implements ActionListener {
         add(confirmation, BorderLayout.CENTER);
 
         // Adding buttons to the panel
-        JPanel buttonPanel = new JPanel();
+        buttonPanel = new JPanel();
         buttonPanel.add(close);
         add(buttonPanel, BorderLayout.SOUTH);
 

@@ -1,30 +1,31 @@
 import java.util.LinkedList;
 
 public class Job {
-    private int jobID;
+    private static int jobID;
     private static int jobDuration;//in hours
-    private String jobDeadline;
-    private String jobDescription;
+    private static String jobDeadline;
+    private static String jobDescription;
     private Boolean completionStatus = false;
+    private static Job single_instance = null;
     private int jobRedundancy;
     private static int completionTime;
     private LinkedList<Car> Cars = new LinkedList<Car>();
-    public static LinkedList<Integer> completionTimes = new LinkedList<Integer>();
 
-    public Job(int jobID, int jobDuration, String jobDeadline, String jobDescription, int jobRedundancy) {
+    private Job() {
+    }
+
+    public static synchronized Job getInstance() {
+		if (single_instance == null)
+			single_instance = new Job();
+
+		return single_instance;
+	}
+
+    public Job(int jobID, int jobDuration, String jobDeadline, String jobDescription) {
         this.jobID = jobID;
         this.jobDuration = jobDuration;
         this.jobDeadline = jobDeadline;
         this.jobDescription = jobDescription;
-        this.jobRedundancy = jobRedundancy;
-    }
-
-    public static int sumCompletionTime(LinkedList<Integer> completionTimes) {
-        int completionTime = 0;
-        for (int num : completionTimes) {
-            completionTime += num;
-        }
-        return completionTime;
     }
 
     public LinkedList<Car> getCars() {
@@ -68,19 +69,19 @@ public class Job {
         this.completionStatus = status;
     }
 
-    public int getJobID() {
+    public static int getJobID() {
         return jobID;
     }
 
-    public int getJobDuration() {
+    public static int getJobDuration() {
         return jobDuration;
     }
 
-    public String getJobDeadline() {
+    public static String getJobDeadline() {
         return jobDeadline;
     }
 
-    public String getJobDescription() {
+    public static String getJobDescription() {
         return jobDescription;
     }
 

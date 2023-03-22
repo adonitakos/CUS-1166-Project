@@ -23,7 +23,6 @@ class Jobs extends JFrame implements ActionListener {
     private final JTextField jobIDField, jobDurationField, jobDeadlineField, jobDescriptionField;
     private JButton submit, jobCompletion, back;
     private JPanel jobPage;
-
     // ---------------------------------------------------------------------------------
     // This method creates the GUI for the JobWindow
     Jobs() {
@@ -143,12 +142,15 @@ class Jobs extends JFrame implements ActionListener {
         if (obj == submit) {
             // Assigning the information that will be inputted by the user as string
             // variables
+            VCC vcc = VCC.getInstance();
             int jobID = Integer.parseInt(jobIDField.getText());
             int jobDuration = Integer.parseInt(jobDurationField.getText());
             String jobDeadline = jobDeadlineField.getText();
             String jobDescription = jobDescriptionField.getText();
-            Job.completionTimes.add(jobDuration);
-            // Job job = new Job(jobID, jobDuration, jobDeadline, jobDescription);
+
+            // adding Job
+            Job job = new Job(jobID, jobDuration, jobDeadline, jobDescription);
+            vcc.addJob(job);
             // getting current timestamp of when user submits form
             String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 
@@ -181,7 +183,7 @@ class Jobs extends JFrame implements ActionListener {
 
         }    
         else if (obj == jobCompletion) {
-            System.out.print("The completion time is: " + Job.sumCompletionTime(Job.completionTimes) + " hours.");
+            System.out.print("The completion time is: " + Job.getCompletionTime() + " hours.");
         }
 
         else if (obj == back) {
