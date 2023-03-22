@@ -6,20 +6,9 @@ public class Job {
     private static String jobDeadline;
     private static String jobDescription;
     private Boolean completionStatus = false;
-    private static Job single_instance = null;
     private int jobRedundancy;
     private static int completionTime;
     private LinkedList<Car> Cars = new LinkedList<Car>();
-
-    private Job() {
-    }
-
-    public static synchronized Job getInstance() {
-		if (single_instance == null)
-			single_instance = new Job();
-
-		return single_instance;
-	}
 
     public Job(int jobID, int jobDuration, String jobDeadline, String jobDescription) {
         this.jobID = jobID;
