@@ -15,10 +15,11 @@ import javax.swing.JComboBox;
 
 class OptionPage extends JFrame implements ActionListener {
    // Initializing Java Swing Variables
-   private JPanel clientUser, buttonPanel;
+   private JPanel clientUser, optionPanel, buttonPanel;
    private JButton back;
-   String[] options = {"Car", "Job", "Admin"};
+   String[] options = {"", "Car", "Job", "Admin"};
    private final JComboBox<String> optionBox = new JComboBox<String>(options);
+   private JLabel aboutLabel;
    final JTextField welcomeLabelText, jobUserTextField, backText;
 
    // ---------------------------------------------------------------------------------
@@ -27,7 +28,7 @@ class OptionPage extends JFrame implements ActionListener {
       // Assigning JSwing variables values & styling
 
       // Welcome Label
-      JLabel welcomeLabel = new JLabel("Welcome to Vehicle Vortex. Would you like to submit a Car or a Job?");
+      JLabel welcomeLabel = new JLabel("Welcome to Vehicle Vortex.");
       welcomeLabel.setForeground(Color.WHITE);
       welcomeLabel.setFont(new Font("Inter", Font.PLAIN, 20));
       welcomeLabelText = new JTextField(15);
@@ -38,6 +39,17 @@ class OptionPage extends JFrame implements ActionListener {
       welcomeLabel.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(new Color(86, 53, 158)),
             BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
+      // About Label
+      aboutLabel = new JLabel();
+      aboutLabel.setText("<html>Vehicle Vortex is an application where car users and job users are able to connect in real time.<br/>Please select from the drop down menu:</html>");
+      aboutLabel.setForeground(Color.WHITE);
+      aboutLabel.setFont(new Font("Inter", Font.ITALIC, 12));
+
+      // Option Box
+      optionBox.setBackground(new Color(217, 217, 217));
+      optionBox.setForeground(new Color(86, 53, 158));
+      optionBox.setFont(new Font("Inter", Font.BOLD, 15));
 
       // Back button
       back = new JButton("Back");
@@ -66,6 +78,7 @@ class OptionPage extends JFrame implements ActionListener {
 
       // Adding variables to the panel
       clientUser.add(welcomeLabel);
+      clientUser.add(aboutLabel);
       clientUser.add(optionBox);
       add(clientUser, BorderLayout.CENTER);
 

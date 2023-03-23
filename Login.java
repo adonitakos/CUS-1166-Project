@@ -17,10 +17,9 @@ import java.io.*;
 
 class CreateLoginForm extends JFrame implements ActionListener {
 // Initializing Java Swing Variables
-    JLabel banner;
     JButton submit;
     JPanel loginPanel;
-    JLabel userLabel, passwordLabel;
+    JLabel loginLabel, userLabel, passwordLabel;
     final JTextField userField, passwordField;
 
 // ---------------------------------------------------------------------------------
@@ -29,12 +28,12 @@ class CreateLoginForm extends JFrame implements ActionListener {
 
     // Assigning JSwing variables values & styling
 
-        // Banner
-        banner = new JLabel();
-        banner.setText("Login");
-        banner.setBounds(115, 30, 100, 40);
-        banner.setForeground(Color.WHITE);
-        banner.setFont(new Font("Inter", Font.BOLD, 30));
+        // Login Label
+        loginLabel = new JLabel();
+        loginLabel.setText("Login");
+        loginLabel.setBounds(115, 30, 100, 40);
+        loginLabel.setForeground(Color.WHITE);
+        loginLabel.setFont(new Font("Inter", Font.BOLD, 30));
 
         // User Label
         userLabel = new JLabel();
@@ -80,7 +79,7 @@ class CreateLoginForm extends JFrame implements ActionListener {
         loginPanel.setLayout(null);
 
     // Adding variables to 
-        loginPanel.add(banner);
+        loginPanel.add(loginLabel);
         loginPanel.add(userLabel);
         loginPanel.add(userField);
         loginPanel.add(passwordLabel);
