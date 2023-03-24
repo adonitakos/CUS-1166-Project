@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Date;
+import java.util.*;
 import java.text.SimpleDateFormat;
 
 class Jobs extends JFrame implements ActionListener {
@@ -21,6 +21,7 @@ class Jobs extends JFrame implements ActionListener {
     private final JTextField jobIDField, jobDurationField, jobDeadlineField, jobDescriptionField;
     private JButton submit, jobCompletion, back;
     private JPanel jobPage;
+    VCC vcc = VCC.getInstance();
     // ---------------------------------------------------------------------------------
     // This method creates the GUI for the JobWindow
     Jobs() {
@@ -140,7 +141,6 @@ class Jobs extends JFrame implements ActionListener {
         if (obj == submit) {
             // Assigning the information that will be inputted by the user as string
             // variables
-            VCC vcc = VCC.getInstance();
             int jobID = Integer.parseInt(jobIDField.getText());
             int jobDuration = Integer.parseInt(jobDurationField.getText());
             String jobDeadline = jobDeadlineField.getText();
@@ -175,13 +175,15 @@ class Jobs extends JFrame implements ActionListener {
                 System.out.println("Error writing job info to file.");
             }
 
-            Confirmation form = new Confirmation();
+            JobConfirmation form = new JobConfirmation(job);
                 form.setVisible(true);
                 form.setSize(400, 300);
 
         }    
         else if (obj == jobCompletion) {
-            System.out.print("The completion time is: " + Job.getCompletionTime() + " hours.");
+            LinkedList<Job> jobs = vcc.getAllJobs();
+            Job job = jobs.getLast();
+            System.out.print("The completion time is: " + job.getCompletionTime() + " hours.");
         }
 
         else if (obj == back) {

@@ -1,13 +1,13 @@
 import java.util.LinkedList;
 
 public class Job {
-    private static int jobID;
-    private static int jobDuration;//in hours
-    private static String jobDeadline;
-    private static String jobDescription;
+    private int jobID;
+    private int jobDuration;//in hours
+    private String jobDeadline;
+    private String jobDescription;
     private Boolean completionStatus = false;
     private int jobRedundancy;
-    private static int completionTime;
+    private int completionTime;
     private LinkedList<Car> Cars = new LinkedList<Car>();
 
     public Job(int jobID, int jobDuration, String jobDeadline, String jobDescription) {
@@ -21,11 +21,11 @@ public class Job {
         return Cars;
     }
 
-    public static int getCompletionTime() {
+    public int getCompletionTime() {
         return completionTime;
     }
 
-    public static void setCompletionTime(int time) {
+    public void setCompletionTime(int time) {
         completionTime = time;
     }
 
@@ -58,19 +58,19 @@ public class Job {
         this.completionStatus = status;
     }
 
-    public static int getJobID() {
+    public int getJobID() {
         return jobID;
     }
 
-    public static int getJobDuration() {
+    public int getJobDuration() {
         return jobDuration;
     }
 
-    public static String getJobDeadline() {
+    public String getJobDeadline() {
         return jobDeadline;
     }
 
-    public static String getJobDescription() {
+    public String getJobDescription() {
         return jobDescription;
     }
 

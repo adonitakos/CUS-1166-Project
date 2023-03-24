@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-class Confirmation extends JFrame implements ActionListener {
+class JobConfirmation extends JFrame implements ActionListener {
     // Initializing variables
     private JPanel confirmation, buttonPanel;
     private JLabel thankYouLabel, jobCompletionLabel, jobIDLabel, jobDeadlineLabel, jobDurationLabel, jobDescriptionLabel;
@@ -11,7 +11,7 @@ class Confirmation extends JFrame implements ActionListener {
     /** need to fix so that user info gets printed **/
     // ------------------------------------------
     // This method creates the GUI for the JobConfirmation
-    Confirmation() {
+    JobConfirmation(Job job) {
 
         // Assigning variables values
         // Thank you label
@@ -24,7 +24,7 @@ class Confirmation extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // JobID label
-        jobIDLabel = new JLabel("Job ID: " + Job.getJobID(), SwingConstants.CENTER);
+        jobIDLabel = new JLabel("Job ID: " + job.getJobID(), SwingConstants.CENTER);
         jobIDLabel.setForeground(Color.WHITE);
         jobIDLabel.setFont(new Font("Inter", Font.BOLD, 16));
         jobIDLabel.setBackground(new Color(217, 217, 217));
@@ -33,7 +33,7 @@ class Confirmation extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Duration Label
-        jobDurationLabel = new JLabel("Job Duration: " + Job.getJobDuration(), SwingConstants.CENTER);
+        jobDurationLabel = new JLabel("Job Duration: " + job.getJobDuration(), SwingConstants.CENTER);
         jobDurationLabel.setForeground(Color.WHITE);
         jobDurationLabel.setFont(new Font("Inter", Font.BOLD, 16));
         jobDurationLabel.setBackground(new Color(217, 217, 217));
@@ -42,7 +42,7 @@ class Confirmation extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Deadline Label
-        jobDeadlineLabel = new JLabel("Job Deadline: " + Job.getJobDeadline(), SwingConstants.CENTER);
+        jobDeadlineLabel = new JLabel("Job Deadline: " + job.getJobDeadline(), SwingConstants.CENTER);
         jobDeadlineLabel.setForeground(Color.WHITE);
         jobDeadlineLabel.setFont(new Font("Inter", Font.BOLD, 16));
         jobDeadlineLabel.setBackground(new Color(217, 217, 217));
@@ -51,7 +51,7 @@ class Confirmation extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Description Label
-        jobDescriptionLabel = new JLabel("Job Description: " + Job.getJobDescription(), SwingConstants.CENTER);
+        jobDescriptionLabel = new JLabel("Job Description: " + job.getJobDescription(), SwingConstants.CENTER);
         jobDescriptionLabel.setForeground(Color.WHITE);
         jobDescriptionLabel.setFont(new Font("Inter", Font.BOLD, 16));
         jobDescriptionLabel.setBackground(new Color(217, 217, 217));
@@ -60,7 +60,7 @@ class Confirmation extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Completion Label
-        jobCompletionLabel = new JLabel("Your job completion time is " + Job.getCompletionTime() + " hours.", SwingConstants.CENTER);
+        jobCompletionLabel = new JLabel("Your job completion time is " + job.getCompletionTime() + " hours.", SwingConstants.CENTER);
         jobCompletionLabel.setForeground(Color.WHITE);
         jobCompletionLabel.setFont(new Font("Inter", Font.BOLD, 16));
         jobCompletionLabel.setBackground(new Color(217, 217, 217));
@@ -107,16 +107,4 @@ class Confirmation extends JFrame implements ActionListener {
         dispose();
     } // <--- actionPerformed() method ends here
 
-    class JobConfirmation {
-        public static void main(String[] args) {
-            try {
-                Confirmation form = new Confirmation();
-                form.setVisible(true);
-                form.setSize(400, 300);
-    
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
-            }
-    } // <--- main() method ends here
 } // <--- JobConfirmation{} class ends here
-}

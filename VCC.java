@@ -20,6 +20,10 @@ public class VCC {
 		return single_instance;
 	}
 
+	public Queue<Job> getQueue() {
+		return jobsQueue;
+	}
+
 	public Boolean importJobFromFile(String path) {// not complete
 		try {
 			FileInputStream fileIn = new FileInputStream(path);
