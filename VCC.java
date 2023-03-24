@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.text.SimpleDateFormat;
 
 public class VCC {
 
@@ -41,7 +42,6 @@ public class VCC {
 			return null;
 		}
 	} // <--- importJobsFromFile() method ends here
-	
 
 	public Boolean importCarsFromFile(String path) {// needs to be completed
 		try {
@@ -124,20 +124,32 @@ public class VCC {
 
 	public Boolean addCar(Car car) {
 		Cars.add(car);
+		// Write the user-provided credentials and timestamp to a file called
+		// userInfo.txt, making it so that this information is not overwritten when the
+		// program terminates and it is stored in a new line with each submission
+		String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 		try {
-			FileOutputStream fileOut = new FileOutputStream("carInfo.txt");
-			ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-			objectOut.writeObject(car);
-			objectOut.close();
-			System.out.println("The Object  was succesfully written to a file");
-		} catch (Exception ex) {
-			ex.printStackTrace();
+			FileWriter writer = new FileWriter("carInfo.txt", true); // true parameter to append to file
+
+			writer.write("Owner ID: " + car.getOwnerID() + " | Car Make: " + car.getCarMake() + " | Car Model: "
+					+ car.getCarModel()
+					+ " | License Plate: " + car.getCarLicensePlate() + " | Residency Time: "
+					+ car.getCarResidencyTime()
+					+ " | Timestamp: " + timestamp + "\n");
+			writer.close();
+			System.out.println("User info successfully saved to file!");
+
+			// success message
+			System.out.println("Thank you. Your car has been submitted.");
+		}
+		// Error message
+		catch (IOException ex) {
+			System.out.println("Error writing user info to file.");
 		}
 		return true;
 	}
 
-	public Boolean deleteJob(int jobId)
-	{
+	public Boolean deleteJob(int jobId) {
 		Queue<Job> temp = new LinkedList<>();
 		Job job = getJobById(jobId);
 		int size = jobsQueue.size();
@@ -148,20 +160,19 @@ public class VCC {
 			count++;
 		}
 		if (jobsQueue.isEmpty()) {
-			System.out.print("Job not found." +"\n");
+			System.out.print("Job not found." + "\n");
 			while (!temp.isEmpty()) {
 				jobsQueue.add(temp.peek());
 				temp.remove();
 			}
-		}
-		else {
+		} else {
 			jobsQueue.remove();
 			while (!temp.isEmpty()) {
 				jobsQueue.add(temp.peek());
 				temp.remove();
 			}
 			int k = size - count - 1;
-			while (k-- >0) {
+			while (k-- > 0) {
 				Job tempJob = jobsQueue.peek();
 				jobsQueue.remove();
 				jobsQueue.add(tempJob);
@@ -177,14 +188,22 @@ public class VCC {
 		jobsQueue.add(job);
 		queueTime += job.getJobDuration();
 		job.setCompletionTime(queueTime);
+		String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 		try {
-			FileOutputStream fileOut = new FileOutputStream("jobInfo.txt");
-			ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-			objectOut.writeObject(job);
-			objectOut.close();
-			System.out.println("The Object  was succesfully written to the file");
-		} catch (Exception ex) {
-			ex.printStackTrace();
+			FileWriter writer = new FileWriter("jobInfo.txt", true); // true parameter to append to file
+
+			writer.write("Job ID: " + job.getJobID() + " | Job Duration: " + job.getJobDuration() + " | Job Deadline: "
+					+ job.getJobDeadline() + " | Job Description: " + job.getJobDeadline() + " | Timestamp: "
+					+ timestamp + "\n");
+			writer.close();
+			System.out.println("Job info successfully saved to file!");
+
+			// confirmation message if successful
+			System.out.println("Thank you. Your job has been submitted.");
+		}
+		// or error message if unsuccessful
+		catch (IOException ex) {
+			System.out.println("Error writing job info to file.");
 		}
 		return true;
 	}

@@ -17,7 +17,7 @@ class OptionPage extends JFrame implements ActionListener {
    // Initializing Java Swing Variables
    private JPanel clientUser, optionPanel, buttonPanel;
    private JButton back;
-   String[] options = {"", "Car", "Job", "Admin"};
+   String[] options = { "", "Car", "Job", "Admin" };
    private final JComboBox<String> optionBox = new JComboBox<String>(options);
    private JLabel aboutLabel;
    final JTextField welcomeLabelText, jobUserTextField, backText;
@@ -42,7 +42,8 @@ class OptionPage extends JFrame implements ActionListener {
 
       // About Label
       aboutLabel = new JLabel();
-      aboutLabel.setText("<html>Vehicle Vortex is an application where car users and job users are able to connect in real time.<br/>Please select from the drop down menu:</html>");
+      aboutLabel.setText(
+            "<html>Vehicle Vortex is an application where car users and job users are able to connect in real time.<br/>Please select from the drop down menu:</html>");
       aboutLabel.setForeground(Color.WHITE);
       aboutLabel.setFont(new Font("Inter", Font.ITALIC, 12));
 
@@ -102,33 +103,30 @@ class OptionPage extends JFrame implements ActionListener {
       // Finding the source of the action and assigning it to an object variable
       Object obj = e.getSource();
       if (obj == optionBox) {
-      // IF the "car" button was pressed, it will take them to the carPage
+         // IF the "car" button was pressed, it will take them to the carPage
          if (optionBox.getSelectedItem().equals("Car")) {
             dispose();
             Cars carPage = new Cars();
             carPage.setVisible(true);
-            carPage.setSize(700,500);
+            carPage.setSize(700, 500);
          }
          // IF the "job" button was pressed, it will take them to the jobPage
          else if (optionBox.getSelectedItem().equals("Job")) {
             dispose();
             Jobs jobWindow = new Jobs();
             jobWindow.setVisible(true);
-            jobWindow.setSize(700,500);
-         } 
-         else if (optionBox.getSelectedItem().equals("Admin")) {
+            jobWindow.setSize(700, 500);
+         } else if (optionBox.getSelectedItem().equals("Admin")) {
             System.out.println("Congrats. You have chosen admin.");
          }
+      } else if (obj == back) {
+         dispose();
+         CreateLoginForm form = new CreateLoginForm();
+         form.setSize(323, 393);
+         form.setVisible(true);
+      } else {
+         System.out.println("error");
       }
-         else if (obj == back) {
-            dispose();
-            CreateLoginForm form = new CreateLoginForm();
-            form.setSize(323, 393);
-            form.setVisible(true);
-         }
-         else {
-            System.out.println("error");
-         }
    } // <--- actionPerformed() method ends here
 
 } // <--- OptionPage{} class ends here

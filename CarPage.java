@@ -11,10 +11,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.ActionListener;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 class Cars extends JFrame implements ActionListener {
 
@@ -23,6 +19,7 @@ class Cars extends JFrame implements ActionListener {
     private JLabel ownerIDLabel, carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
     private final JTextField ownerIDField, carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
     JButton submit, back;
+    VCC vcc = VCC.getInstance();
 
     // ---------------------------------------------------------------------------------
     // This method creates the GUI for the Cars Window
@@ -54,8 +51,8 @@ class Cars extends JFrame implements ActionListener {
         carLicensePlateField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-            carLicensePlateField.setBackground(new Color(217, 217, 217));
-            carLicensePlateField.setBorder(BorderFactory.createCompoundBorder(
+        carLicensePlateField.setBackground(new Color(217, 217, 217));
+        carLicensePlateField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
@@ -164,15 +161,15 @@ class Cars extends JFrame implements ActionListener {
         Object obj = e.getSource();
 
         if (obj == submit) {
-        // Store user input as string variables
+            // Store user input as string variables
             int ownerID = Integer.parseInt(ownerIDField.getText());
             String carMake = carMakeField.getText();
             String carModel = carModelField.getText();
             String carLicensePlate = carLicensePlateField.getText();
             String carResidencyTime = carResidencyTimeField.getText();
 
-            // Get the current timestamp when the user submits this form
-            String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+            Car car = new Car(carLicensePlate, carMake, carModel, carResidencyTime, ownerID);
+            vcc.addCar(car);
 
             // Clearing text fields once user submits to prepare for next input
             carMakeField.setText("");
@@ -180,35 +177,14 @@ class Cars extends JFrame implements ActionListener {
             carLicensePlateField.setText("");
             carResidencyTimeField.setText("");
 
-            // Write the user-provided credentials and timestamp to a file called
-            // userInfo.txt, making it so that this information is not overwritten when the
-            // program terminates and it is stored in a new line with each submission
-            try {
-                FileWriter writer = new FileWriter("carInfo.txt", true); // true parameter to append to file
-
-                writer.write("Owner ID: " + ownerID + " | Car Make: " + carMake + " | Car Model: " + carModel
-                    + " | License Plate: " + carLicensePlate + " | Residency Time: " + carResidencyTime
-                    + " | Timestamp: " + timestamp + "\n");
-                writer.close();
-                System.out.println("User info successfully saved to file!");
-
-                // success message
-                System.out.println("Thank you. Your car has been submitted.");
-            }
-            // Error message
-            catch (IOException ex) {
-                System.out.println("Error writing user info to file.");
-            }
-        }
-        else if (obj == back) {
+        } else if (obj == back) {
 
             // if back button was clicked, reopen OptionPage
             OptionPage page = new OptionPage();
             page.setVisible(true);
             // if back button was clicked, close CarPage
             dispose();
-        }
-        else {
+        } else {
             System.out.println("Error.");
         }
     } // <--- actionPerformed() method ends here
