@@ -15,10 +15,11 @@ import javax.swing.JComboBox;
 
 class OptionPage extends JFrame implements ActionListener {
    // Initializing Java Swing Variables
-   private JPanel clientUser, buttonPanel;
+   private JPanel clientUser, optionPanel, buttonPanel;
    private JButton back;
-   String[] options = {"Car", "Job", "Admin"};
+   String[] options = { "", "Car", "Job", "Admin" };
    private final JComboBox<String> optionBox = new JComboBox<String>(options);
+   private JLabel aboutLabel;
    final JTextField welcomeLabelText, jobUserTextField, backText;
 
    // ---------------------------------------------------------------------------------
@@ -27,7 +28,7 @@ class OptionPage extends JFrame implements ActionListener {
       // Assigning JSwing variables values & styling
 
       // Welcome Label
-      JLabel welcomeLabel = new JLabel("Welcome to Vehicle Vortex. Would you like to submit a Car or a Job?");
+      JLabel welcomeLabel = new JLabel("Welcome to Vehicle Vortex.");
       welcomeLabel.setForeground(Color.WHITE);
       welcomeLabel.setFont(new Font("Inter", Font.PLAIN, 20));
       welcomeLabelText = new JTextField(15);
@@ -38,6 +39,18 @@ class OptionPage extends JFrame implements ActionListener {
       welcomeLabel.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(new Color(86, 53, 158)),
             BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
+      // About Label
+      aboutLabel = new JLabel();
+      aboutLabel.setText(
+            "<html>Vehicle Vortex is an application where car users and job users are able to connect in real time.<br/>Please select from the drop down menu:</html>");
+      aboutLabel.setForeground(Color.WHITE);
+      aboutLabel.setFont(new Font("Inter", Font.ITALIC, 12));
+
+      // Option Box
+      optionBox.setBackground(new Color(217, 217, 217));
+      optionBox.setForeground(new Color(86, 53, 158));
+      optionBox.setFont(new Font("Inter", Font.BOLD, 15));
 
       // Back button
       back = new JButton("Back");
@@ -66,6 +79,7 @@ class OptionPage extends JFrame implements ActionListener {
 
       // Adding variables to the panel
       clientUser.add(welcomeLabel);
+      clientUser.add(aboutLabel);
       clientUser.add(optionBox);
       add(clientUser, BorderLayout.CENTER);
 
@@ -89,33 +103,30 @@ class OptionPage extends JFrame implements ActionListener {
       // Finding the source of the action and assigning it to an object variable
       Object obj = e.getSource();
       if (obj == optionBox) {
-      // IF the "car" button was pressed, it will take them to the carPage
+         // IF the "car" button was pressed, it will take them to the carPage
          if (optionBox.getSelectedItem().equals("Car")) {
             dispose();
             Cars carPage = new Cars();
             carPage.setVisible(true);
-            carPage.setSize(700,500);
+            carPage.setSize(700, 500);
          }
          // IF the "job" button was pressed, it will take them to the jobPage
          else if (optionBox.getSelectedItem().equals("Job")) {
             dispose();
             Jobs jobWindow = new Jobs();
             jobWindow.setVisible(true);
-            jobWindow.setSize(700,500);
-         } 
-         else if (optionBox.getSelectedItem().equals("Admin")) {
+            jobWindow.setSize(700, 500);
+         } else if (optionBox.getSelectedItem().equals("Admin")) {
             System.out.println("Congrats. You have chosen admin.");
          }
+      } else if (obj == back) {
+         dispose();
+         CreateLoginForm form = new CreateLoginForm();
+         form.setSize(323, 393);
+         form.setVisible(true);
+      } else {
+         System.out.println("error");
       }
-         else if (obj == back) {
-            dispose();
-            CreateLoginForm form = new CreateLoginForm();
-            form.setSize(323, 393);
-            form.setVisible(true);
-         }
-         else {
-            System.out.println("error");
-         }
    } // <--- actionPerformed() method ends here
 
 } // <--- OptionPage{} class ends here

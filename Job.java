@@ -2,40 +2,30 @@ import java.util.LinkedList;
 
 public class Job {
     private int jobID;
-    private static int jobDuration;//in hours
+    private int jobDuration;//in hours
     private String jobDeadline;
     private String jobDescription;
     private Boolean completionStatus = false;
     private int jobRedundancy;
-    private static int completionTime;
+    private int completionTime;
     private LinkedList<Car> Cars = new LinkedList<Car>();
-    public static LinkedList<Integer> completionTimes = new LinkedList<Integer>();
 
-    public Job(int jobID, int jobDuration, String jobDeadline, String jobDescription, int jobRedundancy) {
+    public Job(int jobID, int jobDuration, String jobDeadline, String jobDescription) {
         this.jobID = jobID;
         this.jobDuration = jobDuration;
         this.jobDeadline = jobDeadline;
         this.jobDescription = jobDescription;
-        this.jobRedundancy = jobRedundancy;
-    }
-
-    public static int sumCompletionTime(LinkedList<Integer> completionTimes) {
-        int completionTime = 0;
-        for (int num : completionTimes) {
-            completionTime += num;
-        }
-        return completionTime;
     }
 
     public LinkedList<Car> getCars() {
         return Cars;
     }
 
-    public static int getCompletionTime() {
+    public int getCompletionTime() {
         return completionTime;
     }
 
-    public static void setCompletionTime(int time) {
+    public void setCompletionTime(int time) {
         completionTime = time;
     }
 
