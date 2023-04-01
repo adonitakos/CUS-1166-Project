@@ -1,0 +1,186 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+class Admin extends JFrame implements ActionListener {
+    // intitalizing variables
+    private Jpanel admin, buttonPanel;
+    private JLabel AllCarsLabel, AllJobsLabel,CompleteJobsLabel, IncompleteJobsLabel,carByIdLabel,jobByIdLabel;
+    private JTextField AllCarsField, AllJobsField, CompleteJobsField,IncompleteJobsField, carByIdField,jobByIdField;
+    private JButton close;
+    V //instatiates the VCC class in the admin class
+    VCC vcc  = VCC.getinstance();
+
+        // show car table
+        // admin credentials are going to be hard carded 
+        // admin gui will display admin methods
+        //must be printed in the terminal and in the pop up 
+        // get an instance of the vcc
+
+    admin(){
+    //All Cars Description Label
+
+    AllCarsLabel = new JLabel();
+    AllCarsLabel.setText(Text:"All Cars");
+    AllCarsField = new JTextField(column:15);
+    AllCarsField.add(AllCarsLabel);
+    AllCarsLabel.setForeground(Color.WHITE);
+    AllCarsField.setBackground(new Color(217, 217, 217));
+    AllCarsField.setBorder(BorderFactory.createCompoundBorder(
+        BorderFactory.createLineBorder(new Color(86, 53, 158)),
+        BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+    AllCarsField.setBackground(new Color(217, 217, 217));
+    AllCarsField.setBorder(BorderFactory.createCompoundBorder(
+        BorderFactory.createLineBorder(new Color(86, 53, 158)),
+        BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
+    //Complete Description Label
+        CompleteJobsLabel = new JLabel("Thank you. Your job has been submitted.", SwingConstants.CENTER);
+        CompleteJobsLabel.setForeground(Color.WHITE);
+        CompleteJobsLabel.setFont(new Font("Inter", Font.BOLD, 16));
+        CompleteJobsLabel.setBackground(new Color(217, 217, 217));
+        completeJobsLabel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+       completeJobsField.setBackground(new Color(217, 217, 217));
+       completeJobsField.setBorder(BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                        BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+       
+    
+        //Incomplete Jobs Description Label
+                        
+        IncompleteJobsLabel = new JLabel("Thank you. Your job has been submitted.", SwingConstants.CENTER);
+        IncompleteJobsLabel.setForeground(Color.WHITE);
+        IncompleteJobsabel.setFont(new Font("Inter", Font.BOLD, 16));
+        IncompleteJobs.setBackground(new Color(217, 217, 217));
+        IncompleteJobsabel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+        IncompleteJobsField.setBackground(new Color(217, 217, 217));
+        IncompleteJobsField.setBorder(BorderFactory.createCompoundBorder(
+                                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+                
+             
+        //All jobs Description Label
+        AllJobsLabel = new JLabel();
+        AllJobsLabel.setText(Text:"All Cars");
+        AllJobsField = new JTextField(column:15);
+        AllJobsField.add(AllCarsLabel);
+        AllJobsLabel.setForeground(Color.WHITE);
+        AllJobsField.setBackground(new Color(217, 217, 217));
+        AllJobsLabel.setBorder(BorderFactory.createCompoundBorder(
+        BorderFactory.createLineBorder(new Color(86, 53, 158)),
+        BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+        AllJobsField.setBackground(new Color(217, 217, 217));
+        AllJobsField.setBorder(BorderFactory.createCompoundBorder(
+        BorderFactory.createLineBorder(new Color(86, 53, 158)),
+        BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
+     // Creating new panel
+        AdminPage = new JPanel(new GridLayout(15, 1));
+        AdminPage.setBackground(new Color(86, 53, 158));
+        JLabel welcome = new JLabel("Welcome to the Admin page. Please enter your credentials, leaving no fields blank.");
+ 
+    // Sets the Welcome string to White text
+        welcome.setForeground(Color.WHITE);
+        AdminPage.add(welcome);
+        AdminPage.add(AllCarsLabel);
+        AdminPage.add(AllCarsField);
+        AdminPage.add(AllJobsLabel);
+        AdminPage.add(AllJobsPlateField);
+        AdminPage.add(CompleteJobsLabel);
+        AdminPage.add(carMakeField);
+        AdminPage.add(IncompleteJobsLabel);
+        AdminPage.add(carModelField);
+        AdminPage.add(carByIdLabel);
+        AdminPage.add(carByIdField);
+        AdminPage.add(jobByIdLabel);
+        AdminPage.add(jobByIdField);
+        AdminPage.add(submit);
+        AdminPage.add(back);
+        add(AdminPage,BorderLayout.CENTER);
+
+
+        // Adding buttons to the panel
+        JPanel buttonPanel = new JPanel();
+         buttonPanel.add(close);
+         add(buttonPanel, BorderLayout.SOUTH);
+
+         // creating the action listener for the buttons
+         close.addActionListener(this);
+
+         setDefaultCloseOperation(Javax.swing.WindowConstants.DISPOSE_ON_CLOSE)
+         setTitle(title:"Admin Entry")
+         setSize(width:1000,height:3000);
+         // <--Admin () Constructor ends here
+
+    // Action performer class has to be corrected
+
+public void actionPerformed(ActionEvent e) {
+
+    Object obj = e.getSource();
+
+
+    if (obj == close) {
+        // Store user input as string variables
+        int AllCarLabel = Integer.parseInt(AllCarsField.getText());
+        String AllJobsLabel = AllJobsField.getText();
+        String CompleteJobsLabel= carModelField.getText();
+        String carLicensePlate = carLicensePlateField.getText();
+        String carResidencyTime = carResidencyTimeField.getText();
+
+        Admin admin = new admin(AllCars, AllJobs,CompleteJobs, IncompleteJobs,carById,jobById);
+        vcc.addAdmin(admin);
+
+        // Clearing text fields once user submits to prepare for next input
+        AllCarsField.setText("");
+        AllJobsField.setText("");
+        completeJobsField.setText("");
+        IncompleteJobsField.setText("");
+        carsByIdField.setText("");
+        jobByIdField.setText("");
+
+
+    } else {
+        System.out.println("Error.");
+    }
+} // <--- actionPerformed() method ends here
+} // <--- admin{} class ends here
+
+
+
+
+
+
+
+
+
+
+
+
+}
+Class Admin{
+
+    public static void main(String[] args)
+    {
+        try
+        {
+                Admin form = new Admin();
+                form.setSize(400, 300);
+                form.setVisible(true);
+                
+        }
+        catch (Exception e)
+        JOptionPane.showMessageDialog(parentComponent:null,e.getMessage());
+    }
+
+}
+
+
+
+    }
+
+
+} 
