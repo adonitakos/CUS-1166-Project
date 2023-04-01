@@ -220,7 +220,6 @@ public class VCC {
 	public Boolean completeJob() {
 		Job compJob = jobsQueue.remove();
 		compJob.setStatus(true);
-		allJobs.add(compJob);
 		return true;
 	}
 
