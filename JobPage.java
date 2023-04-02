@@ -11,13 +11,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.net.*;
+import java.io.*;
 
-class Jobs extends JFrame implements ActionListener {
+class Jobs extends JFrame implements ActionListener, Serializable {
     // Initializing variables
     private JLabel jobIDLabel, jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel;
     private final JTextField jobIDField, jobDurationField, jobDeadlineField, jobDescriptionField;
     private JButton submit, jobCompletion, back;
     private JPanel jobPage;
+    static Socket socket;
     VCC vcc = VCC.getInstance();
 
     // ---------------------------------------------------------------------------------
@@ -144,9 +147,29 @@ class Jobs extends JFrame implements ActionListener {
             String jobDeadline = jobDeadlineField.getText();
             String jobDescription = jobDescriptionField.getText();
 
-            // adding Job
             Job job = new Job(jobID, jobDuration, jobDeadline, jobDescription);
-            vcc.addJob(job);
+
+            try {
+
+                DataInputStream inputStream = new DataInputStream(socket.getInputStream());
+                OutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+                ObjectOutputStream OOS = new ObjectOutputStream(outputStream);
+
+                System.out.println("Sending job to VCC...");
+
+                // server sends the message to client
+                OOS.writeObject(job);
+
+                if (inputStream.readBoolean()) {
+                    vcc.addJob(job);
+                    System.out.println("Job has been approved by VCC. Writing to file...");
+                } else {
+                    System.out.println("Job has been denied by VCC.");
+                }
+                socket.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
 
             // Clearing text fields once user submits to prepare for next input
             jobIDField.setText("");
@@ -180,14 +203,22 @@ class Jobs extends JFrame implements ActionListener {
 
     class JobPage {
         public static void main(String[] args) {
-            try {
-                Jobs form = new Jobs();
-                form.setVisible(true);
-                form.setSize(400, 300);
-
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
-            }
+            EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    try {
+                        System.out.println("----------*** Attempting Job Owner Connection to Server ***--------");
+                        try (Socket socket = new Socket("localhost", 9806)) {
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        Jobs form = new Jobs();
+                        form.setVisible(true);
+                        form.setSize(400, 300);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
+                    }
+                }
+            });
         } // <--- main() method ends here
     }
 } // <--- JobPage{} class ends here
