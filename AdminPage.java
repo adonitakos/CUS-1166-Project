@@ -23,7 +23,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
         //must be printed in the terminal and in the pop up 
         // get an instance of the vcc
 
-        CreateAdminForm(){
+    CreateAdminForm() {
     //All Cars Description Label
 
     AllCarsLabel = new JLabel();
@@ -54,7 +54,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
                         BorderFactory.createEmptyBorder(10, 10, 10, 10)));
        
     
-        //Incomplete Jobs Description Label
+        // Incomplete Jobs Description Label
                         
         IncompleteJobsLabel = new JLabel("Thank you. Your job has been submitted.", SwingConstants.CENTER);
         IncompleteJobsLabel.setForeground(Color.WHITE);
@@ -67,9 +67,8 @@ class CreateAdminForm extends JFrame implements ActionListener {
         IncompleteJobsField.setBorder(BorderFactory.createCompoundBorder(
                                  BorderFactory.createLineBorder(new Color(86, 53, 158)),
                                  BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-                
              
-        //All jobs Description Label
+        // All jobs Description Label
         AllJobsLabel = new JLabel();
         AllJobsLabel.setText("All Cars");
         AllJobsField = new JTextField(15);
@@ -120,56 +119,55 @@ class CreateAdminForm extends JFrame implements ActionListener {
          setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
          setTitle("Admin Entry");
          setSize(1000,3000);
-        } // <--Admin () Constructor ends here
+
+        } // <--CreateAdminForm() constructor ends here
 
     // Action performer class has to be corrected
 
-public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) {
 
-    Object obj = e.getSource();
-
-
-    if (obj == close) {
-        // Store user input as string variables
-        int AllCarLabel = Integer.parseInt(AllCarsField.getText());
-        String AllJobsLabel = AllJobsField.getText();
-        String CompleteJobsLabel= CarModelField.getText();
-        String carLicensePlate = CarLicensePlateField.getText();
-        String carResidencyTime = CarResidencyTimeField.getText();
-
-        Admin admin = new admin(AllCars, AllJobs,CompleteJobs, IncompleteJobs,carById,jobById);
-        vcc.addAdmin(admin);
-
-        // Clearing text fields once user submits to prepare for next input
-        AllCarsField.setText("");
-        AllJobsField.setText("");
-        CompleteJobsField.setText("");
-        IncompleteJobsField.setText("");
-        carByIdField.setText("");
-        jobByIdField.setText("");
+        Object obj = e.getSource();
 
 
-    } else {
-        System.out.println("Error.");
-    
-} // <--- actionPerformed() method ends here
-} // <--- admin{} class ends here
+        if (obj == close) {
+            // Store user input as string variables
+            int AllCarLabel = Integer.parseInt(AllCarsField.getText());
+            String AllJobsLabel = AllJobsField.getText();
+            String CompleteJobsLabel= CarModelField.getText();
+            String carLicensePlate = CarLicensePlateField.getText();
+            String carResidencyTime = CarResidencyTimeField.getText();
 
+            Admin admin = new admin(AllCars, AllJobs,CompleteJobs, IncompleteJobs,carById,jobById);
+            vcc.addAdmin(admin);
+
+            // Clearing text fields once user submits to prepare for next input
+            AllCarsField.setText("");
+            AllJobsField.setText("");
+            CompleteJobsField.setText("");
+            IncompleteJobsField.setText("");
+            carByIdField.setText("");
+            jobByIdField.setText("");
+        } 
+        else {
+            System.out.println("Error.");
+        } // <--- else-statement ends here
+
+    } // <--- actionPerformed() method ends here
+
+} // <--- CreateAdminForm{} class ends here
 
 class Admin {
-public static void main(String[] args) {
-    System.out.println("\n========= Admin =========\n");
-    try {
-        CreateAdminForm form = new CreateAdminForm();
-        // form.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        form.setSize(323, 393);
-        form.setVisible(true);
-    }
-    catch(Exception e) {
-        JOptionPane.showMessageDialog(null, e.getMessage());
-    }
-} 
-} 
+    public static void main(String[] args) {
+        System.out.println("\n========= Admin =========\n");
+        try {
+            CreateAdminForm form = new CreateAdminForm();
+            // form.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            form.setSize(323, 393);
+            form.setVisible(true);
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    } // <--- main() method ends here
 
-
-} 
+} // <--- Admin{} class ends here
