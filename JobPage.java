@@ -14,14 +14,18 @@ import java.util.*;
 import java.net.*;
 import java.io.*;
 
-class Jobs extends JFrame implements ActionListener{
+class Jobs extends JFrame implements ActionListener {
     // Initializing variables
     private JLabel jobIDLabel, jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel;
     private final JTextField jobIDField, jobDurationField, jobDeadlineField, jobDescriptionField;
     private JButton submit, jobCompletion, back;
     private JPanel jobPage;
-    static Socket socket;
+    private Socket socket;
     VCC vcc = VCC.getInstance();
+
+    public void setSocket(Socket socket) {
+        this.socket = socket;
+    }
 
     // ---------------------------------------------------------------------------------
     // This method creates the GUI for the JobWindow
@@ -162,9 +166,9 @@ class Jobs extends JFrame implements ActionListener{
 
                 if (inputStream.readBoolean()) {
                     vcc.addJob(job);
-                    System.out.println("Job has been approved by VCC. Writing to file...");
+                    System.out.println("Job submission has been approved by VCC. Writing to file...");
                 } else {
-                    System.out.println("Job has been denied by VCC.");
+                    System.out.println("Job submission has been denied by VCC.");
                 }
                 socket.close();
             } catch (Exception ex) {
@@ -207,11 +211,9 @@ class Jobs extends JFrame implements ActionListener{
                 public void run() {
                     try {
                         System.out.println("----------*** Attempting Job Owner Connection to Server ***--------");
-                        try (Socket socket = new Socket("localhost", 9806)) {
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        Socket socket = new Socket("localhost", 9806);
                         Jobs form = new Jobs();
+                        form.setSocket(socket);
                         form.setVisible(true);
                         form.setSize(400, 300);
                     } catch (Exception e) {
