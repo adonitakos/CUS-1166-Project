@@ -17,10 +17,10 @@ import java.awt.event.ActionListener;
 import java.io.*;
 
 class CreateLoginForm extends JFrame implements ActionListener {
-    // Initializing Java Swing Variables
-    JButton submit;
+// Initializing Java Swing Variables
+    JButton submit, signUpButton;
     JPanel loginPanel;
-    JLabel loginLabel, userLabel, passwordLabel;
+    JLabel loginLabel, userLabel, passwordLabel, signUpLabel;
     final JTextField userField, passwordField;
 
     // ---------------------------------------------------------------------------------
@@ -68,14 +68,28 @@ class CreateLoginForm extends JFrame implements ActionListener {
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
+        // Sign Up Label
+        signUpLabel = new JLabel();
+        signUpLabel.setText("Don't have an account?");
+        signUpLabel.setBounds(18, 340, 500, 16);
+        signUpLabel.setForeground(Color.WHITE);
+        signUpLabel.setFont(new Font("Inter", Font.BOLD, 16));
+
         // Submit
         submit = new JButton("Submit");
         submit.setBounds(110, 280, 100, 34);
         submit.setBackground(new Color(217, 217, 217));
         submit.setForeground(new Color(86, 53, 158));
         submit.setFont(new Font("Inter", Font.BOLD, 16));
+        
+        // Sign Up Button
+        signUpButton = new JButton("Sign Up");
+        signUpButton.setBounds(220, 330, 100, 34);
+        signUpButton.setBackground(new Color(217, 217, 217));
+        signUpButton.setForeground(new Color(86, 53, 158));
+        signUpButton.setFont(new Font("Inter", Font.BOLD, 16));
 
-        // Creating a new Panel
+    // Creating a new Panel
         loginPanel = new JPanel();
         loginPanel.setBackground(new Color(86, 53, 158));
         loginPanel.setLayout(null);
@@ -87,20 +101,28 @@ class CreateLoginForm extends JFrame implements ActionListener {
         loginPanel.add(passwordLabel);
         loginPanel.add(passwordField);
         loginPanel.add(submit);
+        loginPanel.add(signUpLabel);
+        loginPanel.add(signUpButton);
         add(loginPanel, BorderLayout.CENTER);
 
-        // Creating action listener for the submit button
+    // Creating action listener for the buttons
         submit.addActionListener(this);
+        signUpButton.addActionListener(this);
         setTitle("Login Form");
         setSize(323, 393); // Set the size of the frame
 
     } // <--- CreateLoginForm() constructor ends here
 
-    // Action listener method for the submit button
-    public void actionPerformed(ActionEvent ae) {
-        // Assigning the information that will be inputted by the user as string variables
-        String userValue = userField.getText();
-        String passValue = passwordField.getText();
+
+// ---------------------------------------------------------------------------------
+// Action listener method for the submit button
+public void actionPerformed(ActionEvent ae) {
+    Object obj = ae.getSource();
+
+    if (obj == submit) {
+    // Assigning the information that will be inputted by the user as string variables
+    String userValue = userField.getText();
+    String passValue = passwordField.getText();
 
         String adminUsername = "admin1";
         String adminPassword = "password123!";
@@ -130,53 +152,42 @@ class CreateLoginForm extends JFrame implements ActionListener {
             System.out.println("Error reading credentials from file.");
         } // <--- catch() block ends here
 
-        // Check if the inputted credentials match any of the existing credentials
-        boolean found = false;
-        for (String credential : credentials) {
-            String[] parts = credential.split("\\|");
-            String username = parts[0].trim().substring(10);
-            String password = parts[1].trim().substring(10);
-            if (username.equals(userValue) && password.equals(passValue)) {
-                found = true;
-                break;
-            }
-        } // <--- for(credential) loop ends here
-
-        if (found) {
-            // Show a success message if credentials are valid
-            JOptionPane.showMessageDialog(this, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            System.out.println("Login successful!\n");
-            
-            // Start the server in a new thread
-            Thread serverThread = new Thread(() -> {
-                Server server = new Server();
-                server.runServer();
-            });
-            serverThread.start();
-
-            // Wait for a short time for the server to start listening
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-
-            // Create a new client and connect to the server
-            Client client = new Client();
-            client.connectClient();
-
-            // Open the "OptionPage.java" page
-            OptionPage optionPage = new OptionPage();
-            optionPage.setVisible(true);
-            this.dispose(); // Close the current login page
-
-        } else {
-            // Display an error message if credentials are invalid
-            JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);
+    // Check if the inputted credentials match any of the existing credentials
+    boolean found = false;
+    for (String credential : credentials) {
+        String[] parts = credential.split("\\|");
+        String username = parts[0].trim().substring(10);
+        String password = parts[1].trim().substring(10);
+        if (username.equals(userValue) && password.equals(passValue)) {
+            found = true;
+            break;
         }
-    } // <--- actionPerformed() method ends here
-} // <--- CreateLoginForm{} class ends here
+    }
+        
+    if (found) {
+        // Show a success message if credentials are valid
+        JOptionPane.showMessageDialog(this, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        
+        // Open the "options.java" page
+        OptionPage optionPage = new OptionPage();
+        optionPage.setVisible(true);
+        this.dispose(); // Close the current login page
+    }
+     else {
+        // Display an error message if credentials are invalid
+        JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+else if (obj == signUpButton) {
+    dispose();
+    CreateSignupForm form = new CreateSignupForm();
+    form.setSize(350, 450);
+    form.setVisible(true);
+}
+}
+}
+
+
 
 class Login {
     public static void main(String[] args) {

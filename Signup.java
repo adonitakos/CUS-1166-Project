@@ -17,8 +17,8 @@ import java.io.*;
 
 class CreateSignupForm extends JFrame implements ActionListener {
 // Initializing Java Swing Variables
-    JButton submit;
-    JPanel signupPanel;
+    JButton submit, back;
+    JPanel signupPanel, buttonPanel;
     JLabel signupLabel, userLabel, passwordLabel, infoLabel;
     final JTextField userField, passwordField;
 
@@ -74,10 +74,17 @@ CreateSignupForm() {
 
     // Submit
     submit = new JButton("Submit");
-    submit.setBounds(110, 350, 100, 34);
+    submit.setBounds(125, 350, 100, 34);
     submit.setBackground(new Color(217, 217, 217));
     submit.setForeground(new Color(86, 53, 158));
     submit.setFont(new Font("Inter", Font.BOLD, 16));
+
+    // Back
+    back = new JButton("Back");
+    back.setBounds(110, 350, 100, 34);
+    back.setBackground(new Color(217, 217, 217));
+    back.setForeground(new Color(86, 53, 158));
+    back.setFont(new Font("Inter", Font.BOLD, 16));
 
     // Creating a new Panel
     JPanel signupPanel = new JPanel();
@@ -95,8 +102,13 @@ CreateSignupForm() {
     signupPanel.add(submit);
     add(signupPanel, BorderLayout.CENTER);
 
+    buttonPanel = new JPanel();
+      buttonPanel.add(back);
+      add(buttonPanel, BorderLayout.SOUTH);
+
     // Creating action listener for the submit button
     submit.addActionListener(this);
+    back.addActionListener(this);
     setTitle("Sign up Form");
     // setPreferredSize(new Dimension(800, 200));
     signupPanel.setPreferredSize(new Dimension(600, 700));
@@ -106,6 +118,9 @@ CreateSignupForm() {
 // ---------------------------------------------------------------------------------
 // Action listener method for the submit button
     public void actionPerformed(ActionEvent ae) {
+        Object obj = ae.getSource();
+
+        if (obj == submit) {
         // Assigning the information that will be inputted by the user as string variables
         String userValue = userField.getText();
         String passValue = passwordField.getText();
@@ -137,6 +152,14 @@ CreateSignupForm() {
             dispose();
         } catch (IOException e) {
             System.out.println("Error writing credentials to file.");
+        }
+        }
+
+        else if (obj == back) {
+            dispose();
+            CreateLoginForm form = new CreateLoginForm();
+            form.setSize(323, 393);
+            form.setVisible(true);
         }
     } // <--- actionPerformed() method ends here
 } // <--- CreateSignupForm{} class ends here

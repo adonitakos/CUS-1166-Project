@@ -156,7 +156,7 @@ class Jobs extends JFrame implements ActionListener {
 
             JobConfirmation form = new JobConfirmation(job);
             form.setVisible(true);
-            form.setSize(400, 300);
+            form.setSize(800, 300);
 
         } else if (obj == jobCompletion) {
             LinkedList<Job> jobs = vcc.getAllJobs();
