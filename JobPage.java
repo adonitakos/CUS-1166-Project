@@ -14,7 +14,7 @@ import java.util.*;
 import java.net.*;
 import java.io.*;
 
-class Jobs extends JFrame implements ActionListener, Serializable {
+class Jobs extends JFrame implements ActionListener{
     // Initializing variables
     private JLabel jobIDLabel, jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel;
     private final JTextField jobIDField, jobDurationField, jobDeadlineField, jobDescriptionField;
