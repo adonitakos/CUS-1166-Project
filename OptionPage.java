@@ -17,7 +17,7 @@ class OptionPage extends JFrame implements ActionListener {
    // Initializing Java Swing Variables
    private JPanel clientUser, optionPanel, buttonPanel;
    private JButton back;
-   String[] options = { "", "Car", "Job", "Admin" };
+   String[] options = { "", "Car", "Job"};
    private final JComboBox<String> optionBox = new JComboBox<String>(options);
    private JLabel aboutLabel;
    final JTextField welcomeLabelText, jobUserTextField, backText;
@@ -116,9 +116,10 @@ class OptionPage extends JFrame implements ActionListener {
             Jobs jobWindow = new Jobs();
             jobWindow.setVisible(true);
             jobWindow.setSize(700, 500);
-         } else if (optionBox.getSelectedItem().equals("Admin")) {
-            System.out.println("Congrats. You have chosen admin.");
          }
+         // else if (optionBox.getSelectedItem().equals("Admin")) {
+         //    System.out.println("Congrats. You have chosen admin.");
+         // }
       } else if (obj == back) {
          dispose();
          CreateLoginForm form = new CreateLoginForm();
