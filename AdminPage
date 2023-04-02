@@ -1,15 +1,21 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.lang.Exception;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.awt.event.ActionListener;
+import java.io.*;
 
-class Admin extends JFrame implements ActionListener {
+class CreateAdminForm extends JFrame implements ActionListener {
     // intitalizing variables
-    private Jpanel admin, buttonPanel;
+    private JPanel admin, buttonPanel;
     private JLabel AllCarsLabel, AllJobsLabel,CompleteJobsLabel, IncompleteJobsLabel,carByIdLabel,jobByIdLabel;
-    private JTextField AllCarsField, AllJobsField, CompleteJobsField,IncompleteJobsField, carByIdField,jobByIdField;
-    private JButton close;
-    V //instatiates the VCC class in the admin class
-    VCC vcc  = VCC.getinstance();
+    private JTextField AllCarsField, AllJobsField, AllJobsPlateField, CompleteJobsField,IncompleteJobsField, CarModelField, CarMakeField, carByIdField, CarLicensePlateField, CarResidencyTimeField, jobByIdField;
+    private JButton close, submit, back;
+    //instatiates the VCC class in the admin class
+    VCC vcc  = VCC.getInstance();
 
         // show car table
         // admin credentials are going to be hard carded 
@@ -17,12 +23,12 @@ class Admin extends JFrame implements ActionListener {
         //must be printed in the terminal and in the pop up 
         // get an instance of the vcc
 
-    admin(){
+        CreateAdminForm(){
     //All Cars Description Label
 
     AllCarsLabel = new JLabel();
-    AllCarsLabel.setText(Text:"All Cars");
-    AllCarsField = new JTextField(column:15);
+    AllCarsLabel.setText("All Cars");
+    AllCarsField = new JTextField(15);
     AllCarsField.add(AllCarsLabel);
     AllCarsLabel.setForeground(Color.WHITE);
     AllCarsField.setBackground(new Color(217, 217, 217));
@@ -39,11 +45,11 @@ class Admin extends JFrame implements ActionListener {
         CompleteJobsLabel.setForeground(Color.WHITE);
         CompleteJobsLabel.setFont(new Font("Inter", Font.BOLD, 16));
         CompleteJobsLabel.setBackground(new Color(217, 217, 217));
-        completeJobsLabel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-       completeJobsField.setBackground(new Color(217, 217, 217));
-       completeJobsField.setBorder(BorderFactory.createCompoundBorder(
+        CompleteJobsLabel.setBorder(BorderFactory.createCompoundBorder(
+        BorderFactory.createLineBorder(new Color(86, 53, 158)),
+        BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+        CompleteJobsField.setBackground(new Color(217, 217, 217));
+        CompleteJobsField.setBorder(BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(new Color(86, 53, 158)),
                         BorderFactory.createEmptyBorder(10, 10, 10, 10)));
        
@@ -52,9 +58,9 @@ class Admin extends JFrame implements ActionListener {
                         
         IncompleteJobsLabel = new JLabel("Thank you. Your job has been submitted.", SwingConstants.CENTER);
         IncompleteJobsLabel.setForeground(Color.WHITE);
-        IncompleteJobsabel.setFont(new Font("Inter", Font.BOLD, 16));
-        IncompleteJobs.setBackground(new Color(217, 217, 217));
-        IncompleteJobsabel.setBorder(BorderFactory.createCompoundBorder(
+        IncompleteJobsLabel.setFont(new Font("Inter", Font.BOLD, 16));
+        IncompleteJobsLabel.setBackground(new Color(217, 217, 217));
+        IncompleteJobsLabel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
         IncompleteJobsField.setBackground(new Color(217, 217, 217));
@@ -65,8 +71,8 @@ class Admin extends JFrame implements ActionListener {
              
         //All jobs Description Label
         AllJobsLabel = new JLabel();
-        AllJobsLabel.setText(Text:"All Cars");
-        AllJobsField = new JTextField(column:15);
+        AllJobsLabel.setText("All Cars");
+        AllJobsField = new JTextField(15);
         AllJobsField.add(AllCarsLabel);
         AllJobsLabel.setForeground(Color.WHITE);
         AllJobsField.setBackground(new Color(217, 217, 217));
@@ -79,28 +85,28 @@ class Admin extends JFrame implements ActionListener {
         BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
      // Creating new panel
-        AdminPage = new JPanel(new GridLayout(15, 1));
-        AdminPage.setBackground(new Color(86, 53, 158));
+        admin = new JPanel(new GridLayout(15, 1));
+        admin.setBackground(new Color(86, 53, 158));
         JLabel welcome = new JLabel("Welcome to the Admin page. Please enter your credentials, leaving no fields blank.");
  
     // Sets the Welcome string to White text
         welcome.setForeground(Color.WHITE);
-        AdminPage.add(welcome);
-        AdminPage.add(AllCarsLabel);
-        AdminPage.add(AllCarsField);
-        AdminPage.add(AllJobsLabel);
-        AdminPage.add(AllJobsPlateField);
-        AdminPage.add(CompleteJobsLabel);
-        AdminPage.add(carMakeField);
-        AdminPage.add(IncompleteJobsLabel);
-        AdminPage.add(carModelField);
-        AdminPage.add(carByIdLabel);
-        AdminPage.add(carByIdField);
-        AdminPage.add(jobByIdLabel);
-        AdminPage.add(jobByIdField);
-        AdminPage.add(submit);
-        AdminPage.add(back);
-        add(AdminPage,BorderLayout.CENTER);
+        admin.add(welcome);
+        admin.add(AllCarsLabel);
+        admin.add(AllCarsField);
+        admin.add(AllJobsLabel);
+        admin.add(AllJobsPlateField);
+        admin.add(CompleteJobsLabel);
+        admin.add(CarMakeField);
+        admin.add(IncompleteJobsLabel);
+        admin.add(CarModelField);
+        admin.add(carByIdLabel);
+        admin.add(carByIdField);
+        admin.add(jobByIdLabel);
+        admin.add(jobByIdField);
+        admin.add(submit);
+        admin.add(back);
+        add(admin,BorderLayout.CENTER);
 
 
         // Adding buttons to the panel
@@ -111,10 +117,10 @@ class Admin extends JFrame implements ActionListener {
          // creating the action listener for the buttons
          close.addActionListener(this);
 
-         setDefaultCloseOperation(Javax.swing.WindowConstants.DISPOSE_ON_CLOSE)
-         setTitle(title:"Admin Entry")
-         setSize(width:1000,height:3000);
-         // <--Admin () Constructor ends here
+         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+         setTitle("Admin Entry");
+         setSize(1000,3000);
+        } // <--Admin () Constructor ends here
 
     // Action performer class has to be corrected
 
@@ -127,9 +133,9 @@ public void actionPerformed(ActionEvent e) {
         // Store user input as string variables
         int AllCarLabel = Integer.parseInt(AllCarsField.getText());
         String AllJobsLabel = AllJobsField.getText();
-        String CompleteJobsLabel= carModelField.getText();
-        String carLicensePlate = carLicensePlateField.getText();
-        String carResidencyTime = carResidencyTimeField.getText();
+        String CompleteJobsLabel= CarModelField.getText();
+        String carLicensePlate = CarLicensePlateField.getText();
+        String carResidencyTime = CarResidencyTimeField.getText();
 
         Admin admin = new admin(AllCars, AllJobs,CompleteJobs, IncompleteJobs,carById,jobById);
         vcc.addAdmin(admin);
@@ -137,50 +143,33 @@ public void actionPerformed(ActionEvent e) {
         // Clearing text fields once user submits to prepare for next input
         AllCarsField.setText("");
         AllJobsField.setText("");
-        completeJobsField.setText("");
+        CompleteJobsField.setText("");
         IncompleteJobsField.setText("");
-        carsByIdField.setText("");
+        carByIdField.setText("");
         jobByIdField.setText("");
 
 
     } else {
         System.out.println("Error.");
-    }
+    
 } // <--- actionPerformed() method ends here
 } // <--- admin{} class ends here
 
 
-
-
-
-
-
-
-
-
-
-
-}
-Class Admin{
-
-    public static void main(String[] args)
-    {
-        try
-        {
-                Admin form = new Admin();
-                form.setSize(400, 300);
-                form.setVisible(true);
-                
-        }
-        catch (Exception e)
-        JOptionPane.showMessageDialog(parentComponent:null,e.getMessage());
+class Admin {
+public static void main(String[] args) {
+    System.out.println("\n========= Admin =========\n");
+    try {
+        CreateAdminForm form = new CreateAdminForm();
+        // form.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        form.setSize(323, 393);
+        form.setVisible(true);
     }
-
-}
-
-
-
+    catch(Exception e) {
+        JOptionPane.showMessageDialog(null, e.getMessage());
     }
+} 
+} 
 
 
 } 
