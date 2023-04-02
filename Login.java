@@ -19,9 +19,9 @@ import java.io.*;
 
 class CreateLoginForm extends JFrame implements ActionListener {
 // Initializing Java Swing Variables
-    JButton submit;
+    JButton submit, signUpButton;
     JPanel loginPanel;
-    JLabel loginLabel, userLabel, passwordLabel;
+    JLabel loginLabel, userLabel, passwordLabel, signUpLabel;
     final JTextField userField, passwordField;
 
 // ---------------------------------------------------------------------------------
@@ -69,6 +69,13 @@ class CreateLoginForm extends JFrame implements ActionListener {
             BorderFactory.createLineBorder(new Color(86, 53, 158)),
             BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
+        // Sign Up Label
+        signUpLabel = new JLabel();
+        signUpLabel.setText("Don't have an account?");
+        signUpLabel.setBounds(18, 340, 500, 16);
+        signUpLabel.setForeground(Color.WHITE);
+        signUpLabel.setFont(new Font("Inter", Font.BOLD, 16));
+
         // Submit
         submit = new JButton("Submit");
         submit.setBounds(110, 280, 100, 34);
@@ -76,6 +83,12 @@ class CreateLoginForm extends JFrame implements ActionListener {
         submit.setForeground(new Color(86, 53, 158));
         submit.setFont(new Font("Inter", Font.BOLD, 16));
         
+        // Sign Up Button
+        signUpButton = new JButton("Sign Up");
+        signUpButton.setBounds(220, 330, 100, 34);
+        signUpButton.setBackground(new Color(217, 217, 217));
+        signUpButton.setForeground(new Color(86, 53, 158));
+        signUpButton.setFont(new Font("Inter", Font.BOLD, 16));
 
     // Creating a new Panel
         loginPanel = new JPanel();
@@ -89,10 +102,13 @@ class CreateLoginForm extends JFrame implements ActionListener {
         loginPanel.add(passwordLabel);
         loginPanel.add(passwordField);
         loginPanel.add(submit);
+        loginPanel.add(signUpLabel);
+        loginPanel.add(signUpButton);
         add(loginPanel, BorderLayout.CENTER);
 
-    // Creating action listener for the submit button
+    // Creating action listener for the buttons
         submit.addActionListener(this);
+        signUpButton.addActionListener(this);
         setTitle("Login Form");
         setSize(323, 393); // Set the size of the frame
 
@@ -102,6 +118,9 @@ class CreateLoginForm extends JFrame implements ActionListener {
 // ---------------------------------------------------------------------------------
 // Action listener method for the submit button
 public void actionPerformed(ActionEvent ae) {
+    Object obj = ae.getSource();
+
+    if (obj == submit) {
     // Assigning the information that will be inputted by the user as string variables
     String userValue = userField.getText();
     String passValue = passwordField.getText();
@@ -159,6 +178,13 @@ public void actionPerformed(ActionEvent ae) {
         // Display an error message if credentials are invalid
         JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);
     }
+}
+else if (obj == signUpButton) {
+    dispose();
+    CreateSignupForm form = new CreateSignupForm();
+    form.setSize(350, 450);
+    form.setVisible(true);
+}
 }
 }
 
