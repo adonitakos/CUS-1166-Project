@@ -24,23 +24,22 @@ class CreateAdminForm extends JFrame implements ActionListener {
         // get an instance of the vcc
 
     CreateAdminForm() {
-    //All Cars Description Label
+        // All Cars Description Label
+        AllCarsLabel = new JLabel();
+        AllCarsLabel.setText("All Cars");
+        AllCarsField = new JTextField(15);
+        AllCarsField.add(AllCarsLabel);
+        AllCarsLabel.setForeground(Color.WHITE);
+        AllCarsField.setBackground(new Color(217, 217, 217));
+        AllCarsField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(86, 53, 158)),
+            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+        AllCarsField.setBackground(new Color(217, 217, 217));
+        AllCarsField.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(86, 53, 158)),
+            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-    AllCarsLabel = new JLabel();
-    AllCarsLabel.setText("All Cars");
-    AllCarsField = new JTextField(15);
-    AllCarsField.add(AllCarsLabel);
-    AllCarsLabel.setForeground(Color.WHITE);
-    AllCarsField.setBackground(new Color(217, 217, 217));
-    AllCarsField.setBorder(BorderFactory.createCompoundBorder(
-        BorderFactory.createLineBorder(new Color(86, 53, 158)),
-        BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-    AllCarsField.setBackground(new Color(217, 217, 217));
-    AllCarsField.setBorder(BorderFactory.createCompoundBorder(
-        BorderFactory.createLineBorder(new Color(86, 53, 158)),
-        BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-
-    //Complete Description Label
+        // Complete Description Label
         CompleteJobsLabel = new JLabel("Thank you. Your job has been submitted.", SwingConstants.CENTER);
         CompleteJobsLabel.setForeground(Color.WHITE);
         CompleteJobsLabel.setFont(new Font("Inter", Font.BOLD, 16));
@@ -52,10 +51,8 @@ class CreateAdminForm extends JFrame implements ActionListener {
         CompleteJobsField.setBorder(BorderFactory.createCompoundBorder(
                         BorderFactory.createLineBorder(new Color(86, 53, 158)),
                         BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-       
-    
-        // Incomplete Jobs Description Label
-                        
+        
+        // Incomplete Jobs Description Label   
         IncompleteJobsLabel = new JLabel("Thank you. Your job has been submitted.", SwingConstants.CENTER);
         IncompleteJobsLabel.setForeground(Color.WHITE);
         IncompleteJobsLabel.setFont(new Font("Inter", Font.BOLD, 16));
@@ -65,9 +62,9 @@ class CreateAdminForm extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
         IncompleteJobsField.setBackground(new Color(217, 217, 217));
         IncompleteJobsField.setBorder(BorderFactory.createCompoundBorder(
-                                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-             
+                                BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+            
         // All jobs Description Label
         AllJobsLabel = new JLabel();
         AllJobsLabel.setText("All Cars");
@@ -83,11 +80,11 @@ class CreateAdminForm extends JFrame implements ActionListener {
         BorderFactory.createLineBorder(new Color(86, 53, 158)),
         BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-     // Creating new panel
+    // Creating new panel
         admin = new JPanel(new GridLayout(15, 1));
         admin.setBackground(new Color(86, 53, 158));
         JLabel welcome = new JLabel("Welcome to the Admin page. Please enter your credentials, leaving no fields blank.");
- 
+
     // Sets the Welcome string to White text
         welcome.setForeground(Color.WHITE);
         admin.add(welcome);
@@ -110,17 +107,17 @@ class CreateAdminForm extends JFrame implements ActionListener {
 
         // Adding buttons to the panel
         JPanel buttonPanel = new JPanel();
-         buttonPanel.add(close);
-         add(buttonPanel, BorderLayout.SOUTH);
+        buttonPanel.add(close);
+        add(buttonPanel, BorderLayout.SOUTH);
 
-         // creating the action listener for the buttons
-         close.addActionListener(this);
+        // creating the action listener for the buttons
+        close.addActionListener(this);
 
-         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-         setTitle("Admin Entry");
-         setSize(1000,3000);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Admin Entry");
+        setSize(1000,3000);
 
-        } // <--CreateAdminForm() constructor ends here
+    } // <--- CreateAdminForm() constructor ends here
 
     // Action performer class has to be corrected
 

@@ -43,7 +43,7 @@ public class VCC {
 		}
 	} // <--- importJobsFromFile() method ends here
 
-	public Boolean importCarsFromFile(String path) {// needs to be completed
+	public Boolean importCarsFromFile(String path) { // needs to be completed
 		try {
 			FileInputStream fileIn = new FileInputStream(path);
 			ObjectInputStream objectIn = new ObjectInputStream(fileIn);
@@ -239,5 +239,14 @@ public class VCC {
 		return true;
 
 	}
+
+	public void runVCCServerInstance() {
+		// Start the server in a new thread
+		Thread serverThread = new Thread(() -> {
+		Server server = new Server();
+		server.runServer();
+		});
+		serverThread.start();
+	} // <---  ends here
 
 }
