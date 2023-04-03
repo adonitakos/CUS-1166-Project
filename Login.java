@@ -121,8 +121,6 @@ class CreateLoginForm extends JFrame implements ActionListener {
 
             String adminUsername = "admin1";
             String adminPassword = "password123!";
-            String adminUsername = "admin1";
-            String adminPassword = "password123!";
 
         // --- Admin user login ---
             if (userValue.equals(adminUsername) && passValue.equals(adminPassword)) {
@@ -134,12 +132,6 @@ class CreateLoginForm extends JFrame implements ActionListener {
                 optionPage.setVisible(true);
                 this.dispose(); // Close the current login page
             } // <--- if(admin) statement ends here
-                // Open the "AdminPage.java" page
-                OptionPage optionPage = new OptionPage();
-                optionPage.setVisible(true);
-                this.dispose(); // Close the current login page
-            } // <--- if(admin) statement ends here
-
             // --- Regular user login ---
             // Read the existing credentials from the file
             List<String> credentials = new ArrayList<>();

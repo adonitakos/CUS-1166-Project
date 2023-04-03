@@ -239,14 +239,4 @@ public class VCC {
 		return true;
 
 	}
-
-	public void runVCCServerInstance() {
-		// Start the server in a new thread
-		Thread serverThread = new Thread(() -> {
-		Server server = new Server();
-		server.runServer();
-		});
-		serverThread.start();
-	} // <---  ends here
-
 }
