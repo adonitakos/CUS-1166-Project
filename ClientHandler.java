@@ -9,36 +9,33 @@ public class ClientHandler extends Thread {
     final Socket socket;
 
     // Constructor
-    public ClientHandler(Socket socket, DataInputStream inputStream, DataOutputStream outputStream) 
-    {
+    public ClientHandler(Socket socket, DataInputStream inputStream, DataOutputStream outputStream) {
         this.socket = socket;
         this.inputStream = inputStream;
         this.outputStream = outputStream;
     } // <--- ClientHandler() constructor ends here
 
     public void run() {
-        String received;
+        try (ObjectInputStream OIS = new ObjectInputStream(inputStream)) {
+            while (true) {
+                try {
+                    // Receive the answer from client
+                    if (OIS.readObject() instanceof Job) {// Job type object being recieved
+                        Job job = (Job) OIS.readObject();
+                        CreateAdminForm jobForm = new CreateAdminForm(job);
+                    } else if (OIS.readObject() instanceof Car) {// Car type object being recieved
+                        Car car = (Car) OIS.readObject();
+                        CreateAdminForm carForm = new CreateAdminForm(car);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } // <--- while(true) loop ends here
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 
-        while(true) {
-            try {
-                // Receive the answer from client
-                received = inputStream.readUTF();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        // Closing resources
-            try {
-                this.inputStream.close();
-                this.outputStream.close();
-            } catch(IOException e){
-                e.printStackTrace();
-            }
-
-        } // <--- while(true) loop ends here
-       
     } // <--- run() method ends here
 
-    
 } // <--- ClientHandler{} class ends here
