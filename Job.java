@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Job {
+public class Job implements Serializable{
     private int jobID;
     private int jobDuration;//in hours
     private String jobDeadline;

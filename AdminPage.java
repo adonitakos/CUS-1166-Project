@@ -7,18 +7,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.net.*;
 
 class CreateAdminForm extends JFrame implements ActionListener {
     // intitalizing variables
     private JPanel admin, buttonPanel;
     private JLabel AllCarsLabel, AllJobsLabel, CompleteJobsLabel, IncompleteJobsLabel, carByIdLabel, jobByIdLabel;
-    private JTextField AllCarsField, AllJobsField, AllJobsPlateField, CompleteJobsField, IncompleteJobsField, CarModelField, CarMakeField, carByIdField, CarLicensePlateField, CarResidencyTimeField, jobByIdField;
+    private JTextField AllCarsField, AllJobsField, AllJobsPlateField, CompleteJobsField, IncompleteJobsField,
+            CarModelField, CarMakeField, carByIdField, CarLicensePlateField, CarResidencyTimeField, jobByIdField;
     private JButton close, submit, back;
-    // Instatiates the VCC class in the admin class
+    static ServerSocket serverSocket;
+    static Socket socket;
+    static DataInputStream inputStream;
+    static DataOutputStream outputStream;
+    // instatiates the VCC class in the admin class
     VCC vcc = VCC.getInstance();
 
     // show car table
-    // admin credentials are going to be hard coded
+    // admin credentials are going to be hard carded
     // admin gui will display admin methods
     // must be printed in the terminal and in the pop up
     // get an instance of the vcc
@@ -65,7 +71,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        // All Jobs Description Label
+        // All jobs Description Label
         AllJobsLabel = new JLabel();
         AllJobsLabel.setText("All Jobs");
         AllJobsField = new JTextField(15);
@@ -133,9 +139,8 @@ class CreateAdminForm extends JFrame implements ActionListener {
             String carLicensePlate = CarLicensePlateField.getText();
             String carResidencyTime = CarResidencyTimeField.getText();
 
-            // Admin admin = new Admin(AllCars, AllJobs, CompleteJobs,IncompleteJobs,
-            // carById, jobById);
-            // vcc.addAdmin(admin);
+            Admin admin = new admin(AllCars, AllJobs, CompleteJobs, IncompleteJobs, carById, jobById);
+            vcc.addAdmin(admin);
 
             // Clearing text fields once user submits to prepare for next input
             AllCarsField.setText("");
@@ -153,16 +158,48 @@ class CreateAdminForm extends JFrame implements ActionListener {
 } // <--- CreateAdminForm{} class ends here
 
 class Admin {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
         System.out.println("\n========= Admin =========\n");
         try {
             CreateAdminForm form = new CreateAdminForm();
             // form.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             form.setSize(323, 393);
             form.setVisible(true);
+
+            System.out.println("----------$$$ This is server side $$$--------");
+            System.out.println("wating for client to connect...");
+            // creating the server
+            ServerSocket serverSocket = new ServerSocket(9806);
+
+            while (true) {
+                Socket s = null;
+                try {
+                    // socket object to receive incoming client requests
+                    s = serverSocket.accept();
+
+                    System.out.println("A new client is connected...");
+
+                    // obtaining input and out streams
+                    DataInputStream dis = new DataInputStream(s.getInputStream());
+                    DataOutputStream dos = new DataOutputStream(s.getOutputStream());
+
+                    System.out.println("Assigning new thread for this client");
+
+                    // create a new thread object
+                    Thread t = new ClientHandler(s, dis, dos);
+
+                    // Invoking the start() method
+                    t.start();
+
+                } catch (Exception e) {
+                    s.close();
+                    e.printStackTrace();
+                }
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     } // <--- main() method ends here
 
-} // <--- Admin{} class ends here
+}
+// <--- Admin{} class ends here

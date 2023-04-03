@@ -15,7 +15,7 @@ import javax.swing.JComboBox;
 
 class OptionPage extends JFrame implements ActionListener {
    // Initializing Java Swing Variables
-   private JPanel clientUser, optionPanel, buttonPanel;
+   private JPanel clientUser, buttonPanel;
    private JButton back;
    String[] options = { "", "Car", "Job"};
    private final JComboBox<String> optionBox = new JComboBox<String>(options);
