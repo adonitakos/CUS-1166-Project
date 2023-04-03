@@ -18,12 +18,13 @@ public class ClientHandler extends Thread {
             while (true) {
                 try {
                     // Receive the answer from client
-                    if (OIS.readObject() instanceof Job) {// Job type object being recieved
+                    Object object = OIS.readObject();
+                    if (object instanceof Job) {// Job type object being recieved
                         System.out.println("Job request recieved...");
-                        Job job = (Job) OIS.readObject();
+                        Job job = (Job) object;
+                        System.out.println("Object converted to job...");
                         CreateAdminForm jobForm = new CreateAdminForm(job, socket, inputStream, outputStream);
-                        jobForm.setSize(400, 300);
-                        jobForm.setVisible(true);
+                        System.out.println("Popup created...");
                     } else if (OIS.readObject() instanceof Car) {// Car type object being recieved
                         System.out.println("Car request recieved...");
                         Car car = (Car) OIS.readObject();

@@ -25,15 +25,6 @@ class CreateAdminForm extends JFrame implements ActionListener {
         jobRequest = new JPanel(new GridLayout(5, 2));
         jobRequest.setBackground(new Color(86, 53, 158));
 
-        // Adding variables to the panel
-        jobRequest.add(confirmationLabel);
-        jobRequest.add(jobIDLabel);
-        jobRequest.add(jobDurationLabel);
-        jobRequest.add(jobDeadlineLabel);
-        jobRequest.add(jobDescriptionLabel);
-
-        add(jobRequest, BorderLayout.CENTER);
-
         // ConfirmationLabel
 
         confirmationLabel = new JLabel(
@@ -82,6 +73,14 @@ class CreateAdminForm extends JFrame implements ActionListener {
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
+        // Adding variables to the panel
+        jobRequest.add(confirmationLabel);
+        jobRequest.add(jobIDLabel);
+        jobRequest.add(jobDurationLabel);
+        jobRequest.add(jobDeadlineLabel);
+        jobRequest.add(jobDescriptionLabel);
+        add(jobRequest, BorderLayout.CENTER);
+
         accept = new JButton("Accept");
         accept.setBounds(110, 310, 100, 34);
         accept.setBackground(new Color(217, 217, 217));
@@ -96,6 +95,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
         reject.setFont(new Font("Inter", Font.BOLD, 16));
 
         // Adding buttons to the panel
+        JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(new Color(86, 53, 158));
         buttonPanel.add(accept);
         buttonPanel.add(reject);
@@ -109,6 +109,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Job Request");
         setSize(1000, 3000);
+        setVisible(true);
 
     } // <--- CreateAdminForm(Jib job) constructor
 
@@ -339,46 +340,62 @@ class CreateAdminForm extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Admin");
         setSize(1000, 3000);
+        setVisible(true);
 
     } // <--- CreateAdminForm() constructor ends here
 
-} // <--- CreateAdminForm{} class ends here
+    public void log(String message) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    start();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public static void start() throws IOException {
+        ServerSocket ss = new ServerSocket(9806);
+        System.out.println("Waiting for connections...");
+        while (true) {
+            Socket s = null;
+            try {
+                // socket object to receive incoming client requests
+                s = ss.accept();
+
+                System.out.println("A new client is connected...");
+
+                // obtaining input and out streams
+                DataInputStream DIS = new DataInputStream(s.getInputStream());
+                DataOutputStream DOS = new DataOutputStream(s.getOutputStream());
+
+                System.out.println("Assigning new thread for this client");
+
+                // create a new thread object
+                Thread t = new ClientHandler(s, DIS, DOS);
+
+                t.start();
+            } catch (Exception ex) {
+                s.close();
+                ex.printStackTrace();
+            }
+        }
+    } // <--- CreateAdminForm{} class ends here
+}
 
 class Admin {
     public static void main(String[] args) throws IOException {
-        try (ServerSocket ss = new ServerSocket(9806)) {
-            System.out.println("Admin connected...");
-            CreateAdminForm form = new CreateAdminForm();
-            form.setSize(800, 800);
-            form.setVisible(true);
-            System.out.println("Waiting for connections...");
-            while (true) {
-                Socket s = null;
-                try {
-                    // socket object to receive incoming client requests
-                    s = ss.accept();
+        System.out.println("Admin connected...");
+        CreateAdminForm form = new CreateAdminForm();
+        form.setSize(800, 800);
+        form.setVisible(true);
+        form.log("Server started...");
+        // <--- while() loop ends here
 
-                    System.out.println("A new client is connected...");
+    }
 
-                    // obtaining input and out streams
-                    DataInputStream DIS = new DataInputStream(s.getInputStream());
-                    DataOutputStream DOS = new DataOutputStream(s.getOutputStream());
-
-                    System.out.println("Assigning new thread for this client");
-
-                    // create a new thread object
-                    Thread t = new ClientHandler(s, DIS, DOS);
-
-                    t.start();
-                } catch (Exception ex) {
-                    s.close();
-                    ex.printStackTrace();
-                }
-            } // <--- while() loop ends here
-        } // <--- try{} block ends here
-        catch(Exception e) {
-            e.printStackTrace();
-        }
-
-    } // <--- main() method ends here
+    // <--- main() method ends here
 } // <--- Admin{} class ends here

@@ -127,14 +127,10 @@ class CreateLoginForm extends JFrame implements ActionListener {
                 // Show a success message if credentials are valid
                 JOptionPane.showMessageDialog(this, "Admin Login successful!", "Success",
                         JOptionPane.INFORMATION_MESSAGE);
-                userField.setText("");
-                passwordField.setText("");
-                CreateLoginForm form = new CreateLoginForm();
-                form.setSize(323, 393);
-                form.setVisible(true);
+                //dispose();
                 // Open the "AdminPage.java" page
                 try {
-                    Admin.main(null);
+                    Admin.main(new String []{});
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -176,11 +172,12 @@ class CreateLoginForm extends JFrame implements ActionListener {
                 userField.setText("");
                 passwordField.setText("");
                 // this.dispose(); // Close the current login page
-            } else {
+            } //else {
                 // Display an error message if credentials are invalid
-                JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            }
+            //     JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error",
+            //             JOptionPane.ERROR_MESSAGE);
+
+            // }
         } // <--- if(obj==signInButton) statement ends here
 
         else if (obj == signUpButton) {
