@@ -1,6 +1,4 @@
 import java.io.*;
-import java.text.*;
-import java.util.*;
 import java.net.*;
 
 public class ClientHandler extends Thread {
@@ -23,9 +21,13 @@ public class ClientHandler extends Thread {
                     if (OIS.readObject() instanceof Job) {// Job type object being recieved
                         Job job = (Job) OIS.readObject();
                         CreateAdminForm jobForm = new CreateAdminForm(job);
+                        jobForm.setSize(400, 300);
+                        jobForm.setVisible(true);
                     } else if (OIS.readObject() instanceof Car) {// Car type object being recieved
                         Car car = (Car) OIS.readObject();
                         CreateAdminForm carForm = new CreateAdminForm(car);
+                        carForm.setSize(400, 300);
+                        carForm.setVisible(true);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
