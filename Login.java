@@ -127,18 +127,17 @@ class CreateLoginForm extends JFrame implements ActionListener {
                 // Show a success message if credentials are valid
                 JOptionPane.showMessageDialog(this, "Admin Login successful!", "Success",
                         JOptionPane.INFORMATION_MESSAGE);
-
+                userField.setText("");
+                passwordField.setText("");
+                CreateLoginForm form = new CreateLoginForm();
+                form.setSize(323, 393);
+                form.setVisible(true);
                 // Open the "AdminPage.java" page
                 try {
                     Admin.main(null);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                userField.setText("");
-                passwordField.setText("");
-                CreateLoginForm form = new CreateLoginForm();
-                form.setSize(323, 393);
-                form.setVisible(true);
                 // this.dispose(); // Close the current login page
             } // <--- if(admin) statement ends here
               // --- Regular user login ---

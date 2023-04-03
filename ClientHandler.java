@@ -19,11 +19,13 @@ public class ClientHandler extends Thread {
                 try {
                     // Receive the answer from client
                     if (OIS.readObject() instanceof Job) {// Job type object being recieved
+                        System.out.println("Job request recieved...");
                         Job job = (Job) OIS.readObject();
                         CreateAdminForm jobForm = new CreateAdminForm(job, socket, inputStream, outputStream);
                         jobForm.setSize(400, 300);
                         jobForm.setVisible(true);
                     } else if (OIS.readObject() instanceof Car) {// Car type object being recieved
+                        System.out.println("Job request recieved...");
                         Car car = (Car) OIS.readObject();
                         CreateAdminForm carForm = new CreateAdminForm(car, socket, inputStream, outputStream);
                         carForm.setSize(400, 300);
