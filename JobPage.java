@@ -202,23 +202,26 @@ class Jobs extends JFrame implements ActionListener {
 
         } // <--- actionPerformed() method ends here
     } // <--- Jobs{} class ends here
-
-    class JobPage {
-        public static void main(String[] args) {
-            EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    try {
-                        System.out.println("----------*** Attempting Job Owner Connection to Server ***--------");
-                        Socket socket = new Socket("localhost", 9806);
-                        Jobs form = new Jobs();
-                        form.setSocket(socket);
-                        form.setVisible(true);
-                        form.setSize(400, 300);
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, e.getMessage());
-                    }
-                }
-            });
-        } // <--- main() method ends here
-    }
 } // <--- JobPage{} class ends here
+
+class JobPage {
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    System.out.println("----------*** Attempting Job Owner Connection to Server ***--------");
+                    Jobs form = new Jobs();
+                    form.setVisible(true);
+                    form.setSize(400, 300);
+                    Socket socket = new Socket("localhost", 9806);
+                    form.setSocket(socket);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
+            }
+        });
+    } // <--- main() method ends here
+
+    public JobPage() {
+    }
+}

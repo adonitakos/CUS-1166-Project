@@ -221,12 +221,12 @@ class Cars extends JFrame implements ActionListener {
 class CarPage {
         public static void main(String[] args) {
                 try {
-                        System.out.println("----------*** Attempting Car Owner Connection to Server ***--------");
-                        Socket socket = new Socket("localhost", 9806);
                         Cars form = new Cars();
-                        form.setSocket(socket);
                         form.setSize(400, 300);
                         form.setVisible(true);
+                        System.out.println("----------*** Attempting Car Owner Connection to Server ***--------");
+                        Socket socket = new Socket("localhost", 9806);
+                        form.setSocket(socket);
                 } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, e.getMessage());
                 }

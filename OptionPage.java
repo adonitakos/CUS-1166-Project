@@ -106,16 +106,12 @@ class OptionPage extends JFrame implements ActionListener {
          // IF the "car" button was pressed, it will take them to the carPage
          if (optionBox.getSelectedItem().equals("Car")) {
             //dispose();
-            Cars carPage = new Cars();
-            carPage.setVisible(true);
-            carPage.setSize(700, 500);
+            CarPage.main(null);
          }
          // IF the "job" button was pressed, it will take them to the jobPage
          else if (optionBox.getSelectedItem().equals("Job")) {
            // dispose();
-            Jobs jobWindow = new Jobs();
-            jobWindow.setVisible(true);
-            jobWindow.setSize(700, 500);
+            JobPage.main(null);
          }
          // else if (optionBox.getSelectedItem().equals("Admin")) {
          //    System.out.println("Congrats. You have chosen admin.");
