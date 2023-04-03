@@ -2,7 +2,6 @@
 /*  Project: Vehicle Vortex
 *   Class: CarPage.java 
 *   Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
-*   Date: February 19th, 2023 
 *   This program creates the car page, where users who have selected "Owner"
 *   will be able to enter details and submit their car for use.
 */

@@ -2,7 +2,6 @@
 /* Project: Vehicle Vortex
 * Class: JobPage.java
 * Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
-* Date: February 19th, 2023 
 * This program creates a job page, where users who have selected "Job" will
 * be able to enter details and submit the job they would like completed.
 */
@@ -97,7 +96,7 @@ class Jobs extends JFrame implements ActionListener {
         jobPage = new JPanel(new GridLayout(5, 2));
         jobPage.setBackground(new Color(86, 53, 158));
         JLabel welcome = new JLabel(
-                "Welcome to the job page. Please enter the following information, leaving no fields blank.");
+                "Welcome to the Job page. Please enter the following information, leaving no fields blank.");
 
         welcome.setForeground(Color.WHITE);
         // Adding variables to the panel

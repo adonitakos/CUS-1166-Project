@@ -1,12 +1,11 @@
 /*  Project: Vehicle Vortex
 *   Class: Login.java 
-*   Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
-*   Date: February 19th, 2023 
+*   Author: Antonios Takos, Summer Snyder, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
 *   This program creates a login page, where users are able to enter their credentials,
-*   where they will gain access to Vehicle Vortex.
+*   where they will gain access to certain parts of Vehicle Vortex, depending on their user type.
 */
 
-import javax.swing.*;
+import javax.swing.*; 
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.Exception;
@@ -18,34 +17,32 @@ import java.io.*;
 
 class CreateLoginForm extends JFrame implements ActionListener {
 // Initializing Java Swing Variables
-    JButton submit, signUpButton;
+    JButton signInButton, signUpButton;
     JPanel loginPanel;
     JLabel loginLabel, userLabel, passwordLabel, signUpLabel;
     final JTextField userField, passwordField;
 
-    // ---------------------------------------------------------------------------------
-    // This method creates the GUI for the Login form
+    // This constructor method creates the GUI for the Login form
     CreateLoginForm() {
 
-        // Assigning JSwing variables values & styling
+    // Assigning Java Swing variables' values & styling
 
         // Login Label
         loginLabel = new JLabel();
-        loginLabel.setText("Login Form");
+        loginLabel.setText("Login");
         loginLabel.setBounds(115, 30, 100, 40);
         loginLabel.setForeground(Color.WHITE);
         loginLabel.setFont(new Font("Inter", Font.BOLD, 30));
         Dimension size = loginLabel.getPreferredSize();
         loginLabel.setBounds(100, 30, size.width, size.height);
 
-        // User Label
+        // User label
         userLabel = new JLabel();
         userLabel.setText("Username");
         userLabel.setBounds(44, 100, 100, 16);
         userLabel.setForeground(Color.WHITE);
         userLabel.setFont(new Font("Inter", Font.BOLD, 16));
-
-        // User Field
+        // User field
         userField = new JTextField(15);
         userField.setBounds(37, 128, 249, 38);
         userField.setBackground(new Color(217, 217, 217));
@@ -53,14 +50,13 @@ class CreateLoginForm extends JFrame implements ActionListener {
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        // Password Label
+        // Password label
         passwordLabel = new JLabel();
         passwordLabel.setText("Password");
         passwordLabel.setBounds(44, 180, 100, 16);
         passwordLabel.setForeground(Color.WHITE);
         passwordLabel.setFont(new Font("Inter", Font.BOLD, 16));
-
-        // Password Field
+        // Password field
         passwordField = new JPasswordField(15);
         passwordField.setBounds(37, 208, 249, 38);
         passwordField.setBackground(new Color(217, 217, 217));
@@ -68,28 +64,28 @@ class CreateLoginForm extends JFrame implements ActionListener {
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        // Sign Up Label
+        // Sign Up label
         signUpLabel = new JLabel();
         signUpLabel.setText("Don't have an account?");
         signUpLabel.setBounds(18, 340, 500, 16);
         signUpLabel.setForeground(Color.WHITE);
         signUpLabel.setFont(new Font("Inter", Font.BOLD, 16));
 
-        // Submit
-        submit = new JButton("Submit");
-        submit.setBounds(110, 280, 100, 34);
-        submit.setBackground(new Color(217, 217, 217));
-        submit.setForeground(new Color(86, 53, 158));
-        submit.setFont(new Font("Inter", Font.BOLD, 16));
-        
-        // Sign Up Button
+        // Sign Up button
         signUpButton = new JButton("Sign Up");
         signUpButton.setBounds(220, 330, 100, 34);
         signUpButton.setBackground(new Color(217, 217, 217));
         signUpButton.setForeground(new Color(86, 53, 158));
         signUpButton.setFont(new Font("Inter", Font.BOLD, 16));
 
-    // Creating a new Panel
+        // Submit button
+        signInButton = new JButton("Sign In");
+        signInButton.setBounds(110, 280, 100, 34);
+        signInButton.setBackground(new Color(217, 217, 217));
+        signInButton.setForeground(new Color(86, 53, 158));
+        signInButton.setFont(new Font("Inter", Font.BOLD, 16));
+        
+        // Creating a new Panel
         loginPanel = new JPanel();
         loginPanel.setBackground(new Color(86, 53, 158));
         loginPanel.setLayout(null);
@@ -100,13 +96,13 @@ class CreateLoginForm extends JFrame implements ActionListener {
         loginPanel.add(userField);
         loginPanel.add(passwordLabel);
         loginPanel.add(passwordField);
-        loginPanel.add(submit);
+        loginPanel.add(signInButton);
         loginPanel.add(signUpLabel);
         loginPanel.add(signUpButton);
         add(loginPanel, BorderLayout.CENTER);
 
     // Creating action listener for the buttons
-        submit.addActionListener(this);
+        signInButton.addActionListener(this);
         signUpButton.addActionListener(this);
         setTitle("Login Form");
         setSize(323, 393); // Set the size of the frame
@@ -115,11 +111,11 @@ class CreateLoginForm extends JFrame implements ActionListener {
 
 
 // ---------------------------------------------------------------------------------
-    // Action listener method for the submit button
+    // Action listener method for the signInButton button
     public void actionPerformed(ActionEvent ae) {
         Object obj = ae.getSource();
 
-        if (obj == submit) {
+        if (obj == signInButton) {
         // Assigning the information that will be inputted by the user as string variables
             String userValue = userField.getText();
             String passValue = passwordField.getText();
@@ -177,7 +173,7 @@ class CreateLoginForm extends JFrame implements ActionListener {
                 // Display an error message if credentials are invalid
                 JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } // <--- if(obj==submit) statement ends here
+        } // <--- if(obj==signInButton) statement ends here
 
         else if (obj == signUpButton) {
             dispose();
