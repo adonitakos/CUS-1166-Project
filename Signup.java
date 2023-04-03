@@ -29,15 +29,16 @@ CreateSignupForm() {
 
     // sign up Label
     signupLabel = new JLabel();
-    signupLabel.setText("Sign up");
+    signupLabel.setText("Sign Up");
     signupLabel.setForeground(Color.WHITE);
-    signupLabel.setFont(new Font("Inter", Font.BOLD, 30));
+    signupLabel.setFont(new Font("Inter", Font.BOLD, 23));
     Dimension size = signupLabel.getPreferredSize();
-    signupLabel.setBounds(115, 30, size.width, size.height);
+    signupLabel.setBounds(130, 30, size.width, size.height);
 
     // Info Label
     infoLabel = new JLabel();
     infoLabel.setText("<html><center>Thanks for choosing Vehicle Vortex! To sign up, please enter your desired username and password. Each field must be at least 5 characters long, and your password must contain at least one special character.</center></html>");
+    infoLabel.setFont(new Font("Inter", Font.PLAIN, 15));
     infoLabel.setBounds(20, 80, 320, 60);
     infoLabel.setForeground(Color.WHITE);
     infoLabel.setFont(new Font("Inter", Font.PLAIN, 12));
@@ -122,38 +123,38 @@ CreateSignupForm() {
 
         if (obj == submit) {
         // Assigning the information that will be inputted by the user as string variables
-        String userValue = userField.getText();
-        String passValue = passwordField.getText();
+            String userValue = userField.getText();
+            String passValue = passwordField.getText();
 
-        // validating username and password based on rules - username must be greater than 5, and password must be at least 5 characters and contain one special character.
-        if (userValue.length() <= 5) {
-            System.out.println("ERROR: Username must be greater than 5 characters long.");
-            return;
-        }
-        if (!passValue.matches("^(?=.*[!@#$%^&*(),.?\":{}|<>]).{5,}$")) {
-            System.out.println("ERROR: Password must be at least 5 characters long and contain at least one special character.");
-            return;
-        }
+            // validating username and password based on rules - username must be greater than 5, and password must be at least 5 characters and contain one special character.
+            if (userValue.length() <= 5) {
+                System.out.println("ERROR: Username must be greater than 5 characters long.");
+                return;
+            }
+            if (!passValue.matches("^(?=.*[!@#$%^&*(),.?\":{}|<>]).{5,}$")) {
+                System.out.println("ERROR: Password must be at least 5 characters long and contain at least one special character.");
+                return;
+            }
 
-        // Write the user-provided credentials to a file
-        try {
-            FileWriter writer = new FileWriter("Credentials.txt", true);
-            LocalDateTime timestamp = LocalDateTime.now();
-            
-            writer.write("Username: " + userValue + " | Password: " + passValue + " | Timestamp: " + timestamp.toString() + System.lineSeparator()); // add newline character
-            writer.close();
-            System.out.println("Credentials successfully saved to file!");
+            // Write the user-provided credentials to a file
+            try {
+                FileWriter writer = new FileWriter("Credentials.txt", true);
+                LocalDateTime timestamp = LocalDateTime.now();
+                
+                writer.write("Username: " + userValue + " | Password: " + passValue + " | Timestamp: " + timestamp.toString() + System.lineSeparator()); // add newline character
+                writer.close();
+                System.out.println("Credentials successfully saved to file!");
 
-            // Show the option page if credentials are in line with rules
-            OptionPage page = new OptionPage();
-            page.setVisible(true);
+                // Show the option page if credentials are in line with rules
+                OptionPage page = new OptionPage();
+                page.setVisible(true);
 
-            // dispose of sign up page once credentials are valid
-            dispose();
-        } catch (IOException e) {
-            System.out.println("Error writing credentials to file.");
-        }
-        }
+                // dispose of sign up page once credentials are valid
+                dispose();
+            } catch (IOException e) {
+                System.out.println("Error writing credentials to file.");
+            }
+        } // <--- if(obj==submit) statment ends here
 
         else if (obj == back) {
             dispose();
@@ -170,7 +171,7 @@ class Signup {
         try {
             CreateSignupForm form = new CreateSignupForm();
             // form.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            form.setSize(323, 393);
+            form.setSize(355, 490);
             form.setVisible(true);
         }
         catch(Exception e) {

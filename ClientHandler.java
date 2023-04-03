@@ -25,7 +25,7 @@ public class ClientHandler extends Thread {
                         jobForm.setSize(400, 300);
                         jobForm.setVisible(true);
                     } else if (OIS.readObject() instanceof Car) {// Car type object being recieved
-                        System.out.println("Job request recieved...");
+                        System.out.println("Car request recieved...");
                         Car car = (Car) OIS.readObject();
                         CreateAdminForm carForm = new CreateAdminForm(car, socket, inputStream, outputStream);
                         carForm.setSize(400, 300);
@@ -36,7 +36,6 @@ public class ClientHandler extends Thread {
                 }
             } // <--- while(true) loop ends here
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 

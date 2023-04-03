@@ -34,7 +34,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
 
         add(jobRequest, BorderLayout.CENTER);
 
-        // confirmationLabel
+        // ConfirmationLabel
 
         confirmationLabel = new JLabel(
                 "Please review the submitted job and decide whether to accept or reject the addition of this job to the file.",
@@ -96,9 +96,11 @@ class CreateAdminForm extends JFrame implements ActionListener {
         reject.setFont(new Font("Inter", Font.BOLD, 16));
 
         // Adding buttons to the panel
+        buttonPanel.setBackground(new Color(86, 53, 158));
         buttonPanel.add(accept);
         buttonPanel.add(reject);
         add(buttonPanel, BorderLayout.CENTER);
+        buttonPanel.setBackground(new Color(86, 53, 158));
 
         // creating action listener for the buttons
         accept.addActionListener(this);
@@ -108,7 +110,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
         setTitle("Job Request");
         setSize(1000, 3000);
 
-    }
+    } // <--- CreateAdminForm(Jib job) constructor
 
     CreateAdminForm(Car car, Socket socket, DataInputStream inputStream, DataOutputStream outputStream) {
 
@@ -212,7 +214,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
         setTitle("Car Request");
         setSize(1000, 3000);
 
-    }
+    } // <--- CreateAdminForm(Car car) constructor
 
     public void actionPerformed(ActionEvent e) {
 
@@ -231,7 +233,8 @@ class CreateAdminForm extends JFrame implements ActionListener {
                 e1.printStackTrace();
             }
         } else if (obj == back) {
-
+            dispose();
+            Login.main(null);
         } else if (obj == carByID) {
 
         } else if (obj == jobByID) {
@@ -249,7 +252,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
         } else {
             System.out.println("Error.");
         }
-    }
+    } // <--- actionPerformed() method ends here
 
     CreateAdminForm() {
 
@@ -316,11 +319,11 @@ class CreateAdminForm extends JFrame implements ActionListener {
         // Sets the Welcome string to White text
         welcome.setForeground(Color.WHITE);
 
-
         adminPage.add(welcome);
         add(adminPage, BorderLayout.NORTH);
         // Adding buttons to the panel
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(new Color(86, 53, 158));
         buttonPanel.add(jobByID);
         buttonPanel.add(carByID);
         buttonPanel.add(completeJobs);
@@ -338,8 +341,6 @@ class CreateAdminForm extends JFrame implements ActionListener {
         setSize(1000, 3000);
 
     } // <--- CreateAdminForm() constructor ends here
-
-    // } // <--- actionPerformed() method ends here
 
 } // <--- CreateAdminForm{} class ends here
 
@@ -373,8 +374,11 @@ class Admin {
                     s.close();
                     ex.printStackTrace();
                 }
-            } // <--- main() method ends here
+            } // <--- while() loop ends here
+        } // <--- try{} block ends here
+        catch(Exception e) {
+            e.printStackTrace();
         }
 
-    }
+    } // <--- main() method ends here
 } // <--- Admin{} class ends here

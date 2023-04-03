@@ -33,7 +33,7 @@ class CreateLoginForm extends JFrame implements ActionListener {
         loginLabel.setForeground(Color.WHITE);
         loginLabel.setFont(new Font("Inter", Font.BOLD, 30));
         Dimension size = loginLabel.getPreferredSize();
-        loginLabel.setBounds(100, 30, size.width, size.height);
+        loginLabel.setBounds(120, 32, size.width, size.height);
 
         // User label
         userLabel = new JLabel();
@@ -199,7 +199,7 @@ class Login {
         System.out.println("\n========= Login =========\n");
         try {
             CreateLoginForm form = new CreateLoginForm();
-            form.setSize(323, 393);
+            form.setSize(350, 420);
             form.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());

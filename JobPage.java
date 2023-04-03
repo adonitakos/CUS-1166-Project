@@ -224,4 +224,4 @@ class JobPage {
 
     public JobPage() {
     }
-}
+} // <--- JobPage{} class ends here

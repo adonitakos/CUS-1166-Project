@@ -1,8 +1,6 @@
-
 /*  Project: Vehicle Vortex
 *   Class: User.java 
 *   Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
-*   Date: February 19th, 2023 
 *   This file contains the classes that will be used for the User.
 */ 
 
@@ -41,6 +39,7 @@ public class User {
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
+
     private static Set<Integer> generatedIDs = new HashSet<>();
 
     public static int generateUniqueUserID() {
@@ -53,7 +52,6 @@ public class User {
 
         generatedIDs.add(userID);
         return userID;
-    }
+    } // <--- generateUniqueUserID() method ends here
 
-}
-
+} // User{} class ends here
