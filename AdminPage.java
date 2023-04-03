@@ -2,8 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.Exception;
-import java.time.LocalDateTime;
-import java.util.*;
 import java.net.*;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -11,18 +9,36 @@ import java.io.*;
 class CreateAdminForm extends JFrame implements ActionListener {
 
     // Initializing variables
-    private JPanel adminPage, jobRequest, carRequest;
-    private JLabel jobIDLabel, jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel, confirmationLabel, ownerIDLabel, carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
+    private JPanel adminPage, jobRequest, carRequest, buttonPanel;
+    private JLabel jobIDLabel, jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel, confirmationLabel, ownerIDLabel,
+            carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
     private JButton back, carByID, jobByID, allCars, allJobs, jobsQueue, completeJobs, checkpointer, accept, reject;
-
+    private DataOutputStream outputStream;
     // Instantiate the VCC class in the Admin class
     VCC vcc = VCC.getInstance();
 
-    CreateAdminForm(Job job) {
+    CreateAdminForm(Job job, Socket socket, DataInputStream inputStream, DataOutputStream outputStream) {
+
+        this.outputStream = outputStream;
+
+        // Creating confirmation panel
+        jobRequest = new JPanel(new GridLayout(5, 2));
+        jobRequest.setBackground(new Color(86, 53, 158));
+
+        // Adding variables to the panel
+        jobRequest.add(confirmationLabel);
+        jobRequest.add(jobIDLabel);
+        jobRequest.add(jobDurationLabel);
+        jobRequest.add(jobDeadlineLabel);
+        jobRequest.add(jobDescriptionLabel);
+
+        add(jobRequest, BorderLayout.CENTER);
 
         // confirmationLabel
-                
-        confirmationLabel = new JLabel("Please review the submitted job and decide whether to accept or reject the addition of this job to the file.", SwingConstants.CENTER);
+
+        confirmationLabel = new JLabel(
+                "Please review the submitted job and decide whether to accept or reject the addition of this job to the file.",
+                SwingConstants.CENTER);
         confirmationLabel.setForeground(Color.WHITE);
         confirmationLabel.setFont(new Font("Inter", Font.BOLD, 16));
         confirmationLabel.setBackground(new Color(217, 217, 217));
@@ -31,7 +47,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // JobID label
-        jobIDLabel = new JLabel("Job ID: " + job.getJobID(), SwingConstants.CENTER);
+        jobIDLabel = new JLabel("ID: " + job.getJobID(), SwingConstants.CENTER);
         jobIDLabel.setForeground(Color.WHITE);
         jobIDLabel.setFont(new Font("Inter", Font.BOLD, 16));
         jobIDLabel.setBackground(new Color(217, 217, 217));
@@ -40,7 +56,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Duration Label
-        jobDurationLabel = new JLabel("Job Duration: " + job.getJobDuration(), SwingConstants.CENTER);
+        jobDurationLabel = new JLabel("Duration: " + job.getJobDuration(), SwingConstants.CENTER);
         jobDurationLabel.setForeground(Color.WHITE);
         jobDurationLabel.setFont(new Font("Inter", Font.BOLD, 16));
         jobDurationLabel.setBackground(new Color(217, 217, 217));
@@ -49,7 +65,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Deadline Label
-        jobDeadlineLabel = new JLabel("Job Deadline: " + job.getJobDeadline(), SwingConstants.CENTER);
+        jobDeadlineLabel = new JLabel("Deadline: " + job.getJobDeadline(), SwingConstants.CENTER);
         jobDeadlineLabel.setForeground(Color.WHITE);
         jobDeadlineLabel.setFont(new Font("Inter", Font.BOLD, 16));
         jobDeadlineLabel.setBackground(new Color(217, 217, 217));
@@ -58,14 +74,14 @@ class CreateAdminForm extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Description Label
-        jobDescriptionLabel = new JLabel("Job Description: " + job.getJobDescription(), SwingConstants.CENTER);
+        jobDescriptionLabel = new JLabel("Description: " + job.getJobDescription(), SwingConstants.CENTER);
         jobDescriptionLabel.setForeground(Color.WHITE);
         jobDescriptionLabel.setFont(new Font("Inter", Font.BOLD, 16));
         jobDescriptionLabel.setBackground(new Color(217, 217, 217));
         jobDescriptionLabel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-        
+
         accept = new JButton("Accept");
         accept.setBounds(110, 310, 100, 34);
         accept.setBackground(new Color(217, 217, 217));
@@ -80,7 +96,6 @@ class CreateAdminForm extends JFrame implements ActionListener {
         reject.setFont(new Font("Inter", Font.BOLD, 16));
 
         // Adding buttons to the panel
-        JPanel buttonPanel = new JPanel();
         buttonPanel.add(accept);
         buttonPanel.add(reject);
         add(buttonPanel, BorderLayout.CENTER);
@@ -95,11 +110,29 @@ class CreateAdminForm extends JFrame implements ActionListener {
 
     }
 
-    CreateAdminForm(Car car) {//, carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel
+    CreateAdminForm(Car car, Socket socket, DataInputStream inputStream, DataOutputStream outputStream) {
+
+        this.outputStream = outputStream;
+
+        // Creating confirmation panel
+        carRequest = new JPanel(new GridLayout(5, 2));
+        carRequest.setBackground(new Color(86, 53, 158));
+
+        // Adding variables to the panel
+        carRequest.add(confirmationLabel);
+        carRequest.add(ownerIDLabel);
+        carRequest.add(carMakeLabel);
+        carRequest.add(carModelLabel);
+        carRequest.add(carLicensePlateLabel);
+        carRequest.add(carResidencyTimeLabel);
+
+        add(carRequest, BorderLayout.CENTER);
 
         // confirmationLabel
-                
-        confirmationLabel = new JLabel("Please review the submitted car and decide whether to accept or reject the addition of this job to the file.", SwingConstants.CENTER);
+
+        confirmationLabel = new JLabel(
+                "Please review the submitted car and decide whether to accept or reject the addition of this job to the file.",
+                SwingConstants.CENTER);
         confirmationLabel.setForeground(Color.WHITE);
         confirmationLabel.setFont(new Font("Inter", Font.BOLD, 16));
         confirmationLabel.setBackground(new Color(217, 217, 217));
@@ -108,7 +141,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Owner ID label
-        ownerIDLabel = new JLabel("Owner ID: " + car.getJobID(), SwingConstants.CENTER);
+        ownerIDLabel = new JLabel("Owner ID: " + car.getOwnerID(), SwingConstants.CENTER);
         ownerIDLabel.setForeground(Color.WHITE);
         ownerIDLabel.setFont(new Font("Inter", Font.BOLD, 16));
         ownerIDLabel.setBackground(new Color(217, 217, 217));
@@ -116,34 +149,43 @@ class CreateAdminForm extends JFrame implements ActionListener {
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        // Job Duration Label
-        jobDurationLabel = new JLabel("Job Duration: " + job.getJobDuration(), SwingConstants.CENTER);
-        jobDurationLabel.setForeground(Color.WHITE);
-        jobDurationLabel.setFont(new Font("Inter", Font.BOLD, 16));
-        jobDurationLabel.setBackground(new Color(217, 217, 217));
-        jobDurationLabel.setBorder(BorderFactory.createCompoundBorder(
+        // carMakeLabel
+        carMakeLabel = new JLabel("Make: " + car.getCarMake(), SwingConstants.CENTER);
+        carMakeLabel.setForeground(Color.WHITE);
+        carMakeLabel.setFont(new Font("Inter", Font.BOLD, 16));
+        carMakeLabel.setBackground(new Color(217, 217, 217));
+        carMakeLabel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        // Job Deadline Label
-        jobDeadlineLabel = new JLabel("Job Deadline: " + job.getJobDeadline(), SwingConstants.CENTER);
-        jobDeadlineLabel.setForeground(Color.WHITE);
-        jobDeadlineLabel.setFont(new Font("Inter", Font.BOLD, 16));
-        jobDeadlineLabel.setBackground(new Color(217, 217, 217));
-        jobDeadlineLabel.setBorder(BorderFactory.createCompoundBorder(
+        // carModelLabel
+        carModelLabel = new JLabel("Model: " + car.getCarModel(), SwingConstants.CENTER);
+        carModelLabel.setForeground(Color.WHITE);
+        carModelLabel.setFont(new Font("Inter", Font.BOLD, 16));
+        carModelLabel.setBackground(new Color(217, 217, 217));
+        carModelLabel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        // Job Description Label
-        jobDescriptionLabel = new JLabel("Job Description: " + job.getJobDescription(), SwingConstants.CENTER);
-        jobDescriptionLabel.setForeground(Color.WHITE);
-        jobDescriptionLabel.setFont(new Font("Inter", Font.BOLD, 16));
-        jobDescriptionLabel.setBackground(new Color(217, 217, 217));
-        jobDescriptionLabel.setBorder(BorderFactory.createCompoundBorder(
+        // carLicensePlateLabel
+        carLicensePlateLabel = new JLabel("License Plate: " + car.getCarLicensePlate(), SwingConstants.CENTER);
+        carLicensePlateLabel.setForeground(Color.WHITE);
+        carLicensePlateLabel.setFont(new Font("Inter", Font.BOLD, 16));
+        carLicensePlateLabel.setBackground(new Color(217, 217, 217));
+        carLicensePlateLabel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
+        // carResidencyTimeLabel
+        carResidencyTimeLabel = new JLabel("Residency Time: " + car.getCarResidencyTime(), SwingConstants.CENTER);
+        carResidencyTimeLabel.setForeground(Color.WHITE);
+        carResidencyTimeLabel.setFont(new Font("Inter", Font.BOLD, 16));
+        carResidencyTimeLabel.setBackground(new Color(217, 217, 217));
+        carResidencyTimeLabel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
         // accept
-
         accept = new JButton("Accept");
         accept.setBounds(110, 310, 100, 34);
         accept.setBackground(new Color(217, 217, 217));
@@ -158,7 +200,6 @@ class CreateAdminForm extends JFrame implements ActionListener {
         reject.setFont(new Font("Inter", Font.BOLD, 16));
 
         // Adding buttons to the panel
-        JPanel buttonPanel = new JPanel();
         buttonPanel.add(accept);
         buttonPanel.add(reject);
         add(buttonPanel, BorderLayout.CENTER);
@@ -174,12 +215,21 @@ class CreateAdminForm extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+
         Object obj = e.getSource();
 
         if (obj == accept) {
-
+            try {
+                outputStream.writeBoolean(true);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         } else if (obj == reject) {
-
+            try {
+                outputStream.writeBoolean(false);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         } else if (obj == back) {
 
         } else if (obj == carByID) {
@@ -262,31 +312,29 @@ class CreateAdminForm extends JFrame implements ActionListener {
         adminPage = new JPanel(new GridLayout(15, 1));
         adminPage.setBackground(new Color(86, 53, 158));
         JLabel welcome = new JLabel(
-                "Welcome to the car page. Please enter the following information, leaving no fields blank.");
+                "Welcome to the admin page. Please select what data you would like to retrieve.");
         // Sets the Welcome string to White text
         welcome.setForeground(Color.WHITE);
 
-        // Adding buttons to the panel
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(back);
-        add(buttonPanel, BorderLayout.SOUTH);
 
         adminPage.add(welcome);
-        // admin.add(allCarsLabel);
-        // admin.add(allJobsLabel);
-        // admin.add(completeJobsLabel);
-        // admin.add(incompleteJobsLabel);
-        // admin.add(carByIdLabel);
-        // admin.add(carByIdField);
-        // admin.add(jobByIdLabel);
-        // admin.add(jobByIdField);
-
-        add(adminPage, BorderLayout.CENTER);
+        add(adminPage, BorderLayout.NORTH);
+        // Adding buttons to the panel
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(jobByID);
+        buttonPanel.add(carByID);
+        buttonPanel.add(completeJobs);
+        buttonPanel.add(jobsQueue);
+        buttonPanel.add(allJobs);
+        buttonPanel.add(allCars);
+        buttonPanel.add(checkpointer);
+        buttonPanel.add(back);
+        add(buttonPanel, BorderLayout.CENTER);
 
         // Creating the action listener for the buttons
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setTitle("Admin Entry");
+        setTitle("Admin");
         setSize(1000, 3000);
 
     } // <--- CreateAdminForm() constructor ends here
@@ -297,33 +345,36 @@ class CreateAdminForm extends JFrame implements ActionListener {
 
 class Admin {
     public static void main(String[] args) throws IOException {
-        ServerSocket ss = new ServerSocket(5056);
-        CreateAdminForm form = new CreateAdminForm();
-        form.setSize(800, 800);
-        form.setVisible(true);
-        while (true) {
-            Socket s = null;
-            try {
-                // socket object to receive incoming client requests
-                s = ss.accept();
+        try (ServerSocket ss = new ServerSocket(9806)) {
+            System.out.println("Admin connected...");
+            CreateAdminForm form = new CreateAdminForm();
+            form.setSize(800, 800);
+            form.setVisible(true);
+            System.out.println("Waiting for connections...");
+            while (true) {
+                Socket s = null;
+                try {
+                    // socket object to receive incoming client requests
+                    s = ss.accept();
 
-                System.out.println("A new client is connected...");
+                    System.out.println("A new client is connected...");
 
-                // obtaining input and out streams
-                DataInputStream DIS = new DataInputStream(s.getInputStream());
-                DataOutputStream DOS = new DataOutputStream(s.getOutputStream());
+                    // obtaining input and out streams
+                    DataInputStream DIS = new DataInputStream(s.getInputStream());
+                    DataOutputStream DOS = new DataOutputStream(s.getOutputStream());
 
-                System.out.println("Assigning new thread for this client");
+                    System.out.println("Assigning new thread for this client");
 
-                // create a new thread object
-                Thread t = new ClientHandler(s, DIS, DOS);
+                    // create a new thread object
+                    Thread t = new ClientHandler(s, DIS, DOS);
 
-                t.start();
-            } catch (Exception ex) {
-                s.close();
-                ex.printStackTrace();
-            }
-        } // <--- main() method ends here
+                    t.start();
+                } catch (Exception ex) {
+                    s.close();
+                    ex.printStackTrace();
+                }
+            } // <--- main() method ends here
+        }
 
     }
 } // <--- Admin{} class ends here

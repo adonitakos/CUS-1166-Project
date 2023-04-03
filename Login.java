@@ -5,17 +5,17 @@
 *   where they will gain access to certain parts of Vehicle Vortex, depending on their user type.
 */
 
-import javax.swing.*; 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.Exception;
 import java.util.ArrayList;
-import java.util.List; 
+import java.util.List;
 import java.awt.event.ActionListener;
 import java.io.*;
 
 class CreateLoginForm extends JFrame implements ActionListener {
-// Initializing Java Swing Variables
+    // Initializing Java Swing Variables
     JButton signInButton, signUpButton;
     JPanel loginPanel;
     JLabel loginLabel, userLabel, passwordLabel, signUpLabel;
@@ -24,7 +24,7 @@ class CreateLoginForm extends JFrame implements ActionListener {
     // This constructor method creates the GUI for the Login form
     CreateLoginForm() {
 
-    // Assigning Java Swing variables' values & styling
+        // Assigning Java Swing variables' values & styling
 
         // Login Label
         loginLabel = new JLabel();
@@ -83,7 +83,7 @@ class CreateLoginForm extends JFrame implements ActionListener {
         signInButton.setBackground(new Color(217, 217, 217));
         signInButton.setForeground(new Color(86, 53, 158));
         signInButton.setFont(new Font("Inter", Font.BOLD, 16));
-        
+
         // Creating a new Panel
         loginPanel = new JPanel();
         loginPanel.setBackground(new Color(86, 53, 158));
@@ -100,7 +100,7 @@ class CreateLoginForm extends JFrame implements ActionListener {
         loginPanel.add(signUpButton);
         add(loginPanel, BorderLayout.CENTER);
 
-    // Creating action listener for the buttons
+        // Creating action listener for the buttons
         signInButton.addActionListener(this);
         signUpButton.addActionListener(this);
         setTitle("Login Form");
@@ -108,32 +108,41 @@ class CreateLoginForm extends JFrame implements ActionListener {
 
     } // <--- CreateLoginForm() constructor ends here
 
-
-// ---------------------------------------------------------------------------------
+    // ---------------------------------------------------------------------------------
     // Action listener method for the signInButton button
-    public void actionPerformed(ActionEvent ae) {
-        Object obj = ae.getSource();
+    public void actionPerformed(ActionEvent e) {
+        Object obj = e.getSource();
 
         if (obj == signInButton) {
-        // Assigning the information that will be inputted by the user as string variables
+            // Assigning the information that will be inputted by the user as string
+            // variables
             String userValue = userField.getText();
             String passValue = passwordField.getText();
 
             String adminUsername = "admin1";
             String adminPassword = "password123!";
 
-        // --- Admin user login ---
+            // --- Admin user login ---
             if (userValue.equals(adminUsername) && passValue.equals(adminPassword)) {
                 // Show a success message if credentials are valid
-                JOptionPane.showMessageDialog(this, "Admin Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Admin Login successful!", "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
 
                 // Open the "AdminPage.java" page
-                OptionPage optionPage = new OptionPage();
-                optionPage.setVisible(true);
-                this.dispose(); // Close the current login page
+                try {
+                    Admin.main(null);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                userField.setText("");
+                passwordField.setText("");
+                CreateLoginForm form = new CreateLoginForm();
+                form.setSize(323, 393);
+                form.setVisible(true);
+                // this.dispose(); // Close the current login page
             } // <--- if(admin) statement ends here
-            // --- Regular user login ---
-            // Read the existing credentials from the file
+              // --- Regular user login ---
+              // Read the existing credentials from the file
             List<String> credentials = new ArrayList<>();
             try {
                 BufferedReader reader = new BufferedReader(new FileReader("Credentials.txt"));
@@ -142,7 +151,7 @@ class CreateLoginForm extends JFrame implements ActionListener {
                     credentials.add(line);
                 }
                 reader.close();
-            } catch (IOException e) {
+            } catch (IOException ex) {
                 System.out.println("Error reading credentials from file.");
             } // <--- catch() block ends here
 
@@ -157,19 +166,21 @@ class CreateLoginForm extends JFrame implements ActionListener {
                     break;
                 }
             } // <--- for(credential) loop ends here
-                
+
             if (found) {
                 // Show a success message if credentials are valid
                 JOptionPane.showMessageDialog(this, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                
+
                 // Open the "options.java" page
                 OptionPage optionPage = new OptionPage();
                 optionPage.setVisible(true);
-                this.dispose(); // Close the current login page
-            }
-            else {
+                userField.setText("");
+                passwordField.setText("");
+                // this.dispose(); // Close the current login page
+            } else {
                 // Display an error message if credentials are invalid
-                JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error",
+                        JOptionPane.ERROR_MESSAGE);
             }
         } // <--- if(obj==signInButton) statement ends here
 
@@ -189,7 +200,6 @@ class Login {
         System.out.println("\n========= Login =========\n");
         try {
             CreateLoginForm form = new CreateLoginForm();
-            // form.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             form.setSize(323, 393);
             form.setVisible(true);
         } catch (Exception e) {
