@@ -25,6 +25,8 @@ public class ClientHandler extends Thread {
                         System.out.println("Object converted to job...");
                         CreateAdminForm jobForm = new CreateAdminForm(job, socket, inputStream, outputStream);
                         System.out.println("Popup created...");
+                        jobForm.setSize(400, 300);
+                        jobForm.setVisible(true);
                     } else if (OIS.readObject() instanceof Car) {// Car type object being recieved
                         System.out.println("Car request recieved...");
                         Car car = (Car) OIS.readObject();
