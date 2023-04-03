@@ -170,7 +170,6 @@ class Jobs extends JFrame implements ActionListener {
                 } else {
                     System.out.println("Job submission has been denied by VCC.");
                 }
-                socket.close();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
