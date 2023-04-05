@@ -121,16 +121,6 @@ class CreateAdminForm extends JFrame implements ActionListener {
         carRequest = new JPanel(new GridLayout(5, 2));
         carRequest.setBackground(new Color(86, 53, 158));
 
-        // Adding variables to the panel
-        carRequest.add(confirmationLabel);
-        carRequest.add(ownerIDLabel);
-        carRequest.add(carMakeLabel);
-        carRequest.add(carModelLabel);
-        carRequest.add(carLicensePlateLabel);
-        carRequest.add(carResidencyTimeLabel);
-
-        add(carRequest, BorderLayout.CENTER);
-
         // confirmationLabel
 
         confirmationLabel = new JLabel(
@@ -187,6 +177,16 @@ class CreateAdminForm extends JFrame implements ActionListener {
         carResidencyTimeLabel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
+        // Adding variables to the panel
+        carRequest.add(confirmationLabel);
+        carRequest.add(ownerIDLabel);
+        carRequest.add(carMakeLabel);
+        carRequest.add(carModelLabel);
+        carRequest.add(carLicensePlateLabel);
+        carRequest.add(carResidencyTimeLabel);
+
+        add(carRequest, BorderLayout.CENTER);
 
         // accept
         accept = new JButton("Accept");
