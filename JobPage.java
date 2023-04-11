@@ -18,7 +18,7 @@ class Jobs extends JFrame implements ActionListener {
     private JLabel jobIDLabel, jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel;
     private final JTextField jobIDField, jobDurationField, jobDeadlineField, jobDescriptionField;
     private JButton submit, jobCompletion, back;
-    private JPanel jobPage;
+    private JPanel jobPage, welcomePanel, buttonPanel;
     private Socket socket;
     VCC vcc = VCC.getInstance();
 
@@ -31,14 +31,13 @@ class Jobs extends JFrame implements ActionListener {
     Jobs() {
         // Assigning variables values
         // JobID
+
         jobIDLabel = new JLabel();
         jobIDLabel.setText("Job ID:");
         jobIDField = new JTextField(15);
         jobIDField.add(jobIDLabel);
         jobIDLabel.setForeground(Color.WHITE);
-        jobIDLabel.setFont(new Font("Inter", Font.BOLD, 16));
-        jobIDLabel.setBackground(new Color(217, 217, 217));
-        jobIDLabel.setBorder(BorderFactory.createCompoundBorder(
+        jobIDField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
@@ -48,21 +47,18 @@ class Jobs extends JFrame implements ActionListener {
         jobDurationField = new JTextField(15);
         jobDurationField.add(jobDurationLabel);
         jobDurationLabel.setForeground(Color.WHITE);
-        jobDurationLabel.setFont(new Font("Inter", Font.BOLD, 16));
-        jobDurationLabel.setBackground(new Color(217, 217, 217));
-        jobDurationLabel.setBorder(BorderFactory.createCompoundBorder(
+        jobDurationField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+                
 
         // Deadline
         jobDeadlineLabel = new JLabel();
-        jobDeadlineLabel.setText("Job Deadline (mm/dd/yyyy):");
+        jobDeadlineLabel.setText("Job Deadline (mm/dd/yy):");
         jobDeadlineField = new JTextField(15);
         jobDeadlineField.add(jobDeadlineLabel);
         jobDeadlineLabel.setForeground(Color.WHITE);
-        jobDeadlineLabel.setFont(new Font("Inter", Font.BOLD, 16));
-        jobDeadlineLabel.setBackground(new Color(217, 217, 217));
-        jobDeadlineLabel.setBorder(BorderFactory.createCompoundBorder(
+        jobDeadlineField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
@@ -70,13 +66,12 @@ class Jobs extends JFrame implements ActionListener {
         jobDescriptionLabel = new JLabel();
         jobDescriptionLabel.setText("Please describe the job:");
         jobDescriptionField = new JTextField(15);
-        jobDescriptionLabel.setBounds(44, 100, 100, 16);
+        jobDescriptionField.add(jobDescriptionLabel);
         jobDescriptionLabel.setForeground(Color.WHITE);
-        jobDescriptionLabel.setFont(new Font("Inter", Font.BOLD, 16));
-        jobDescriptionLabel.setBackground(new Color(217, 217, 217));
-        jobDescriptionLabel.setBorder(BorderFactory.createCompoundBorder(
+        jobDescriptionField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
 
         // jobCompletion
         jobCompletion = new JButton("Completion Time");
@@ -100,15 +95,20 @@ class Jobs extends JFrame implements ActionListener {
         back.setFont(new Font("Inter", Font.BOLD, 16));
 
         // Creating a new panel
-        jobPage = new JPanel(new GridLayout(5, 2));
+        jobPage = new JPanel(new GridLayout(8, 1));
         jobPage.setBackground(new Color(86, 53, 158));
+        
         JLabel welcome = new JLabel(
                 "Welcome to the Job page. Please enter the following information, leaving no fields blank.");
-
         welcome.setForeground(Color.WHITE);
+
+        // Creating welcome panel
+        welcomePanel = new JPanel();
+        welcomePanel.setBackground(new Color(86, 53, 158));
+        welcomePanel.add(welcome);
+        add(welcomePanel, BorderLayout.NORTH);
+
         // Adding variables to the panel
-        jobPage.add(welcome);
-        jobPage.add(new JLabel(""));
         jobPage.add(jobIDLabel);
         jobPage.add(jobIDField);
         jobPage.add(jobDurationLabel);
@@ -121,7 +121,7 @@ class Jobs extends JFrame implements ActionListener {
         add(jobPage, BorderLayout.CENTER);
 
         // Adding buttons to the panel
-        JPanel buttonPanel = new JPanel();
+        buttonPanel = new JPanel();
         buttonPanel.add(submit);
         buttonPanel.add(jobCompletion);
         buttonPanel.add(back);
@@ -134,7 +134,6 @@ class Jobs extends JFrame implements ActionListener {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Job Submission");
-        setSize(400, 250);
     } // <--- Jobs() constructor ends here
 
     // ---------------------------------------------------------------------------------

@@ -31,7 +31,7 @@ CreateSignupForm() {
     signupLabel = new JLabel();
     signupLabel.setText("Sign Up");
     signupLabel.setForeground(Color.WHITE);
-    signupLabel.setFont(new Font("Inter", Font.BOLD, 23));
+    signupLabel.setFont(new Font("Inter", Font.BOLD, 30));
     Dimension size = signupLabel.getPreferredSize();
     signupLabel.setBounds(130, 30, size.width, size.height);
 

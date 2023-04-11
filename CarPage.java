@@ -16,7 +16,7 @@ import java.net.*;
 class Cars extends JFrame implements ActionListener {
 
         // Intializing variables
-        private JPanel carPage;
+        private JPanel carPage, welcomePanel, buttonPanel;
         private JLabel carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
         private final JTextField carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
         JButton submit, back;
@@ -38,14 +38,10 @@ class Cars extends JFrame implements ActionListener {
                 carLicensePlateField = new JTextField(15);
                 carLicensePlateField.add(carLicensePlateLabel);
                 carLicensePlateLabel.setForeground(Color.WHITE);
-                carLicensePlateField.setBackground(new Color(217, 217, 217));
                 carLicensePlateField.setBorder(BorderFactory.createCompoundBorder(
                                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-                carLicensePlateField.setBackground(new Color(217, 217, 217));
-                carLicensePlateField.setBorder(BorderFactory.createCompoundBorder(
-                                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+
 
                 // Make
                 carMakeLabel = new JLabel();
@@ -53,26 +49,16 @@ class Cars extends JFrame implements ActionListener {
                 carMakeField = new JTextField(15);
                 carMakeField.add(carMakeLabel);
                 carMakeLabel.setForeground(Color.WHITE);
-                carMakeField.setBackground(new Color(217, 217, 217));
                 carMakeField.setBorder(BorderFactory.createCompoundBorder(
                                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-                carMakeField.setBackground(new Color(217, 217, 217));
-                carMakeField.setBorder(BorderFactory.createCompoundBorder(
-                                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-
+     
                 // Model
                 carModelLabel = new JLabel();
                 carModelLabel.setText("Model:");
                 carModelField = new JTextField(15);
                 carModelField.add(carModelLabel);
                 carModelLabel.setForeground(Color.WHITE);
-                carModelField.setBackground(new Color(217, 217, 217));
-                carModelField.setBorder(BorderFactory.createCompoundBorder(
-                                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-                carModelField.setBackground(new Color(217, 217, 217));
                 carModelField.setBorder(BorderFactory.createCompoundBorder(
                                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
@@ -83,11 +69,6 @@ class Cars extends JFrame implements ActionListener {
                 carResidencyTimeField = new JTextField(15);
                 carResidencyTimeField.add(carResidencyTimeLabel);
                 carResidencyTimeLabel.setForeground(Color.WHITE);
-                carResidencyTimeField.setBackground(new Color(217, 217, 217));
-                carResidencyTimeField.setBorder(BorderFactory.createCompoundBorder(
-                                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-                carResidencyTimeField.setBackground(new Color(217, 217, 217));
                 carResidencyTimeField.setBorder(BorderFactory.createCompoundBorder(
                                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
@@ -106,16 +87,21 @@ class Cars extends JFrame implements ActionListener {
                 back.setForeground(new Color(86, 53, 158));
                 back.setFont(new Font("Inter", Font.BOLD, 16));
 
-                // Creating new panel
-                carPage = new JPanel(new GridLayout(15, 1));
+                // Creating carPage panel
+                carPage = new JPanel(new GridLayout(8, 1));
                 carPage.setBackground(new Color(86, 53, 158));
                 JLabel welcome = new JLabel(
                                 "Welcome to the car page. Please enter the following information, leaving no fields blank.");
                 // Sets the Welcome string to White text
                 welcome.setForeground(Color.WHITE);
 
+                // Creating welcome panel
+                welcomePanel = new JPanel();
+                welcomePanel.setBackground(new Color(86, 53, 158));
+                welcomePanel.add(welcome);
+                add(welcomePanel, BorderLayout.NORTH);
+
                 // Adding variables to panel
-                carPage.add(welcome);
                 carPage.add(carLicensePlateLabel);
                 carPage.add(carLicensePlateField);
                 carPage.add(carMakeLabel);
@@ -130,7 +116,7 @@ class Cars extends JFrame implements ActionListener {
                 add(carPage, BorderLayout.CENTER);
 
                 // Adding buttons to the panel
-                JPanel buttonPanel = new JPanel();
+                buttonPanel = new JPanel();
                 buttonPanel.add(submit);
                 buttonPanel.add(back);
                 add(buttonPanel, BorderLayout.SOUTH);
@@ -141,7 +127,6 @@ class Cars extends JFrame implements ActionListener {
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
                 setTitle("Car Submission");
-                setSize(1000, 3000);
         } // <--- Cars() constructor ends here
 
         // ---------------------------------------------------------------------------------
@@ -204,7 +189,7 @@ class CarPage {
         public static void main(String[] args) {
                 try {
                         Cars form = new Cars();
-                        form.setSize(600, 800);
+                        form.setSize(700, 500);
                         form.setVisible(true);
                         System.out.println("----------*** Attempting Car Owner Connection to Server ***--------");
                         Socket socket = new Socket("localhost", 9806);
