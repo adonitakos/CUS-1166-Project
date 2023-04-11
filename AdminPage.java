@@ -134,7 +134,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Owner ID label
-        ownerIDLabel = new JLabel("Owner ID: " + car.getOwnerID(), SwingConstants.CENTER);
+        ownerIDLabel = new JLabel("Owner ID: " + /*car.getOwnerID()*/ SwingConstants.CENTER);
         ownerIDLabel.setForeground(Color.WHITE);
         ownerIDLabel.setFont(new Font("Inter", Font.BOLD, 16));
         ownerIDLabel.setBackground(new Color(217, 217, 217));
@@ -203,6 +203,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
         reject.setFont(new Font("Inter", Font.BOLD, 16));
 
         // Adding buttons to the panel
+        buttonPanel = new JPanel();
         buttonPanel.add(accept);
         buttonPanel.add(reject);
         add(buttonPanel, BorderLayout.CENTER);

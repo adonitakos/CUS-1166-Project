@@ -17,8 +17,8 @@ class Cars extends JFrame implements ActionListener {
 
         // Intializing variables
         private JPanel carPage;
-        private JLabel ownerIDLabel, carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
-        private final JTextField ownerIDField, carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
+        private JLabel carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
+        private final JTextField carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
         JButton submit, back;
         private Socket socket;
         VCC vcc = VCC.getInstance();
@@ -31,21 +31,6 @@ class Cars extends JFrame implements ActionListener {
         // This method creates the GUI for the Cars Window
         Cars() {
                 // Assigning variables values
-
-                // OwnerID
-                ownerIDLabel = new JLabel();
-                ownerIDLabel.setText("Owner ID:");
-                ownerIDField = new JTextField(15);
-                ownerIDField.add(ownerIDLabel);
-                ownerIDLabel.setForeground(Color.WHITE);
-                ownerIDField.setBackground(new Color(217, 217, 217));
-                ownerIDField.setBorder(BorderFactory.createCompoundBorder(
-                                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-                ownerIDField.setBackground(new Color(217, 217, 217));
-                ownerIDField.setBorder(BorderFactory.createCompoundBorder(
-                                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
                 // License Plate
                 carLicensePlateLabel = new JLabel();
@@ -94,7 +79,7 @@ class Cars extends JFrame implements ActionListener {
 
                 // Residency Time
                 carResidencyTimeLabel = new JLabel();
-                carResidencyTimeLabel.setText("Residency Time:");
+                carResidencyTimeLabel.setText("Residency Time (in hours):");
                 carResidencyTimeField = new JTextField(15);
                 carResidencyTimeField.add(carResidencyTimeLabel);
                 carResidencyTimeLabel.setForeground(Color.WHITE);
@@ -131,8 +116,6 @@ class Cars extends JFrame implements ActionListener {
 
                 // Adding variables to panel
                 carPage.add(welcome);
-                carPage.add(ownerIDLabel);
-                carPage.add(ownerIDField);
                 carPage.add(carLicensePlateLabel);
                 carPage.add(carLicensePlateField);
                 carPage.add(carMakeLabel);
@@ -168,13 +151,12 @@ class Cars extends JFrame implements ActionListener {
 
                 if (obj == submit) {
                         // Store user input as string variables
-                        int ownerID = Integer.parseInt(ownerIDField.getText());
                         String carMake = carMakeField.getText();
                         String carModel = carModelField.getText();
                         String carLicensePlate = carLicensePlateField.getText();
                         String carResidencyTime = carResidencyTimeField.getText();
 
-                        Car car = new Car(carLicensePlate, carMake, carModel, carResidencyTime, ownerID);
+                        Car car = new Car(carLicensePlate, carMake, carModel, carResidencyTime);
 
                         try {
 
@@ -222,7 +204,7 @@ class CarPage {
         public static void main(String[] args) {
                 try {
                         Cars form = new Cars();
-                        form.setSize(400, 300);
+                        form.setSize(600, 800);
                         form.setVisible(true);
                         System.out.println("----------*** Attempting Car Owner Connection to Server ***--------");
                         Socket socket = new Socket("localhost", 9806);

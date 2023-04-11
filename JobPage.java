@@ -212,7 +212,7 @@ class JobPage {
                     System.out.println("----------*** Attempting Job Owner Connection to Server ***--------");
                     Jobs form = new Jobs();
                     form.setVisible(true);
-                    form.setSize(400, 300);
+                    form.setSize(700, 500);
                     Socket socket = new Socket("localhost", 9806);
                     form.setSocket(socket);
                 } catch (Exception e) {
