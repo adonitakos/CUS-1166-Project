@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 
 public class VCC {
@@ -10,6 +11,12 @@ public class VCC {
 	private static LinkedList<Job> allJobs = new LinkedList<Job>();
 	private static VCC single_instance = null;
 	private static int queueTime = 0;
+
+	public static void init() throws ClassNotFoundException {
+		DBConnection.init("vehicle_vortex");
+	}
+
+	private static Connection conn;
 
 	private VCC() {
 	}

@@ -21,10 +21,6 @@ class CreateAdminForm extends JFrame implements ActionListener {
 
         this.outputStream = outputStream;
 
-        // Creating confirmation panel
-        jobRequest = new JPanel(new GridLayout(5, 2));
-        jobRequest.setBackground(new Color(86, 53, 158));
-
         // ConfirmationLabel
 
         confirmationLabel = new JLabel(
@@ -73,14 +69,6 @@ class CreateAdminForm extends JFrame implements ActionListener {
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        // Adding variables to the panel
-        jobRequest.add(confirmationLabel);
-        jobRequest.add(jobIDLabel);
-        jobRequest.add(jobDurationLabel);
-        jobRequest.add(jobDeadlineLabel);
-        jobRequest.add(jobDescriptionLabel);
-        add(jobRequest, BorderLayout.CENTER);
-
         accept = new JButton("Accept");
         accept.setBounds(110, 310, 100, 34);
         accept.setBackground(new Color(217, 217, 217));
@@ -93,6 +81,18 @@ class CreateAdminForm extends JFrame implements ActionListener {
         reject.setBackground(new Color(217, 217, 217));
         reject.setForeground(new Color(86, 53, 158));
         reject.setFont(new Font("Inter", Font.BOLD, 16));
+
+        // Creating confirmation panel
+        jobRequest = new JPanel(new GridLayout(5, 2));
+        jobRequest.setBackground(new Color(86, 53, 158));
+
+        // Adding variables to the panel
+        jobRequest.add(confirmationLabel);
+        jobRequest.add(jobIDLabel);
+        jobRequest.add(jobDurationLabel);
+        jobRequest.add(jobDeadlineLabel);
+        jobRequest.add(jobDescriptionLabel);
+        add(jobRequest, BorderLayout.CENTER);
 
         // Adding buttons to the panel
         JPanel buttonPanel = new JPanel();
@@ -392,6 +392,7 @@ class Admin {
         CreateAdminForm form = new CreateAdminForm();
         form.setSize(800, 800);
         form.setVisible(true);
+        
         form.log("Server started...");
         // <--- while() loop ends here
 

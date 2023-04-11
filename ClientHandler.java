@@ -3,7 +3,7 @@ import java.net.*;
 
 import javax.swing.SwingUtilities;
 
-public class ClientHandler extends Thread implements ActionListener{
+public class ClientHandler extends Thread {
     final DataInputStream inputStream;
     final DataOutputStream outputStream;
     final Socket socket;
@@ -15,24 +15,6 @@ public class ClientHandler extends Thread implements ActionListener{
         this.outputStream = outputStream;
     } // <--- ClientHandler() constructor ends here
 
-    private static void jobFormCreation(Job job) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                CreateAdminForm jobForm = new CreateAdminForm(job, this.socket, inputStream, outputStream);
-                System.out.println("Popup created...");
-            }
-        });
-    }
-
-    private static void carFormCreation(Car car) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                CreateAdminForm carForm = new CreateAdminForm(car, socket, inputStream, outputStream);
-                System.out.println("Popup created...");
-            }
-        });
-    }
-
     public void run() {
         try (ObjectInputStream OIS = new ObjectInputStream(inputStream)) {
             while (true) {
@@ -43,13 +25,21 @@ public class ClientHandler extends Thread implements ActionListener{
                         System.out.println("Job request recieved...");
                         Job job = (Job) object;
                         System.out.println("Object converted to job...");
-                        jobFormCreation(job);
+                        System.out.println("Popup created...1");
+                        CreateAdminForm jobForm = new CreateAdminForm(job, socket, inputStream, outputStream);
+                        jobForm.setSize(400, 300);
+                        jobForm.setVisible(true);
+                        System.out.println("Popup created...");
 
                     } else if (object instanceof Car) {// Car type object being recieved
                         System.out.println("Car request recieved...");
                         Car car = (Car) object;
-                        System.out.println("Object converted to job...");
-                        jobFormCreation(car);
+                        System.out.println("Object converted to car...");
+                        System.out.println("Popup created...1");
+                        CreateAdminForm carForm = new CreateAdminForm(car, socket, inputStream, outputStream);
+                        carForm.setSize(400, 300);
+                        carForm.setVisible(true);
+                        System.out.println("Popup created...");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
