@@ -53,7 +53,6 @@ CreateSignupForm() {
     // User Field
     userField = new JTextField(15);
     userField.setBounds(37, 198, 249, 38);
-    userField.setBackground(new Color(217, 217, 217));
     userField.setBorder(BorderFactory.createCompoundBorder(
         BorderFactory.createLineBorder(new Color(86, 53, 158)),
         BorderFactory.createEmptyBorder(10, 10, 10, 10)));
@@ -68,7 +67,6 @@ CreateSignupForm() {
     // Password Field
     passwordField = new JPasswordField(15);
     passwordField.setBounds(37, 278, 249, 38);
-    passwordField.setBackground(new Color(217, 217, 217));
     passwordField.setBorder(BorderFactory.createCompoundBorder(
         BorderFactory.createLineBorder(new Color(86, 53, 158)),
         BorderFactory.createEmptyBorder(10, 10, 10, 10)));

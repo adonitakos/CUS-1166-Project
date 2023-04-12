@@ -44,7 +44,6 @@ class CreateLoginForm extends JFrame implements ActionListener {
         // User field
         userField = new JTextField(15);
         userField.setBounds(37, 128, 249, 38);
-        userField.setBackground(new Color(217, 217, 217));
         userField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
@@ -58,7 +57,6 @@ class CreateLoginForm extends JFrame implements ActionListener {
         // Password field
         passwordField = new JPasswordField(15);
         passwordField.setBounds(37, 208, 249, 38);
-        passwordField.setBackground(new Color(217, 217, 217));
         passwordField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));

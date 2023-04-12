@@ -15,7 +15,7 @@ import java.io.*;
 
 class Jobs extends JFrame implements ActionListener {
     // Initializing variables
-    private JLabel jobIDLabel, jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel;
+    private JLabel welcome, infoLabel, jobIDLabel, jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel;
     private final JTextField jobIDField, jobDurationField, jobDeadlineField, jobDescriptionField;
     private JButton submit, jobCompletion, back;
     private JPanel jobPage, welcomePanel, buttonPanel;
@@ -29,9 +29,9 @@ class Jobs extends JFrame implements ActionListener {
     // ---------------------------------------------------------------------------------
     // This method creates the GUI for the JobWindow
     Jobs() {
-        // Assigning variables values
-        // JobID
 
+        // Assigning variables values
+        // JobID Label
         jobIDLabel = new JLabel();
         jobIDLabel.setText("Job ID:");
         jobIDField = new JTextField(15);
@@ -41,7 +41,7 @@ class Jobs extends JFrame implements ActionListener {
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        // Duration
+        // Duration Label
         jobDurationLabel = new JLabel();
         jobDurationLabel.setText("Job Duration (in hours):");
         jobDurationField = new JTextField(15);
@@ -52,7 +52,7 @@ class Jobs extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
                 
 
-        // Deadline
+        // Deadline Label
         jobDeadlineLabel = new JLabel();
         jobDeadlineLabel.setText("Job Deadline (mm/dd/yy):");
         jobDeadlineField = new JTextField(15);
@@ -62,7 +62,7 @@ class Jobs extends JFrame implements ActionListener {
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        // Description
+        // Description Label
         jobDescriptionLabel = new JLabel();
         jobDescriptionLabel.setText("Please describe the job:");
         jobDescriptionField = new JTextField(15);
@@ -73,14 +73,14 @@ class Jobs extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
 
-        // jobCompletion
+        // Job Completion Label
         jobCompletion = new JButton("Completion Time");
         jobCompletion.setBounds(110, 270, 100, 34);
         jobCompletion.setBackground(new Color(217, 217, 217));
         jobCompletion.setForeground(new Color(86, 53, 158));
         jobCompletion.setFont(new Font("Inter", Font.BOLD, 16));
 
-        // Submit
+        // Submit Button
         submit = new JButton("Submit");
         submit.setBounds(110, 270, 100, 34);
         submit.setBackground(new Color(217, 217, 217));
@@ -93,21 +93,29 @@ class Jobs extends JFrame implements ActionListener {
         back.setBackground(new Color(217, 217, 217));
         back.setForeground(new Color(86, 53, 158));
         back.setFont(new Font("Inter", Font.BOLD, 16));
+        
+        // Welcome Label
+        welcome = new JLabel("Welcome to the Job page.", SwingConstants.CENTER);
+        welcome.setForeground(Color.WHITE);
+        welcome.setFont(new Font("Inter", Font.BOLD, 26));
+
+        // Info Label
+        infoLabel = new JLabel("Please enter the following information, leaving no fields blank.", SwingConstants.CENTER);
+        infoLabel.setForeground(Color.WHITE);
+        infoLabel.setFont(new Font("Inter", Font.PLAIN, 12));
+
+        // Creating welcome panel
+        welcomePanel = new JPanel(new GridLayout(2,1));
+        welcomePanel.setBackground(new Color(86, 53, 158));
+        // Adding variables to panel
+        welcomePanel.add(welcome);
+        welcomePanel.add(infoLabel);
+        add(welcomePanel, BorderLayout.NORTH);
 
         // Creating a new panel
         jobPage = new JPanel(new GridLayout(8, 1));
         jobPage.setBackground(new Color(86, 53, 158));
         
-        JLabel welcome = new JLabel(
-                "Welcome to the Job page. Please enter the following information, leaving no fields blank.");
-        welcome.setForeground(Color.WHITE);
-
-        // Creating welcome panel
-        welcomePanel = new JPanel();
-        welcomePanel.setBackground(new Color(86, 53, 158));
-        welcomePanel.add(welcome);
-        add(welcomePanel, BorderLayout.NORTH);
-
         // Adding variables to the panel
         jobPage.add(jobIDLabel);
         jobPage.add(jobIDField);
@@ -120,8 +128,9 @@ class Jobs extends JFrame implements ActionListener {
 
         add(jobPage, BorderLayout.CENTER);
 
-        // Adding buttons to the panel
+        // Creating button panel
         buttonPanel = new JPanel();
+        // Adding buttons to the panel
         buttonPanel.add(submit);
         buttonPanel.add(jobCompletion);
         buttonPanel.add(back);
@@ -132,6 +141,7 @@ class Jobs extends JFrame implements ActionListener {
         jobCompletion.addActionListener(this);
         back.addActionListener(this);
 
+        // Setting title
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Job Submission");
     } // <--- Jobs() constructor ends here
@@ -139,11 +149,11 @@ class Jobs extends JFrame implements ActionListener {
     // ---------------------------------------------------------------------------------
     // Action Listener method
     public void actionPerformed(ActionEvent e) {
+        // Storing the ActionEvent as an Object
         Object obj = e.getSource();
 
         if (obj == submit) {
-            // Assigning the information that will be inputted by the user as string
-            // variables
+            // Assigning the information that will be inputted by the user as string variables
             int jobID = Integer.parseInt(jobIDField.getText());
             int jobDuration = Integer.parseInt(jobDurationField.getText());
             String jobDeadline = jobDeadlineField.getText();
@@ -178,6 +188,7 @@ class Jobs extends JFrame implements ActionListener {
             jobDeadlineField.setText("");
             jobDescriptionField.setText("");
 
+            // Open pop-up Job Confirmation page
             JobConfirmation form = new JobConfirmation(job);
             form.setVisible(true);
             form.setSize(800, 300);
@@ -196,7 +207,8 @@ class Jobs extends JFrame implements ActionListener {
 
             // if back button was clicked, close current panel
             dispose();
-        } else {
+        }
+        else {
             System.out.println("Error.");
 
         } // <--- actionPerformed() method ends here

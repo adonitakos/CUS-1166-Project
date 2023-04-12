@@ -17,7 +17,7 @@ class Cars extends JFrame implements ActionListener {
 
         // Intializing variables
         private JPanel carPage, welcomePanel, buttonPanel;
-        private JLabel carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
+        private JLabel welcome, infoLabel, carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
         private final JTextField carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
         JButton submit, back;
         private Socket socket;
@@ -87,19 +87,28 @@ class Cars extends JFrame implements ActionListener {
                 back.setForeground(new Color(86, 53, 158));
                 back.setFont(new Font("Inter", Font.BOLD, 16));
 
+                // Welcome Label
+                welcome = new JLabel("Welcome to the Car Page.", SwingConstants.CENTER);
+                // Sets the Welcome string to White text
+                welcome.setForeground(Color.WHITE);
+                welcome.setFont(new Font("Inter", Font.BOLD, 26));
+
+                // Info Label
+                infoLabel = new JLabel("Please enter the following information, leaving no fields blank.", SwingConstants.CENTER);
+                infoLabel.setForeground(Color.WHITE);
+                infoLabel.setFont(new Font("Inter", Font.PLAIN, 12));
+
+                // Creating welcome panel
+                welcomePanel = new JPanel(new GridLayout(2,1));
+                welcomePanel.setBackground(new Color(86, 53, 158));
+                // Adding variables to the panel
+                welcomePanel.add(welcome);
+                welcomePanel.add(infoLabel);
+                add(welcomePanel, BorderLayout.NORTH);
+
                 // Creating carPage panel
                 carPage = new JPanel(new GridLayout(8, 1));
                 carPage.setBackground(new Color(86, 53, 158));
-                JLabel welcome = new JLabel(
-                                "Welcome to the car page. Please enter the following information, leaving no fields blank.");
-                // Sets the Welcome string to White text
-                welcome.setForeground(Color.WHITE);
-
-                // Creating welcome panel
-                welcomePanel = new JPanel();
-                welcomePanel.setBackground(new Color(86, 53, 158));
-                welcomePanel.add(welcome);
-                add(welcomePanel, BorderLayout.NORTH);
 
                 // Adding variables to panel
                 carPage.add(carLicensePlateLabel);
@@ -115,8 +124,9 @@ class Cars extends JFrame implements ActionListener {
 
                 add(carPage, BorderLayout.CENTER);
 
-                // Adding buttons to the panel
+                // Creating Button Panel
                 buttonPanel = new JPanel();
+                // Adding buttons to the panel
                 buttonPanel.add(submit);
                 buttonPanel.add(back);
                 add(buttonPanel, BorderLayout.SOUTH);

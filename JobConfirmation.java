@@ -4,11 +4,10 @@ import java.awt.event.*;
 
 class JobConfirmation extends JFrame implements ActionListener {
     // Initializing variables
-    private JPanel confirmation, buttonPanel;
+    private JPanel titlePanel, confirmationPanel, buttonPanel;
     private JLabel thankYouLabel, jobCompletionLabel, jobIDLabel, jobDeadlineLabel, jobDurationLabel, jobDescriptionLabel;
     private JButton close;
 
-    /** need to fix so that user info gets printed **/
     // ------------------------------------------
     // This method creates the GUI for the JobConfirmation
     JobConfirmation(Job job) {
@@ -17,88 +16,96 @@ class JobConfirmation extends JFrame implements ActionListener {
         // Thank you label
         thankYouLabel = new JLabel("Thank you. Your job has been submitted.", SwingConstants.CENTER);
         thankYouLabel.setForeground(Color.WHITE);
-        thankYouLabel.setFont(new Font("Inter", Font.BOLD, 16));
+        thankYouLabel.setFont(new Font("Inter", Font.BOLD, 22));
         thankYouLabel.setBackground(new Color(217, 217, 217));
         thankYouLabel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // JobID label
-        jobIDLabel = new JLabel("Job ID: " + job.getJobID(), SwingConstants.CENTER);
+        jobIDLabel = new JLabel("<html><b><u>Job ID:</u></b> " + job.getJobID() + "</html>", SwingConstants.CENTER);
         jobIDLabel.setForeground(Color.WHITE);
-        jobIDLabel.setFont(new Font("Inter", Font.BOLD, 16));
+        jobIDLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         jobIDLabel.setBackground(new Color(217, 217, 217));
         jobIDLabel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Duration Label
-        jobDurationLabel = new JLabel("Job Duration: " + job.getJobDuration(), SwingConstants.CENTER);
+        jobDurationLabel = new JLabel("<html><b><u>Job Duration:</b></u> " + job.getJobDuration() + " hours.</html>", SwingConstants.CENTER);
         jobDurationLabel.setForeground(Color.WHITE);
-        jobDurationLabel.setFont(new Font("Inter", Font.BOLD, 16));
+        jobDurationLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         jobDurationLabel.setBackground(new Color(217, 217, 217));
         jobDurationLabel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Deadline Label
-        jobDeadlineLabel = new JLabel("Job Deadline: " + job.getJobDeadline(), SwingConstants.CENTER);
+        jobDeadlineLabel = new JLabel("<html><b><u>Job Deadline:</b></u> " + job.getJobDeadline() + "</html>", SwingConstants.CENTER);
         jobDeadlineLabel.setForeground(Color.WHITE);
-        jobDeadlineLabel.setFont(new Font("Inter", Font.BOLD, 16));
+        jobDeadlineLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         jobDeadlineLabel.setBackground(new Color(217, 217, 217));
         jobDeadlineLabel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Description Label
-        jobDescriptionLabel = new JLabel("Job Description: " + job.getJobDescription(), SwingConstants.CENTER);
+        jobDescriptionLabel = new JLabel("<html><b><u>Job Description:</b></u> " + job.getJobDescription() + "</html>", SwingConstants.CENTER);
         jobDescriptionLabel.setForeground(Color.WHITE);
-        jobDescriptionLabel.setFont(new Font("Inter", Font.BOLD, 16));
+        jobDescriptionLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         jobDescriptionLabel.setBackground(new Color(217, 217, 217));
         jobDescriptionLabel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Completion Label
-        jobCompletionLabel = new JLabel("Your job completion time is " + job.getCompletionTime() + " hours.", SwingConstants.CENTER);
+        jobCompletionLabel = new JLabel("<html><b><u>Job completion time:</b></u> " + job.getCompletionTime() + " hours.</html>", SwingConstants.CENTER);
         jobCompletionLabel.setForeground(Color.WHITE);
-        jobCompletionLabel.setFont(new Font("Inter", Font.BOLD, 16));
+        jobCompletionLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         jobCompletionLabel.setBackground(new Color(217, 217, 217));
         jobCompletionLabel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        // Close button
+        // Close Button
         close = new JButton("Close");
         close.setBounds(110, 270, 100, 34);
         close.setBackground(new Color(217, 217, 217));
         close.setForeground(new Color(86, 53, 158));
         close.setFont(new Font("Inter", Font.BOLD, 16));
 
+        // Creating title panel
+        titlePanel = new JPanel();
+        titlePanel.setBackground(new Color(86, 53, 158));
+        titlePanel.add(thankYouLabel);
+        add(titlePanel, BorderLayout.NORTH);
+
         // Creating confirmation panel
-        confirmation = new JPanel(new GridLayout(5, 2));
-        confirmation.setBackground(new Color(86, 53, 158));
+        confirmationPanel = new JPanel(new GridLayout(5, 1));
+        confirmationPanel.setBackground(new Color(86, 53, 158));
 
         // Adding variables to the panel
-        confirmation.add(thankYouLabel);
-        confirmation.add(jobCompletionLabel);
-        confirmation.add(jobIDLabel);
-        confirmation.add(jobDurationLabel);
-        confirmation.add(jobDeadlineLabel);
-        confirmation.add(jobDescriptionLabel);
+        confirmationPanel.add(jobCompletionLabel);
+        confirmationPanel.add(jobIDLabel);
+        confirmationPanel.add(jobDurationLabel);
+        confirmationPanel.add(jobDeadlineLabel);
+        confirmationPanel.add(jobDescriptionLabel);
 
-        add(confirmation, BorderLayout.CENTER);
+        add(confirmationPanel, BorderLayout.CENTER);
 
-        // Adding buttons to the panel
+        // Creating button panel
         buttonPanel = new JPanel();
+        // Adding buttons to panel
         buttonPanel.add(close);
         add(buttonPanel, BorderLayout.SOUTH);
 
-        // Creating action listener for the close button
+        // Creating action listener for the buttons
         close.addActionListener(this);
 
+        // Setting title, size, and visibility
         setTitle("Confirmation");
-        setSize(400, 250);
+        setSize(600, 350);
+        setVisible(true);
     } // <--- Confirmation() constructor ends here
 
     // --------------------------------------------
