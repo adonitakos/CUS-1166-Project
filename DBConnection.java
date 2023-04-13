@@ -8,7 +8,7 @@ public class DBConnection {
 	private static Connection conn = null;
 	private static String dbString = "jdbc:mysql://localhost:3306/";
 	private static String userName = "root";
-	private static String password = "password";
+	private static String password = "password";// Change to personal system password
 	public static String winflag = "?useSSL=false";
 	public static String dbname;
 

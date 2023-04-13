@@ -255,7 +255,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
         }
     } // <--- actionPerformed() method ends here
 
-    CreateAdminForm() {
+    CreateAdminForm(User user) {
 
         jobByID = new JButton("Job By ID");
         jobByID.setBounds(110, 310, 100, 34);
@@ -343,57 +343,56 @@ class CreateAdminForm extends JFrame implements ActionListener {
         setVisible(true);
 
     } // <--- CreateAdminForm() constructor ends here
-
-    public void log(String message) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    start();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    public static void start() throws IOException {
-        ServerSocket ss = new ServerSocket(9806);
-        System.out.println("Waiting for connections...");
-        while (true) {
-            Socket s = null;
-            try {
-                // socket object to receive incoming client requests
-                s = ss.accept();
-
-                System.out.println("A new client is connected...");
-
-                // obtaining input and out streams
-                DataInputStream DIS = new DataInputStream(s.getInputStream());
-                DataOutputStream DOS = new DataOutputStream(s.getOutputStream());
-
-                System.out.println("Assigning new thread for this client");
-
-                // create a new thread object
-                Thread t = new ClientHandler(s, DIS, DOS);
-
-                t.start();
-            } catch (Exception ex) {
-                s.close();
-                ex.printStackTrace();
-            }
-        }
-    } // <--- CreateAdminForm{} class ends here
 }
 
-class Admin {
-    public static void main(String[] args) throws IOException {
+class Admin extends Thread {
+
+    private User user;
+
+    public Admin(User user) {
+        this.user = user;
+    }
+
+    public void run() {
         System.out.println("Admin connected...");
-        CreateAdminForm form = new CreateAdminForm();
-        form.setSize(800, 800);
-        form.setVisible(true);
-        
-        form.log("Server started...");
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                CreateAdminForm form = new CreateAdminForm(user);
+                form.setSize(800, 800);
+                form.setVisible(true);
+            }
+        });
+        ServerSocket ss;
+        try {
+            ss = new ServerSocket(9806);
+            System.out.println("Waiting for connections...");
+            while (true) {
+                Socket s = null;
+                try {
+                    // socket object to receive incoming client requests
+                    s = ss.accept();
+
+                    System.out.println("A new client is connected...");
+
+                    // obtaining input and out streams
+                    DataInputStream DIS = new DataInputStream(s.getInputStream());
+                    DataOutputStream DOS = new DataOutputStream(s.getOutputStream());
+
+                    System.out.println("Assigning new thread for this client");
+
+                    // create a new thread object
+                    Thread t = new ClientHandler(s, DIS, DOS);
+
+                    t.start();
+                } catch (Exception ex) {
+                    s.close();
+                    ex.printStackTrace();
+                }
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         // <--- while() loop ends here
 
     }

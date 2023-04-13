@@ -21,12 +21,17 @@ class OptionPage extends JFrame implements ActionListener {
    private final JComboBox<String> optionBox = new JComboBox<String>(options);
    private JLabel aboutLabel;
    final JTextField welcomeLabelText, jobUserTextField, backText;
+   private User user;
+
+   public void setUser(User user) {
+      this.user = user;
+   }
 
    // ---------------------------------------------------------------------------------
    // This method creates the GUI for the optionPage
-   OptionPage() {
+   OptionPage(User user) {
       // Assigning JSwing variables values & styling
-
+      setUser(user);
       // Welcome Label
       JLabel welcomeLabel = new JLabel("Welcome to Vehicle Vortex.");
       welcomeLabel.setForeground(Color.WHITE);
@@ -106,12 +111,14 @@ class OptionPage extends JFrame implements ActionListener {
          // IF the "car" button was pressed, it will take them to the carPage
          if (optionBox.getSelectedItem().equals("Car")) {
             // dispose();
-            CarPage.main(null);
+            CarPage page = new CarPage();
+            page.start(user);
          }
          // IF the "job" button was pressed, it will take them to the jobPage
          else if (optionBox.getSelectedItem().equals("Job")) {
             // dispose();
-            JobPage.main(null);
+            JobPage page = new JobPage();
+            page.start(user);
          }
          // else if (optionBox.getSelectedItem().equals("Admin")) {
          // System.out.println("Congrats. You have chosen admin.");

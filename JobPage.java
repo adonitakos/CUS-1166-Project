@@ -21,6 +21,11 @@ class Jobs extends JFrame implements ActionListener {
     private JPanel jobPage;
     private Socket socket;
     VCC vcc = VCC.getInstance();
+    private User user;
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public void setSocket(Socket socket) {
         this.socket = socket;
@@ -28,9 +33,11 @@ class Jobs extends JFrame implements ActionListener {
 
     // ---------------------------------------------------------------------------------
     // This method creates the GUI for the JobWindow
-    Jobs() {
+    Jobs(User user) {
         // Assigning variables values
         // JobID
+        setUser(user);
+
         jobIDLabel = new JLabel();
         jobIDLabel.setText("Job ID:");
         jobIDField = new JTextField(15);
@@ -192,7 +199,7 @@ class Jobs extends JFrame implements ActionListener {
         else if (obj == back) {
 
             // if back button was clicked, reopen OptionPage
-            OptionPage page = new OptionPage();
+            OptionPage page = new OptionPage(user);
             page.setVisible(true);
 
             // if back button was clicked, close current panel
@@ -205,12 +212,12 @@ class Jobs extends JFrame implements ActionListener {
 } // <--- JobPage{} class ends here
 
 class JobPage {
-    public static void main(String[] args) {
+    public void start(User user) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
                     System.out.println("----------*** Attempting Job Owner Connection to Server ***--------");
-                    Jobs form = new Jobs();
+                    Jobs form = new Jobs(user);
                     form.setVisible(true);
                     form.setSize(400, 300);
                     Socket socket = new Socket("localhost", 9806);

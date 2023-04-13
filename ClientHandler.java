@@ -1,8 +1,6 @@
 import java.io.*;
 import java.net.*;
 
-import javax.swing.SwingUtilities;
-
 public class ClientHandler extends Thread {
     final DataInputStream inputStream;
     final DataOutputStream outputStream;

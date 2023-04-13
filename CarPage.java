@@ -21,17 +21,26 @@ class Cars extends JFrame implements ActionListener {
         private final JTextField ownerIDField, carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
         JButton submit, back;
         private Socket socket;
+        private User user;
         VCC vcc = VCC.getInstance();
 
         public void setSocket(Socket socket) {
                 this.socket = socket;
         }
 
+        public User getUser(){
+                return user;
+        }
+
+        public void setUser(User user) {
+                this.user = user;
+        }
+
         // ---------------------------------------------------------------------------------
         // This method creates the GUI for the Cars Window
-        Cars() {
+        Cars(User user) {
                 // Assigning variables values
-
+                setUser(user);
                 // OwnerID
                 ownerIDLabel = new JLabel();
                 ownerIDLabel.setText("Owner ID:");
@@ -188,7 +197,7 @@ class Cars extends JFrame implements ActionListener {
                                 OOS.writeObject(car);
 
                                 if (inputStream.readBoolean()) {
-                                        vcc.addCar(car);
+                                        vcc.addCar(car, user);
                                         System.out.println(
                                                         "Car submission has been approved by VCC. Writing to file...");
                                 } else {
@@ -208,7 +217,7 @@ class Cars extends JFrame implements ActionListener {
                 } else if (obj == back) {
 
                         // if back button was clicked, reopen OptionPage
-                        OptionPage page = new OptionPage();
+                        OptionPage page = new OptionPage(user);
                         page.setVisible(true);
                         // if back button was clicked, close CarPage
                         dispose();
@@ -219,9 +228,9 @@ class Cars extends JFrame implements ActionListener {
 } // <--- Cars{} class ends here
 
 class CarPage {
-        public static void main(String[] args) {
+        public void start(User user) {
                 try {
-                        Cars form = new Cars();
+                        Cars form = new Cars(user);
                         form.setSize(400, 300);
                         form.setVisible(true);
                         System.out.println("----------*** Attempting Car Owner Connection to Server ***--------");
