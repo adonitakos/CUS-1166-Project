@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.Exception;
+import java.sql.SQLException;
 import java.awt.event.ActionListener;
 
 class CreateSignupForm extends JFrame implements ActionListener {
@@ -141,8 +142,14 @@ class CreateSignupForm extends JFrame implements ActionListener {
             }
 
             // Write the user-provided credentials to a file
-            User user = new User(, userValue, passValue);
-            vcc.addUser(user);
+            int userID = User.generateUniqueUserID();
+            User user = new User(userID, userValue, passValue);
+            try {
+                vcc.addUser(user);
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             OptionPage page = new OptionPage(user);
             page.setVisible(true);
 

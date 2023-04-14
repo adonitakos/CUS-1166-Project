@@ -177,13 +177,13 @@ class Cars extends JFrame implements ActionListener {
 
                 if (obj == submit) {
                         // Store user input as string variables
-                        int ownerID = Integer.parseInt(ownerIDField.getText());
+                        int carID = Integer.parseInt(ownerIDField.getText());
                         String carMake = carMakeField.getText();
                         String carModel = carModelField.getText();
                         String carLicensePlate = carLicensePlateField.getText();
                         String carResidencyTime = carResidencyTimeField.getText();
 
-                        Car car = new Car(carLicensePlate, carMake, carModel, carResidencyTime, ownerID);
+                        Car car = new Car(carID, carLicensePlate, user.getUserID(), carMake, carModel, carResidencyTime);
 
                         try {
 

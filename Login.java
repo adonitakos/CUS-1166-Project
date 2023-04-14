@@ -120,9 +120,9 @@ class CreateLoginForm extends JFrame implements ActionListener {
 
             try {
                 User user = vcc.getUser(userValue, passValue);
-
+                vcc.addLogin(user);
                 // --- Admin user login ---
-                if (user.getType() == "admin") {
+                if (user.getType() == "Admin") {
                     // Show a success message if credentials are valid
                     JOptionPane.showMessageDialog(this, "Admin Login successful!", "Success",
                             JOptionPane.INFORMATION_MESSAGE);

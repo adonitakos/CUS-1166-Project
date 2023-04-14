@@ -1,29 +1,36 @@
 import java.io.Serializable;
 
 public class Car implements Serializable{
+
+    private int carID;
     private String carLicensePlate;
+    private int ownerID;
     private String carMake;
     private String carModel;
-    private String carResidencyTime;
-    private int ownerID;
+    private String carResidencyTime;    
+    private Boolean inUse = false;
     private int jobID;
-    private Job Job;
 
-    public Car(String carLicensePlate, String carMake, String carModel, String carResidencyTime, int ownerID) {
+    public Car(int carID, String carLicensePlate, int ownerID,String carMake, String carModel, String carResidencyTime) {
         this.carLicensePlate = carLicensePlate;
         this.carMake = carMake;
         this.carModel = carModel;
-        this.carResidencyTime = carResidencyTime;
         this.ownerID = ownerID;
+        this.carResidencyTime = carResidencyTime;
+        this.carID = carID;
         this.jobID = 0; // Set job ID to 0 to indicate that the car is currently available for hire
     }
 
-    public Job getJob() {
-        return Job;
+    public void setStatus(Boolean status) {
+        this.inUse = status;
     }
 
-    public void setJob(Job job) {
-        this.Job = job;
+    public Boolean getStatus() {
+        return inUse;
+    }
+
+    public int getOwnerID() {
+        return ownerID;
     }
 
     public String getCarLicensePlate() {
@@ -58,12 +65,12 @@ public class Car implements Serializable{
         this.carResidencyTime = carResidencyTime;
     }
 
-    public int getOwnerID() {
-        return ownerID;
+    public int getCarID() {
+        return carID;
     }
 
-    public void setOwnerID(int ownerID) {
-        this.ownerID = ownerID;
+    public void setCarID(int carID) {
+        this.carID = carID;
     }
 
     public int getJobID() {
