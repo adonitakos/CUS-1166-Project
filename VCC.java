@@ -96,7 +96,7 @@ public class VCC {
 		return notCompleted;
 	}
 
-	public Car getCarById(String carID) {
+	public Car getCarById(int carID) {
 		for (int i = 0; i < Cars.size(); i++) {
 			if (Cars.get(i).getCarID() == carID) {
 				return Cars.get(i);
@@ -114,7 +114,7 @@ public class VCC {
 		return null;
 	}
 
-	public Boolean assignCarToJob(int jobId, String carID) {
+	public Boolean assignCarToJob(int jobId, int carID) {
 		Job job = getJobById(jobId);
 		Car car = getCarById(carID);
 		if (car.getJob() == null && job.getCars().size() < job.getRedundancy()) {
@@ -124,7 +124,7 @@ public class VCC {
 		return true;
 	}
 
-	public Boolean deleteCar(String carID) {
+	public Boolean deleteCar(int carID) {
 		Cars.remove(getCarById(carID));
 		return true;
 	}
