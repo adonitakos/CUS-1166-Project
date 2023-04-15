@@ -17,8 +17,8 @@ class Cars extends JFrame implements ActionListener {
 
         // Intializing variables
         private JPanel carPage, welcomePanel, buttonPanel;
-        private JLabel welcome, infoLabel, carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
-        private final JTextField carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
+        private JLabel welcome, infoLabel, carIDLabel, carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
+        private final JTextField carIDField, carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
         JButton submit, back;
         private Socket socket;
         VCC vcc = VCC.getInstance();
@@ -31,6 +31,16 @@ class Cars extends JFrame implements ActionListener {
         // This method creates the GUI for the Cars Window
         Cars() {
                 // Assigning variables values
+
+                // CarID
+                carIDLabel = new JLabel();
+                carIDLabel.setText("Car ID:");
+                carIDField = new JTextField(15);
+                carIDField.add(carIDLabel);
+                carIDLabel.setForeground(Color.WHITE);
+                carIDField.setBorder(BorderFactory.createCompoundBorder(
+                                BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
                 // License Plate
                 carLicensePlateLabel = new JLabel();
@@ -107,10 +117,12 @@ class Cars extends JFrame implements ActionListener {
                 add(welcomePanel, BorderLayout.NORTH);
 
                 // Creating carPage panel
-                carPage = new JPanel(new GridLayout(8, 1));
+                carPage = new JPanel(new GridLayout(10, 1));
                 carPage.setBackground(new Color(86, 53, 158));
 
                 // Adding variables to panel
+                carPage.add(carIDLabel);
+                carPage.add(carIDField);
                 carPage.add(carLicensePlateLabel);
                 carPage.add(carLicensePlateField);
                 carPage.add(carMakeLabel);
@@ -146,12 +158,13 @@ class Cars extends JFrame implements ActionListener {
 
                 if (obj == submit) {
                         // Store user input as string variables
+                        String carID = carIDField.getText();
                         String carMake = carMakeField.getText();
                         String carModel = carModelField.getText();
                         String carLicensePlate = carLicensePlateField.getText();
                         String carResidencyTime = carResidencyTimeField.getText();
 
-                        Car car = new Car(carLicensePlate, carMake, carModel, carResidencyTime);
+                        Car car = new Car(carID, carLicensePlate, carMake, carModel, carResidencyTime);
 
                         try {
 
@@ -177,6 +190,7 @@ class Cars extends JFrame implements ActionListener {
                         }
 
                         // Clearing text fields once user submits to prepare for next input
+                        carIDField.setText("");
                         carMakeField.setText("");
                         carModelField.setText("");
                         carLicensePlateField.setText("");

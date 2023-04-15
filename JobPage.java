@@ -95,7 +95,7 @@ class Jobs extends JFrame implements ActionListener {
         back.setFont(new Font("Inter", Font.BOLD, 16));
         
         // Welcome Label
-        welcome = new JLabel("Welcome to the Job page.", SwingConstants.CENTER);
+        welcome = new JLabel("Welcome to the Job Page.", SwingConstants.CENTER);
         welcome.setForeground(Color.WHITE);
         welcome.setFont(new Font("Inter", Font.BOLD, 26));
 

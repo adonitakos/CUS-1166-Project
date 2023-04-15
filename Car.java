@@ -5,16 +5,16 @@ public class Car implements Serializable{
     private String carMake;
     private String carModel;
     private String carResidencyTime;
-    private int ownerID;
+    private String carID;
     private int jobID;
     private Job Job;
 
-    public Car(String carLicensePlate, String carMake, String carModel, String carResidencyTime) {
+    public Car(String carID, String carLicensePlate, String carMake, String carModel, String carResidencyTime) {
         this.carLicensePlate = carLicensePlate;
         this.carMake = carMake;
         this.carModel = carModel;
         this.carResidencyTime = carResidencyTime;
-        this.jobID = 0; // Set job ID to 0 to indicate that the car is currently available for hire
+        this.carID = carID; // Set job ID to 0 to indicate that the car is currently available for hire
     }
 
     public Job getJob() {
@@ -23,6 +23,14 @@ public class Car implements Serializable{
 
     public void setJob(Job job) {
         this.Job = job;
+    }
+
+    public String getCarID() {
+        return carID;
+    }
+
+    public void setCarID(String carID) {
+        this.carID = carID;
     }
 
     public String getCarLicensePlate() {
@@ -81,6 +89,6 @@ public class Car implements Serializable{
     }
 
     public String getCarInfo() {
-        return "Make: " + this.carMake + ", Model: " + this.carModel + ", Residency Time: " + this.carResidencyTime;
+        return "Car ID: " + this.carID + ", Make: " + this.carMake + ", Model: " + this.carModel + ", Residency Time: " + this.carResidencyTime;
     }
 }

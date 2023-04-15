@@ -10,7 +10,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
 
     // Initializing variables
     private JPanel confirmationPanel, adminPage, jobRequest, carRequest, buttonPanel, backPanel;
-    private JLabel jobIDLabel, jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel, confirmationLabel, ownerIDLabel,
+    private JLabel jobIDLabel, jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel, confirmationLabel, carIDLabel,
             carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
     private JButton back, carByID, jobByID, allCars, allJobs, jobsQueue, completeJobs, checkpointer, accept, reject;
     private DataOutputStream outputStream;
@@ -22,7 +22,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
         this.outputStream = outputStream;
 
         // ConfirmationLabel
-        confirmationLabel = new JLabel("Please review submitted job:", SwingConstants.CENTER);
+        confirmationLabel = new JLabel("Please review the submitted job:", SwingConstants.CENTER);
         confirmationLabel.setForeground(Color.WHITE);
         confirmationLabel.setFont(new Font("Inter", Font.BOLD, 16));
         confirmationLabel.setBackground(new Color(217, 217, 217));
@@ -31,7 +31,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // JobID label
-        jobIDLabel = new JLabel("<html><b><u>ID:</b></u> " + job.getJobID() + "</html>", SwingConstants.CENTER);
+        jobIDLabel = new JLabel("<html><b><u>Job ID:</b></u> " + job.getJobID() + "</html>", SwingConstants.CENTER);
         jobIDLabel.setForeground(Color.WHITE);
         jobIDLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         jobIDLabel.setBackground(new Color(217, 217, 217));
@@ -131,16 +131,16 @@ class CreateAdminForm extends JFrame implements ActionListener {
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Owner ID label (will eventually have same ID as user)
-        ownerIDLabel = new JLabel("<html><b><u>Owner ID:</b></u> </html>", /*car.getOwnerID()*/ SwingConstants.CENTER);
-        ownerIDLabel.setForeground(Color.WHITE);
-        ownerIDLabel.setFont(new Font("Inter", Font.PLAIN, 16));
-        ownerIDLabel.setBackground(new Color(217, 217, 217));
-        ownerIDLabel.setBorder(BorderFactory.createCompoundBorder(
+        carIDLabel = new JLabel("<html><b><u>Car ID:</b></u> " + car.getCarID() + "</html>", SwingConstants.CENTER);
+        carIDLabel.setForeground(Color.WHITE);
+        carIDLabel.setFont(new Font("Inter", Font.PLAIN, 16));
+        carIDLabel.setBackground(new Color(217, 217, 217));
+        carIDLabel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Car Make Label
-        carMakeLabel = new JLabel("<html><b><u>Make:</b></u> " + car.getCarMake() +"</html>", SwingConstants.CENTER);
+        carMakeLabel = new JLabel("<html><b><u>Make:</b></u> " + car.getCarMake() + "</html>", SwingConstants.CENTER);
         carMakeLabel.setForeground(Color.WHITE);
         carMakeLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         carMakeLabel.setBackground(new Color(217, 217, 217));
@@ -200,7 +200,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
         carRequest.setBackground(new Color(86, 53, 158));
 
         // Adding variables to the panel
-        carRequest.add(ownerIDLabel);
+        carRequest.add(carIDLabel);
         carRequest.add(carMakeLabel);
         carRequest.add(carModelLabel);
         carRequest.add(carLicensePlateLabel);

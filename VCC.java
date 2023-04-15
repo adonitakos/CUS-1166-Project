@@ -96,9 +96,9 @@ public class VCC {
 		return notCompleted;
 	}
 
-	public Car getCarById(int ownerId) {
+	public Car getCarById(String carID) {
 		for (int i = 0; i < Cars.size(); i++) {
-			if (Cars.get(i).getOwnerID() == ownerId) {
+			if (Cars.get(i).getCarID() == carID) {
 				return Cars.get(i);
 			}
 		}
@@ -114,9 +114,9 @@ public class VCC {
 		return null;
 	}
 
-	public Boolean assignCarToJob(int jobId, int carId) {
+	public Boolean assignCarToJob(int jobId, String carID) {
 		Job job = getJobById(jobId);
-		Car car = getCarById(carId);
+		Car car = getCarById(carID);
 		if (car.getJob() == null && job.getCars().size() < job.getRedundancy()) {
 			job.addCar(car);
 			car.setJob(job);
@@ -124,8 +124,8 @@ public class VCC {
 		return true;
 	}
 
-	public Boolean deleteCar(int carId) {
-		Cars.remove(getCarById(carId));
+	public Boolean deleteCar(String carID) {
+		Cars.remove(getCarById(carID));
 		return true;
 	}
 
@@ -138,7 +138,7 @@ public class VCC {
 		try {
 			FileWriter writer = new FileWriter("carInfo.txt", true); // true parameter to append to file
 
-			writer.write("Owner ID: " + car.getOwnerID() + " | Car Make: " + car.getCarMake() + " | Car Model: "
+			writer.write("Car ID: " + car.getCarID() + " | Car Make: " + car.getCarMake() + " | Car Model: "
 					+ car.getCarModel()
 					+ " | License Plate: " + car.getCarLicensePlate() + " | Residency Time: "
 					+ car.getCarResidencyTime()
