@@ -13,37 +13,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionListener;
 import java.io.*;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 
 class CreateLoginForm extends JFrame implements ActionListener {
     // Initializing Java Swing Variables
     JButton signInButton, signUpButton;
     JPanel loginPanel;
-    JLabel loginLabel, userLabel, passwordLabel, signUpLabel;
+    JLabel logoLabel, userLabel, passwordLabel, signUpLabel;
     final JTextField userField, passwordField;
 
     // This constructor method creates the GUI for the Login form
-    CreateLoginForm() {
+    CreateLoginForm() throws IOException {
 
         // Assigning Java Swing variables' values & styling
 
-        // Login Label
-        loginLabel = new JLabel();
-        loginLabel.setText("Login");
-        loginLabel.setBounds(115, 30, 100, 40);
-        loginLabel.setForeground(Color.WHITE);
-        loginLabel.setFont(new Font("Inter", Font.BOLD, 30));
-        Dimension size = loginLabel.getPreferredSize();
-        loginLabel.setBounds(120, 32, size.width, size.height);
+        // Logo Label
+        BufferedImage myPicture = ImageIO.read(new File("/Users/summersnyder/Desktop/SJU/logo.png"));
+        logoLabel = new JLabel(new ImageIcon(myPicture));
+        logoLabel.setBounds(27, -20, 309, 218);
 
         // User label
         userLabel = new JLabel();
         userLabel.setText("Username");
-        userLabel.setBounds(44, 100, 100, 16);
+        userLabel.setBounds(54, 180, 100, 16);
         userLabel.setForeground(Color.WHITE);
         userLabel.setFont(new Font("Inter", Font.BOLD, 16));
         // User field
         userField = new JTextField(15);
-        userField.setBounds(37, 128, 249, 38);
+        userField.setBounds(47, 208, 249, 38);
         userField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
@@ -51,12 +49,12 @@ class CreateLoginForm extends JFrame implements ActionListener {
         // Password label
         passwordLabel = new JLabel();
         passwordLabel.setText("Password");
-        passwordLabel.setBounds(44, 180, 100, 16);
+        passwordLabel.setBounds(54, 260, 100, 16);
         passwordLabel.setForeground(Color.WHITE);
         passwordLabel.setFont(new Font("Inter", Font.BOLD, 16));
         // Password field
         passwordField = new JPasswordField(15);
-        passwordField.setBounds(37, 208, 249, 38);
+        passwordField.setBounds(47, 288, 249, 38);
         passwordField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
@@ -64,20 +62,20 @@ class CreateLoginForm extends JFrame implements ActionListener {
         // Sign Up label
         signUpLabel = new JLabel();
         signUpLabel.setText("Don't have an account?");
-        signUpLabel.setBounds(18, 340, 500, 16);
+        signUpLabel.setBounds(18, 400, 500, 16);
         signUpLabel.setForeground(Color.WHITE);
         signUpLabel.setFont(new Font("Inter", Font.BOLD, 16));
-
+        
         // Sign Up button
         signUpButton = new JButton("Sign Up");
-        signUpButton.setBounds(220, 330, 100, 34);
+        signUpButton.setBounds(220, 390, 100, 34);
         signUpButton.setBackground(new Color(217, 217, 217));
         signUpButton.setForeground(new Color(86, 53, 158));
         signUpButton.setFont(new Font("Inter", Font.BOLD, 16));
 
-        // Submit button
+        // SignIn button
         signInButton = new JButton("Sign In");
-        signInButton.setBounds(110, 280, 100, 34);
+        signInButton.setBounds(125, 340, 100, 34);
         signInButton.setBackground(new Color(217, 217, 217));
         signInButton.setForeground(new Color(86, 53, 158));
         signInButton.setFont(new Font("Inter", Font.BOLD, 16));
@@ -88,7 +86,7 @@ class CreateLoginForm extends JFrame implements ActionListener {
         loginPanel.setLayout(null);
 
         // Adding variables to loginPanel
-        loginPanel.add(loginLabel);
+        loginPanel.add(logoLabel);
         loginPanel.add(userLabel);
         loginPanel.add(userField);
         loginPanel.add(passwordLabel);
@@ -102,7 +100,8 @@ class CreateLoginForm extends JFrame implements ActionListener {
         signInButton.addActionListener(this);
         signUpButton.addActionListener(this);
         setTitle("Login Form");
-        setSize(323, 393); // Set the size of the frame
+        setSize(350, 470);
+
 
     } // <--- CreateLoginForm() constructor ends here
 
@@ -179,10 +178,16 @@ class CreateLoginForm extends JFrame implements ActionListener {
         } // <--- if(obj==signInButton) statement ends here
 
         else if (obj == signUpButton) {
+
+            try {
             dispose();
             CreateSignupForm form = new CreateSignupForm();
-            form.setSize(350, 450);
             form.setVisible(true);
+            }
+
+            catch(IOException ex) {
+
+            }
         }
 
     } // <--- actionPerformed() event method ends here
@@ -194,7 +199,6 @@ class Login {
         System.out.println("\n========= Login =========\n");
         try {
             CreateLoginForm form = new CreateLoginForm();
-            form.setSize(350, 420);
             form.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());

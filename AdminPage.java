@@ -9,8 +9,8 @@ import java.io.*;
 class CreateAdminForm extends JFrame implements ActionListener {
 
     // Initializing variables
-    private JPanel confirmationPanel, adminPage, jobRequest, carRequest, buttonPanel, backPanel;
-    private JLabel jobIDLabel, jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel, confirmationLabel, carIDLabel,
+    private JPanel welcomePanel, confirmationPanel, jobRequest, carRequest, buttonPanel, backPanel;
+    private JLabel welcome, infoLabel, jobIDLabel, jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel, confirmationLabel, carIDLabel,
             carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
     private JButton back, carByID, jobByID, allCars, allJobs, jobsQueue, completeJobs, checkpointer, accept, reject;
     private DataOutputStream outputStream;
@@ -130,7 +130,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        // Owner ID label (will eventually have same ID as user)
+        // Car ID label (will eventually have same ID as user)
         carIDLabel = new JLabel("<html><b><u>Car ID:</b></u> " + car.getCarID() + "</html>", SwingConstants.CENTER);
         carIDLabel.setForeground(Color.WHITE);
         carIDLabel.setFont(new Font("Inter", Font.PLAIN, 16));
@@ -325,17 +325,25 @@ class CreateAdminForm extends JFrame implements ActionListener {
         back.setForeground(new Color(86, 53, 158));
         back.setFont(new Font("Inter", Font.BOLD, 16));
 
-        // Creating new panel
-        adminPage = new JPanel();
-        adminPage.setBackground(new Color(86, 53, 158));
-        JLabel welcome = new JLabel(
-                "<html>Welcome to the Admin Page. Please select which data you would like to retrieve.</html>", SwingConstants.CENTER);
-        // Customizing font
-        welcome.setForeground(Color.WHITE);
-        welcome.setFont(new Font("Inter", Font.BOLD, 16));
-        // Adding items to panel
-        adminPage.add(welcome);
-        add(adminPage, BorderLayout.NORTH);
+         // Welcome Label
+         welcome = new JLabel("Welcome to the Admin Page.", SwingConstants.CENTER);
+         // Sets the Welcome string to White text
+         welcome.setForeground(Color.WHITE);
+         welcome.setFont(new Font("Inter", Font.BOLD, 26));
+
+         // Info Label
+         infoLabel = new JLabel("Please select which data you would like to retrieve.", SwingConstants.CENTER);
+         infoLabel.setForeground(Color.WHITE);
+         infoLabel.setFont(new Font("Inter", Font.PLAIN, 12));
+
+        // Creating welcome panel
+        welcomePanel = new JPanel(new GridLayout(2,1));
+        welcomePanel.setBackground(new Color(86, 53, 158));
+        // Adding variables to the panel
+        welcomePanel.add(welcome);
+        welcomePanel.add(infoLabel);
+        add(welcomePanel, BorderLayout.NORTH);
+
 
         // Creating button panel
         buttonPanel = new JPanel();
@@ -368,7 +376,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
         // Setting the title, size, and visibility
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Admin");
-        setSize(675, 175);
+        setSize(675, 350);
         setVisible(true);
 
     } // <--- CreateAdminForm() constructor ends here

@@ -64,9 +64,6 @@ class OptionPage extends JFrame implements ActionListener {
             BorderFactory.createLineBorder(new Color(86, 53, 158)),
             BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-      // Adoni's NOTE: Make these buttons on different rows, make them bigger (at
-      // least wider), and make any adjustments you feel are right
-
       // Creating new panel
       clientUser = new JPanel();
       clientUser.setBackground(new Color(86, 53, 158));

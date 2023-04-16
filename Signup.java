@@ -14,45 +14,45 @@ import java.lang.Exception;
 import java.time.LocalDateTime;
 import java.awt.event.ActionListener;
 import java.io.*;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 
 class CreateSignupForm extends JFrame implements ActionListener {
 // Initializing Java Swing Variables
     JButton submit, back;
     JPanel signupPanel, buttonPanel;
-    JLabel signupLabel, userLabel, passwordLabel, infoLabel;
+    JLabel logoLabel, userLabel, passwordLabel, infoLabel;
     final JTextField userField, passwordField;
 
 // ---------------------------------------------------------------------------------
 // This method creates the GUI for the sign up form
-CreateSignupForm() {
+CreateSignupForm() throws IOException {
     // Assigning JSwing variables values & styling
 
-    // sign up Label
-    signupLabel = new JLabel();
-    signupLabel.setText("Sign Up");
-    signupLabel.setForeground(Color.WHITE);
-    signupLabel.setFont(new Font("Inter", Font.BOLD, 30));
-    Dimension size = signupLabel.getPreferredSize();
-    signupLabel.setBounds(130, 30, size.width, size.height);
+    // Logo Label
+    BufferedImage myPicture = ImageIO.read(new File("/Users/summersnyder/Desktop/SJU/logo.png"));
+    logoLabel = new JLabel(new ImageIcon(myPicture));
+    logoLabel.setBounds(27, -30, 309, 218);
 
     // Info Label
     infoLabel = new JLabel();
-    infoLabel.setText("<html><center>Thanks for choosing Vehicle Vortex! To sign up, please enter your desired username and password. Each field must be at least 5 characters long, and your password must contain at least one special character.</center></html>");
+    infoLabel.setText("<html><center>Thanks for choosing Vehicle Vortex! To sign up, please enter your desired username and password."
+   + " Each field must be at least 5 characters long, and your password must contain at least one special character.</center></html>");
     infoLabel.setFont(new Font("Inter", Font.PLAIN, 15));
-    infoLabel.setBounds(20, 80, 320, 60);
+    infoLabel.setBounds(20, 160, 320, 60);
     infoLabel.setForeground(Color.WHITE);
     infoLabel.setFont(new Font("Inter", Font.PLAIN, 12));
 
     // User Label
     userLabel = new JLabel();
     userLabel.setText("Username");
-    userLabel.setBounds(44, 170, 100, 16);
+    userLabel.setBounds(54, 230, 100, 16);
     userLabel.setForeground(Color.WHITE);
     userLabel.setFont(new Font("Inter", Font.BOLD, 16));
 
     // User Field
     userField = new JTextField(15);
-    userField.setBounds(37, 198, 249, 38);
+    userField.setBounds(47, 258, 249, 38);
     userField.setBorder(BorderFactory.createCompoundBorder(
         BorderFactory.createLineBorder(new Color(86, 53, 158)),
         BorderFactory.createEmptyBorder(10, 10, 10, 10)));
@@ -60,20 +60,20 @@ CreateSignupForm() {
     // Password Label
     passwordLabel = new JLabel();
     passwordLabel.setText("Password");
-    passwordLabel.setBounds(44, 250, 100, 16);
+    passwordLabel.setBounds(54, 310, 100, 16);
     passwordLabel.setForeground(Color.WHITE);
     passwordLabel.setFont(new Font("Inter", Font.BOLD, 16));
 
     // Password Field
     passwordField = new JPasswordField(15);
-    passwordField.setBounds(37, 278, 249, 38);
+    passwordField.setBounds(47, 338, 249, 38);
     passwordField.setBorder(BorderFactory.createCompoundBorder(
         BorderFactory.createLineBorder(new Color(86, 53, 158)),
         BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
     // Submit
     submit = new JButton("Submit");
-    submit.setBounds(125, 350, 100, 34);
+    submit.setBounds(125, 390, 100, 34);
     submit.setBackground(new Color(217, 217, 217));
     submit.setForeground(new Color(86, 53, 158));
     submit.setFont(new Font("Inter", Font.BOLD, 16));
@@ -92,7 +92,7 @@ CreateSignupForm() {
     signupPanel.setLayout(null);
 
     // Adding variables to
-    signupPanel.add(signupLabel);
+    signupPanel.add(logoLabel);
     signupPanel.add(infoLabel);
     signupPanel.add(userLabel);
     signupPanel.add(userField);
@@ -108,9 +108,9 @@ CreateSignupForm() {
     // Creating action listener for the submit button
     submit.addActionListener(this);
     back.addActionListener(this);
-    setTitle("Sign up Form");
+    setTitle("Sign Up Form");
     // setPreferredSize(new Dimension(800, 200));
-    signupPanel.setPreferredSize(new Dimension(600, 700));
+    signupPanel.setPreferredSize(new Dimension(350, 440));
     pack();
 }
 
@@ -156,9 +156,14 @@ CreateSignupForm() {
 
         else if (obj == back) {
             dispose();
+
+            try {
             CreateLoginForm form = new CreateLoginForm();
-            form.setSize(323, 393);
             form.setVisible(true);
+            }
+            catch(IOException ex) {
+            
+            }
         }
     } // <--- actionPerformed() method ends here
 } // <--- CreateSignupForm{} class ends here
@@ -169,7 +174,7 @@ class Signup {
         try {
             CreateSignupForm form = new CreateSignupForm();
             // form.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            form.setSize(355, 490);
+            form.setSize(355, 630);
             form.setVisible(true);
         }
         catch(Exception e) {
