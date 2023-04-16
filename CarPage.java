@@ -1,8 +1,8 @@
-
 /*  Project: Vehicle Vortex
 *   Class: CarPage.java 
 *   Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
-*   This program creates the car page, where users who have selected "Owner"
+*   Date: April 16th, 2023
+*   This program creates the car page, where users who have selected "Car"
 *   will be able to enter details and submit their car for use.
 */
 
@@ -149,6 +149,7 @@ class Cars extends JFrame implements ActionListener {
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
                 setTitle("Car Submission");
+                setSize(450, 500);
         } // <--- Cars() constructor ends here
 
         // ---------------------------------------------------------------------------------
@@ -213,7 +214,6 @@ class CarPage {
         public static void main(String[] args) {
                 try {
                         Cars form = new Cars();
-                        form.setSize(700, 500);
                         form.setVisible(true);
                         System.out.println("----------*** Attempting Car Owner Connection to Server ***--------");
                         Socket socket = new Socket("localhost", 9806);

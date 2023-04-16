@@ -1,9 +1,12 @@
+/* Project: Vehicle Vortex
+*  Class: DBConnection.java
+*  Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+*  Date: April 16th, 2023 
+*  This program creates and returns a database connection.
+*/
+
 import java.sql.*;
 
-/**
- * Creates and returns a database connection
- *
- */
 public class DBConnection {
 	private static Connection conn = null;
 	private static String dbString = "jdbc:mysql://localhost:3306/";

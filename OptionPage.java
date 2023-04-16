@@ -1,8 +1,7 @@
-
 /* Project: Vehicle Vortex
 *  Class: OptionPage.java
 *  Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
-*  Date: February 19th, 2023 
+*  Date: April 16th, 2023 
 *  This program creates an option page, where users will be able to decide
 *  if they would like to submit a car or a job.
 */
@@ -20,7 +19,6 @@ class OptionPage extends JFrame implements ActionListener {
    String[] options = { "", "Car", "Job" };
    private final JComboBox<String> optionBox = new JComboBox<String>(options);
    private JLabel aboutLabel;
-   final JTextField welcomeLabelText, jobUserTextField, backText;
 
    // ---------------------------------------------------------------------------------
    // This method creates the GUI for the optionPage
@@ -28,56 +26,39 @@ class OptionPage extends JFrame implements ActionListener {
       // Assigning JSwing variables values & styling
 
       // Welcome Label
-      JLabel welcomeLabel = new JLabel("Welcome to Vehicle Vortex.");
+      JLabel welcomeLabel = new JLabel("Welcome to Vehicle Vortex.", SwingConstants.CENTER);
       welcomeLabel.setForeground(Color.WHITE);
-      welcomeLabel.setFont(new Font("Inter", Font.PLAIN, 20));
-      welcomeLabelText = new JTextField(15);
-      welcomeLabelText.add(welcomeLabel);
-      welcomeLabel.setForeground(Color.WHITE);
-      welcomeLabel.setFont(new Font("Inter", Font.BOLD, 20));
+      welcomeLabel.setFont(new Font("Inter", Font.BOLD, 26));
       welcomeLabel.setBackground(new Color(217, 217, 217));
-      welcomeLabel.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(86, 53, 158)),
-            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+      welcomeLabel.setBounds(0, -75, 450, 200);
 
       // About Label
-      aboutLabel = new JLabel();
-      aboutLabel.setText(
-            "<html>Vehicle Vortex is an application where car users and job users are able to connect in real time.<br/>Please select from the drop down menu:</html>");
+      aboutLabel = new JLabel("<html><center>Vehicle Vortex is an application where car users and job users are able to connect in real time. Please select from the drop down menu:</center></html>");
       aboutLabel.setForeground(Color.WHITE);
       aboutLabel.setFont(new Font("Inter", Font.ITALIC, 12));
+      aboutLabel.setBounds(0, 20, 450, 100);
 
       // Option Box
       optionBox.setBackground(new Color(217, 217, 217));
       optionBox.setForeground(new Color(86, 53, 158));
       optionBox.setFont(new Font("Inter", Font.BOLD, 15));
+      optionBox.setBounds(170, 70, 100, 100);
 
       // Back button
       back = new JButton("Back");
       back.setBackground(new Color(217, 217, 217));
       back.setForeground(new Color(86, 53, 158));
-      back.setFont(new Font("Inter", Font.BOLD, 20));
-      backText = new JTextField(15);
-      backText.add(back);
-      backText.setBackground(new Color(217, 217, 217));
-      backText.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(86, 53, 158)),
-            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-
+      back.setFont(new Font("Inter", Font.BOLD, 16));
+      
       // Creating new panel
-      clientUser = new JPanel();
+      clientUser = new JPanel(new GridLayout(3, 1));
       clientUser.setBackground(new Color(86, 53, 158));
-      jobUserTextField = new JTextField(15);
-      jobUserTextField.add(clientUser);
-      jobUserTextField.setBackground(new Color(217, 217, 217));
-      jobUserTextField.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(86, 53, 158)),
-            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-
+      
       // Adding variables to the panel
       clientUser.add(welcomeLabel);
       clientUser.add(aboutLabel);
       clientUser.add(optionBox);
+      clientUser.setLayout(null);
       add(clientUser, BorderLayout.CENTER);
 
       // Button Panel
@@ -91,7 +72,7 @@ class OptionPage extends JFrame implements ActionListener {
 
       setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
       setTitle("Welcome");
-      setSize(750, 500);
+      setSize(450, 500);
    } // <--- optionPage() constructor ends here
 
    // ---------------------------------------------------------------------------------

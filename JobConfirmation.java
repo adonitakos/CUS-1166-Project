@@ -1,3 +1,10 @@
+/* Project: Vehicle Vortex
+*  Class: JobConfirmation.java
+*  Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+*  Date: April 16th, 2023 
+*  This program creates a job confirmation pop up.
+*/
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -18,54 +25,36 @@ class JobConfirmation extends JFrame implements ActionListener {
         thankYouLabel.setForeground(Color.WHITE);
         thankYouLabel.setFont(new Font("Inter", Font.BOLD, 22));
         thankYouLabel.setBackground(new Color(217, 217, 217));
-        thankYouLabel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // JobID label
         jobIDLabel = new JLabel("<html><b><u>Job ID:</u></b> " + job.getJobID() + "</html>", SwingConstants.CENTER);
         jobIDLabel.setForeground(Color.WHITE);
         jobIDLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         jobIDLabel.setBackground(new Color(217, 217, 217));
-        jobIDLabel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Duration Label
         jobDurationLabel = new JLabel("<html><b><u>Job Duration:</b></u> " + job.getJobDuration() + " hours.</html>", SwingConstants.CENTER);
         jobDurationLabel.setForeground(Color.WHITE);
         jobDurationLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         jobDurationLabel.setBackground(new Color(217, 217, 217));
-        jobDurationLabel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Deadline Label
         jobDeadlineLabel = new JLabel("<html><b><u>Job Deadline:</b></u> " + job.getJobDeadline() + "</html>", SwingConstants.CENTER);
         jobDeadlineLabel.setForeground(Color.WHITE);
         jobDeadlineLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         jobDeadlineLabel.setBackground(new Color(217, 217, 217));
-        jobDeadlineLabel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Description Label
         jobDescriptionLabel = new JLabel("<html><b><u>Job Description:</b></u> " + job.getJobDescription() + "</html>", SwingConstants.CENTER);
         jobDescriptionLabel.setForeground(Color.WHITE);
         jobDescriptionLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         jobDescriptionLabel.setBackground(new Color(217, 217, 217));
-        jobDescriptionLabel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Completion Label
-        jobCompletionLabel = new JLabel("<html><b><u>Job completion time:</b></u> " + job.getCompletionTime() + " hours.</html>", SwingConstants.CENTER);
+        jobCompletionLabel = new JLabel("<html><b><u>Job Completion Time:</b></u> " + job.getCompletionTime() + " hours.</html>", SwingConstants.CENTER);
         jobCompletionLabel.setForeground(Color.WHITE);
         jobCompletionLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         jobCompletionLabel.setBackground(new Color(217, 217, 217));
-        jobCompletionLabel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Close Button
         close = new JButton("Close");
@@ -85,8 +74,8 @@ class JobConfirmation extends JFrame implements ActionListener {
         confirmationPanel.setBackground(new Color(86, 53, 158));
 
         // Adding variables to the panel
-        confirmationPanel.add(jobCompletionLabel);
         confirmationPanel.add(jobIDLabel);
+        confirmationPanel.add(jobCompletionLabel);
         confirmationPanel.add(jobDurationLabel);
         confirmationPanel.add(jobDeadlineLabel);
         confirmationPanel.add(jobDescriptionLabel);
@@ -104,7 +93,7 @@ class JobConfirmation extends JFrame implements ActionListener {
 
         // Setting title, size, and visibility
         setTitle("Confirmation");
-        setSize(600, 350);
+        setSize(500, 350);
         setVisible(true);
     } // <--- Confirmation() constructor ends here
 

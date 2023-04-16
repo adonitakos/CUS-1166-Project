@@ -1,3 +1,10 @@
+/* Project: Vehicle Vortex
+*  Class: Car.java
+*  Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+*  Date: April 16th, 2023 
+*  This file contains the classes that will be used for the Car.
+*/
+
 import java.io.Serializable;
 
 public class Car implements Serializable{
@@ -14,7 +21,7 @@ public class Car implements Serializable{
         this.carMake = carMake;
         this.carModel = carModel;
         this.carResidencyTime = carResidencyTime;
-        this.carID = 0; // Set job ID to 0 to indicate that the car is currently available for hire
+        this.carID = carID; // Set car ID to 0 to indicate that the car is currently available for hire (removed for now)
     }
 
     public Job getJob() {

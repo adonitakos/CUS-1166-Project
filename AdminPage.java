@@ -1,3 +1,10 @@
+/* Project: Vehicle Vortex
+*  Class: AdminPage.java
+*  Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+*  Date: April 16th, 2023 
+*  This program creates the admin page, where the admin is able to accept/decline/view jobs.
+*/
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -17,54 +24,41 @@ class CreateAdminForm extends JFrame implements ActionListener {
     // Instantiate the VCC class in the Admin class
     VCC vcc = VCC.getInstance();
 
+    // ---------------------------------------------------------------------------------
+    // This constructor creates the GUI for the job review pop up
     CreateAdminForm(Job job, Socket socket, DataInputStream inputStream, DataOutputStream outputStream) {
 
         this.outputStream = outputStream;
 
-        // ConfirmationLabel
+        // Confirmation Label
         confirmationLabel = new JLabel("Please review the submitted job:", SwingConstants.CENTER);
         confirmationLabel.setForeground(Color.WHITE);
         confirmationLabel.setFont(new Font("Inter", Font.BOLD, 16));
         confirmationLabel.setBackground(new Color(217, 217, 217));
-        confirmationLabel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        // JobID label
+        // JobID Label
         jobIDLabel = new JLabel("<html><b><u>Job ID:</b></u> " + job.getJobID() + "</html>", SwingConstants.CENTER);
         jobIDLabel.setForeground(Color.WHITE);
         jobIDLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         jobIDLabel.setBackground(new Color(217, 217, 217));
-        jobIDLabel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Duration Label
         jobDurationLabel = new JLabel("<html><u><b>Duration:</u></b> " + job.getJobDuration() + " hours</html>", SwingConstants.CENTER);
         jobDurationLabel.setForeground(Color.WHITE);
         jobDurationLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         jobDurationLabel.setBackground(new Color(217, 217, 217));
-        jobDurationLabel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Deadline Label
         jobDeadlineLabel = new JLabel("<html><u><b>Deadline:</u></b> " + job.getJobDeadline() + "</html>", SwingConstants.CENTER);
         jobDeadlineLabel.setForeground(Color.WHITE);
         jobDeadlineLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         jobDeadlineLabel.setBackground(new Color(217, 217, 217));
-        jobDeadlineLabel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Description Label
         jobDescriptionLabel = new JLabel("<html><b><u>Description:</u></b> " + job.getJobDescription() +"</html>", SwingConstants.CENTER);
         jobDescriptionLabel.setForeground(Color.WHITE);
         jobDescriptionLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         jobDescriptionLabel.setBackground(new Color(217, 217, 217));
-        jobDescriptionLabel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
     
         // Accept Button
         accept = new JButton("Accept");
@@ -113,8 +107,10 @@ class CreateAdminForm extends JFrame implements ActionListener {
         setSize(400, 425);
         setVisible(true);
 
-    } // <--- CreateAdminForm(Jib job) constructor
+    } // <--- CreateAdminForm(Job job) constructor
 
+    // ---------------------------------------------------------------------------------
+    // This constructor creates the GUI for the car review pop up
     CreateAdminForm(Car car, Socket socket, DataInputStream inputStream, DataOutputStream outputStream) {
 
         this.outputStream = outputStream;
@@ -126,54 +122,36 @@ class CreateAdminForm extends JFrame implements ActionListener {
         confirmationLabel.setForeground(Color.WHITE);
         confirmationLabel.setFont(new Font("Inter", Font.BOLD, 16));
         confirmationLabel.setBackground(new Color(217, 217, 217));
-        confirmationLabel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Car ID label (will eventually have same ID as user)
         carIDLabel = new JLabel("<html><b><u>Car ID:</b></u> " + car.getCarID() + "</html>", SwingConstants.CENTER);
         carIDLabel.setForeground(Color.WHITE);
         carIDLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         carIDLabel.setBackground(new Color(217, 217, 217));
-        carIDLabel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Car Make Label
         carMakeLabel = new JLabel("<html><b><u>Make:</b></u> " + car.getCarMake() + "</html>", SwingConstants.CENTER);
         carMakeLabel.setForeground(Color.WHITE);
         carMakeLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         carMakeLabel.setBackground(new Color(217, 217, 217));
-        carMakeLabel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Car Model Label
         carModelLabel = new JLabel("<html><b><u>Model:</b></u> " + car.getCarModel() + "</html>", SwingConstants.CENTER);
         carModelLabel.setForeground(Color.WHITE);
         carModelLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         carModelLabel.setBackground(new Color(217, 217, 217));
-        carModelLabel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Car License Plate Label
         carLicensePlateLabel = new JLabel("<html><b><u>License Plate:</b></u> " + car.getCarLicensePlate() + "</html>", SwingConstants.CENTER);
         carLicensePlateLabel.setForeground(Color.WHITE);
         carLicensePlateLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         carLicensePlateLabel.setBackground(new Color(217, 217, 217));
-        carLicensePlateLabel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Car Residency Time Label
         carResidencyTimeLabel = new JLabel("<html><b><u>Residency Time:</b></u> " + car.getCarResidencyTime() + " hours</html>", SwingConstants.CENTER);
         carResidencyTimeLabel.setForeground(Color.WHITE);
         carResidencyTimeLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         carResidencyTimeLabel.setBackground(new Color(217, 217, 217));
-        carResidencyTimeLabel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Accept Button
         accept = new JButton("Accept");
@@ -267,6 +245,8 @@ class CreateAdminForm extends JFrame implements ActionListener {
         }
     } // <--- actionPerformed() method ends here
 
+    // ---------------------------------------------------------------------------------
+    // This constructor creates the GUI for the admin form
     CreateAdminForm() {
 
         // JobByID Button

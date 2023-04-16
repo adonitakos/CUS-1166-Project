@@ -1,8 +1,7 @@
-
 /*  Project: Vehicle Vortex
 *   Class: Signup.java 
 *   Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
-*   Date: February 19th, 2023 
+*   Date: April 16th, 2023 
 *   This program creates a signup page, where users are able to enter their credentials,
 *   where they will gain access to Vehicle Vortex.
 */ 
@@ -80,18 +79,16 @@ CreateSignupForm() throws IOException {
 
     // Back
     back = new JButton("Back");
-    back.setBounds(110, 350, 100, 34);
     back.setBackground(new Color(217, 217, 217));
     back.setForeground(new Color(86, 53, 158));
     back.setFont(new Font("Inter", Font.BOLD, 16));
 
     // Creating a new Panel
-    JPanel signupPanel = new JPanel();
-    // signupPanel.setPreferredSize(new Dimension(700, 700));
+    signupPanel = new JPanel();
     signupPanel.setBackground(new Color(86, 53, 158));
     signupPanel.setLayout(null);
 
-    // Adding variables to
+    // Adding variables to SignUp Panel
     signupPanel.add(logoLabel);
     signupPanel.add(infoLabel);
     signupPanel.add(userLabel);
@@ -101,15 +98,15 @@ CreateSignupForm() throws IOException {
     signupPanel.add(submit);
     add(signupPanel, BorderLayout.CENTER);
 
+    // Creating Button Panel
     buttonPanel = new JPanel();
       buttonPanel.add(back);
       add(buttonPanel, BorderLayout.SOUTH);
 
-    // Creating action listener for the submit button
+    // Creating action listener for the buttons
     submit.addActionListener(this);
     back.addActionListener(this);
     setTitle("Sign Up Form");
-    // setPreferredSize(new Dimension(800, 200));
     signupPanel.setPreferredSize(new Dimension(350, 440));
     pack();
 }

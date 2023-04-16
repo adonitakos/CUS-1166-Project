@@ -1,3 +1,9 @@
+/* Project: Vehicle Vortex
+*  Class: Checkpoint.java
+*  Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+*  Date: April 16th, 2023 
+*/
+
 import java.util.Date;
 
 public class Checkpoint {

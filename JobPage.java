@@ -1,7 +1,7 @@
-
 /* Project: Vehicle Vortex
 * Class: JobPage.java
 * Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+* Date: April 16th, 2023
 * This program creates a job page, where users who have selected "Job" will
 * be able to enter details and submit the job they would like completed.
 */
@@ -141,9 +141,10 @@ class Jobs extends JFrame implements ActionListener {
         jobCompletion.addActionListener(this);
         back.addActionListener(this);
 
-        // Setting title
+        // Setting title and size
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Job Submission");
+        setSize(450, 500);
     } // <--- Jobs() constructor ends here
 
     // ---------------------------------------------------------------------------------
@@ -223,7 +224,6 @@ class JobPage {
                     System.out.println("----------*** Attempting Job Owner Connection to Server ***--------");
                     Jobs form = new Jobs();
                     form.setVisible(true);
-                    form.setSize(700, 500);
                     Socket socket = new Socket("localhost", 9806);
                     form.setSocket(socket);
                 } catch (Exception e) {
