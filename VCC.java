@@ -18,6 +18,7 @@ public class VCC {
 	private static Connection conn;
 
 	private static Car buildCar(ResultSet rs) throws SQLException {
+		rs.next();
 		int carID = rs.getInt("carID");
 		String carLicensePlate = rs.getString("plateNum");
 		int ownerID = rs.getInt("carOwnerID");
@@ -37,7 +38,8 @@ public class VCC {
 	}
 
 	private static Job buildJob(ResultSet rs) throws SQLException {
-		int jobID = rs.getInt("jobID");
+		rs.next();
+		int jobID = rs.getInt("ID");
 		int jobDuration = rs.getInt("duration");
 		String jobDeadline = rs.getString("deadline");
 		int completionStatus = rs.getInt("status");
@@ -60,10 +62,11 @@ public class VCC {
 	}
 
 	private static User buildUser(ResultSet rs) throws SQLException {
-		int userID = rs.getInt("userID");// Ask and delete
+		rs.next();
+		int userID = rs.getInt("ID");// Ask and delete
 		String userName = rs.getString("username");
 		String userPassword = rs.getString("password");
-		String type = rs.getString("userType");
+		String type = rs.getString("Type");
 		User user = new User(userID, userName, userPassword);
 		user.setType(type);
 		return user;

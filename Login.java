@@ -121,8 +121,12 @@ class CreateLoginForm extends JFrame implements ActionListener {
             try {
                 User user = vcc.getUser(userValue, passValue);
                 vcc.addLogin(user);
+                System.out.println(user.getType());
+                Boolean type = user.getType() == "Admin";
+                System.out.println(type);
                 // --- Admin user login ---
-                if (user.getType() == "Admin") {
+                if (user.getType().equals("Admin")) {
+                    System.out.println("admin login");
                     // Show a success message if credentials are valid
                     JOptionPane.showMessageDialog(this, "Admin Login successful!", "Success",
                             JOptionPane.INFORMATION_MESSAGE);
@@ -139,7 +143,7 @@ class CreateLoginForm extends JFrame implements ActionListener {
                 } // <--- if(admin) statement ends here
                   // --- Regular user login ---
 
-                else if (user.getType() == "User") {
+                else if (user.getType().equals("User")) {
                     // Show a success message if credentials are valid
                     JOptionPane.showMessageDialog(this, "Login successful!", "Success",
                             JOptionPane.INFORMATION_MESSAGE);
@@ -156,12 +160,7 @@ class CreateLoginForm extends JFrame implements ActionListener {
             } catch (SQLException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
-            } // else {
-              // Display an error message if credentials are invalid
-              // JOptionPane.showMessageDialog(this, "Invalid username or password.", "Error",
-              // JOptionPane.ERROR_MESSAGE);
-
-            // }
+            } 
         } // <--- if(obj==signInButton) statement ends here
 
         else if (obj == signUpButton)
