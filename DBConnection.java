@@ -6,7 +6,7 @@ import java.sql.*;
  */
 public class DBConnection {
 	private static Connection conn = null;
-	private static String dbString = "jdbc:mysql://localhost:3306/";
+	private static String dbString = "jdbc:mysql://localhost:3306/vehicle_vortex";
 	private static String userName = "root";
 	private static String password = "password";// Change to personal system password
 	public static String winflag = "?useSSL=false";
@@ -37,7 +37,7 @@ public class DBConnection {
 	 */
 	public static Connection getMyConnection() throws SQLException {
 		if (conn == null) {
-			String fullDBString = dbString + dbname + winflag;
+			String fullDBString = dbString + winflag;
 			conn = DriverManager.getConnection(fullDBString, userName, password);
 		}
 		return conn;
