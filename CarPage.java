@@ -191,6 +191,8 @@ class Cars extends JFrame implements ActionListener {
                                         vcc.addCar(car, user);
                                         System.out.println(
                                                         "Car submission has been approved by VCC. Writing to file...");
+
+                                        
                                 } else {
                                         System.out.println("Car submission has been denied by VCC.");
                                 }
@@ -205,6 +207,11 @@ class Cars extends JFrame implements ActionListener {
                         carModelField.setText("");
                         carLicensePlateField.setText("");
                         carResidencyTimeField.setText("");
+
+                        //Open pop-up Car Confirmation page
+                        CarConfirmation form = new CarConfirmation(car);
+                        form.setVisible(true);
+                        form.setSize(800, 300);
 
                 } else if (obj == back) {
 
