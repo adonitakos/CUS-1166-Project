@@ -17,8 +17,8 @@ class Cars extends JFrame implements ActionListener {
 
         // Intializing variables
         private JPanel carPage, welcomePanel, buttonPanel;
-        private JLabel welcome, ownerIDLabel, infoLabel, carIDLabel, carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
-        private final JTextField carIDField, ownerIDField, carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
+        private JLabel welcome, carIDLabel, infoLabel, carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
+        private final JTextField carIDField, carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
         JButton submit, back;
         private Socket socket;
         private User user;
@@ -42,17 +42,17 @@ class Cars extends JFrame implements ActionListener {
                 // Assigning variables values
                 setUser(user);
                 // OwnerID
-                ownerIDLabel = new JLabel();
-                ownerIDLabel.setText("Owner ID:");
-                ownerIDField = new JTextField(15);
-                ownerIDField.add(ownerIDLabel);
-                ownerIDLabel.setForeground(Color.WHITE);
-                ownerIDField.setBackground(new Color(217, 217, 217));
-                ownerIDField.setBorder(BorderFactory.createCompoundBorder(
+                carIDLabel = new JLabel();
+                carIDLabel.setText("Owner ID:");
+                carIDField = new JTextField(15);
+                carIDField.add(carIDLabel);
+                carIDLabel.setForeground(Color.WHITE);
+                carIDField.setBackground(new Color(217, 217, 217));
+                carIDField.setBorder(BorderFactory.createCompoundBorder(
                                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-                ownerIDField.setBackground(new Color(217, 217, 217));
-                ownerIDField.setBorder(BorderFactory.createCompoundBorder(
+                carIDField.setBackground(new Color(217, 217, 217));
+                carIDField.setBorder(BorderFactory.createCompoundBorder(
                                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
@@ -173,7 +173,7 @@ class Cars extends JFrame implements ActionListener {
 
                 if (obj == submit) {
                         // Store user input as string variables
-                        int carID = Integer.parseInt(ownerIDField.getText());
+                        int carID = Integer.parseInt(carIDField.getText());
                         String carMake = carMakeField.getText();
                         String carModel = carModelField.getText();
                         String carLicensePlate = carLicensePlateField.getText();

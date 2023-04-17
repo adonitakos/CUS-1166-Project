@@ -19,7 +19,6 @@ class OptionPage extends JFrame implements ActionListener {
    String[] options = { "", "Car", "Job" };
    private final JComboBox<String> optionBox = new JComboBox<String>(options);
    private JLabel aboutLabel;
-   final JTextField welcomeLabelText, jobUserTextField, backText;
    private User user;
 
    public void setUser(User user) {
