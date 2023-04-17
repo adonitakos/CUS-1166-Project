@@ -56,7 +56,6 @@ class Jobs extends JFrame implements ActionListener {
         jobDurationField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-                
 
         // Deadline Label
         jobDeadlineLabel = new JLabel();
@@ -78,7 +77,6 @@ class Jobs extends JFrame implements ActionListener {
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-
         // Job Completion Label
         jobCompletion = new JButton("Completion Time");
         jobCompletion.setBounds(110, 270, 100, 34);
@@ -99,19 +97,20 @@ class Jobs extends JFrame implements ActionListener {
         back.setBackground(new Color(217, 217, 217));
         back.setForeground(new Color(86, 53, 158));
         back.setFont(new Font("Inter", Font.BOLD, 16));
-        
+
         // Welcome Label
         welcome = new JLabel("Welcome to the Job Page.", SwingConstants.CENTER);
         welcome.setForeground(Color.WHITE);
         welcome.setFont(new Font("Inter", Font.BOLD, 26));
 
         // Info Label
-        infoLabel = new JLabel("Please enter the following information, leaving no fields blank.", SwingConstants.CENTER);
+        infoLabel = new JLabel("Please enter the following information, leaving no fields blank.",
+                SwingConstants.CENTER);
         infoLabel.setForeground(Color.WHITE);
         infoLabel.setFont(new Font("Inter", Font.PLAIN, 12));
 
         // Creating welcome panel
-        welcomePanel = new JPanel(new GridLayout(2,1));
+        welcomePanel = new JPanel(new GridLayout(2, 1));
         welcomePanel.setBackground(new Color(86, 53, 158));
         // Adding variables to panel
         welcomePanel.add(welcome);
@@ -121,7 +120,7 @@ class Jobs extends JFrame implements ActionListener {
         // Creating a new panel
         jobPage = new JPanel(new GridLayout(8, 1));
         jobPage.setBackground(new Color(86, 53, 158));
-        
+
         // Adding variables to the panel
         jobPage.add(jobIDLabel);
         jobPage.add(jobIDField);
@@ -159,65 +158,70 @@ class Jobs extends JFrame implements ActionListener {
         // Storing the ActionEvent as an Object
         Object obj = e.getSource();
 
-        if (obj == submit) {
-            // Assigning the information that will be inputted by the user as string variables
-            int jobID = Integer.parseInt(jobIDField.getText());
-            int jobDuration = Integer.parseInt(jobDurationField.getText());
-            String jobDeadline = jobDeadlineField.getText();
-            String jobDescription = jobDescriptionField.getText();
+        try {
+            DataInputStream inputStream = new DataInputStream(socket.getInputStream());
+            OutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+            ObjectOutputStream OOS = new ObjectOutputStream(outputStream);
 
-            Job job = new Job(jobID, jobDuration, jobDeadline, jobDescription);
+            if (obj == submit) {
+                // Assigning the information that will be inputted by the user as string
+                // variables
+                int jobID = Integer.parseInt(jobIDField.getText());
+                int jobDuration = Integer.parseInt(jobDurationField.getText());
+                String jobDeadline = jobDeadlineField.getText();
+                String jobDescription = jobDescriptionField.getText();
 
-            try {
+                Job job = new Job(jobID, jobDuration, jobDeadline, jobDescription);
+                job.setOwnerID(user.getUserID());
+                try {
 
-                DataInputStream inputStream = new DataInputStream(socket.getInputStream());
-                OutputStream outputStream = new DataOutputStream(socket.getOutputStream());
-                ObjectOutputStream OOS = new ObjectOutputStream(outputStream);
+                    System.out.println("Sending job to VCC...");
 
-                System.out.println("Sending job to VCC...");
+                    // server sends the message to client
+                    OOS.writeObject(job);
 
-                // server sends the message to client
-                OOS.writeObject(job);
-
-                if (inputStream.readBoolean()) {
-                    vcc.addJob(job);
-                    System.out.println("Job submission has been approved by VCC. Writing to file...");
-                } else {
-                    System.out.println("Job submission has been denied by VCC.");
+                    if (inputStream.readBoolean()) {
+                        vcc.addJob(job);
+                        System.out.println("Job submission has been approved by VCC. Writing to file...");
+                        OOS.reset();
+                    } else {
+                        System.out.println("Job submission has been denied by VCC.");
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
-            } catch (Exception ex) {
-                ex.printStackTrace();
+
+                // Clearing text fields once user submits to prepare for next input
+                jobIDField.setText("");
+                jobDurationField.setText("");
+                jobDeadlineField.setText("");
+                jobDescriptionField.setText("");
+
+                // Open pop-up Job Confirmation page
+                JobConfirmation form = new JobConfirmation(job);
+                form.setVisible(true);
+                form.setSize(800, 300);
+
+            } else if (obj == jobCompletion) {
+                LinkedList<Job> jobs = vcc.getAllJobs();
+                Job job = jobs.getLast();
+                System.out.print("The completion time is: " + job.getCompletionTime() + " hours.");
             }
 
-            // Clearing text fields once user submits to prepare for next input
-            jobIDField.setText("");
-            jobDurationField.setText("");
-            jobDeadlineField.setText("");
-            jobDescriptionField.setText("");
+            else if (obj == back) {
 
-            // Open pop-up Job Confirmation page
-            JobConfirmation form = new JobConfirmation(job);
-            form.setVisible(true);
-            form.setSize(800, 300);
+                // if back button was clicked, reopen OptionPage
+                OptionPage page = new OptionPage(user);
+                page.setVisible(true);
 
-        } else if (obj == jobCompletion) {
-            LinkedList<Job> jobs = vcc.getAllJobs();
-            Job job = jobs.getLast();
-            System.out.print("The completion time is: " + job.getCompletionTime() + " hours.");
-        }
+                // if back button was clicked, close current panel
+                dispose();
+            } else {
+                System.out.println("Error.");
 
-        else if (obj == back) {
-
-            // if back button was clicked, reopen OptionPage
-            OptionPage page = new OptionPage(user);
-            page.setVisible(true);
-
-            // if back button was clicked, close current panel
-            dispose();
-        }
-        else {
-            System.out.println("Error.");
-
+            }
+        } catch (Exception ex) {
+            // TODO: handle exception
         } // <--- actionPerformed() method ends here
     } // <--- Jobs{} class ends here
 } // <--- JobPage{} class ends here
@@ -229,6 +233,7 @@ class JobPage {
                 try {
                     System.out.println("----------*** Attempting Job Owner Connection to Server ***--------");
                     Jobs form = new Jobs(user);
+                    System.out.println(user.getUserID());
                     form.setVisible(true);
                     Socket socket = new Socket("localhost", 9806);
                     form.setSocket(socket);

@@ -218,11 +218,13 @@ public class VCC {
 		PreparedStatement stmt2 = conn.prepareStatement(query2);
 		ResultSet rs = stmt2.executeQuery();
 		rs.next();
-		int total = rs.getInt(1);
-		stmt.setInt(6, total + job.getJobDuration());
+		int total = rs.getInt(1) + job.getJobDuration();
+		stmt.setInt(6, total);
+		job.setCompletionTime(total);
 		stmt.setString(7, job.getJobDescription());
 		stmt.setInt(8, job.getOwnerID());
-		stmt.setNull(9, Types.INTEGER);
+		System.out.println(job.getOwnerID());
+		stmt.setInt(9, 0);
 		stmt.setTimestamp(10, new java.sql.Timestamp(new java.util.Date().getTime()));
 		stmt.executeUpdate();
 		stmt.close();

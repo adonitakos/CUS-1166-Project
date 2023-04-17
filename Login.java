@@ -143,6 +143,7 @@ class CreateLoginForm extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(this, "Login successful!", "Success",
                             JOptionPane.INFORMATION_MESSAGE);
                     // Open the "options.java" page
+                    System.out.println(user.getUserID());
                     OptionPage optionPage = new OptionPage(user);
                     optionPage.setVisible(true);
                     userField.setText("");
