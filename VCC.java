@@ -217,6 +217,7 @@ public class VCC {
 		String query2 = ("select sum(duration) as total from jobs");
 		PreparedStatement stmt2 = conn.prepareStatement(query2);
 		ResultSet rs = stmt2.executeQuery();
+		rs.next();
 		int total = rs.getInt(1);
 		stmt.setInt(6, total + job.getJobDuration());
 		stmt.setString(7, job.getJobDescription());
@@ -238,7 +239,7 @@ public class VCC {
 		stmt.setString(4, car.getCarMake());
 		stmt.setString(5, car.getCarModel());
 		stmt.setString(6, car.getCarResidencyTime());
-		stmt.setNull(7, Types.INTEGER);
+		stmt.setInt(7, 0);
 		stmt.setNull(8, Types.INTEGER);
 		stmt.setTimestamp(9, new java.sql.Timestamp(new java.util.Date().getTime()));
 		stmt.executeUpdate();
