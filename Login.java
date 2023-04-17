@@ -30,7 +30,7 @@ class CreateLoginForm extends JFrame implements ActionListener {
         // Assigning Java Swing variables' values & styling
 
         // Logo Label
-        BufferedImage myPicture = ImageIO.read(new File("/Users/summersnyder/Desktop/SJU/logo.png"));
+        BufferedImage myPicture = ImageIO.read(new File("logo.png"));
         logoLabel = new JLabel(new ImageIcon(myPicture));
         logoLabel.setBounds(27, -20, 309, 218);
 
