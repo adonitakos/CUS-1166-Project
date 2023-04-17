@@ -11,7 +11,7 @@ public class DBConnection {
 	private static Connection conn = null;
 	private static String dbString = "jdbc:mysql://localhost:3306/vehicle_vortex";
 	private static String userName = "root";
-	private static String password = "2Tgaming";// Change to personal system password
+	private static String password = "password";// Change to personal system password
 	public static String winflag = "?useSSL=false";
 
 	/**
