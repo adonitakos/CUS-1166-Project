@@ -17,18 +17,20 @@ class Cars extends JFrame implements ActionListener {
 
         // Intializing variables
         private JPanel carPage, welcomePanel, buttonPanel;
-        private JLabel welcome, carIDLabel, infoLabel, carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
+        private JLabel welcome, carIDLabel, infoLabel, carMakeLabel, carModelLabel, carLicensePlateLabel,
+                        carResidencyTimeLabel;
         private final JTextField carIDField, carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
         JButton submit, back;
         private Socket socket;
         private User user;
         VCC vcc = VCC.getInstance();
+        private int objectsPassed = 0;
 
         public void setSocket(Socket socket) {
                 this.socket = socket;
         }
 
-        public User getUser(){
+        public User getUser() {
                 return user;
         }
 
@@ -61,7 +63,6 @@ class Cars extends JFrame implements ActionListener {
                                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-
                 // Make
                 carMakeLabel = new JLabel();
                 carMakeLabel.setText("Make:");
@@ -71,7 +72,7 @@ class Cars extends JFrame implements ActionListener {
                 carMakeField.setBorder(BorderFactory.createCompoundBorder(
                                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-     
+
                 // Model
                 carModelLabel = new JLabel();
                 carModelLabel.setText("Model:");
@@ -113,12 +114,13 @@ class Cars extends JFrame implements ActionListener {
                 welcome.setFont(new Font("Inter", Font.BOLD, 26));
 
                 // Info Label
-                infoLabel = new JLabel("Please enter the following information, leaving no fields blank.", SwingConstants.CENTER);
+                infoLabel = new JLabel("Please enter the following information, leaving no fields blank.",
+                                SwingConstants.CENTER);
                 infoLabel.setForeground(Color.WHITE);
                 infoLabel.setFont(new Font("Inter", Font.PLAIN, 12));
 
                 // Creating welcome panel
-                welcomePanel = new JPanel(new GridLayout(2,1));
+                welcomePanel = new JPanel(new GridLayout(2, 1));
                 welcomePanel.setBackground(new Color(86, 53, 158));
                 // Adding variables to the panel
                 welcomePanel.add(welcome);
@@ -166,55 +168,66 @@ class Cars extends JFrame implements ActionListener {
         public void actionPerformed(ActionEvent e) {
                 Object obj = e.getSource();
 
-                if (obj == submit) {
-                        // Store user input as string variables
-                        int carID = Integer.parseInt(carIDField.getText());
-                        String carMake = carMakeField.getText();
-                        String carModel = carModelField.getText();
-                        String carLicensePlate = carLicensePlateField.getText();
-                        String carResidencyTime = carResidencyTimeField.getText();
+                try {
 
-                        Car car = new Car(carID, carLicensePlate, user.getUserID(), carMake, carModel, carResidencyTime);
+                        DataInputStream inputStream = new DataInputStream(socket.getInputStream());
+                        OutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+                        if (obj == submit) {
+                                // Store user input as string variables
+                                int carID = Integer.parseInt(carIDField.getText());
+                                String carMake = carMakeField.getText();
+                                String carModel = carModelField.getText();
+                                String carLicensePlate = carLicensePlateField.getText();
+                                String carResidencyTime = carResidencyTimeField.getText();
 
-                        try {
+                                Car car = new Car(carID, carLicensePlate, user.getUserID(), carMake, carModel,
+                                                carResidencyTime);
 
-                                DataInputStream inputStream = new DataInputStream(socket.getInputStream());
-                                OutputStream outputStream = new DataOutputStream(socket.getOutputStream());
-                                ObjectOutputStream OOS = new ObjectOutputStream(outputStream);
+                                try {
+                                        System.out.println("Sending car to VCC...");
 
-                                System.out.println("Sending car to VCC...");
+                                        if (objectsPassed == 0) {
+                                                ObjectOutputStream OOS = new ObjectOutputStream(outputStream);
+                                                objectsPassed += 1;
+                                                OOS.writeObject(car);
+                                        } else {
+                                                MyObjectOutputStream OOS = new MyObjectOutputStream(outputStream);
+                                                OOS.writeObject(car);
+                                        }
+                                        if (inputStream.readBoolean()) {
+                                                vcc.addCar(car, user);
+                                                System.out.println(
+                                                                "Car submission has been approved by VCC. Writing to file...");
+                                        } else {
+                                                System.out.println("Car submission has been denied by VCC.");
+                                        }
 
-                                // server sends the message to client
-                                OOS.writeObject(car);
+                                } catch (Exception ex) {
 
-                                if (inputStream.readBoolean()) {
-                                        vcc.addCar(car, user);
-                                        System.out.println(
-                                                        "Car submission has been approved by VCC. Writing to file...");
-                                } else {
-                                        System.out.println("Car submission has been denied by VCC.");
                                 }
-                                socket.close();
-                        } catch (Exception ex) {
-                                ex.printStackTrace();
+                                // Clearing text fields once user submits to prepare for next input
+                                carIDField.setText("");
+                                carMakeField.setText("");
+                                carModelField.setText("");
+                                carLicensePlateField.setText("");
+                                carResidencyTimeField.setText("");
+
+                                CarConfirmation form = new CarConfirmation(car);
+                                form.setVisible(true);
+                                form.setSize(800, 300);
+
+                        } else if (obj == back) {
+
+                                // if back button was clicked, reopen OptionPage
+                                OptionPage page = new OptionPage(user);
+                                page.setVisible(true);
+                                // if back button was clicked, close CarPage
+                                dispose();
+                        } else {
+                                System.out.println("Error.");
                         }
+                } catch (Exception ex) {
 
-                        // Clearing text fields once user submits to prepare for next input
-                        carIDField.setText("");
-                        carMakeField.setText("");
-                        carModelField.setText("");
-                        carLicensePlateField.setText("");
-                        carResidencyTimeField.setText("");
-
-                } else if (obj == back) {
-
-                        // if back button was clicked, reopen OptionPage
-                        OptionPage page = new OptionPage(user);
-                        page.setVisible(true);
-                        // if back button was clicked, close CarPage
-                        dispose();
-                } else {
-                        System.out.println("Error.");
                 }
         } // <--- actionPerformed() method ends here
 } // <--- Cars{} class ends here

@@ -22,6 +22,7 @@ class Jobs extends JFrame implements ActionListener {
     private Socket socket;
     VCC vcc = VCC.getInstance();
     private User user;
+    private int objectsPassed = 0;
 
     public void setUser(User user) {
         this.user = user;
@@ -161,7 +162,6 @@ class Jobs extends JFrame implements ActionListener {
         try {
             DataInputStream inputStream = new DataInputStream(socket.getInputStream());
             OutputStream outputStream = new DataOutputStream(socket.getOutputStream());
-            ObjectOutputStream OOS = new ObjectOutputStream(outputStream);
 
             if (obj == submit) {
                 // Assigning the information that will be inputted by the user as string
@@ -176,14 +176,18 @@ class Jobs extends JFrame implements ActionListener {
                 try {
 
                     System.out.println("Sending job to VCC...");
-
+                    if (objectsPassed == 0) {
+                        ObjectOutputStream OOS = new ObjectOutputStream(outputStream);
+                        objectsPassed += 1;
+                        OOS.writeObject(job);
+                    } else {
+                        MyObjectOutputStream OOS = new MyObjectOutputStream(outputStream);
+                        OOS.writeObject(job);
+                    }
                     // server sends the message to client
-                    OOS.writeObject(job);
-
                     if (inputStream.readBoolean()) {
                         vcc.addJob(job);
                         System.out.println("Job submission has been approved by VCC. Writing to file...");
-                        OOS.reset();
                     } else {
                         System.out.println("Job submission has been denied by VCC.");
                     }
