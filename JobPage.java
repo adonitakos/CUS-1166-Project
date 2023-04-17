@@ -191,8 +191,13 @@ class Jobs extends JFrame implements ActionListener {
                         form.setVisible(true);
                         form.setSize(800, 300);
                         System.out.println("Job submission has been approved by VCC. Writing to file...");
+                        // Open pop-up Job Confirmation page
+                        JobConfirmation form = new JobConfirmation(job);
+                        form.setVisible(true);
+                        form.setSize(800, 300);
                     } else {
                         System.out.println("Job submission has been denied by VCC.");
+                        RejectionPopUp form = new RejectionPopUp(job);
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
