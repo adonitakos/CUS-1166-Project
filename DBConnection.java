@@ -6,16 +6,10 @@ import java.sql.*;
  */
 public class DBConnection {
 	private static Connection conn = null;
-	private static String dbString = "jdbc:mysql://localhost:3306/";
+	private static String dbString = "jdbc:mysql://localhost:3306/vehicle_vortex";
 	private static String userName = "root";
 	private static String password = "password";// Change to personal system password
 	public static String winflag = "?useSSL=false";
-	public static String dbname;
-
-
-	public static void setDBName(String db) {
-		dbname = db;
-	}
 
 	/**
 	 * initialize with the name of the database the rest of the connection
@@ -24,8 +18,7 @@ public class DBConnection {
 	 * @param dbn database name
 	 * @throws ClassNotFoundException
 	 */
-	public static void init(String dbn) throws ClassNotFoundException {
-		dbname = dbn;
+	public static void init() throws ClassNotFoundException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 	}
 
@@ -37,7 +30,7 @@ public class DBConnection {
 	 */
 	public static Connection getMyConnection() throws SQLException {
 		if (conn == null) {
-			String fullDBString = dbString + dbname + winflag;
+			String fullDBString = dbString + winflag;
 			conn = DriverManager.getConnection(fullDBString, userName, password);
 		}
 		return conn;
