@@ -121,9 +121,6 @@ class CreateLoginForm extends JFrame implements ActionListener {
             try {
                 User user = vcc.getUser(userValue, passValue);
                 vcc.addLogin(user);
-                System.out.println(user.getType());
-                Boolean type = user.getType() == "Admin";
-                System.out.println(type);
                 // --- Admin user login ---
                 if (user.getType().equals("Admin")) {
                     System.out.println("admin login");

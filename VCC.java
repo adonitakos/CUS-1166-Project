@@ -12,7 +12,7 @@ public class VCC {
 	private static VCC single_instance = null;
 
 	public static void init() throws ClassNotFoundException {
-		DBConnection.init("vehicle_vortex");
+		DBConnection.init();
 	}
 
 	private static Connection conn;
@@ -211,7 +211,7 @@ public class VCC {
 		String query2 = ("select sum(duration) as total from jobs");
 		PreparedStatement stmt2 = conn.prepareStatement(query2);
 		ResultSet rs = stmt2.executeQuery();
-		int total = rs.getInt("total");
+		int total = rs.getInt("sum(duration)");
 		stmt.setInt(6, total + job.getJobDuration());
 		stmt.setString(7, job.getJobDescription());
 		stmt.setInt(8, job.getOwnerID());
