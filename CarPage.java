@@ -41,17 +41,12 @@ class Cars extends JFrame implements ActionListener {
         Cars(User user) {
                 // Assigning variables values
                 setUser(user);
-                // OwnerID
+                // Car ID
                 carIDLabel = new JLabel();
-                carIDLabel.setText("Owner ID:");
+                carIDLabel.setText("Car ID:");
                 carIDField = new JTextField(15);
                 carIDField.add(carIDLabel);
                 carIDLabel.setForeground(Color.WHITE);
-                carIDField.setBackground(new Color(217, 217, 217));
-                carIDField.setBorder(BorderFactory.createCompoundBorder(
-                                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-                carIDField.setBackground(new Color(217, 217, 217));
                 carIDField.setBorder(BorderFactory.createCompoundBorder(
                                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
@@ -228,7 +223,6 @@ class CarPage {
         public void start(User user) {
                 try {
                         Cars form = new Cars(user);
-                        form.setSize(400, 300);
                         form.setVisible(true);
                         System.out.println("----------*** Attempting Car Owner Connection to Server ***--------");
                         Socket socket = new Socket("localhost", 9806);
