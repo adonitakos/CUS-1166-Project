@@ -188,8 +188,13 @@ class Jobs extends JFrame implements ActionListener {
                     if (inputStream.readBoolean()) {
                         vcc.addJob(job);
                         System.out.println("Job submission has been approved by VCC. Writing to file...");
+                        // Open pop-up Job Confirmation page
+                        JobConfirmation form = new JobConfirmation(job);
+                        form.setVisible(true);
+                        form.setSize(800, 300);
                     } else {
                         System.out.println("Job submission has been denied by VCC.");
+                        RejectionPopUp form = new RejectionPopUp(job);
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -200,11 +205,7 @@ class Jobs extends JFrame implements ActionListener {
                 jobDurationField.setText("");
                 jobDeadlineField.setText("");
                 jobDescriptionField.setText("");
-
-                // Open pop-up Job Confirmation page
-                JobConfirmation form = new JobConfirmation(job);
-                form.setVisible(true);
-                form.setSize(800, 300);
+        
 
             } else if (obj == jobCompletion) {
                 LinkedList<Job> jobs = vcc.getAllJobs();

@@ -5,7 +5,7 @@ import java.awt.event.*;
 class CarConfirmation extends JFrame implements ActionListener {
     // Initializing variables
     private JPanel titlePanel, confirmationPanel, buttonPanel;
-    private JLabel thankYouLabel, carLicensePlateLabel, carIDLabel, carMakeLabel, carModelLabel, carResidencyTimeLabel;
+    private JLabel thankYouLabel, userIDLabel, carLicensePlateLabel, carIDLabel, carMakeLabel, carModelLabel, carResidencyTimeLabel;
     private JButton close;
 
     // ------------------------------------------
@@ -24,6 +24,11 @@ class CarConfirmation extends JFrame implements ActionListener {
         carIDLabel.setForeground(Color.WHITE);
         carIDLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         carIDLabel.setBackground(new Color(217, 217, 217));
+
+        userIDLabel = new JLabel("<html><b><u>User ID:</u></b> " + car.getOwnerID() + "</html>", SwingConstants.CENTER);
+        userIDLabel.setForeground(Color.WHITE);
+        userIDLabel.setFont(new Font("Inter", Font.PLAIN, 16));
+        userIDLabel.setBackground(new Color(217, 217, 217));
 
         // Job Duration Label
         carLicensePlateLabel = new JLabel("<html><b><u>License Plate:</b></u> " + car.getCarLicensePlate() + " hours.</html>", SwingConstants.CENTER);
@@ -63,11 +68,12 @@ class CarConfirmation extends JFrame implements ActionListener {
         add(titlePanel, BorderLayout.NORTH);
 
         // Creating confirmation panel
-        confirmationPanel = new JPanel(new GridLayout(5, 1));
+        confirmationPanel = new JPanel(new GridLayout(6, 1));
         confirmationPanel.setBackground(new Color(86, 53, 158));
 
         // Adding variables to the panel
         confirmationPanel.add(carIDLabel);
+        confirmationPanel.add(userIDLabel);
         confirmationPanel.add(carLicensePlateLabel);
         confirmationPanel.add(carMakeLabel);
         confirmationPanel.add(carModelLabel);
