@@ -6,17 +6,17 @@
 */
 
 import java.io.Serializable;
-import java.util.LinkedList;
 
 public class Job implements Serializable{
     private int jobID;
     private int jobDuration;//in hours
     private String jobDeadline;
-    private String jobDescription;
     private Boolean completionStatus = false;
     private int jobRedundancy;
     private int completionTime;
-    private LinkedList<Car> Cars = new LinkedList<Car>();
+    private String jobDescription;
+    private int ownerID;
+    private int currentCarNum;
 
     public Job(int jobID, int jobDuration, String jobDeadline, String jobDescription) {
         this.jobID = jobID;
@@ -25,8 +25,20 @@ public class Job implements Serializable{
         this.jobDescription = jobDescription;
     }
 
-    public LinkedList<Car> getCars() {
-        return Cars;
+    public void setCurrentCarNum(int currentCarNum) {
+        this.currentCarNum = currentCarNum;
+    }
+
+    public int getCurrentCarNum() {
+        return currentCarNum;
+    }
+
+    public void setOwnerID(int ownerID) {
+        this.ownerID = ownerID;
+    }
+
+    public int getOwnerID() {
+        return ownerID;
     }
 
     public int getCompletionTime() {
@@ -35,19 +47,6 @@ public class Job implements Serializable{
 
     public void setCompletionTime(int time) {
         completionTime = time;
-    }
-
-    public Boolean addCar(Car car) {
-        if (Cars.size() < jobRedundancy) {
-            Cars.add(car);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public void removeCar(Car car) {
-        Cars.remove(car);
     }
 
     public int getRedundancy() {

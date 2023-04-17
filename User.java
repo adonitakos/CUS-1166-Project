@@ -10,6 +10,15 @@ public class User {
     private int userID;
     private String userName;
     private String userPassword;
+    private String userType;
+
+    public String getType() {
+        return userType;
+    }
+
+    public void setType(String type) {
+        this.userType = type;
+    }
     
     public User(int userID, String userName, String userPassword) {
         this.userID = userID;

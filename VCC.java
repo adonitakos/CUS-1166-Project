@@ -4,11 +4,9 @@
 *   Date: April 16th, 2023
 *   This file contains the classes that will be used for the VCC.
 */ 
-
 import java.util.*;
-import java.io.*;
 import java.sql.*;
-import java.text.SimpleDateFormat;
+import java.sql.Date;
 
 public class VCC {
 
@@ -16,14 +14,96 @@ public class VCC {
 	private static LinkedList<Car> Cars = new LinkedList<Car>();
 	private static Queue<Job> jobsQueue = new LinkedList<Job>();
 	private static LinkedList<Job> allJobs = new LinkedList<Job>();
+	private static LinkedList<User> users = new LinkedList<User>();
 	private static VCC single_instance = null;
-	private static int queueTime = 0;
 
 	public static void init() throws ClassNotFoundException {
-		DBConnection.init("vehicle_vortex");
+		DBConnection.init();
 	}
 
 	private static Connection conn;
+
+	private static Car buildCar(ResultSet rs) throws SQLException {
+		rs.next();
+		int carID = rs.getInt("carID");
+		String carLicensePlate = rs.getString("plateNum");
+		int ownerID = rs.getInt("carOwnerID");
+		String carMake = rs.getString("make");
+		String carModel = rs.getString("model");
+		String carResidencyTime = rs.getString("time");
+		int inUse = rs.getInt("inUse");
+		int currentJobID = rs.getInt("currentJobID");
+		Car car = new Car(carID, carLicensePlate, ownerID, carMake, carModel, carResidencyTime);
+		if (inUse == 0) {
+			car.setStatus(false);
+		} else {
+			car.setStatus(true);
+		}
+		car.setJobID(currentJobID);
+		return car;
+	}
+
+	private static Job buildJob(ResultSet rs) throws SQLException {
+		rs.next();
+		int jobID = rs.getInt("ID");
+		int jobDuration = rs.getInt("duration");
+		String jobDeadline = rs.getString("deadline");
+		int completionStatus = rs.getInt("status");
+		int jobRedundancy = rs.getInt("redundancy");
+		int completionTime = rs.getInt("completionTime");
+		String jobDescription = rs.getString("description");
+		int ownerID = rs.getInt("jobOwnerID");
+		int carsUsing = rs.getInt("carsUsingNum");
+		Job job = new Job(jobID, jobDuration, jobDeadline, jobDescription);
+		job.setCompletionTime(completionTime);
+		job.setJobRedundancy(jobRedundancy);
+		if (completionStatus == 0) {
+			job.setStatus(false);
+		} else if (completionStatus == 1) {
+			job.setStatus(true);
+		}
+		job.setOwnerID(ownerID);
+		job.setCurrentCarNum(carsUsing);
+		return job;
+	}
+
+	private static User buildUser(ResultSet rs) throws SQLException {
+		rs.next();
+		int userID = rs.getInt("ID");// Ask and delete
+		String userName = rs.getString("username");
+		String userPassword = rs.getString("password");
+		String type = rs.getString("Type");
+		User user = new User(userID, userName, userPassword);
+		user.setType(type);
+		return user;
+	}
+
+	private static LinkedList<User> buildUserList(ResultSet rs) throws SQLException {
+		LinkedList<User> users = new LinkedList<User>();
+		while (rs.next()) {
+			User user = buildUser(rs);
+			users.add(user);
+		}
+		return users;
+	}
+
+	private static LinkedList<Job> buildJobList(ResultSet rs) throws SQLException {
+		LinkedList<Job> jobs = new LinkedList<Job>();
+		while (rs.next()) {
+			Job job = buildJob(rs);
+			jobs.add(job);
+		}
+		return jobs;
+	}
+
+	private static LinkedList<Car> buildCarList(ResultSet rs) throws SQLException {
+		LinkedList<Car> cars = new LinkedList<Car>();
+		while (rs.next()) {
+			Car car = buildCar(rs);
+			cars.add(car);
+		}
+		return cars;
+	}
 
 	private VCC() {
 	}
@@ -35,55 +115,26 @@ public class VCC {
 		return single_instance;
 	}
 
+	public LinkedList<User> getUsers() {
+		return users;
+	}
+
 	public Queue<Job> getQueue() {
 		return jobsQueue;
 	}
 
-	public Boolean importJobFromFile(String path) {// not complete
-		try {
-			FileInputStream fileIn = new FileInputStream(path);
-			ObjectInputStream objectIn = new ObjectInputStream(fileIn);
-			while (objectIn.readObject() != null) {
-				Object obj = objectIn.readObject();
-				System.out.println("The Object has been read from the file");
-				objectIn.close();
-				Job job = (Job) obj;
-				addJob(job);
-			}
-			return true;
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			return null;
-		}
-	} // <--- importJobsFromFile() method ends here
-
-	public Boolean importCarsFromFile(String path) { // needs to be completed
-		try {
-			FileInputStream fileIn = new FileInputStream(path);
-			ObjectInputStream objectIn = new ObjectInputStream(fileIn);
-			while (objectIn.readObject() != null) {
-				Object obj = objectIn.readObject();
-				System.out.println("The Object has been read from the file");
-				objectIn.close();
-				Car car = (Car) obj;
-				addCar(car);
-			}
-			return true;
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			return null;
-		}
-	}
-
 	public LinkedList<Car> getAllCars() {
+
 		return Cars;
 	}
 
 	public LinkedList<Job> getAllJobs() {
+
 		return allJobs;
 	}
 
 	public LinkedList<Job> getCompleteJobs() {
+
 		LinkedList<Job> completed = new LinkedList<Job>();
 		for (int i = 0; i < allJobs.size(); i++) {
 			if (allJobs.get(i).getStatus()) {
@@ -103,67 +154,126 @@ public class VCC {
 		return notCompleted;
 	}
 
-	public Car getCarById(int carID) {
-		for (int i = 0; i < Cars.size(); i++) {
-			if (Cars.get(i).getCarID() == carID) {
-				return Cars.get(i);
-			}
-		}
-		return null;
+	public Car getCarById(String plateNum) throws ClassNotFoundException, SQLException {
+		conn = DBConnection.getMyConnection();
+		Car car;
+		String query = ("select * from cars where plateNum like ?");
+		PreparedStatement stmt = conn.prepareStatement(query);
+		stmt.setString(1, plateNum);
+		ResultSet rs = stmt.executeQuery();
+		car = buildCar(rs);
+		stmt.close();
+		return car;
 	}
 
-	public Job getJobById(int jobID) {
-		for (int i = 0; i < allJobs.size(); i++) {
-			if (allJobs.get(i).getJobID() == jobID) {
-				return allJobs.get(i);
-			}
-		}
-		return null;
+	public Job getJobById(int jobID) throws ClassNotFoundException, SQLException {
+		conn = DBConnection.getMyConnection();
+		Job job;
+		String query = ("select * from jobs where jobID = ?");
+		PreparedStatement stmt = conn.prepareStatement(query);
+		stmt.setInt(1, jobID);
+		ResultSet rs = stmt.executeQuery();
+		job = buildJob(rs);
+		stmt.close();
+		return job;
 	}
 
-	public Boolean assignCarToJob(int jobId, int carID) {
+	public User getUser(String username, String password) throws SQLException, ClassNotFoundException {
+		conn = DBConnection.getMyConnection();
+		User user;
+		String query = ("select * from users where username = ? and password = ?");
+		PreparedStatement stmt = conn.prepareStatement(query);
+		stmt.setString(1, username);
+		stmt.setString(2, password);
+		ResultSet rs = stmt.executeQuery();
+		user = buildUser(rs);
+		stmt.close();
+		return user;
+	}
+
+	public Boolean addUser(User user) throws SQLException {
+		conn = DBConnection.getMyConnection();
+		String query = ("insert into users values (?,?,?,?)");
+		PreparedStatement stmt = conn.prepareStatement(query);
+		stmt.setInt(1, user.getUserID());
+		stmt.setString(2, user.getUserName());
+		stmt.setString(3, user.getUserPassword());
+		stmt.setString(4, "User");
+		stmt.executeUpdate();
+		stmt.close();
+		return true;
+	}
+
+	public Boolean addJob(Job job) throws SQLException {
+		job.setRedundancy(generalRedundancy);
+		conn = DBConnection.getMyConnection();
+		String query = ("insert into jobs values (?,?,?,?,?,?,?,?,?,?)");
+		PreparedStatement stmt = conn.prepareStatement(query);
+		stmt.setInt(1, job.getJobID());
+		stmt.setInt(2, job.getJobDuration());
+		stmt.setString(3, job.getJobDeadline());
+		stmt.setInt(4, 0);
+		stmt.setInt(5, job.getRedundancy());
+		String query2 = ("select sum(duration) as total from jobs");
+		PreparedStatement stmt2 = conn.prepareStatement(query2);
+		ResultSet rs = stmt2.executeQuery();
+		int total = rs.getInt("sum(duration)");
+		stmt.setInt(6, total + job.getJobDuration());
+		stmt.setString(7, job.getJobDescription());
+		stmt.setInt(8, job.getOwnerID());
+		stmt.setNull(9, Types.INTEGER);
+		stmt.setTimestamp(10, new java.sql.Timestamp(new java.util.Date().getTime()));
+		stmt.executeUpdate();
+		stmt.close();
+		return true;
+	}
+
+	public Boolean addCar(Car car, User user) throws SQLException {
+		conn = DBConnection.getMyConnection();
+		String query = ("insert into cars values (?,?,?,?,?,?,?,?,?)");
+		PreparedStatement stmt = conn.prepareStatement(query);
+		stmt.setInt(1, car.getCarID());
+		stmt.setString(2, car.getCarLicensePlate());
+		stmt.setInt(3, car.getOwnerID());
+		stmt.setString(4, car.getCarMake());
+		stmt.setString(5, car.getCarModel());
+		stmt.setString(6, car.getCarResidencyTime());
+		stmt.setNull(7, Types.INTEGER);
+		stmt.setNull(8, Types.INTEGER);
+		stmt.setTimestamp(9, new java.sql.Timestamp(new java.util.Date().getTime()));
+		stmt.executeUpdate();
+		stmt.close();
+		return true;
+	}
+
+	public Boolean addLogin(User user) throws SQLException {
+		conn = DBConnection.getMyConnection();
+		String query = ("insert into logins values (?,?)");
+		PreparedStatement stmt = conn.prepareStatement(query);
+		stmt.setInt(1, user.getUserID());
+		stmt.setTimestamp(2, new java.sql.Timestamp(new java.util.Date().getTime()));
+		stmt.executeUpdate();
+		stmt.close();
+		return true;
+	}
+
+	public Boolean assignCarToJob(int jobId, String plateNum) throws ClassNotFoundException, SQLException {
 		Job job = getJobById(jobId);
-		Car car = getCarById(carID);
-		if (car.getJob() == null && job.getCars().size() < job.getRedundancy()) {
-			job.addCar(car);
-			car.setJob(job);
-		}
+		Car car = getCarById(plateNum);
 		return true;
 	}
 
-	public Boolean deleteCar(int carID) {
-		Cars.remove(getCarById(carID));
+	public Boolean deleteCar(String plateNum) throws SQLException {
+		conn = DBConnection.getMyConnection();
+		String query = ("delete from cars where numPlate like ?");
+		PreparedStatement stmt = conn.prepareStatement(query);
+		stmt.setString(1, plateNum);
+		stmt.executeQuery();
+		stmt.close();
 		return true;
 	}
 
-	public Boolean addCar(Car car) {
-		Cars.add(car);
-		// Write the user-provided credentials and timestamp to a file called
-		// userInfo.txt, making it so that this information is not overwritten when the
-		// program terminates and it is stored in a new line with each submission
-		String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-		try {
-			FileWriter writer = new FileWriter("carInfo.txt", true); // true parameter to append to file
-
-			writer.write("Car ID: " + car.getCarID() + " | Car Make: " + car.getCarMake() + " | Car Model: "
-					+ car.getCarModel()
-					+ " | License Plate: " + car.getCarLicensePlate() + " | Residency Time: "
-					+ car.getCarResidencyTime()
-					+ " | Timestamp: " + timestamp + "\n");
-			writer.close();
-			System.out.println("User info successfully saved to file!");
-
-			// success message
-			System.out.println("Thank you. Your car has been submitted.");
-		}
-		// Error message
-		catch (IOException ex) {
-			System.out.println("Error writing user info to file.");
-		}
-		return true;
-	}
-
-	public Boolean deleteJob(int jobId) {
+	public Boolean deleteJob(int jobId) throws ClassNotFoundException, SQLException {
 		Queue<Job> temp = new LinkedList<>();
 		Job job = getJobById(jobId);
 		int size = jobsQueue.size();
@@ -196,38 +306,12 @@ public class VCC {
 		return true;
 	}
 
-	public Boolean addJob(Job job) {
-		job.setRedundancy(generalRedundancy);
-		allJobs.add(job);
-		jobsQueue.add(job);
-		queueTime += job.getJobDuration();
-		job.setCompletionTime(queueTime);
-		String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-		try {
-			FileWriter writer = new FileWriter("jobInfo.txt", true); // true parameter to append to file
-
-			writer.write("Job ID: " + job.getJobID() + " | Job Duration: " + job.getJobDuration() + " | Job Deadline: "
-					+ job.getJobDeadline() + " | Job Description: " + job.getJobDeadline() + " | Timestamp: "
-					+ timestamp + "\n");
-			writer.close();
-			System.out.println("Job info successfully saved to file!");
-
-			// confirmation message if successful
-			System.out.println("Thank you. Your job has been submitted.");
-		}
-		// or error message if unsuccessful
-		catch (IOException ex) {
-			System.out.println("Error writing job info to file.");
-		}
-		return true;
-	}
-
 	public Boolean transferJobsBetweenCars(Job job, Car original, Car newCar) {
-		job.getCars().remove(original);
-		job.getCars().add(newCar);
-		original.setJob(null);
-		newCar.setJob(job);
-		// need to add checkpoint usage
+		// job.getCars().remove(original);
+		// job.getCars().add(newCar);
+		// original.setJob(null);
+		// newCar.setJob(job);
+		// // need to add checkpoint usage
 		return true;
 	}
 

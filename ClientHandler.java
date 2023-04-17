@@ -7,8 +7,6 @@
 import java.io.*;
 import java.net.*;
 
-import javax.swing.SwingUtilities;
-
 public class ClientHandler extends Thread {
     final DataInputStream inputStream;
     final DataOutputStream outputStream;
@@ -31,21 +29,17 @@ public class ClientHandler extends Thread {
                         System.out.println("Job request recieved...");
                         Job job = (Job) object;
                         System.out.println("Object converted to job...");
-                        System.out.println("Popup created...1");
                         CreateAdminForm jobForm = new CreateAdminForm(job, socket, inputStream, outputStream);
                         jobForm.setSize(400, 300);
                         jobForm.setVisible(true);
-                        System.out.println("Popup created...");
 
                     } else if (object instanceof Car) {// Car type object being recieved
                         System.out.println("Car request recieved...");
                         Car car = (Car) object;
                         System.out.println("Object converted to car...");
-                        System.out.println("Popup created...1");
                         CreateAdminForm carForm = new CreateAdminForm(car, socket, inputStream, outputStream);
                         carForm.setSize(400, 300);
                         carForm.setVisible(true);
-                        System.out.println("Popup created...");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

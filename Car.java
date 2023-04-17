@@ -4,40 +4,39 @@
 *  Date: April 16th, 2023 
 *  This file contains the classes that will be used for the Car.
 */
-
 import java.io.Serializable;
 
 public class Car implements Serializable{
+
+    private int carID;
     private String carLicensePlate;
+    private int ownerID;
     private String carMake;
     private String carModel;
-    private String carResidencyTime;
-    private int carID;
+    private String carResidencyTime;    
+    private Boolean inUse = false;
     private int jobID;
-    private Job Job;
 
-    public Car(int carID, String carLicensePlate, String carMake, String carModel, String carResidencyTime) {
+    public Car(int carID, String carLicensePlate, int ownerID,String carMake, String carModel, String carResidencyTime) {
         this.carLicensePlate = carLicensePlate;
         this.carMake = carMake;
         this.carModel = carModel;
+        this.ownerID = ownerID;
         this.carResidencyTime = carResidencyTime;
-        this.carID = carID; // Set car ID to 0 to indicate that the car is currently available for hire (removed for now)
-    }
-
-    public Job getJob() {
-        return Job;
-    }
-
-    public void setJob(Job job) {
-        this.Job = job;
-    }
-
-    public int getCarID() {
-        return carID;
-    }
-
-    public void setCarID(int carID) {
         this.carID = carID;
+        this.jobID = 0; // Set job ID to 0 to indicate that the car is currently available for hire
+    }
+
+    public void setStatus(Boolean status) {
+        this.inUse = status;
+    }
+
+    public Boolean getStatus() {
+        return inUse;
+    }
+
+    public int getOwnerID() {
+        return ownerID;
     }
 
     public String getCarLicensePlate() {
@@ -72,6 +71,14 @@ public class Car implements Serializable{
         this.carResidencyTime = carResidencyTime;
     }
 
+    public int getCarID() {
+        return carID;
+    }
+
+    public void setCarID(int carID) {
+        this.carID = carID;
+    }
+
     public int getJobID() {
         return jobID;
     }
@@ -96,6 +103,6 @@ public class Car implements Serializable{
     }
 
     public String getCarInfo() {
-        return "Car ID: " + this.carID + ", Make: " + this.carMake + ", Model: " + this.carModel + ", Residency Time: " + this.carResidencyTime;
+        return "Make: " + this.carMake + ", Model: " + this.carModel + ", Residency Time: " + this.carResidencyTime;
     }
 }

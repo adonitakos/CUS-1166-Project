@@ -17,28 +17,42 @@ class Cars extends JFrame implements ActionListener {
 
         // Intializing variables
         private JPanel carPage, welcomePanel, buttonPanel;
-        private JLabel welcome, infoLabel, carIDLabel, carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
-        private final JTextField carIDField, carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
+        private JLabel welcome, ownerIDLabel, infoLabel, carIDLabel, carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
+        private final JTextField carIDField, ownerIDField, carMakeField, carModelField, carLicensePlateField, carResidencyTimeField;
         JButton submit, back;
         private Socket socket;
+        private User user;
         VCC vcc = VCC.getInstance();
 
         public void setSocket(Socket socket) {
                 this.socket = socket;
         }
 
+        public User getUser(){
+                return user;
+        }
+
+        public void setUser(User user) {
+                this.user = user;
+        }
+
         // ---------------------------------------------------------------------------------
         // This method creates the GUI for the Cars Window
-        Cars() {
+        Cars(User user) {
                 // Assigning variables values
-
-                // CarID
-                carIDLabel = new JLabel();
-                carIDLabel.setText("Car ID:");
-                carIDField = new JTextField(15);
-                carIDField.add(carIDLabel);
-                carIDLabel.setForeground(Color.WHITE);
-                carIDField.setBorder(BorderFactory.createCompoundBorder(
+                setUser(user);
+                // OwnerID
+                ownerIDLabel = new JLabel();
+                ownerIDLabel.setText("Owner ID:");
+                ownerIDField = new JTextField(15);
+                ownerIDField.add(ownerIDLabel);
+                ownerIDLabel.setForeground(Color.WHITE);
+                ownerIDField.setBackground(new Color(217, 217, 217));
+                ownerIDField.setBorder(BorderFactory.createCompoundBorder(
+                                BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+                ownerIDField.setBackground(new Color(217, 217, 217));
+                ownerIDField.setBorder(BorderFactory.createCompoundBorder(
                                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
@@ -159,13 +173,13 @@ class Cars extends JFrame implements ActionListener {
 
                 if (obj == submit) {
                         // Store user input as string variables
-                        int carID = Integer.parseInt(carIDField.getText());
+                        int carID = Integer.parseInt(ownerIDField.getText());
                         String carMake = carMakeField.getText();
                         String carModel = carModelField.getText();
                         String carLicensePlate = carLicensePlateField.getText();
                         String carResidencyTime = carResidencyTimeField.getText();
 
-                        Car car = new Car(carID, carLicensePlate, carMake, carModel, carResidencyTime);
+                        Car car = new Car(carID, carLicensePlate, user.getUserID(), carMake, carModel, carResidencyTime);
 
                         try {
 
@@ -179,7 +193,7 @@ class Cars extends JFrame implements ActionListener {
                                 OOS.writeObject(car);
 
                                 if (inputStream.readBoolean()) {
-                                        vcc.addCar(car);
+                                        vcc.addCar(car, user);
                                         System.out.println(
                                                         "Car submission has been approved by VCC. Writing to file...");
                                 } else {
@@ -200,7 +214,7 @@ class Cars extends JFrame implements ActionListener {
                 } else if (obj == back) {
 
                         // if back button was clicked, reopen OptionPage
-                        OptionPage page = new OptionPage();
+                        OptionPage page = new OptionPage(user);
                         page.setVisible(true);
                         // if back button was clicked, close CarPage
                         dispose();
@@ -211,9 +225,10 @@ class Cars extends JFrame implements ActionListener {
 } // <--- Cars{} class ends here
 
 class CarPage {
-        public static void main(String[] args) {
+        public void start(User user) {
                 try {
-                        Cars form = new Cars();
+                        Cars form = new Cars(user);
+                        form.setSize(400, 300);
                         form.setVisible(true);
                         System.out.println("----------*** Attempting Car Owner Connection to Server ***--------");
                         Socket socket = new Socket("localhost", 9806);
