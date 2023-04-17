@@ -20,13 +20,13 @@ class JobConfirmation extends JFrame implements ActionListener {
     JobConfirmation(Job job) {
 
         // Assigning variables values
-        // Thank you label
+        // Thank You Label
         thankYouLabel = new JLabel("Thank you. Your job has been submitted.", SwingConstants.CENTER);
         thankYouLabel.setForeground(Color.WHITE);
         thankYouLabel.setFont(new Font("Inter", Font.BOLD, 22));
         thankYouLabel.setBackground(new Color(217, 217, 217));
 
-        // JobID label
+        // JobID Label
         jobIDLabel = new JLabel("<html><b><u>Job ID:</u></b> " + job.getJobID() + "</html>", SwingConstants.CENTER);
         jobIDLabel.setForeground(Color.WHITE);
         jobIDLabel.setFont(new Font("Inter", Font.PLAIN, 16));
@@ -66,6 +66,7 @@ class JobConfirmation extends JFrame implements ActionListener {
         // Creating title panel
         titlePanel = new JPanel();
         titlePanel.setBackground(new Color(86, 53, 158));
+        // Adding variables to the title panel
         titlePanel.add(thankYouLabel);
         add(titlePanel, BorderLayout.NORTH);
 
@@ -73,7 +74,7 @@ class JobConfirmation extends JFrame implements ActionListener {
         confirmationPanel = new JPanel(new GridLayout(5, 1));
         confirmationPanel.setBackground(new Color(86, 53, 158));
 
-        // Adding variables to the panel
+        // Adding variables to the confirmation panel
         confirmationPanel.add(jobIDLabel);
         confirmationPanel.add(jobCompletionLabel);
         confirmationPanel.add(jobDurationLabel);
@@ -102,5 +103,4 @@ class JobConfirmation extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         dispose();
     } // <--- actionPerformed() method ends here
-
 } // <--- JobConfirmation{} class ends here

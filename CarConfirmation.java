@@ -9,46 +9,47 @@ class CarConfirmation extends JFrame implements ActionListener {
     private JButton close;
 
     // ------------------------------------------
-    // This method creates the GUI for the JobConfirmation
+    // This method creates the GUI for the Car Confirmation page
     CarConfirmation(Car car) {
 
         // Assigning variables values
-        // Thank you label
+        // Thank you Label
         thankYouLabel = new JLabel("Thank you. Your car has been submitted.", SwingConstants.CENTER);
         thankYouLabel.setForeground(Color.WHITE);
         thankYouLabel.setFont(new Font("Inter", Font.BOLD, 22));
         thankYouLabel.setBackground(new Color(217, 217, 217));
 
-        // JobID label
+        // CarID Label
         carIDLabel = new JLabel("<html><b><u>Car ID:</u></b> " + car.getCarID() + "</html>", SwingConstants.CENTER);
         carIDLabel.setForeground(Color.WHITE);
         carIDLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         carIDLabel.setBackground(new Color(217, 217, 217));
 
+        // UserID Label
         userIDLabel = new JLabel("<html><b><u>User ID:</u></b> " + car.getOwnerID() + "</html>", SwingConstants.CENTER);
         userIDLabel.setForeground(Color.WHITE);
         userIDLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         userIDLabel.setBackground(new Color(217, 217, 217));
 
-        // Job Duration Label
+        // Car License Plate Label
         carLicensePlateLabel = new JLabel("<html><b><u>License Plate:</b></u> " + car.getCarLicensePlate() + " hours.</html>", SwingConstants.CENTER);
         carLicensePlateLabel.setForeground(Color.WHITE);
         carLicensePlateLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         carLicensePlateLabel.setBackground(new Color(217, 217, 217));
 
-        // Job Deadline Label
+        // Car Make Label
         carMakeLabel = new JLabel("<html><b><u>Make:</b></u> " + car.getCarMake() + "</html>", SwingConstants.CENTER);
         carMakeLabel.setForeground(Color.WHITE);
         carMakeLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         carMakeLabel.setBackground(new Color(217, 217, 217));
 
-        // Job Description Label
+        // Car Model Label
         carModelLabel = new JLabel("<html><b><u>Model:</b></u> " + car.getCarModel() + "</html>", SwingConstants.CENTER);
         carModelLabel.setForeground(Color.WHITE);
         carModelLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         carModelLabel.setBackground(new Color(217, 217, 217));
 
-        // Job Completion Label
+        // Car Residency Time Label
         carResidencyTimeLabel = new JLabel("<html><b><u>Residency Time:</b></u> " + car.getCarResidencyTime() + " hours.</html>", SwingConstants.CENTER);
         carResidencyTimeLabel.setForeground(Color.WHITE);
         carResidencyTimeLabel.setFont(new Font("Inter", Font.PLAIN, 16));
@@ -98,7 +99,7 @@ class CarConfirmation extends JFrame implements ActionListener {
     // --------------------------------------------
     // Action Listener method
     public void actionPerformed(ActionEvent e) {
+        // Dispose window if the close button is clicked
         dispose();
     } // <--- actionPerformed() method ends here
-
 } // <--- JobConfirmation{} class ends here

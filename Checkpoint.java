@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class Checkpoint {
 
+    // Initializing variables
     private int checkpointID;
     private Car car;
     private Date checkInTime;

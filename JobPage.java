@@ -39,46 +39,66 @@ class Jobs extends JFrame implements ActionListener {
         // JobID
         setUser(user);
 
+        // Welcome Label
+        welcome = new JLabel("Welcome to the Job Page.", SwingConstants.CENTER);
+        welcome.setForeground(Color.WHITE);
+        welcome.setFont(new Font("Inter", Font.BOLD, 26));
+
+        // Info Label
+        infoLabel = new JLabel("Please enter the following information, leaving no fields blank.",
+                SwingConstants.CENTER);
+        infoLabel.setForeground(Color.WHITE);
+        infoLabel.setFont(new Font("Inter", Font.PLAIN, 12));
+
+        // Job ID Label
         jobIDLabel = new JLabel();
         jobIDLabel.setText("Job ID:");
+        jobIDLabel.setForeground(Color.WHITE);
+        
+        // Job ID Field
         jobIDField = new JTextField(15);
         jobIDField.add(jobIDLabel);
-        jobIDLabel.setForeground(Color.WHITE);
         jobIDField.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+            BorderFactory.createLineBorder(new Color(86, 53, 158)),
+            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        // Duration Label
+        // Job Duration Label
         jobDurationLabel = new JLabel();
         jobDurationLabel.setText("Job Duration (in hours):");
+        jobDurationLabel.setForeground(Color.WHITE);
+
+        // Job Duration Field
         jobDurationField = new JTextField(15);
         jobDurationField.add(jobDurationLabel);
-        jobDurationLabel.setForeground(Color.WHITE);
         jobDurationField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        // Deadline Label
+        // Job Deadline Label
         jobDeadlineLabel = new JLabel();
         jobDeadlineLabel.setText("Job Deadline (mm/dd/yy):");
+        jobDeadlineLabel.setForeground(Color.WHITE);
+
+        // Job Deadline Field
         jobDeadlineField = new JTextField(15);
         jobDeadlineField.add(jobDeadlineLabel);
-        jobDeadlineLabel.setForeground(Color.WHITE);
         jobDeadlineField.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+            BorderFactory.createLineBorder(new Color(86, 53, 158)),
+            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        // Description Label
+        // Job Description Label
         jobDescriptionLabel = new JLabel();
         jobDescriptionLabel.setText("Please describe the job:");
+        jobDescriptionLabel.setForeground(Color.WHITE);
+
+        // Job Description Field
         jobDescriptionField = new JTextField(15);
         jobDescriptionField.add(jobDescriptionLabel);
-        jobDescriptionLabel.setForeground(Color.WHITE);
         jobDescriptionField.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+            BorderFactory.createLineBorder(new Color(86, 53, 158)),
+            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        // Job Completion Label
+        // Job Completion Button
         jobCompletion = new JButton("Completion Time");
         jobCompletion.setBounds(110, 270, 100, 34);
         jobCompletion.setBackground(new Color(217, 217, 217));
@@ -99,17 +119,6 @@ class Jobs extends JFrame implements ActionListener {
         back.setForeground(new Color(86, 53, 158));
         back.setFont(new Font("Inter", Font.BOLD, 16));
 
-        // Welcome Label
-        welcome = new JLabel("Welcome to the Job Page.", SwingConstants.CENTER);
-        welcome.setForeground(Color.WHITE);
-        welcome.setFont(new Font("Inter", Font.BOLD, 26));
-
-        // Info Label
-        infoLabel = new JLabel("Please enter the following information, leaving no fields blank.",
-                SwingConstants.CENTER);
-        infoLabel.setForeground(Color.WHITE);
-        infoLabel.setFont(new Font("Inter", Font.PLAIN, 12));
-
         // Creating welcome panel
         welcomePanel = new JPanel(new GridLayout(2, 1));
         welcomePanel.setBackground(new Color(86, 53, 158));
@@ -118,7 +127,7 @@ class Jobs extends JFrame implements ActionListener {
         welcomePanel.add(infoLabel);
         add(welcomePanel, BorderLayout.NORTH);
 
-        // Creating a new panel
+        // Creating a main panel
         jobPage = new JPanel(new GridLayout(8, 1));
         jobPage.setBackground(new Color(86, 53, 158));
 
@@ -147,10 +156,11 @@ class Jobs extends JFrame implements ActionListener {
         jobCompletion.addActionListener(this);
         back.addActionListener(this);
 
-        // Setting title and size
+        // Setting title, size, and visibility
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Job Submission");
         setSize(450, 500);
+        setVisible(true);
     } // <--- Jobs() constructor ends here
 
     // ---------------------------------------------------------------------------------
@@ -180,7 +190,8 @@ class Jobs extends JFrame implements ActionListener {
                         ObjectOutputStream OOS = new ObjectOutputStream(outputStream);
                         objectsPassed += 1;
                         OOS.writeObject(job);
-                    } else {
+                    }
+                    else {
                         MyObjectOutputStream OOS = new MyObjectOutputStream(outputStream);
                         OOS.writeObject(job);
                     }
@@ -192,13 +203,15 @@ class Jobs extends JFrame implements ActionListener {
                         form.setSize(800, 300);
                         System.out.println("Job submission has been approved by VCC. Writing to file...");
                         // Open pop-up Job Confirmation page
-                    } else {
+                    }
+                    else {
                         System.out.println("Job submission has been denied by VCC.");
                         RejectionPopUp form = new RejectionPopUp(job);
                         form.setVisible(true);
                         form.setSize(800, 300);
                     }
-                } catch (Exception ex) {
+                }
+                catch (Exception ex) {
                     ex.printStackTrace();
                 }
 
@@ -208,10 +221,8 @@ class Jobs extends JFrame implements ActionListener {
                 jobDeadlineField.setText("");
                 jobDescriptionField.setText("");
 
-                // Open pop-up Job Confirmation page
-
-
-            } else if (obj == jobCompletion) {
+            }
+            else if (obj == jobCompletion) {
                 LinkedList<Job> jobs = vcc.getAllJobs();
                 Job job = jobs.getLast();
                 System.out.print("The completion time is: " + job.getCompletionTime() + " hours.");
@@ -221,15 +232,14 @@ class Jobs extends JFrame implements ActionListener {
 
                 // if back button was clicked, reopen OptionPage
                 OptionPage page = new OptionPage(user);
-                page.setVisible(true);
-
                 // if back button was clicked, close current panel
                 dispose();
-            } else {
-                System.out.println("Error.");
-
             }
-        } catch (Exception ex) {
+            else {
+                System.out.println("Error.");
+            }
+        }
+        catch (Exception ex) {
             // TODO: handle exception
         } // <--- actionPerformed() method ends here
     } // <--- Jobs{} class ends here
@@ -243,7 +253,6 @@ class JobPage {
                     System.out.println("----------*** Attempting Job Owner Connection to Server ***--------");
                     Jobs form = new Jobs(user);
                     System.out.println(user.getUserID());
-                    form.setVisible(true);
                     Socket socket = new Socket("localhost", 9806);
                     form.setSocket(socket);
                 } catch (Exception e) {

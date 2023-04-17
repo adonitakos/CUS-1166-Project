@@ -7,9 +7,11 @@ class RejectionPopUp extends JFrame implements ActionListener {
     JLabel rejectionLabel;
     JButton close;
 
+    // ------------------------------------------
+    // This constructor creates the GUI for the car rejection pop-up
     RejectionPopUp(Car car) {
 
-        // Rejection label
+        // Rejection Label
         rejectionLabel = new JLabel("I'm sorry, your car has been rejected by the VCC.", SwingConstants.CENTER);
         rejectionLabel.setForeground(Color.WHITE);
         rejectionLabel.setFont(new Font("Inter", Font.PLAIN, 12));
@@ -22,6 +24,7 @@ class RejectionPopUp extends JFrame implements ActionListener {
         close.setForeground(new Color(86, 53, 158));
         close.setFont(new Font("Inter", Font.BOLD, 16));
 
+        // Main panel for rejection label
         mainPanel = new JPanel();
         mainPanel.setBackground(new Color(86, 53, 158));
         mainPanel.add(rejectionLabel);
@@ -36,11 +39,14 @@ class RejectionPopUp extends JFrame implements ActionListener {
         // Creating action listener for the buttons
         close.addActionListener(this);
 
+        // Setting title, size, and visibility
         setTitle("Car Rejection");
         setSize(500, 350);
         setVisible(true);
     }
 
+    // ------------------------------------------
+    // This constructor creates the GUI for the job rejection pop-up
     RejectionPopUp(Job job) {
 
         // Rejection label
@@ -56,6 +62,7 @@ class RejectionPopUp extends JFrame implements ActionListener {
         close.setForeground(new Color(86, 53, 158));
         close.setFont(new Font("Inter", Font.BOLD, 16));
 
+        // Main panel for rejection label
         mainPanel = new JPanel();
         mainPanel.setBackground(new Color(86, 53, 158));
         mainPanel.add(rejectionLabel);
@@ -70,14 +77,16 @@ class RejectionPopUp extends JFrame implements ActionListener {
         // Creating action listener for the buttons
         close.addActionListener(this);
 
+        // Setting title, size, and visibility
         setTitle("Job Rejection");
         setSize(500, 350);
         setVisible(true);
     }
 
-    
-
+    // ------------------------------------------
+    // Action listener method
     public void actionPerformed(ActionEvent e) {
+        // disposes of pop-up once the close button is pressed.
         dispose();
     } // <--- actionPerformed() method ends here
 

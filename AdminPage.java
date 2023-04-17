@@ -217,28 +217,36 @@ class CreateAdminForm extends JFrame implements ActionListener {
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
+            dispose();
         } else if (obj == reject) {
             try {
                 outputStream.writeBoolean(false);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
+            dispose();
         } else if (obj == back) {
             dispose();
             Login.main(null);
         } else if (obj == carByID) {
+        //    PopUp form = new PopUp(car);
 
         } else if (obj == jobByID) {
+        //    PopUp form = new PopUp(job);
 
         } else if (obj == allCars) {
+        //    PopUp form = new PopUp(Cars);
 
         } else if (obj == allJobs) {
+        //    PopUp form = new PopUp(allJobs);
 
         } else if (obj == jobsQueue) {
-
+         //   PopUp form = new PopUp(jobsQueue);
         } else if (obj == completeJobs) {
+        //    PopUp form = new PopUp(allJobs);
 
         } else if (obj == checkpointer) {
+        //    PopUp form = new PopUp(Cars, allJobs);
 
         } else {
             System.out.println("Error.");
@@ -249,56 +257,48 @@ class CreateAdminForm extends JFrame implements ActionListener {
 
         // JobByID Button
         jobByID = new JButton("Job By ID");
-        jobByID.setBounds(110, 310, 100, 34);
         jobByID.setBackground(new Color(217, 217, 217));
         jobByID.setForeground(new Color(86, 53, 158));
         jobByID.setFont(new Font("Inter", Font.BOLD, 16));
 
         // carByID Button
         carByID = new JButton("Car By ID");
-        carByID.setBounds(110, 310, 100, 34);
         carByID.setBackground(new Color(217, 217, 217));
         carByID.setForeground(new Color(86, 53, 158));
         carByID.setFont(new Font("Inter", Font.BOLD, 16));
 
         // completeJobs Button
         completeJobs = new JButton("Complete Jobs");
-        completeJobs.setBounds(110, 310, 100, 34);
         completeJobs.setBackground(new Color(217, 217, 217));
         completeJobs.setForeground(new Color(86, 53, 158));
         completeJobs.setFont(new Font("Inter", Font.BOLD, 16));
 
         // jobsQueue Button
         jobsQueue = new JButton("Job Queue");
-        jobsQueue.setBounds(110, 310, 100, 34);
         jobsQueue.setBackground(new Color(217, 217, 217));
         jobsQueue.setForeground(new Color(86, 53, 158));
         jobsQueue.setFont(new Font("Inter", Font.BOLD, 16));
 
         // allJobs Button
         allJobs = new JButton("All Jobs");
-        allJobs.setBounds(110, 310, 100, 34);
         allJobs.setBackground(new Color(217, 217, 217));
         allJobs.setForeground(new Color(86, 53, 158));
         allJobs.setFont(new Font("Inter", Font.BOLD, 16));
 
         // allCars Button
         allCars = new JButton("All Cars");
-        allCars.setBounds(110, 310, 100, 34);
         allCars.setBackground(new Color(217, 217, 217));
         allCars.setForeground(new Color(86, 53, 158));
         allCars.setFont(new Font("Inter", Font.BOLD, 16));
 
         // Checkpointer Button
         checkpointer = new JButton("Checkpoint");
-        checkpointer.setBounds(110, 310, 100, 34);
         checkpointer.setBackground(new Color(217, 217, 217));
         checkpointer.setForeground(new Color(86, 53, 158));
         checkpointer.setFont(new Font("Inter", Font.BOLD, 16));
 
         // Back Button
         back = new JButton("Back");
-        back.setBounds(110, 310, 100, 34);
         back.setBackground(new Color(217, 217, 217));
         back.setForeground(new Color(86, 53, 158));
         back.setFont(new Font("Inter", Font.BOLD, 16));
@@ -321,7 +321,6 @@ class CreateAdminForm extends JFrame implements ActionListener {
         welcomePanel.add(welcome);
         welcomePanel.add(infoLabel);
         add(welcomePanel, BorderLayout.NORTH);
-
 
         // Creating button panel
         buttonPanel = new JPanel();
@@ -404,8 +403,9 @@ class Admin extends Thread {
                 ex.printStackTrace();
             }
         }
-    } catch (Exception e) {
+    }
+    catch (Exception e) {
         // TODO: handle exception
-    } // <--- CreateAdminForm{} class ends here
-}
-}
+    } 
+} // <--- Admin{} class ends here
+} // <--- CreateAdminForm{} class ends here

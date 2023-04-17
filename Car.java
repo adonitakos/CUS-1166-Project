@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 public class Car implements Serializable{
 
+    // Initializing Variables
     private int carID;
     private String carLicensePlate;
     private int ownerID;

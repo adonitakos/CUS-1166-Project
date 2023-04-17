@@ -30,6 +30,7 @@ class OptionPage extends JFrame implements ActionListener {
    OptionPage(User user) {
       // Assigning JSwing variables values & styling
       setUser(user);
+
       // Welcome Label
       JLabel welcomeLabel = new JLabel("Welcome to Vehicle Vortex.", SwingConstants.CENTER);
       welcomeLabel.setForeground(Color.WHITE);
@@ -38,7 +39,8 @@ class OptionPage extends JFrame implements ActionListener {
       welcomeLabel.setBounds(0, -75, 450, 200);
 
       // About Label
-      aboutLabel = new JLabel("<html><center>Vehicle Vortex is an application where car users and job users are able to connect in real time. Please select from the drop down menu:</center></html>");
+      aboutLabel = new JLabel("<html><center>Vehicle Vortex is an application where car users and job users are" 
+      + " able to connect in real time. Please select from the drop down menu:</center></html>");
       aboutLabel.setForeground(Color.WHITE);
       aboutLabel.setFont(new Font("Inter", Font.ITALIC, 12));
       aboutLabel.setBounds(0, 20, 450, 100);
@@ -49,7 +51,7 @@ class OptionPage extends JFrame implements ActionListener {
       optionBox.setFont(new Font("Inter", Font.BOLD, 15));
       optionBox.setBounds(170, 70, 100, 100);
 
-      // Back button
+      // Back Button
       back = new JButton("Back");
       back.setBackground(new Color(217, 217, 217));
       back.setForeground(new Color(86, 53, 158));
@@ -63,6 +65,7 @@ class OptionPage extends JFrame implements ActionListener {
       clientUser.add(welcomeLabel);
       clientUser.add(aboutLabel);
       clientUser.add(optionBox);
+      // Setting layout as null so we can choose our bounds.
       clientUser.setLayout(null);
       add(clientUser, BorderLayout.CENTER);
 
@@ -75,9 +78,11 @@ class OptionPage extends JFrame implements ActionListener {
       back.addActionListener(this);
       optionBox.addActionListener(this);
 
+      // Setting title, size, and visibility
       setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
       setTitle("Welcome");
       setSize(450, 500);
+      setVisible(true);
    } // <--- optionPage() constructor ends here
 
    // ---------------------------------------------------------------------------------
@@ -88,23 +93,22 @@ class OptionPage extends JFrame implements ActionListener {
       if (obj == optionBox) {
          // IF the "car" button was pressed, it will take them to the carPage
          if (optionBox.getSelectedItem().equals("Car")) {
-            // dispose();
+            dispose();
             CarPage page = new CarPage();
             page.start(user);
          }
          // IF the "job" button was pressed, it will take them to the jobPage
          else if (optionBox.getSelectedItem().equals("Job")) {
-            // dispose();
+            dispose();
             JobPage page = new JobPage();
             page.start(user);
          }
-         // else if (optionBox.getSelectedItem().equals("Admin")) {
-         // System.out.println("Congrats. You have chosen admin.");
-         // }
-      } else if (obj == back) {
+      }
+      else if (obj == back) {
          dispose();
          Login.main(null);
-      } else {
+      }
+      else {
          System.out.println("error");
       }
    } // <--- actionPerformed() method ends here

@@ -9,7 +9,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.lang.Exception;
 import java.sql.SQLException;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -38,7 +37,6 @@ CreateSignupForm() throws IOException {
     infoLabel = new JLabel();
     infoLabel.setText("<html><center>Thanks for choosing Vehicle Vortex! To sign up, please enter your desired username and password."
    + " Each field must be at least 5 characters long, and your password must contain at least one special character.</center></html>");
-    infoLabel.setFont(new Font("Inter", Font.PLAIN, 15));
     infoLabel.setBounds(20, 160, 320, 60);
     infoLabel.setForeground(Color.WHITE);
     infoLabel.setFont(new Font("Inter", Font.PLAIN, 12));
@@ -71,22 +69,23 @@ CreateSignupForm() throws IOException {
         BorderFactory.createLineBorder(new Color(86, 53, 158)),
         BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-    // Submit
+    // Submit Button
     submit = new JButton("Submit");
     submit.setBounds(125, 390, 100, 34);
     submit.setBackground(new Color(217, 217, 217));
     submit.setForeground(new Color(86, 53, 158));
     submit.setFont(new Font("Inter", Font.BOLD, 16));
 
-    // Back
+    // Back Button
     back = new JButton("Back");
     back.setBackground(new Color(217, 217, 217));
     back.setForeground(new Color(86, 53, 158));
     back.setFont(new Font("Inter", Font.BOLD, 16));
 
-    // Creating a new Panel
+    // Creating main panel
     signupPanel = new JPanel();
     signupPanel.setBackground(new Color(86, 53, 158));
+    // Setting layout as null so that we can set the bounds for variables
     signupPanel.setLayout(null);
 
     // Adding variables to SignUp Panel
@@ -101,14 +100,18 @@ CreateSignupForm() throws IOException {
 
     // Creating Button Panel
     buttonPanel = new JPanel();
-      buttonPanel.add(back);
-      add(buttonPanel, BorderLayout.SOUTH);
+    // Adding button to panel
+    buttonPanel.add(back);
+    add(buttonPanel, BorderLayout.SOUTH);
 
     // Creating action listener for the buttons
     submit.addActionListener(this);
     back.addActionListener(this);
+
+    // Setting title, size, and visibility
     setTitle("Sign Up Form");
     signupPanel.setPreferredSize(new Dimension(350, 440));
+    setVisible(true);
     pack();
 }
 
@@ -141,12 +144,14 @@ CreateSignupForm() throws IOException {
             User user = new User(userID, userValue, passValue);
             try {
                 vcc.addUser(user);
-            } catch (SQLException e) {
+            }
+            catch (SQLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+
+            // Open option page once user signs up
             OptionPage page = new OptionPage(user);
-            page.setVisible(true);
 
             // dispose of sign up page once credentials are valid
             dispose();
@@ -169,17 +174,8 @@ CreateSignupForm() throws IOException {
             //     System.out.println("Error writing credentials to file.");
             // }
         } // <--- if(obj==submit) statment ends here
-
         else if (obj == back) {
             dispose();
-
-            try {
-            CreateLoginForm form = new CreateLoginForm();
-            form.setVisible(true);
-            }
-            catch(IOException ex) {
-            
-            }
         }
     } // <--- actionPerformed() method ends here
 } // <--- CreateSignupForm{} class ends here
@@ -187,13 +183,5 @@ CreateSignupForm() throws IOException {
 class Signup {
     public static void main(String[] args) {
         System.out.println("\n========= Signup =========\n");
-        try {
-            CreateSignupForm form = new CreateSignupForm();
-            // form.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            form.setSize(355, 630);
-            form.setVisible(true);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
     } // <--- main() method ends here
 } // <--- Signup{} class ends here

@@ -7,7 +7,8 @@
 
 import java.io.Serializable;
 
-public class Job implements Serializable{
+public class Job implements Serializable {
+    // Initialize variables
     private int jobID;
     private int jobDuration;//in hours
     private String jobDeadline;
@@ -108,5 +109,4 @@ public class Job implements Serializable{
     public void performJob() {
         System.out.println("This job is being performed.");
     }
-
 }

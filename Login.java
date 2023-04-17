@@ -24,6 +24,7 @@ class CreateLoginForm extends JFrame implements ActionListener {
     final JTextField userField, passwordField;
     VCC vcc = VCC.getInstance();
 
+    // ---------------------------------------------------------------------------------
     // This constructor method creates the GUI for the Login form
     CreateLoginForm() throws IOException {
 
@@ -34,56 +35,59 @@ class CreateLoginForm extends JFrame implements ActionListener {
         logoLabel = new JLabel(new ImageIcon(myPicture));
         logoLabel.setBounds(27, -20, 309, 218);
 
-        // User label
+        // User Label
         userLabel = new JLabel();
         userLabel.setText("Username");
         userLabel.setBounds(54, 180, 100, 16);
         userLabel.setForeground(Color.WHITE);
         userLabel.setFont(new Font("Inter", Font.BOLD, 16));
-        // User field
+
+        // User Field
         userField = new JTextField(15);
         userField.setBounds(47, 208, 249, 38);
         userField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        // Password label
+        // Password Label
         passwordLabel = new JLabel();
         passwordLabel.setText("Password");
         passwordLabel.setBounds(54, 260, 100, 16);
         passwordLabel.setForeground(Color.WHITE);
         passwordLabel.setFont(new Font("Inter", Font.BOLD, 16));
-        // Password field
+
+        // Password Field
         passwordField = new JPasswordField(15);
         passwordField.setBounds(47, 288, 249, 38);
         passwordField.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(86, 53, 158)),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        // Sign Up label
+        // Sign Up Label
         signUpLabel = new JLabel();
         signUpLabel.setText("Don't have an account?");
         signUpLabel.setBounds(18, 400, 500, 16);
         signUpLabel.setForeground(Color.WHITE);
         signUpLabel.setFont(new Font("Inter", Font.BOLD, 16));
 
-        // Sign Up button
+        // Sign Up Button
         signUpButton = new JButton("Sign Up");
         signUpButton.setBounds(220, 390, 100, 34);
         signUpButton.setBackground(new Color(217, 217, 217));
         signUpButton.setForeground(new Color(86, 53, 158));
         signUpButton.setFont(new Font("Inter", Font.BOLD, 16));
 
-        // SignIn button
+        // SignIn Button
         signInButton = new JButton("Sign In");
         signInButton.setBounds(125, 340, 100, 34);
         signInButton.setBackground(new Color(217, 217, 217));
         signInButton.setForeground(new Color(86, 53, 158));
         signInButton.setFont(new Font("Inter", Font.BOLD, 16));
 
-        // Creating a new Panel
+        // Creating a new panel
         loginPanel = new JPanel();
         loginPanel.setBackground(new Color(86, 53, 158));
+        // Setting layout as null so that we can set the bounds for variables
         loginPanel.setLayout(null);
 
         // Adding variables to loginPanel
@@ -100,8 +104,11 @@ class CreateLoginForm extends JFrame implements ActionListener {
         // Creating action listener for the buttons
         signInButton.addActionListener(this);
         signUpButton.addActionListener(this);
+
+        // Setting title, size, and visibility
         setTitle("Login Form");
         setSize(350, 470);
+        setVisible(true);
 
     } // <--- CreateLoginForm() constructor ends here
 
@@ -119,6 +126,7 @@ class CreateLoginForm extends JFrame implements ActionListener {
             try {
                 User user = vcc.getUser(userValue, passValue);
                 vcc.addLogin(user);
+
                 // --- Admin user login ---
                 if (user.getType().equals("Admin")) {
                     System.out.println("admin login");
@@ -134,10 +142,10 @@ class CreateLoginForm extends JFrame implements ActionListener {
                     // }
                     Admin adm = new Admin(user);
                     adm.start();
-                    // this.dispose(); // Close the current login page
+                    this.dispose();
                 } // <--- if(admin) statement ends here
-                  // --- Regular user login ---
 
+                // --- Regular user login ---
                 else if (user.getType().equals("User")) {
                     // Show a success message if credentials are valid
                     JOptionPane.showMessageDialog(this, "Login successful!", "Success",
@@ -145,46 +153,39 @@ class CreateLoginForm extends JFrame implements ActionListener {
                     // Open the "options.java" page
                     System.out.println(user.getUserID());
                     OptionPage optionPage = new OptionPage(user);
-                    optionPage.setVisible(true);
+
+                    // Clearing text fields once user submits to prepare for next input
                     userField.setText("");
                     passwordField.setText("");
-                    // this.dispose(); // Close the current login page
                 }
-            } catch (ClassNotFoundException e1) {
+            }
+            catch (ClassNotFoundException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
-            } catch (SQLException e1) {
+            }
+            catch (SQLException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
         } // <--- if(obj==signInButton) statement ends here
 
-        else if (obj == signUpButton)
-
-        {
-            dispose();
+        else if (obj == signUpButton) {
             try {
-                dispose();
                 CreateSignupForm form = new CreateSignupForm();
-                form.setVisible(true);
-            } catch (IOException e1) {
+            }
+            catch (IOException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
         }
-
-    }
-
-} // <--- actionPerformed() event method ends here
-
-// <--- CreateLoginForm{} class ends here
+    } // <--- actionPerformed() event method ends here
+} // <--- CreateLoginForm{} class ends here
 
 class Login {
     public static void main(String[] args) {
         System.out.println("\n========= Login =========\n");
         try {
             CreateLoginForm form = new CreateLoginForm();
-            form.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
