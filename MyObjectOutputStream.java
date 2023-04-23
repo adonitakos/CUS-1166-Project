@@ -23,4 +23,5 @@ class MyObjectOutputStream extends ObjectOutputStream {
     {
         return;
     }
-}
+
+} // <--- MyObjectOutputStream{} class ends here

@@ -1,12 +1,13 @@
+
 /* Project: Vehicle Vortex
 *  Class: Car.java
-*  Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+*  Author: Antonios Takos, Summer Snyder, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
 *  Date: April 16th, 2023 
 *  This file contains the classes that will be used for the Car.
 */
 import java.io.Serializable;
 
-public class Car implements Serializable{
+public class Car implements Serializable {
 
     // Initializing Variables
     private int carID;
@@ -14,11 +15,12 @@ public class Car implements Serializable{
     private int ownerID;
     private String carMake;
     private String carModel;
-    private String carResidencyTime;    
+    private String carResidencyTime;
     private Boolean inUse = false;
     private int jobID;
 
-    public Car(int carID, String carLicensePlate, int ownerID,String carMake, String carModel, String carResidencyTime) {
+    public Car(int carID, String carLicensePlate, int ownerID, String carMake, String carModel,
+            String carResidencyTime) {
         this.carLicensePlate = carLicensePlate;
         this.carMake = carMake;
         this.carModel = carModel;
@@ -106,4 +108,5 @@ public class Car implements Serializable{
     public String getCarInfo() {
         return "Make: " + this.carMake + ", Model: " + this.carModel + ", Residency Time: " + this.carResidencyTime;
     }
-}
+
+} // <--- Car{} ends here

@@ -1,6 +1,6 @@
 /* Project: Vehicle Vortex
 * Class: JobPage.java
-* Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+* Author: Antonios Takos, Summer Snyder, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
 * Date: April 16th, 2023
 * This program creates a job page, where users who have selected "Job" will
 * be able to enter details and submit the job they would like completed.
@@ -54,13 +54,13 @@ class Jobs extends JFrame implements ActionListener {
         jobIDLabel = new JLabel();
         jobIDLabel.setText("Job ID:");
         jobIDLabel.setForeground(Color.WHITE);
-        
+
         // Job ID Field
         jobIDField = new JTextField(15);
         jobIDField.add(jobIDLabel);
         jobIDField.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(86, 53, 158)),
-            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+                BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Duration Label
         jobDurationLabel = new JLabel();
@@ -83,8 +83,8 @@ class Jobs extends JFrame implements ActionListener {
         jobDeadlineField = new JTextField(15);
         jobDeadlineField.add(jobDeadlineLabel);
         jobDeadlineField.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(86, 53, 158)),
-            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+                BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Description Label
         jobDescriptionLabel = new JLabel();
@@ -95,8 +95,8 @@ class Jobs extends JFrame implements ActionListener {
         jobDescriptionField = new JTextField(15);
         jobDescriptionField.add(jobDescriptionLabel);
         jobDescriptionField.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(86, 53, 158)),
-            BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+                BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         // Job Completion Button
         jobCompletion = new JButton("Completion Time");
@@ -190,8 +190,7 @@ class Jobs extends JFrame implements ActionListener {
                         ObjectOutputStream OOS = new ObjectOutputStream(outputStream);
                         objectsPassed += 1;
                         OOS.writeObject(job);
-                    }
-                    else {
+                    } else {
                         MyObjectOutputStream OOS = new MyObjectOutputStream(outputStream);
                         OOS.writeObject(job);
                     }
@@ -203,15 +202,13 @@ class Jobs extends JFrame implements ActionListener {
                         form.setSize(800, 300);
                         System.out.println("Job submission has been approved by VCC. Writing to file...");
                         // Open pop-up Job Confirmation page
-                    }
-                    else {
+                    } else {
                         System.out.println("Job submission has been denied by VCC.");
                         RejectionPopUp form = new RejectionPopUp(job);
                         form.setVisible(true);
                         form.setSize(800, 300);
                     }
-                }
-                catch (Exception ex) {
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
 
@@ -221,8 +218,7 @@ class Jobs extends JFrame implements ActionListener {
                 jobDeadlineField.setText("");
                 jobDescriptionField.setText("");
 
-            }
-            else if (obj == jobCompletion) {
+            } else if (obj == jobCompletion) {
                 LinkedList<Job> jobs = vcc.getAllJobs();
                 Job job = jobs.getLast();
                 System.out.print("The completion time is: " + job.getCompletionTime() + " hours.");
@@ -234,15 +230,15 @@ class Jobs extends JFrame implements ActionListener {
                 OptionPage page = new OptionPage(user);
                 // if back button was clicked, close current panel
                 dispose();
-            }
-            else {
+            } else {
                 System.out.println("Error.");
             }
-        }
-        catch (Exception ex) {
-            // TODO: handle exception
+        } catch (Exception ex) {
+            ex.printStackTrace();
         } // <--- actionPerformed() method ends here
+
     } // <--- Jobs{} class ends here
+
 } // <--- JobPage{} class ends here
 
 class JobPage {
@@ -264,4 +260,5 @@ class JobPage {
 
     public JobPage() {
     }
+    
 } // <--- JobPage{} class ends here

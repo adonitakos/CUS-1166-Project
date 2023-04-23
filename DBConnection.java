@@ -1,6 +1,6 @@
 /* Project: Vehicle Vortex
 *  Class: DBConnection.java
-*  Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+*  Author: Antonios Takos, Summer Snyder, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
 *  Date: April 16th, 2023 
 *  This program creates and returns a database connection.
 */
@@ -37,6 +37,6 @@ public class DBConnection {
 			conn = DriverManager.getConnection(fullDBString, userName, password);
 		}
 		return conn;
-	}
+	} // <--- getMyConnection() method ends here
 
-}
+} // <--- DBConncetion{} class ends here

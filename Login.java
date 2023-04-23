@@ -179,6 +179,7 @@ class CreateLoginForm extends JFrame implements ActionListener {
             }
         }
     } // <--- actionPerformed() event method ends here
+    
 } // <--- CreateLoginForm{} class ends here
 
 class Login {
@@ -190,4 +191,5 @@ class Login {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     } // <--- main() method ends here
+
 }// <--- Login{} class ends here

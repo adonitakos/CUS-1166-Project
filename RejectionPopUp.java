@@ -43,7 +43,7 @@ class RejectionPopUp extends JFrame implements ActionListener {
         setTitle("Car Rejection");
         setSize(500, 350);
         setVisible(true);
-    }
+    } // <--- RejectionPopUp(Car car) constructor ends here
 
     // ------------------------------------------
     // This constructor creates the GUI for the job rejection pop-up
@@ -81,7 +81,7 @@ class RejectionPopUp extends JFrame implements ActionListener {
         setTitle("Job Rejection");
         setSize(500, 350);
         setVisible(true);
-    }
+    } // <--- RejectionPopUp() constructor ends here
 
     // ------------------------------------------
     // Action listener method
@@ -90,4 +90,4 @@ class RejectionPopUp extends JFrame implements ActionListener {
         dispose();
     } // <--- actionPerformed() method ends here
 
-}
+} // <--- RejectionPopUp{} class ends here

@@ -1,4 +1,0 @@
-Job ID: 12345 | Job Duration: 5 hours | Job Deadline: May 10 | Job Description: N/A | Time: 2023-03-02 14:45:52
-Job ID: 15357 | Job Duration: 10 hours | Job Deadline: March 5 | Job Description: N/A | Timestamp: 2023-03-02 14:47:39
-Job ID: 778524738 | Job Duration: 5 hours | Job Deadline: May 21, 2023 | Job Description: N/A | Timestamp: 2023-03-14 19:31:45
-Job ID: 957745627 | Job Duration: 5 hours | Job Deadline: May 10th, 2023 | Job Description: N/A | Timestamp: 2023-03-16 08:48:46

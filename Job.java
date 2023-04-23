@@ -1,6 +1,6 @@
 /* Project: Vehicle Vortex
 *  Class: Job.java
-*  Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+*  Author: Antonios Takos, Summer Snyder, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
 *  Date: April 16th, 2023
 *  This file contains the classes that will be used for the Job.
 */
@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class Job implements Serializable {
     // Initialize variables
     private int jobID;
-    private int jobDuration;//in hours
+    private int jobDuration;// in hours
     private String jobDeadline;
     private Boolean completionStatus = false;
     private int jobRedundancy;
@@ -109,4 +109,5 @@ public class Job implements Serializable {
     public void performJob() {
         System.out.println("This job is being performed.");
     }
-}
+
+} // <--- Job{} class ends here

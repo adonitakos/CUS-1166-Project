@@ -1,6 +1,6 @@
 /*  Project: Vehicle Vortex
 *   Class: CarPage.java 
-*   Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+*   Author: Antonios Takos, Summer Snyder, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
 *   Date: April 16th, 2023
 *   This program creates the car page, where users who have selected "Car"
 *   will be able to enter details and submit their car for use.
@@ -52,7 +52,7 @@ class Cars extends JFrame implements ActionListener {
 
                 // Info Label
                 infoLabel = new JLabel("Please enter the following information, leaving no fields blank.",
-                SwingConstants.CENTER);
+                                SwingConstants.CENTER);
                 infoLabel.setForeground(Color.WHITE);
                 infoLabel.setFont(new Font("Inter", Font.PLAIN, 12));
 
@@ -65,8 +65,8 @@ class Cars extends JFrame implements ActionListener {
                 carIDField = new JTextField(15);
                 carIDField.add(carIDLabel);
                 carIDField.setBorder(BorderFactory.createCompoundBorder(
-                        BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                        BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+                                BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
                 // Car License Plate Label
                 carLicensePlateLabel = new JLabel();
@@ -77,20 +77,20 @@ class Cars extends JFrame implements ActionListener {
                 carLicensePlateField = new JTextField(15);
                 carLicensePlateField.add(carLicensePlateLabel);
                 carLicensePlateField.setBorder(BorderFactory.createCompoundBorder(
-                        BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                        BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+                                BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
                 // Car Make Label
                 carMakeLabel = new JLabel();
                 carMakeLabel.setText("Make:");
                 carMakeLabel.setForeground(Color.WHITE);
-                
+
                 // Car Make Field
                 carMakeField = new JTextField(15);
                 carMakeField.add(carMakeLabel);
                 carMakeField.setBorder(BorderFactory.createCompoundBorder(
-                        BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                        BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+                                BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
                 // Car Model Label
                 carModelLabel = new JLabel();
@@ -101,8 +101,8 @@ class Cars extends JFrame implements ActionListener {
                 carModelField = new JTextField(15);
                 carModelField.add(carModelLabel);
                 carModelField.setBorder(BorderFactory.createCompoundBorder(
-                        BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                        BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+                                BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
                 // Car Residency Time Label
                 carResidencyTimeLabel = new JLabel();
@@ -113,8 +113,8 @@ class Cars extends JFrame implements ActionListener {
                 carResidencyTimeField = new JTextField(15);
                 carResidencyTimeField.add(carResidencyTimeLabel);
                 carResidencyTimeField.setBorder(BorderFactory.createCompoundBorder(
-                        BorderFactory.createLineBorder(new Color(86, 53, 158)),
-                        BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+                                BorderFactory.createLineBorder(new Color(86, 53, 158)),
+                                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
                 // Submit Button
                 submit = new JButton("Submit");
@@ -202,8 +202,7 @@ class Cars extends JFrame implements ActionListener {
                                                 ObjectOutputStream OOS = new ObjectOutputStream(outputStream);
                                                 objectsPassed += 1;
                                                 OOS.writeObject(car);
-                                        }
-                                        else {
+                                        } else {
                                                 MyObjectOutputStream OOS = new MyObjectOutputStream(outputStream);
                                                 OOS.writeObject(car);
                                         }
@@ -215,16 +214,14 @@ class Cars extends JFrame implements ActionListener {
                                                 System.out.println(
                                                                 "Car submission has been approved by VCC. Writing to file...");
 
-                                        }
-                                        else {
+                                        } else {
                                                 System.out.println("Car submission has been denied by VCC.");
                                                 RejectionPopUp form = new RejectionPopUp(car);
                                                 form.setVisible(true);
                                                 form.setSize(800, 300);
                                         }
 
-                                }
-                                catch (Exception ex) {
+                                } catch (Exception ex) {
 
                                 }
                                 // Clearing text fields once user submits to prepare for next input
@@ -234,19 +231,16 @@ class Cars extends JFrame implements ActionListener {
                                 carLicensePlateField.setText("");
                                 carResidencyTimeField.setText("");
 
-                }
-                else if (obj == back) {
-                        // if back button was clicked, reopen OptionPage
-                        OptionPage page = new OptionPage(user);
-                        page.setVisible(true);
-                        // if back button was clicked, close CarPage
-                        dispose();
-                }
-                else {
-                        System.out.println("Error.");
-                }
-                }
-                catch (Exception ex) {
+                        } else if (obj == back) {
+                                // if back button was clicked, reopen OptionPage
+                                OptionPage page = new OptionPage(user);
+                                page.setVisible(true);
+                                // if back button was clicked, close CarPage
+                                dispose();
+                        } else {
+                                System.out.println("Error.");
+                        }
+                } catch (Exception ex) {
 
                 }
         } // <--- actionPerformed() method ends here

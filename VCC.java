@@ -1,9 +1,10 @@
+
 /*  Project: Vehicle Vortex
 *   Class: VCC.java 
-*   Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+*   Author: Antonios Takos, Summer Snyder, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
 *   Date: April 16th, 2023
 *   This file contains the classes that will be used for the VCC.
-*/ 
+*/
 import java.util.*;
 
 import javax.swing.table.DefaultTableColumnModel;

@@ -1,6 +1,6 @@
 /* Project: Vehicle Vortex
 *  Class: OptionPage.java
-*  Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+*  Author: Antonios Takos, Summer Snyder, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
 *  Date: April 16th, 2023 
 *  This program creates an option page, where users will be able to decide
 *  if they would like to submit a car or a job.
@@ -39,8 +39,8 @@ class OptionPage extends JFrame implements ActionListener {
       welcomeLabel.setBounds(0, -75, 450, 200);
 
       // About Label
-      aboutLabel = new JLabel("<html><center>Vehicle Vortex is an application where car users and job users are" 
-      + " able to connect in real time. Please select from the drop down menu:</center></html>");
+      aboutLabel = new JLabel("<html><center>Vehicle Vortex is an application where car users and job users are"
+            + " able to connect in real time. Please select from the drop down menu:</center></html>");
       aboutLabel.setForeground(Color.WHITE);
       aboutLabel.setFont(new Font("Inter", Font.ITALIC, 12));
       aboutLabel.setBounds(0, 20, 450, 100);
@@ -56,11 +56,11 @@ class OptionPage extends JFrame implements ActionListener {
       back.setBackground(new Color(217, 217, 217));
       back.setForeground(new Color(86, 53, 158));
       back.setFont(new Font("Inter", Font.BOLD, 16));
-      
+
       // Creating new panel
       clientUser = new JPanel(new GridLayout(3, 1));
       clientUser.setBackground(new Color(86, 53, 158));
-      
+
       // Adding variables to the panel
       clientUser.add(welcomeLabel);
       clientUser.add(aboutLabel);
@@ -103,14 +103,13 @@ class OptionPage extends JFrame implements ActionListener {
             JobPage page = new JobPage();
             page.start(user);
          }
-      }
-      else if (obj == back) {
+      } else if (obj == back) {
          dispose();
          Login.main(null);
-      }
-      else {
+      } else {
          System.out.println("error");
       }
+      
    } // <--- actionPerformed() method ends here
 
 } // <--- OptionPage{} class ends here

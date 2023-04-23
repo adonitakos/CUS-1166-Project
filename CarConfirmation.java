@@ -102,4 +102,5 @@ class CarConfirmation extends JFrame implements ActionListener {
         // Dispose window if the close button is clicked
         dispose();
     } // <--- actionPerformed() method ends here
+    
 } // <--- JobConfirmation{} class ends here

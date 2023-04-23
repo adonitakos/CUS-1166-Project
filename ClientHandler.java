@@ -1,6 +1,6 @@
 /* Project: Vehicle Vortex
 *  Class: ClientHandler.java
-*  Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+*  Author: Antonios Takos, Summer Snyder, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
 *  Date: April 16th, 2023 
 */
 

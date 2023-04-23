@@ -1,6 +1,6 @@
 /* Project: Vehicle Vortex
 *  Class: AdminPage.java
-*  Author: Summer Snyder, Antonios Takos, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
+*  Author: Antonios Takos, Summer Snyder, Teuta Elezaj, Christian Felix, Tahir Buksh, Jayden Kuprel
 *  Date: April 16th, 2023 
 *  This program creates the admin page, where the admin is able to accept/decline/view jobs.
 */
@@ -19,7 +19,8 @@ class CreateAdminForm extends JFrame implements ActionListener {
 
     // Initializing variables
     private JPanel welcomePanel, confirmationPanel, jobRequest, carRequest, buttonPanel, backPanel;
-    private JLabel welcome, infoLabel, jobIDLabel, jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel, confirmationLabel, carIDLabel,
+    private JLabel welcome, infoLabel, jobIDLabel, jobDurationLabel, jobDeadlineLabel, jobDescriptionLabel,
+            confirmationLabel, carIDLabel,
             carMakeLabel, carModelLabel, carLicensePlateLabel, carResidencyTimeLabel;
     private JButton back, carByID, jobByID, allCars, allJobs, jobsQueue, completeJobs, checkpointer, accept, reject;
     private DataOutputStream outputStream;
@@ -45,23 +46,26 @@ class CreateAdminForm extends JFrame implements ActionListener {
         jobIDLabel.setBackground(new Color(217, 217, 217));
 
         // Job Duration Label
-        jobDurationLabel = new JLabel("<html><u><b>Duration:</u></b> " + job.getJobDuration() + " hours</html>", SwingConstants.CENTER);
+        jobDurationLabel = new JLabel("<html><u><b>Duration:</u></b> " + job.getJobDuration() + " hours</html>",
+                SwingConstants.CENTER);
         jobDurationLabel.setForeground(Color.WHITE);
         jobDurationLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         jobDurationLabel.setBackground(new Color(217, 217, 217));
 
         // Job Deadline Label
-        jobDeadlineLabel = new JLabel("<html><u><b>Deadline:</u></b> " + job.getJobDeadline() + "</html>", SwingConstants.CENTER);
+        jobDeadlineLabel = new JLabel("<html><u><b>Deadline:</u></b> " + job.getJobDeadline() + "</html>",
+                SwingConstants.CENTER);
         jobDeadlineLabel.setForeground(Color.WHITE);
         jobDeadlineLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         jobDeadlineLabel.setBackground(new Color(217, 217, 217));
 
         // Job Description Label
-        jobDescriptionLabel = new JLabel("<html><b><u>Description:</u></b> " + job.getJobDescription() +"</html>", SwingConstants.CENTER);
+        jobDescriptionLabel = new JLabel("<html><b><u>Description:</u></b> " + job.getJobDescription() + "</html>",
+                SwingConstants.CENTER);
         jobDescriptionLabel.setForeground(Color.WHITE);
         jobDescriptionLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         jobDescriptionLabel.setBackground(new Color(217, 217, 217));
-    
+
         // Accept Button
         accept = new JButton("Accept");
         accept.setBounds(110, 310, 100, 34);
@@ -75,7 +79,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
         reject.setBackground(new Color(217, 217, 217));
         reject.setForeground(new Color(86, 53, 158));
         reject.setFont(new Font("Inter", Font.BOLD, 16));
-        
+
         // Creating title panel
         confirmationPanel = new JPanel();
         confirmationPanel.add(confirmationLabel);
@@ -139,19 +143,23 @@ class CreateAdminForm extends JFrame implements ActionListener {
         carMakeLabel.setBackground(new Color(217, 217, 217));
 
         // Car Model Label
-        carModelLabel = new JLabel("<html><b><u>Model:</b></u> " + car.getCarModel() + "</html>", SwingConstants.CENTER);
+        carModelLabel = new JLabel("<html><b><u>Model:</b></u> " + car.getCarModel() + "</html>",
+                SwingConstants.CENTER);
         carModelLabel.setForeground(Color.WHITE);
         carModelLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         carModelLabel.setBackground(new Color(217, 217, 217));
 
         // Car License Plate Label
-        carLicensePlateLabel = new JLabel("<html><b><u>License Plate:</b></u> " + car.getCarLicensePlate() + "</html>", SwingConstants.CENTER);
+        carLicensePlateLabel = new JLabel("<html><b><u>License Plate:</b></u> " + car.getCarLicensePlate() + "</html>",
+                SwingConstants.CENTER);
         carLicensePlateLabel.setForeground(Color.WHITE);
         carLicensePlateLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         carLicensePlateLabel.setBackground(new Color(217, 217, 217));
 
         // Car Residency Time Label
-        carResidencyTimeLabel = new JLabel("<html><b><u>Residency Time:</b></u> " + car.getCarResidencyTime() + " hours</html>", SwingConstants.CENTER);
+        carResidencyTimeLabel = new JLabel(
+                "<html><b><u>Residency Time:</b></u> " + car.getCarResidencyTime() + " hours</html>",
+                SwingConstants.CENTER);
         carResidencyTimeLabel.setForeground(Color.WHITE);
         carResidencyTimeLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         carResidencyTimeLabel.setBackground(new Color(217, 217, 217));
@@ -232,10 +240,10 @@ class CreateAdminForm extends JFrame implements ActionListener {
             dispose();
             Login.main(null);
         } else if (obj == carByID) {
-        //    PopUp form = new PopUp(car);
+            // PopUp form = new PopUp(car);
 
         } else if (obj == jobByID) {
-        //    PopUp form = new PopUp(job);
+            // PopUp form = new PopUp(job);
 
         } else if (obj == allCars) {
             LinkedList<Car> cars;
@@ -254,7 +262,7 @@ class CreateAdminForm extends JFrame implements ActionListener {
                 e1.printStackTrace();
             }
         } else if (obj == allJobs) {
-            LinkedList <Job> jobs;
+            LinkedList<Job> jobs;
             try {
                 jobs = vcc.getAllJobs();
                 System.out.println(jobs);
@@ -264,20 +272,18 @@ class CreateAdminForm extends JFrame implements ActionListener {
                 popUpPanel.setBackground(new Color(86, 53, 158));
                 setSize(500, 600);
                 setVisible(true);
-            }
-            catch(ClassNotFoundException error) {
+            } catch (ClassNotFoundException error) {
                 error.printStackTrace();
-            }   
-            catch(SQLException error) {
+            } catch (SQLException error) {
                 error.printStackTrace();
             }
         } else if (obj == jobsQueue) {
-         //   PopUp form = new PopUp(jobsQueue);
+            // PopUp form = new PopUp(jobsQueue);
         } else if (obj == completeJobs) {
-        //    PopUp form = new PopUp(allJobs);
+            // PopUp form = new PopUp(allJobs);
 
         } else if (obj == checkpointer) {
-        //    PopUp form = new PopUp(Cars, allJobs);
+            // PopUp form = new PopUp(Cars, allJobs);
 
         } else {
             System.out.println("Error.");
@@ -334,19 +340,19 @@ class CreateAdminForm extends JFrame implements ActionListener {
         back.setForeground(new Color(86, 53, 158));
         back.setFont(new Font("Inter", Font.BOLD, 16));
 
-         // Welcome Label
-         welcome = new JLabel("Welcome to the Admin Page.", SwingConstants.CENTER);
-         // Sets the Welcome string to White text
-         welcome.setForeground(Color.WHITE);
-         welcome.setFont(new Font("Inter", Font.BOLD, 26));
+        // Welcome Label
+        welcome = new JLabel("Welcome to the Admin Page.", SwingConstants.CENTER);
+        // Sets the Welcome string to White text
+        welcome.setForeground(Color.WHITE);
+        welcome.setFont(new Font("Inter", Font.BOLD, 26));
 
-         // Info Label
-         infoLabel = new JLabel("Please select which data you would like to retrieve.", SwingConstants.CENTER);
-         infoLabel.setForeground(Color.WHITE);
-         infoLabel.setFont(new Font("Inter", Font.PLAIN, 12));
+        // Info Label
+        infoLabel = new JLabel("Please select which data you would like to retrieve.", SwingConstants.CENTER);
+        infoLabel.setForeground(Color.WHITE);
+        infoLabel.setFont(new Font("Inter", Font.PLAIN, 12));
 
         // Creating welcome panel
-        welcomePanel = new JPanel(new GridLayout(2,1));
+        welcomePanel = new JPanel(new GridLayout(2, 1));
         welcomePanel.setBackground(new Color(86, 53, 158));
         // Adding variables to the panel
         welcomePanel.add(welcome);
@@ -429,7 +435,7 @@ class Admin extends Thread {
                     // create a new thread object
                     Thread t = new ClientHandler(s, DIS, DOS);
 
-                t.start();
+                    t.start();
                 } catch (Exception ex) {
                     s.close();
                     ex.printStackTrace();
@@ -438,7 +444,7 @@ class Admin extends Thread {
         } // <--- try{} block ends here
         catch (Exception e) {
             e.printStackTrace();
-        }  // <--- catch{} block ends here
+        } // <--- catch{} block ends here
 
     } // <--- run() method ends here
 
