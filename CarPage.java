@@ -217,8 +217,6 @@ class Cars extends JFrame implements ActionListener {
                                         } else {
                                                 System.out.println("Car submission has been denied by VCC.");
                                                 RejectionPopUp form = new RejectionPopUp(car);
-                                                form.setVisible(true);
-                                                form.setSize(800, 300);
                                         }
 
                                 } catch (Exception ex) {

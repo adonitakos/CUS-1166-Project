@@ -205,8 +205,6 @@ class Jobs extends JFrame implements ActionListener {
                     } else {
                         System.out.println("Job submission has been denied by VCC.");
                         RejectionPopUp form = new RejectionPopUp(job);
-                        form.setVisible(true);
-                        form.setSize(800, 300);
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();

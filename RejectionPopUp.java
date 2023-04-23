@@ -41,7 +41,7 @@ class RejectionPopUp extends JFrame implements ActionListener {
 
         // Setting title, size, and visibility
         setTitle("Car Rejection");
-        setSize(500, 350);
+        setSize(320, 100);
         setVisible(true);
     } // <--- RejectionPopUp(Car car) constructor ends here
 
@@ -79,7 +79,7 @@ class RejectionPopUp extends JFrame implements ActionListener {
 
         // Setting title, size, and visibility
         setTitle("Job Rejection");
-        setSize(500, 350);
+        setSize(320, 100);
         setVisible(true);
     } // <--- RejectionPopUp() constructor ends here
 
