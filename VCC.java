@@ -5,6 +5,9 @@
 *   This file contains the classes that will be used for the VCC.
 */ 
 import java.util.*;
+
+import javax.swing.table.DefaultTableColumnModel;
+
 import java.sql.*;
 import java.sql.Date;
 
@@ -19,7 +22,7 @@ public class VCC {
 
 	public static void init() throws ClassNotFoundException {
 		DBConnection.init();
-	}
+	} // <--- init() method ends here
 
 	private static Connection conn;
 
@@ -41,7 +44,7 @@ public class VCC {
 		}
 		car.setJobID(currentJobID);
 		return car;
-	}
+	} // <--- buildcar() method ends here
 
 	private static Job buildJob(ResultSet rs) throws SQLException {
 		rs.next();
@@ -65,7 +68,7 @@ public class VCC {
 		job.setOwnerID(ownerID);
 		job.setCurrentCarNum(carsUsing);
 		return job;
-	}
+	} // <--- buildJob() method ends here
 
 	private static User buildUser(ResultSet rs) throws SQLException {
 		rs.next();
@@ -76,7 +79,7 @@ public class VCC {
 		User user = new User(userID, userName, userPassword);
 		user.setType(type);
 		return user;
-	}
+	} // <--- buildUser() method ends here
 
 	private static LinkedList<User> buildUserList(ResultSet rs) throws SQLException {
 		LinkedList<User> users = new LinkedList<User>();
@@ -85,7 +88,7 @@ public class VCC {
 			users.add(user);
 		}
 		return users;
-	}
+	} // <--- buildUserList() method ends here
 
 	private static LinkedList<Job> buildJobList(ResultSet rs) throws SQLException {
 		LinkedList<Job> jobs = new LinkedList<Job>();
@@ -94,7 +97,7 @@ public class VCC {
 			jobs.add(job);
 		}
 		return jobs;
-	}
+	} // <--- buildJobList() method ends here
 
 	private static LinkedList<Car> buildCarList(ResultSet rs) throws SQLException {
 		LinkedList<Car> cars = new LinkedList<Car>();
@@ -103,7 +106,7 @@ public class VCC {
 			cars.add(car);
 		}
 		return cars;
-	}
+	} // <--- buildCarList() method ends here
 
 	private VCC() {
 	}
@@ -113,25 +116,44 @@ public class VCC {
 			single_instance = new VCC();
 
 		return single_instance;
-	}
+	} // <--- getInstance() method ends here
 
-	public LinkedList<User> getUsers() {
+	public LinkedList<User> getUsers() throws ClassNotFoundException, SQLException {
+		conn = DBConnection.getMyConnection();
+		LinkedList<User> users = new LinkedList<User>();
+		String query = ("select * from users");
+		PreparedStatement stmt = conn.prepareStatement(query);
+		ResultSet rs = stmt.executeQuery();
+		users = buildUserList(rs);
+		stmt.close();
 		return users;
-	}
+	} // <--- getUsers() method ends here
 
 	public Queue<Job> getQueue() {
 		return jobsQueue;
-	}
+	} // <--- getQueue() method ends here
 
-	public LinkedList<Car> getAllCars() {
+	public LinkedList<Car> getAllCars() throws ClassNotFoundException, SQLException {
+		conn = DBConnection.getMyConnection();
+		LinkedList<Car> cars = new LinkedList<Car>();
+		String query = ("select * from cars");
+		PreparedStatement stmt = conn.prepareStatement(query);
+		ResultSet rs = stmt.executeQuery();
+		cars = buildCarList(rs);
+		stmt.close();
+		return cars;
+	} // <--- getAllCars() method ends here
 
-		return Cars;
-	}
-
-	public LinkedList<Job> getAllJobs() {
-
-		return allJobs;
-	}
+	public LinkedList<Job> getAllJobs() throws ClassNotFoundException, SQLException {
+		conn = DBConnection.getMyConnection();
+		LinkedList<Job> jobs = new LinkedList<Job>();
+		String query = ("select * from jobs");
+		PreparedStatement stmt = conn.prepareStatement(query);
+		ResultSet rs = stmt.executeQuery();
+		jobs = buildJobList(rs);
+		stmt.close();
+		return jobs;
+	} // <--- getAllJobs() method ends here
 
 	public LinkedList<Job> getCompleteJobs() {
 
@@ -140,9 +162,9 @@ public class VCC {
 			if (allJobs.get(i).getStatus()) {
 				completed.add(allJobs.get(i));
 			}
-		}
+		} // <--- for() loop ends here
 		return completed;
-	}
+	} // <--- getCompleteJobs() method ends here
 
 	public LinkedList<Job> getIncompleteJobs() {
 		LinkedList<Job> notCompleted = new LinkedList<Job>();
@@ -152,19 +174,19 @@ public class VCC {
 			}
 		}
 		return notCompleted;
-	}
+	} // <--- getIncompleteJobs() method ends here
 
-	public Car getCarById(String plateNum) throws ClassNotFoundException, SQLException {
+	public Car getCarById(String carID) throws ClassNotFoundException, SQLException {
 		conn = DBConnection.getMyConnection();
 		Car car;
-		String query = ("select * from cars where plateNum like ?");
+		String query = ("select * from cars where carID like ?");
 		PreparedStatement stmt = conn.prepareStatement(query);
-		stmt.setString(1, plateNum);
+		stmt.setString(1, carID);
 		ResultSet rs = stmt.executeQuery();
 		car = buildCar(rs);
 		stmt.close();
 		return car;
-	}
+	} // <--- getCarById() method ends here
 
 	public Job getJobById(int jobID) throws ClassNotFoundException, SQLException {
 		conn = DBConnection.getMyConnection();
@@ -176,7 +198,7 @@ public class VCC {
 		job = buildJob(rs);
 		stmt.close();
 		return job;
-	}
+	} // <--- getJobByID() method ends here
 
 	public User getUser(String username, String password) throws SQLException, ClassNotFoundException {
 		conn = DBConnection.getMyConnection();
@@ -189,7 +211,7 @@ public class VCC {
 		user = buildUser(rs);
 		stmt.close();
 		return user;
-	}
+	} // <--- getUser() method ends here
 
 	public Boolean addUser(User user) throws SQLException {
 		conn = DBConnection.getMyConnection();
@@ -202,7 +224,7 @@ public class VCC {
 		stmt.executeUpdate();
 		stmt.close();
 		return true;
-	}
+	} // <--- addUser() method ends here
 
 	public Boolean addJob(Job job) throws SQLException {
 		job.setRedundancy(generalRedundancy);
@@ -229,7 +251,7 @@ public class VCC {
 		stmt.executeUpdate();
 		stmt.close();
 		return true;
-	}
+	} // <--- addJob() method ends here
 
 	public Boolean addCar(Car car, User user) throws SQLException {
 		conn = DBConnection.getMyConnection();
@@ -247,7 +269,7 @@ public class VCC {
 		stmt.executeUpdate();
 		stmt.close();
 		return true;
-	}
+	} // <--- addCar() method ends here
 
 	public Boolean addLogin(User user) throws SQLException {
 		conn = DBConnection.getMyConnection();
@@ -258,13 +280,13 @@ public class VCC {
 		stmt.executeUpdate();
 		stmt.close();
 		return true;
-	}
+	} // <--- addLogin() method ends here
 
 	public Boolean assignCarToJob(int jobId, String plateNum) throws ClassNotFoundException, SQLException {
 		Job job = getJobById(jobId);
 		Car car = getCarById(plateNum);
 		return true;
-	}
+	} // <--- assignCarToJob() method ends here
 
 	public Boolean deleteCar(String plateNum) throws SQLException {
 		conn = DBConnection.getMyConnection();
@@ -274,7 +296,7 @@ public class VCC {
 		stmt.executeQuery();
 		stmt.close();
 		return true;
-	}
+	} // <--- deleteCar() method ends here
 
 	public Boolean deleteJob(int jobId) throws ClassNotFoundException, SQLException {
 		Queue<Job> temp = new LinkedList<>();
@@ -285,29 +307,29 @@ public class VCC {
 			temp.add(jobsQueue.peek());
 			jobsQueue.remove();
 			count++;
-		}
+		} // <--- while() loop ends here
 		if (jobsQueue.isEmpty()) {
 			System.out.print("Job not found." + "\n");
 			while (!temp.isEmpty()) {
 				jobsQueue.add(temp.peek());
 				temp.remove();
-			}
+			} // <--- while() loop ends here
 		} else {
 			jobsQueue.remove();
 			while (!temp.isEmpty()) {
 				jobsQueue.add(temp.peek());
 				temp.remove();
-			}
+			} // <--- while() loop ends here
 			int k = size - count - 1;
 			while (k-- > 0) {
 				Job tempJob = jobsQueue.peek();
 				jobsQueue.remove();
 				jobsQueue.add(tempJob);
-			}
-		}
+			} // <--- while() looop ends here
+		} // <--- else{} statement ends here
 		allJobs.remove(job);
 		return true;
-	}
+	} // <--- deleteJob() method ends here
 
 	public Boolean transferJobsBetweenCars(Job job, Car original, Car newCar) {
 		// job.getCars().remove(original);
@@ -316,13 +338,13 @@ public class VCC {
 		// newCar.setJob(job);
 		// // need to add checkpoint usage
 		return true;
-	}
+	} // <--- transferJobsBetweenCars() method ends here
 
 	public Boolean completeJob() {
 		Job compJob = jobsQueue.remove();
 		compJob.setStatus(true);
 		return true;
-	}
+	} // <--- completeJobs() method ends here
 
 	public Boolean createCheckPoint(Car Car, int checkpointID, Date checkInTime, Date checkOutTime) // (Vehicle vehicle)
 	{
@@ -332,12 +354,12 @@ public class VCC {
 		checkpoint.setCheckOutTime(checkOutTime);
 		// checkpoint.add(checkpoint); Not sure of purpose
 		return true;
-	}
+	} // <--- createCheckPoint() method ends here
 
 	public Boolean transferCheckpoint() {
 		// Boolean checkpointData = VCC.createCheckPoint(checkpointID,vehicle,
 		// checkinTime, checkoutTime);
 		return true;
+	} // <--- transferCheckpoint() method ends here
 
-	}
-}
+} // <--- VCC{} class ends here

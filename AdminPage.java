@@ -10,6 +10,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.lang.Exception;
 import java.net.*;
+import java.sql.SQLException;
+import java.util.*;
 import java.awt.event.ActionListener;
 import java.io.*;
 
@@ -110,7 +112,8 @@ class CreateAdminForm extends JFrame implements ActionListener {
     } // <--- CreateAdminForm(Job job) constructor
 
     // ---------------------------------------------------------------------------------
-    // This constructor creates the GUI for the car review pop up
+
+    // This constructor creates the GUI for the car REVIEW pop up
     CreateAdminForm(Car car, Socket socket, DataInputStream inputStream, DataOutputStream outputStream) {
 
         this.outputStream = outputStream;
@@ -235,11 +238,39 @@ class CreateAdminForm extends JFrame implements ActionListener {
         //    PopUp form = new PopUp(job);
 
         } else if (obj == allCars) {
-        //    PopUp form = new PopUp(Cars);
-
+            LinkedList<Car> cars;
+            try {
+                cars = vcc.getAllCars();
+                System.out.println(cars);
+                PopUp popUp = new PopUp(cars);
+                JPanel popUpPanel = new JPanel();
+                popUpPanel.add(popUp);
+                popUpPanel.setBackground(new Color(86, 53, 158));
+                setSize(500, 500);
+                setVisible(true);
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
         } else if (obj == allJobs) {
-        //    PopUp form = new PopUp(allJobs);
-
+            LinkedList <Job> jobs;
+            try {
+                jobs = vcc.getAllJobs();
+                System.out.println(jobs);
+                PopUp popUp = new PopUp(jobs, false);
+                JPanel popUpPanel = new JPanel();
+                popUpPanel.add(popUp);
+                popUpPanel.setBackground(new Color(86, 53, 158));
+                setSize(500, 600);
+                setVisible(true);
+            }
+            catch(ClassNotFoundException error) {
+                error.printStackTrace();
+            }   
+            catch(SQLException error) {
+                error.printStackTrace();
+            }
         } else if (obj == jobsQueue) {
          //   PopUp form = new PopUp(jobsQueue);
         } else if (obj == completeJobs) {
@@ -356,8 +387,9 @@ class CreateAdminForm extends JFrame implements ActionListener {
         setSize(675, 350);
         setVisible(true);
 
-    } // <--- CreateAdminForm() constructor ends here
-}
+    } // <--- CreateAdminForm(User user) constructor ends here
+
+} // <--- CreateAdminForm{} class ends here
 
 class Admin extends Thread {
 
@@ -398,14 +430,16 @@ class Admin extends Thread {
                     Thread t = new ClientHandler(s, DIS, DOS);
 
                 t.start();
-            } catch (Exception ex) {
-                s.close();
-                ex.printStackTrace();
-            }
-        }
-    }
-    catch (Exception e) {
-        // TODO: handle exception
-    } 
-} // <--- Admin{} class ends here
+                } catch (Exception ex) {
+                    s.close();
+                    ex.printStackTrace();
+                }
+            } // <--- while(true) loop ends here
+        } // <--- try{} block ends here
+        catch (Exception e) {
+            e.printStackTrace();
+        }  // <--- catch{} block ends here
+
+    } // <--- run() method ends here
+
 } // <--- CreateAdminForm{} class ends here
