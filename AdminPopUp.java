@@ -250,7 +250,7 @@ class PopUp extends JFrame implements ActionListener {
         // Setting title, size, and visibility
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Admin - Completed Jobs");
-        setSize(400, 275);
+        setSize(800, 275);
         setVisible(true);
 
     } // <--- PopUp(Job job) constructor
@@ -298,7 +298,7 @@ class PopUp extends JFrame implements ActionListener {
     PopUp(LinkedList<Car> cars) {
 
         // Info Label
-        infoLabel = new JLabel("This is the  Cars pop up panel.", SwingConstants.CENTER);
+        infoLabel = new JLabel("This is the Cars pop up panel.", SwingConstants.CENTER);
         infoLabel.setForeground(Color.WHITE);
         infoLabel.setFont(new Font("Inter", Font.BOLD, 16));
         infoLabel.setBackground(new Color(217, 217, 217));
@@ -335,7 +335,7 @@ class PopUp extends JFrame implements ActionListener {
         // Setting title, size, and visibility
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Admin - All Cars");
-        setSize(400, 275);
+        setSize(800, 275);
         setVisible(true);
 
     } // <--- PopUp(Linked List<Car> Cars) constructor
