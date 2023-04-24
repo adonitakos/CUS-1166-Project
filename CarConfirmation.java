@@ -32,7 +32,7 @@ class CarConfirmation extends JFrame implements ActionListener {
         userIDLabel.setBackground(new Color(217, 217, 217));
 
         // Car License Plate Label
-        carLicensePlateLabel = new JLabel("<html><b><u>License Plate:</b></u> " + car.getCarLicensePlate() + " hours.</html>", SwingConstants.CENTER);
+        carLicensePlateLabel = new JLabel("<html><b><u>License Plate:</b></u> " + car.getCarLicensePlate() + "</html>", SwingConstants.CENTER);
         carLicensePlateLabel.setForeground(Color.WHITE);
         carLicensePlateLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         carLicensePlateLabel.setBackground(new Color(217, 217, 217));
@@ -50,7 +50,7 @@ class CarConfirmation extends JFrame implements ActionListener {
         carModelLabel.setBackground(new Color(217, 217, 217));
 
         // Car Residency Time Label
-        carResidencyTimeLabel = new JLabel("<html><b><u>Residency Time:</b></u> " + car.getCarResidencyTime() + " hours.</html>", SwingConstants.CENTER);
+        carResidencyTimeLabel = new JLabel("<html><b><u>Residency Time:</b></u> " + car.getCarResidencyTime() + " hours</html>", SwingConstants.CENTER);
         carResidencyTimeLabel.setForeground(Color.WHITE);
         carResidencyTimeLabel.setFont(new Font("Inter", Font.PLAIN, 16));
         carResidencyTimeLabel.setBackground(new Color(217, 217, 217));
