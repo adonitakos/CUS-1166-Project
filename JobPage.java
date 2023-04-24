@@ -217,9 +217,7 @@ class Jobs extends JFrame implements ActionListener {
                 jobDescriptionField.setText("");
 
             } else if (obj == jobCompletion) {
-                LinkedList<Job> jobs = vcc.getAllJobs();
-                Job job = jobs.getLast();
-                System.out.print("The completion time is: " + job.getCompletionTime() + " hours.");
+                CompletionPopUp form = new CompletionPopUp(job);                
             }
 
             else if (obj == back) {
