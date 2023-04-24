@@ -23,6 +23,7 @@ class Jobs extends JFrame implements ActionListener {
     VCC vcc = VCC.getInstance();
     private User user;
     private int objectsPassed = 0;
+    private Job pageJob;
 
     public void setUser(User user) {
         this.user = user;
@@ -198,6 +199,7 @@ class Jobs extends JFrame implements ActionListener {
                     if (inputStream.readBoolean()) {
                         vcc.addJob(job);
                         JobConfirmation form = new JobConfirmation(job);
+                        pageJob = job;
                         form.setVisible(true);
                         form.setSize(800, 300);
                         System.out.println("Job submission has been approved by VCC. Writing to file...");
@@ -217,7 +219,7 @@ class Jobs extends JFrame implements ActionListener {
                 jobDescriptionField.setText("");
 
             } else if (obj == jobCompletion) {
-                CompletionPopUp form = new CompletionPopUp(job);                
+                CompletionPopUp form = new CompletionPopUp(pageJob);                
             }
 
             else if (obj == back) {

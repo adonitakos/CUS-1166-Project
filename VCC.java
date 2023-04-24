@@ -28,7 +28,6 @@ public class VCC {
 	private static Connection conn;
 
 	private static Car buildCar(ResultSet rs) throws SQLException {
-		rs.next();
 		int carID = rs.getInt("carID");
 		String carLicensePlate = rs.getString("plateNum");
 		int ownerID = rs.getInt("carOwnerID");
@@ -48,7 +47,6 @@ public class VCC {
 	} // <--- buildcar() method ends here
 
 	private static Job buildJob(ResultSet rs) throws SQLException {
-		rs.next();
 		int jobID = rs.getInt("ID");
 		int jobDuration = rs.getInt("duration");
 		String jobDeadline = rs.getString("deadline");
@@ -72,7 +70,6 @@ public class VCC {
 	} // <--- buildJob() method ends here
 
 	private static User buildUser(ResultSet rs) throws SQLException {
-		rs.next();
 		int userID = rs.getInt("ID");// Ask and delete
 		String userName = rs.getString("username");
 		String userPassword = rs.getString("password");
@@ -184,6 +181,7 @@ public class VCC {
 		PreparedStatement stmt = conn.prepareStatement(query);
 		stmt.setString(1, carID);
 		ResultSet rs = stmt.executeQuery();
+		rs.next();
 		car = buildCar(rs);
 		stmt.close();
 		return car;
@@ -196,6 +194,7 @@ public class VCC {
 		PreparedStatement stmt = conn.prepareStatement(query);
 		stmt.setInt(1, jobID);
 		ResultSet rs = stmt.executeQuery();
+		rs.next();
 		job = buildJob(rs);
 		stmt.close();
 		return job;
@@ -209,6 +208,7 @@ public class VCC {
 		stmt.setString(1, username);
 		stmt.setString(2, password);
 		ResultSet rs = stmt.executeQuery();
+		rs.next();
 		user = buildUser(rs);
 		stmt.close();
 		return user;
