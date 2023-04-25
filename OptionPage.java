@@ -49,7 +49,7 @@ class OptionPage extends JFrame implements ActionListener {
       optionBox.setBackground(new Color(217, 217, 217));
       optionBox.setForeground(new Color(86, 53, 158));
       optionBox.setFont(new Font("Inter", Font.BOLD, 15));
-      optionBox.setBounds(170, 70, 100, 100);
+      optionBox.setBounds(180, 120, 50, 50);
 
       // Back Button
       back = new JButton("Back");

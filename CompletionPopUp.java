@@ -17,7 +17,7 @@ public class CompletionPopUp extends JFrame implements ActionListener {
 
         // Close Button
         close = new JButton("Close");
-        close.setBounds(110, 270, 100, 34);
+        close.setBounds(110, 270, 100, 40);
         close.setBackground(new Color(217, 217, 217));
         close.setForeground(new Color(86, 53, 158));
         close.setFont(new Font("Inter", Font.BOLD, 16));

@@ -363,13 +363,13 @@ class CreateAdminForm extends JFrame implements ActionListener {
         buttonPanel = new JPanel();
         buttonPanel.setBackground(new Color(86, 53, 158));
         // Adding buttons to the panel
-        buttonPanel.add(jobByID);
-        buttonPanel.add(carByID);
-        buttonPanel.add(completeJobs);
-        buttonPanel.add(jobsQueue);
+        // buttonPanel.add(jobByID);
+        // buttonPanel.add(carByID);
+        // buttonPanel.add(completeJobs);
+        // buttonPanel.add(jobsQueue);
         buttonPanel.add(allJobs);
         buttonPanel.add(allCars);
-        buttonPanel.add(checkpointer);
+        // buttonPanel.add(checkpointer);
         add(buttonPanel, BorderLayout.CENTER);
 
         // Creating the back panel
